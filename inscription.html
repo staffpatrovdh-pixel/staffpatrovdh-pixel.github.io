@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inscription | Patro du Val d'Haine</title>
+    <meta name="description" content="Inscrivez votre enfant au Patro du Val d'Haine à Maurage. Rejoignez l'aventure !">
+    
+    <!-- 1. Lien vers le CSS global -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- 2. Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- 3. Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- 4. Config Tailwind -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        patro: {
+                            yellow: '#FFD700', 
+                            green: '#009045', 
+                            dark: '#1a1a1a',
+                            light: '#f8fafc',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                        display: ['Fredoka', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="font-sans text-slate-800 bg-patro-light antialiased">
+
+    <!-- Loader -->
+    <div id="loader">
+        <div class="spinner mb-4"></div>
+        <p class="text-patro-green font-bold font-display animate-pulse">Chargement...</p>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 transition-all duration-300 bg-white/95 backdrop-blur-md shadow-sm" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <a href="index.html" class="flex-shrink-0 flex items-center gap-2">
+                    <img src="https://static.wixstatic.com/shapes/99150c_262f50afd9f748c1b2820587168d19f3.svg" alt="Logo Patro Val d'Haine" class="h-14 w-auto">
+                </a>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-8 items-center">
+                    <a href="index.html" class="text-gray-600 hover:text-patro-green font-medium transition">Accueil</a>
+                    <a href="index.html#sections" class="text-gray-600 hover:text-patro-green font-medium transition">Nos Sections</a>
+                    <a href="index.html#infos" class="text-gray-600 hover:text-patro-green font-medium transition">Infos Pratiques</a>
+                    <a href="https://www.patrovaldhaine.be/documents" class="text-gray-600 hover:text-patro-green font-medium transition">Documents</a>
+                    <a href="#" class="bg-patro-green text-white px-5 py-2.5 rounded-full font-semibold shadow-md ring-2 ring-offset-2 ring-patro-green cursor-default opacity-100">
+                        Nous rejoindre
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button onclick="toggleMenu()" class="text-gray-600 hover:text-patro-green focus:outline-none">
+                        <i data-lucide="menu" class="w-8 h-8"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Panel -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
+            <div class="px-4 pt-2 pb-6 space-y-2 shadow-lg">
+                <a href="index.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-patro-green hover:bg-yellow-50">Accueil</a>
+                <a href="index.html#sections" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-patro-green hover:bg-yellow-50">Nos Sections</a>
+                <a href="index.html#infos" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-patro-green hover:bg-yellow-50">Infos Pratiques</a>
+                <a href="https://www.patrovaldhaine.be/documents" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-patro-green hover:bg-yellow-50">Documents</a>
+                <span class="block w-full text-center mt-4 px-5 py-3 rounded-md font-bold bg-gray-100 text-patro-green cursor-default border border-gray-200">
+                    Vous y êtes déjà !
+                </span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header Spécifique Inscription -->
+    <div class="relative bg-patro-green pt-32 pb-24 overflow-hidden">
+        <div class="absolute inset-0 opacity-10" style="background-image: url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23ffffff\' fill-opacity=\'1\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white text-sm font-semibold mb-6">
+                <i data-lucide="sparkles" class="w-4 h-4 text-patro-yellow"></i>
+                Saison 2024 - 2025
+            </div>
+            <h1 class="text-4xl md:text-6xl font-display font-bold text-white mb-6">
+                Rejoins <span class="text-patro-yellow">l'aventure !</span>
+            </h1>
+            <p class="text-green-50 text-lg md:text-xl max-w-3xl mx-auto font-light">
+                Remplissez le formulaire ci-dessous pour démarrer l'inscription.
+            </p>
+        </div>
+
+        <div class="absolute bottom-0 w-full leading-none text-patro-light">
+            <svg class="block w-full h-12 md:h-24" viewBox="0 0 1440 320" preserveAspectRatio="none">
+                <path fill="currentColor" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,112C672,96,768,96,864,112C960,128,1056,160,1152,160C1248,160,1344,128,1392,112L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+            </svg>
+        </div>
+    </div>
+
+    <!-- Contenu : Valeurs & Formulaire Intégré -->
+    <section class="pb-20 bg-patro-light">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-10 relative z-20">
+            
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                
+                <!-- Colonne Gauche : Info -->
+                <div class="lg:col-span-1 space-y-6">
+                    <div class="bg-white p-8 rounded-2xl shadow-sm border-t-4 border-patro-yellow">
+                        <h2 class="text-2xl font-display font-bold text-patro-green mb-4">Pourquoi s'inscrire ?</h2>
+                        <div class="space-y-4 text-gray-600 text-sm leading-relaxed">
+                            <p>
+                                <strong class="text-gray-800">Bien plus que des jeux.</strong> 
+                                Au Patro, nous croyons que chaque animé a un potentiel à révéler.
+                            </p>
+                            <p>
+                                <strong class="text-gray-800">L'école de la vie.</strong>
+                                Nous encourageons la solidarité, la créativité et l'envie d'apprendre ensemble.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="bg-patro-green p-8 rounded-2xl shadow-sm text-white">
+                        <h3 class="font-bold text-lg mb-2 flex items-center gap-2">
+                            <i data-lucide="file-text" class="w-5 h-5 text-patro-yellow"></i>
+                            Version Papier
+                        </h3>
+                        <p class="text-green-100 text-sm mb-4">
+                            Vous préférez remplir le document à la main ?
+                        </p>
+                        <a href="https://www.patrovaldhaine.be/documents" class="inline-block w-full text-center bg-white text-patro-green font-bold py-2 px-4 rounded-lg hover:bg-gray-100 transition text-sm">
+                            Télécharger le PDF
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Colonne Droite : Formulaire Wix Intégré -->
+                <div class="lg:col-span-2">
+                    <div class="bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden h-full min-h-[800px]">
+                        <!-- Iframe vers Wix -->
+                        <iframe 
+                            src="https://patrovaldhaine.wixstudio.com/patrovdh/intranet/inscriptionpatro" 
+                            width="100%" 
+                            height="100%" 
+                            style="min-height: 1000px; border: none;"
+                            title="Formulaire d'inscription Patro"
+                            loading="lazy">
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12 text-center md:text-left">
+                <div>
+                    <span class="font-display font-bold text-2xl text-white block mb-4">Patro Val d'Haine</span>
+                    <p class="text-gray-400 text-sm">
+                        Association de fait reconnue par la Fédération Wallonie-Bruxelles.
+                    </p>
+                </div>
+                <div>
+                    <h5 class="font-bold text-gray-200 mb-4 uppercase text-sm tracking-wider">Avec le soutien de :</h5>
+                    <div class="flex flex-wrap justify-center md:justify-start gap-4 text-gray-500 text-sm">
+                        <span class="bg-gray-800 px-3 py-1 rounded">Fédération Nationale des Patros</span>
+                        <span class="bg-gray-800 px-3 py-1 rounded">Fédération Wallonie-Bruxelles</span>
+                        <span class="bg-gray-800 px-3 py-1 rounded">Ecole Libre de Maurage l'Etincelle</span>
+                    </div>
+                </div>
+                <div class="flex flex-col items-center md:items-end">
+                    <h5 class="font-bold text-gray-200 mb-4 uppercase text-sm tracking-wider">Suivez-nous</h5>
+                    <div class="flex space-x-4">
+                        <a href="https://www.facebook.com/patrovaldhaine" class="bg-gray-800 p-2 rounded-full hover:bg-[#1877F2] hover:text-white transition duration-300">
+                            <i data-lucide="facebook" class="w-6 h-6"></i>
+                        </a>
+                        <a href="https://www.instagram.com/patrovaldhaine/" class="bg-gray-800 p-2 rounded-full hover:bg-[#E4405F] hover:text-white transition duration-300">
+                            <i data-lucide="instagram" class="w-6 h-6"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 pt-8 text-center">
+                <p class="text-gray-500 text-sm">© 2025 Patro du Val d'Haine – Tous droits réservés</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+        window.addEventListener('load', function() {
+            const loader = document.getElementById('loader');
+            loader.classList.add('loader-hidden');
+            loader.addEventListener('transitionend', function() {
+                loader.style.display = 'none';
+            });
+        });
+        function toggleMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+    </script>
+</body>
+</html>
