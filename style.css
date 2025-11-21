@@ -1,0 +1,134 @@
+/* =========================================
+   1. IMPORTS & FONTS
+   ========================================= */
+/* On importe les polices Google directement ici pour ne pas encombrer le HTML */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&family=Fredoka:wght@400;600&display=swap');
+
+/* =========================================
+   2. VARIABLES & CONFIGURATION DE BASE
+   ========================================= */
+:root {
+    --patro-yellow: #FFD700;
+    --patro-green: #009045;
+    --patro-dark: #1a1a1a;
+    --patro-light: #f8fafc;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--patro-light);
+    color: var(--patro-dark);
+}
+
+/* Titres "Fun" */
+h1, h2, h3, h4, .font-display {
+    font-family: 'Fredoka', sans-serif;
+}
+
+/* =========================================
+   3. CUSTOM SCROLLBAR
+   ========================================= */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--patro-green);
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #007035;
+}
+
+/* =========================================
+   4. COMPOSANTS VISUELS (Hero, Blobs, Vagues)
+   ========================================= */
+
+/* Hero Pattern (Motif tente) */
+.hero-pattern {
+    background-color: var(--patro-green);
+    /* Le background-image est géré en inline dans le HTML pour permettre le changement facile d'image, 
+       mais le fallback SVG reste ici si besoin */
+}
+
+/* Formes floues (Blobs) */
+.blob {
+    position: absolute;
+    filter: blur(40px);
+    z-index: 0;
+    opacity: 0.4;
+}
+
+/* Animation de la vague */
+@keyframes wave-move {
+    0% { transform: scaleY(1.0) skewX(0deg); }
+    50% { transform: scaleY(1.15) skewX(2deg); }
+    100% { transform: scaleY(1.0) skewX(0deg); }
+}
+
+.wave-anim-1 {
+    animation: wave-move 8s ease-in-out infinite;
+    transform-origin: bottom;
+}
+
+.wave-anim-2 {
+    animation: wave-move 12s ease-in-out infinite reverse;
+    transform-origin: bottom;
+    opacity: 0.6;
+}
+
+/* =========================================
+   5. LOADER (Écran de chargement)
+   ========================================= */
+#loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--patro-light);
+    z-index: 9999; /* Doit être au-dessus de tout */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    transition: opacity 0.6s ease-out, visibility 0.6s ease-out;
+}
+
+.spinner {
+    width: 60px;
+    height: 60px;
+    border: 6px solid var(--patro-yellow);
+    border-top-color: var(--patro-green);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Classe ajoutée via JS pour masquer le loader */
+.loader-hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+
+/* =========================================
+   6. UTILITAIRES SPECIFIQUES
+   ========================================= */
+/* Permet de gérer le sticky header si nécessaire */
+.sticky-header {
+    background-color: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(12px);
+}
