@@ -6,123 +6,41 @@
     <title>Patro du Val d'Haine | Maurage</title>
     <meta name="description" content="Le Patro du Val d'Haine est un mouvement de jeunesse à Maurage ouvert à tous dès 4 ans.">
     
-    <!-- Tailwind CSS -->
+    <!-- 1. Lien vers notre fichier CSS personnalisé -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- 2. Tailwind CSS (Script nécessaire pour le design utility-first) -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Icons (Lucide) -->
+    <!-- 3. Icons (Lucide) -->
     <script src="https://unpkg.com/lucide@latest"></script>
-    
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
 
+    <!-- 4. Configuration Tailwind (Couleurs Patro) -->
+    <!-- IMPORTANT : Copier ce script sur chaque nouvelle page -->
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
                         patro: {
-                            yellow: '#FFD700', // Jaune Patro classique
-                            green: '#009045', // Vert Patro classique
+                            yellow: '#FFD700', 
+                            green: '#009045', 
                             dark: '#1a1a1a',
                             light: '#f8fafc',
                         }
                     },
                     fontFamily: {
                         sans: ['Poppins', 'sans-serif'],
-                        display: ['Fredoka', 'sans-serif'], // Font un peu plus "fun" pour les titres
+                        display: ['Fredoka', 'sans-serif'],
                     }
                 }
             }
         }
     </script>
-
-    <style>
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 10px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #f1f1f1;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #009045;
-            border-radius: 5px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #007035;
-        }
-        
-        /* Hero Pattern */
-        .hero-pattern {
-            background-color: #009045;
-            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffd700' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-        }
-
-        .blob {
-            position: absolute;
-            filter: blur(40px);
-            z-index: 0;
-            opacity: 0.4;
-        }
-
-        /* Animation de la vague */
-        @keyframes wave-move {
-            0% { transform: scaleY(1.0) skewX(0deg); }
-            50% { transform: scaleY(1.15) skewX(2deg); }
-            100% { transform: scaleY(1.0) skewX(0deg); }
-        }
-        
-        .wave-anim-1 {
-            animation: wave-move 8s ease-in-out infinite;
-            transform-origin: bottom;
-        }
-        
-        .wave-anim-2 {
-            animation: wave-move 12s ease-in-out infinite reverse;
-            transform-origin: bottom;
-            opacity: 0.6;
-        }
-
-        /* Loader Styles */
-        #loader {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: #f8fafc; /* Correspond à patro-light */
-            z-index: 9999; /* Doit être au-dessus de tout */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            transition: opacity 0.6s ease-out, visibility 0.6s ease-out;
-        }
-
-        .spinner {
-            width: 60px;
-            height: 60px;
-            border: 6px solid #FFD700; /* Jaune */
-            border-top-color: #009045; /* Vert */
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        
-        /* Classe pour masquer le loader */
-        .loader-hidden {
-            opacity: 0;
-            visibility: hidden;
-        }
-    </style>
 </head>
 <body class="font-sans text-slate-800 bg-patro-light antialiased">
 
-    <!-- Loader HTML -->
+    <!-- Loader -->
     <div id="loader">
         <div class="spinner mb-4"></div>
         <p class="text-patro-green font-bold font-display animate-pulse">Chargement...</p>
@@ -132,7 +50,7 @@
     <nav class="fixed w-full z-50 transition-all duration-300 bg-white/95 backdrop-blur-md shadow-sm" id="navbar">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
-                <!-- Logo (Mis à jour selon la demande) -->
+                <!-- Logo -->
                 <div class="flex-shrink-0 flex items-center gap-2">
                     <img src="https://static.wixstatic.com/shapes/99150c_262f50afd9f748c1b2820587168d19f3.svg" alt="Logo Patro Val d'Haine" class="h-14 w-auto">
                 </div>
@@ -142,9 +60,7 @@
                     <a href="#accueil" class="text-gray-600 hover:text-patro-green font-medium transition">Accueil</a>
                     <a href="#sections" class="text-gray-600 hover:text-patro-green font-medium transition">Nos Sections</a>
                     <a href="#infos" class="text-gray-600 hover:text-patro-green font-medium transition">Infos Pratiques</a>
-                    <!-- Lien modifié vers Documents -->
                     <a href="https://www.patrovaldhaine.be/documents" class="text-gray-600 hover:text-patro-green font-medium transition">Documents</a>
-                    <!-- Lien modifié vers Inscription -->
                     <a href="https://www.patrovaldhaine.be/inscription" class="bg-patro-green text-white px-5 py-2.5 rounded-full font-semibold hover:bg-green-700 transition shadow-md hover:shadow-lg transform hover:-translate-y-0.5">
                         Nous rejoindre
                     </a>
@@ -174,9 +90,7 @@
     </nav>
 
     <!-- Hero Section -->
-    <!-- Modification : Ajout de l'image de fond avec un overlay sombre/vert pour la lisibilité du texte -->
     <section id="accueil" class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden" style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 144, 69, 0.7)), url('https://static.wixstatic.com/media/99150c_fdc168f86c01429eb37adcee6a16b99c~mv2.jpg'); background-size: cover; background-position: center;">
-        <!-- Blobs d'ambiance (conservés pour l'effet lumineux) -->
         <div class="blob bg-patro-yellow w-64 h-64 rounded-full top-20 left-0 mix-blend-multiply filter blur-xl opacity-20 animate-blob"></div>
         <div class="blob bg-white w-64 h-64 rounded-full bottom-0 right-0 mix-blend-multiply filter blur-xl opacity-10 animate-blob animation-delay-2000"></div>
 
@@ -193,7 +107,6 @@
                 Le Patro du Val d'Haine, c'est s'amuser, rêver & kiffer. Un mouvement de jeunesse ouvert à tous à partir de 4 ans.
             </p>
             <div class="mt-10 flex flex-col sm:flex-row justify-center gap-4">
-                <!-- Lien modifié vers Inscription -->
                 <a href="https://www.patrovaldhaine.be/inscription" class="px-8 py-4 rounded-full bg-patro-yellow text-patro-green font-bold text-lg shadow-lg hover:bg-yellow-400 hover:scale-105 transition transform duration-200 flex items-center justify-center gap-2">
                     <i data-lucide="user-plus" class="w-5 h-5"></i>
                     Je m'inscris
@@ -201,7 +114,7 @@
             </div>
         </div>
         
-        <!-- Wave separator -->
+        <!-- Wave separator Animée -->
         <div class="absolute bottom-0 w-full leading-none z-10">
             <svg class="block w-full h-12 md:h-24 text-patro-light" viewBox="0 0 1440 320" preserveAspectRatio="none">
                 <path class="wave-anim-2" fill="currentColor" d="M0,224L48,213.3C96,203,192,181,288,181.3C384,181,480,203,576,224C672,245,768,267,864,261.3C960,256,1056,224,1152,202.7C1248,181,1344,171,1392,165.3L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
@@ -370,7 +283,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
                 
-                <!-- Text Info (Sticky pour rester visible quand on scrolle vers le calendrier) -->
+                <!-- Text Info (Sticky) -->
                 <div class="sticky top-28">
                     <h2 class="text-patro-green font-bold tracking-wide uppercase text-sm mb-2">En Pratique</h2>
                     <h3 class="text-3xl md:text-4xl font-display font-bold text-gray-900 mb-6">C'est où & quand ?</h3>
@@ -413,7 +326,6 @@
                 <!-- Visuals Column (Map + Calendar) -->
                 <div class="space-y-8">
                     <!-- Map Block -->
-                    <!-- Modification : Suppression des classes de rotation (transform, rotate) pour fixer la position -->
                     <div class="relative h-80 rounded-2xl overflow-hidden shadow-xl border-4 border-white z-10 bg-white">
                         <div class="absolute inset-0 bg-gray-200 flex items-center justify-center">
                             <iframe 
@@ -433,7 +345,6 @@
                     </div>
 
                     <!-- Calendar Block -->
-                    <!-- Modification : Suppression des rotations et ajout du mode AGENDA dans l'URL -->
                     <div class="relative h-[500px] rounded-2xl overflow-hidden shadow-xl border-4 border-white bg-white z-0">
                         <iframe 
                             src="https://calendar.google.com/calendar/embed?src=staff.patrovdh%40gmail.com&ctz=Europe%2FBrussels&showTitle=0&showPrint=0&showTabs=0&showCalendars=0&mode=AGENDA" 
@@ -452,8 +363,6 @@
             </div>
         </div>
     </section>
-
-    <!-- SECTION DOCUMENTS SUPPRIMÉE -->
 
     <!-- Contact Simplifié (Sans Formulaire) -->
     <section id="contact" class="py-20 bg-white">
@@ -544,7 +453,6 @@
                 <div class="flex flex-col items-center md:items-end">
                     <h5 class="font-bold text-gray-200 mb-4 uppercase text-sm tracking-wider">Suivez-nous</h5>
                     <div class="flex space-x-4">
-                        <!-- Modification : Suppression de target="_blank" pour forcer l'ouverture dans le même onglet -->
                         <a href="https://www.facebook.com/patrovaldhaine" class="bg-gray-800 p-2 rounded-full hover:bg-[#1877F2] hover:text-white transition duration-300">
                             <i data-lucide="facebook" class="w-6 h-6"></i>
                         </a>
@@ -571,7 +479,7 @@
             const loader = document.getElementById('loader');
             loader.classList.add('loader-hidden');
             
-            // Optionnel : Supprimer complètement l'élément du DOM après la transition
+            // Supprimer complètement l'élément du DOM après la transition
             loader.addEventListener('transitionend', function() {
                 loader.style.display = 'none';
             });
