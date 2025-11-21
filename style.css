@@ -1,7 +1,6 @@
 /* =========================================
    1. IMPORTS & FONTS
    ========================================= */
-/* On importe les polices Google directement ici pour ne pas encombrer le HTML */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&family=Fredoka:wght@400;600&display=swap');
 
 /* =========================================
@@ -16,17 +15,24 @@
 
 html {
     scroll-behavior: smooth;
+    cursor: none; /* Masque le curseur par défaut sur tout le site */
 }
 
 body {
     font-family: 'Poppins', sans-serif;
     background-color: var(--patro-light);
     color: var(--patro-dark);
+    cursor: none; /* Sécurité supplémentaire */
 }
 
 /* Titres "Fun" */
 h1, h2, h3, h4, .font-display {
     font-family: 'Fredoka', sans-serif;
+}
+
+/* Éléments cliquables : on s'assure que le curseur reste caché */
+a, button, input, select, label {
+    cursor: none !important;
 }
 
 /* =========================================
@@ -53,11 +59,9 @@ h1, h2, h3, h4, .font-display {
    4. COMPOSANTS VISUELS (Hero, Blobs, Vagues)
    ========================================= */
 
-/* Hero Pattern (Motif tente) */
+/* Hero Pattern */
 .hero-pattern {
     background-color: var(--patro-green);
-    /* Le background-image est géré en inline dans le HTML pour permettre le changement facile d'image, 
-       mais le fallback SVG reste ici si besoin */
 }
 
 /* Formes floues (Blobs) */
@@ -96,7 +100,7 @@ h1, h2, h3, h4, .font-display {
     width: 100%;
     height: 100%;
     background-color: var(--patro-light);
-    z-index: 9999; /* Doit être au-dessus de tout */
+    z-index: 9999;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -118,7 +122,6 @@ h1, h2, h3, h4, .font-display {
     100% { transform: rotate(360deg); }
 }
 
-/* Classe ajoutée via JS pour masquer le loader */
 .loader-hidden {
     opacity: 0;
     visibility: hidden;
@@ -127,8 +130,44 @@ h1, h2, h3, h4, .font-display {
 /* =========================================
    6. UTILITAIRES SPECIFIQUES
    ========================================= */
-/* Permet de gérer le sticky header si nécessaire */
 .sticky-header {
     background-color: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(12px);
+}
+
+/* =========================================
+   7. CURSEUR PERSONNALISÉ (La Boule Verte)
+   ========================================= */
+#custom-cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 20px;
+    height: 20px;
+    background-color: var(--patro-green);
+    border: 2px solid white; /* Petit bord blanc pour visibilité sur fond sombre */
+    border-radius: 50%;
+    pointer-events: none; /* Important : permet de cliquer au travers */
+    z-index: 10000; /* Toujours au-dessus de tout */
+    transform: translate(-50%, -50%);
+    transition: width 0.2s, height 0.2s, background-color 0.2s, transform 0.05s linear;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+/* Effet quand on survole un lien ou un bouton (la boule grossit) */
+body:has(a:hover, button:hover, .hover-trigger:hover) #custom-cursor {
+    width: 40px;
+    height: 40px;
+    background-color: rgba(0, 144, 69, 0.3); /* Devient transparent */
+    border-color: var(--patro-green);
+}
+
+/* Fallback pour mobile : on masque le curseur custom sur tactile */
+@media (hover: none) and (pointer: coarse) {
+    #custom-cursor {
+        display: none;
+    }
+    html, body, a, button {
+        cursor: auto !important;
+    }
 }
