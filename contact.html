@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
-    <script src="layout.js"></script> <!-- IMPORT DU LAYOUT JS -->
+    <script src="layout.js"></script>
 
     <script>
         tailwind.config = { theme: { extend: { colors: { patro: { yellow: '#FFD700', green: '#009045', dark: '#1a1a1a', light: '#f8fafc' } }, fontFamily: { sans: ['Poppins', 'sans-serif'], display: ['Fredoka', 'sans-serif'] } } } }
@@ -17,7 +17,13 @@
 <body class="font-sans text-slate-800 bg-patro-light antialiased">
 
     <div id="custom-cursor"></div>
-    <div id="loader"><div class="spinner mb-4"></div></div>
+    
+    <!-- Loader avec Texte -->
+    <div id="loader">
+        <div class="spinner mb-4"></div>
+        <p class="text-patro-green font-bold font-display animate-pulse">Chargement...</p>
+    </div>
+    
     <div id="navbar-placeholder"></div>
 
     <!-- En-tête Page -->
