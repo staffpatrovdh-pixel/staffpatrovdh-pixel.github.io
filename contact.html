@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Le Staff | Patro du Val d'Haine</title>
+    
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="layout.js"></script> <!-- IMPORT DU LAYOUT JS -->
+
+    <script>
+        tailwind.config = { theme: { extend: { colors: { patro: { yellow: '#FFD700', green: '#009045', dark: '#1a1a1a', light: '#f8fafc' } }, fontFamily: { sans: ['Poppins', 'sans-serif'], display: ['Fredoka', 'sans-serif'] } } } }
+    </script>
+</head>
+<body class="font-sans text-slate-800 bg-patro-light antialiased">
+
+    <div id="custom-cursor"></div>
+    <div id="loader"><div class="spinner mb-4"></div></div>
+    <div id="navbar-placeholder"></div>
+
+    <!-- En-tête Page -->
+    <div class="pt-32 pb-12 bg-patro-green text-center">
+        <h1 class="text-4xl font-display font-bold text-white">Notre Staff</h1>
+        <p class="text-green-100 mt-2">Une équipe de choc pour animer vos enfants !</p>
+    </div>
+
+    <section class="py-16 px-4">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- Nevala -->
+                <div class="staff-card bg-white rounded-2xl shadow-md overflow-hidden">
+                    <div class="h-64 w-full staff-img-container bg-gray-200">
+                        <img src="https://lh3.googleusercontent.com/sitesv/AAzXCkdsUhpBSS2A7_OU7yO6OukKAp8Fix5NhZ2T01NWAwrkqqlncXN-IFbFyWG8SNYeZn3fMonk3d3b769BVvfRvU7YK3ITHPJrIaYUoH7ZbQ6uFOc7es9gbdsay12FdCvZfsocnx56uxGYuzPkElTkDrqsJga0P_RpdUDcUyxMszy1Dx0wu3CRGTJwXD7RZbAiupFmbS__qcCCbgHWeZx-vlJ18rEgP3uAjtr0AF0=w1280" alt="Nevala" class="w-full h-full object-cover staff-img">
+                    </div>
+                    <div class="p-6 text-center">
+                        <h3 class="text-2xl font-display font-bold text-patro-green">Nevala</h3>
+                        <p class="text-gray-500 text-sm mb-4">(Aurélie)</p>
+                        <div class="inline-block px-3 py-1 bg-patro-yellow text-xs font-bold rounded-full mb-2">Présidente</div>
+                        <p class="text-gray-700 font-medium mb-4">Cheffe Poussins & Benjamins</p>
+                        <div class="space-y-2 text-sm text-gray-500">
+                            <p class="flex justify-center items-center gap-2"><i data-lucide="phone" class="w-4 h-4"></i> 0488/08.86.03</p>
+                            <p class="flex justify-center items-center gap-2"><i data-lucide="mail" class="w-4 h-4"></i> patrovaldhaine@patro.be</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Choucas -->
+                <div class="staff-card bg-white rounded-2xl shadow-md overflow-hidden">
+                    <div class="h-64 w-full staff-img-container bg-gray-200">
+                        <img src="https://lh3.googleusercontent.com/sitesv/AAzXCkeuGiqEJBc8Z1-8nrypTmk0U2QTHz85loujTZMGc5mqczNsQDQrpT6NrNXbSQkrOIdaV4ZUIYZrk5_M0NFkKlRxdOJD4MVfrxtW8yZCDnkIfAyVv8a7vuGNCmGd7iIrFo7PKm-myIFRNXfWZldQQN3iExPzXYJYwy1-qjwVBAzHWJUsj3D84wf7LeoFcMIxZJpFirBD3ZSAqAz3wUHQ_NCj1tvfPaXmSyUhFuk=w1280" alt="Choucas" class="w-full h-full object-cover staff-img">
+                    </div>
+                    <div class="p-6 text-center">
+                        <h3 class="text-2xl font-display font-bold text-patro-green">Choucas</h3>
+                        <p class="text-gray-500 text-sm mb-4">(Romain)</p>
+                        <div class="inline-block px-3 py-1 bg-gray-200 text-gray-800 text-xs font-bold rounded-full mb-2">Vice-Président</div>
+                        <p class="text-gray-700 font-medium mb-4">Chef Alpines/Conq. & Aventuriers</p>
+                        <div class="space-y-2 text-sm text-gray-500">
+                            <p class="flex justify-center items-center gap-2"><i data-lucide="phone" class="w-4 h-4"></i> 0494/20.72.98</p>
+                            <p class="flex justify-center items-center gap-2"><i data-lucide="mail" class="w-4 h-4"></i> patrovaldhaine@patro.be</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Duma -->
+                <div class="staff-card bg-white rounded-2xl shadow-md overflow-hidden">
+                    <div class="h-64 w-full staff-img-container bg-gray-200">
+                        <img src="https://lh3.googleusercontent.com/sitesv/AAzXCkf_tkiEsQyhjL2psbwQwtDrLzaLl86jNwaImb2WRqGhfaOszga1GFsZw-lDRnyjePx8EKJ-q4o2MTRzqdNaU5hqRB9gnHB2js64u0TCyQnMSx8wXQHY6ex_s0csEh81033tAhMT7wO5GHFVc_ua9lLYJk8hDkxMxrVegFLp4VP8KmmA5wn7WZdIoGsQxPCvkuuskiC8DxjHqTiPKU5S9DtE0TNc3a3h1jZud7g=w1280" alt="Duma" class="w-full h-full object-cover staff-img">
+                    </div>
+                    <div class="p-6 text-center">
+                        <h3 class="text-2xl font-display font-bold text-patro-green">Duma</h3>
+                        <p class="text-gray-500 text-sm mb-4">(Jonathan)</p>
+                        <div class="inline-block px-3 py-1 bg-gray-200 text-gray-800 text-xs font-bold rounded-full mb-2">Trésorier</div>
+                        <p class="text-gray-700 font-medium mb-4">Anim. Alpines/Conq. & Aventuriers</p>
+                        <div class="space-y-2 text-sm text-gray-500">
+                            <p class="flex justify-center items-center gap-2"><i data-lucide="phone" class="w-4 h-4"></i> 0468/08.92.86</p>
+                            <p class="flex justify-center items-center gap-2"><i data-lucide="mail" class="w-4 h-4"></i> patrovaldhaine@patro.be</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Logan -->
+                <div class="staff-card bg-white rounded-2xl shadow-md overflow-hidden">
+                    <div class="h-64 w-full staff-img-container bg-gray-200">
+                        <img src="https://lh3.googleusercontent.com/sitesv/AAzXCkdPYB1WV2-cobioOKD9-21qjGtuOniLTr_KXdSx-Z9KMm5xw_Wf18PWDwadaIX3P_GtsrOXP3Hgm8w81_IgJ9RLDNQEOj3MkG4wRUR5EIX2SoGjo9wlz-iHBgISmvLmuU-L1ab4lI-BIWrQmmhwfO5AqMsT0iaR7-TAIuynCUksAhRyNZWgdeSsc69EoHpGvORvckxZsCIAfWobHOW6wVwir6t4pslQpKEpfYg=w1280" alt="Logan" class="w-full h-full object-cover staff-img">
+                    </div>
+                    <div class="p-6 text-center">
+                        <h3 class="text-2xl font-display font-bold text-patro-green">Logan</h3>
+                        <p class="text-gray-500 text-sm mb-4">&nbsp;</p>
+                        <p class="text-gray-700 font-medium mb-4">Chef Chevaliers/Etincelles</p>
+                        <div class="space-y-2 text-sm text-gray-500">
+                            <p class="flex justify-center items-center gap-2"><i data-lucide="phone" class="w-4 h-4"></i> 0472/28.21.23</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hyrax -->
+                <div class="staff-card bg-white rounded-2xl shadow-md overflow-hidden">
+                    <div class="h-64 w-full staff-img-container bg-gray-200">
+                        <img src="https://lh3.googleusercontent.com/sitesv/AAzXCkcx8CR7uizmNpMzSS6b-JITYAkJTbUI5No4BgjBVl7x1JhOYXkoF0J_G8CZHskj6h3zDoMqeIc5LIFuf0-tfLjrDIPjv-TCDQd8K2fTZzkaI-5piJ0QT-XJilcZT9WxlyVnImL2mD4BXSb-M4nzG6zFWte7lZra4S8quGK76iPaBd9uTNNAGU3yEKOqx3-PmTjdxV_nmZmAMnMGs9KTXHpHbZ3QPprtMlamAac=w1280" alt="Hyrax" class="w-full h-full object-cover staff-img">
+                    </div>
+                    <div class="p-6 text-center">
+                        <h3 class="text-2xl font-display font-bold text-patro-green">Hyrax</h3>
+                        <p class="text-gray-500 text-sm mb-4">(Kelya)</p>
+                        <p class="text-gray-700 font-medium mb-4">Animatrice Poussins/Benjamins</p>
+                        <div class="space-y-2 text-sm text-gray-500">
+                            <p class="flex justify-center items-center gap-2"><i data-lucide="phone" class="w-4 h-4"></i> 0495/69.10.98</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pomsky -->
+                <div class="staff-card bg-white rounded-2xl shadow-md overflow-hidden">
+                    <div class="h-64 w-full staff-img-container bg-gray-200">
+                        <img src="https://lh3.googleusercontent.com/sitesv/AAzXCkf-suP_j_qaG4APkVPn4rW46JWQAsTi4PXeTlzPFX0cYdlNgcPDfw4oIspcSskLwiqNDAmo8wZPY1L4CpSWJ2-GtlmNZoUsS2zqu68_VkwOofc-newShbtGc7ZZAkkVr_RRE35alsfwUyRUEkYlsxktcI_aWJxfVl-xlhRVyRdhIvrOnBIRRJXuYPPOxPFrZb3aZ-DhRhWULtzD329OqwMCNObC-CI1WRq7TWI=w1280" alt="Pomsky" class="w-full h-full object-cover staff-img">
+                    </div>
+                    <div class="p-6 text-center">
+                        <h3 class="text-2xl font-display font-bold text-patro-green">Pomsky</h3>
+                        <p class="text-gray-500 text-sm mb-4">(Maelia)</p>
+                        <p class="text-gray-700 font-medium mb-4">Animatrice Poussins/Benjamins</p>
+                        <div class="space-y-2 text-sm text-gray-500">
+                            <p class="flex justify-center items-center gap-2"><i data-lucide="phone" class="w-4 h-4"></i> 0488/93.96.90</p>
+                        </div>
+                    </div>
+                </div>
+
+                 <!-- Wombat -->
+                 <div class="staff-card bg-white rounded-2xl shadow-md overflow-hidden">
+                    <div class="h-64 w-full staff-img-container bg-gray-200">
+                        <img src="https://lh3.googleusercontent.com/sitesv/AAzXCkdSv0ZRgcvSu8jvHALl9Y57EFMTGVv7myMGFFCa0_VpALD4aiGyNfCOjhK5ISlIp5XJBwrcK3aVv4nTArWKUquEiSYKODDxSKlFauRTGYa-4MIKfUASFGP4GkOVFKQ3yLvfmPefj4TPYePFeN-BdFzSU5K7_1EFmTshF3UkU3DwttJ1Iphm99or-RguzCxvtTftP8IPMATDp3a0hqgu6IL78sXjeXdL_m7rnsk=w1280" alt="Wombat" class="w-full h-full object-cover staff-img">
+                    </div>
+                    <div class="p-6 text-center">
+                        <h3 class="text-2xl font-display font-bold text-patro-green">Wombat</h3>
+                        <p class="text-gray-500 text-sm mb-4">(Chloé)</p>
+                        <p class="text-gray-700 font-medium mb-4">Aide animatrice Poussins/Benjamins</p>
+                        <div class="space-y-2 text-sm text-gray-500">
+                            <p class="flex justify-center items-center gap-2"><i data-lucide="phone" class="w-4 h-4"></i> 0478/61.09.16</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <div id="footer-placeholder"></div>
+</body>
+</html>
