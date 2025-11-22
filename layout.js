@@ -66,7 +66,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         </div>
                     </div>
 
-                    <!-- Colonne 2: Partenaires (Logos demandés) -->
+                    <!-- Colonne 2: Partenaires -->
                     <div class="flex flex-col items-center md:items-start">
                         <h5 class="font-bold text-gray-200 mb-6 uppercase text-sm tracking-wider">Avec le soutien de :</h5>
                         <div class="grid grid-cols-2 gap-4 items-center">
@@ -104,7 +104,7 @@ document.addEventListener("DOMContentLoaded", function () {
         lucide.createIcons();
     }
 
-    // Gestion du curseur (si on est sur PC)
+    // --- 4. GESTION DU CURSEUR ---
     if (window.matchMedia("(pointer: fine)").matches) {
         const cursor = document.getElementById('custom-cursor');
         if(cursor) {
@@ -119,13 +119,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    // Masquer le loader
-    const loader = document.getElementById('loader');
-    if(loader) {
-        loader.classList.add('loader-hidden');
-        setTimeout(() => loader.style.display = 'none', 600);
-    }
-    
     // Effet de scroll sur la navbar
     window.addEventListener('scroll', function() {
         const nav = document.getElementById('navbar');
@@ -139,6 +132,17 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         }
     });
+});
+
+// --- 5. GESTION DU LOADER (ATTENDRE LE CHARGEMENT COMPLET) ---
+// On utilise 'load' au lieu de DOMContentLoaded pour attendre les images
+window.addEventListener('load', function() {
+    const loader = document.getElementById('loader');
+    if(loader) {
+        loader.classList.add('loader-hidden');
+        // Suppression du DOM après l'animation CSS (0.6s)
+        setTimeout(() => loader.style.display = 'none', 600);
+    }
 });
 
 // Fonction globale pour le menu mobile
