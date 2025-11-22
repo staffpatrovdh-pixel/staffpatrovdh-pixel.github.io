@@ -15,14 +15,21 @@
 
 html {
     scroll-behavior: smooth;
-    cursor: none; /* Masque le curseur par défaut sur tout le site */
+    cursor: none; /* Masque le curseur par défaut */
 }
 
 body {
     font-family: 'Poppins', sans-serif;
     background-color: var(--patro-light);
     color: var(--patro-dark);
-    cursor: none; /* Sécurité supplémentaire */
+    cursor: none;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    flex: 1; /* Pousse le footer vers le bas si la page est vide */
 }
 
 /* Titres "Fun" */
@@ -30,7 +37,7 @@ h1, h2, h3, h4, .font-display {
     font-family: 'Fredoka', sans-serif;
 }
 
-/* Éléments cliquables : on s'assure que le curseur reste caché */
+/* Elements cliquables curseur invisible */
 a, button, input, select, label {
     cursor: none !important;
 }
@@ -41,36 +48,15 @@ a, button, input, select, label {
 ::-webkit-scrollbar {
     width: 10px;
 }
-
-::-webkit-scrollbar-track {
-    background: #f1f1f1;
-}
-
-::-webkit-scrollbar-thumb {
-    background: var(--patro-green);
-    border-radius: 5px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: #007035;
-}
+::-webkit-scrollbar-track { background: #f1f1f1; }
+::-webkit-scrollbar-thumb { background: var(--patro-green); border-radius: 5px; }
+::-webkit-scrollbar-thumb:hover { background: #007035; }
 
 /* =========================================
-   4. COMPOSANTS VISUELS (Hero, Blobs, Vagues)
+   4. COMPOSANTS VISUELS
    ========================================= */
-
-/* Hero Pattern */
-.hero-pattern {
-    background-color: var(--patro-green);
-}
-
-/* Formes floues (Blobs) */
-.blob {
-    position: absolute;
-    filter: blur(40px);
-    z-index: 0;
-    opacity: 0.4;
-}
+.hero-pattern { background-color: var(--patro-green); }
+.blob { position: absolute; filter: blur(40px); z-index: 0; opacity: 0.4; }
 
 /* Animation de la vague */
 @keyframes wave-move {
@@ -78,96 +64,72 @@ a, button, input, select, label {
     50% { transform: scaleY(1.15) skewX(2deg); }
     100% { transform: scaleY(1.0) skewX(0deg); }
 }
-
-.wave-anim-1 {
-    animation: wave-move 8s ease-in-out infinite;
-    transform-origin: bottom;
-}
-
-.wave-anim-2 {
-    animation: wave-move 12s ease-in-out infinite reverse;
-    transform-origin: bottom;
-    opacity: 0.6;
-}
+.wave-anim-1 { animation: wave-move 8s ease-in-out infinite; transform-origin: bottom; }
+.wave-anim-2 { animation: wave-move 12s ease-in-out infinite reverse; transform-origin: bottom; opacity: 0.6; }
 
 /* =========================================
-   5. LOADER (Écran de chargement)
+   5. LOADER
    ========================================= */
 #loader {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: var(--patro-light);
-    z-index: 9999;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background-color: var(--patro-light); z-index: 9999;
+    display: flex; justify-content: center; align-items: center; flex-direction: column;
     transition: opacity 0.6s ease-out, visibility 0.6s ease-out;
 }
-
 .spinner {
-    width: 60px;
-    height: 60px;
-    border: 6px solid var(--patro-yellow);
-    border-top-color: var(--patro-green);
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
+    width: 60px; height: 60px;
+    border: 6px solid var(--patro-yellow); border-top-color: var(--patro-green);
+    border-radius: 50%; animation: spin 1s linear infinite;
 }
-
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
-.loader-hidden {
-    opacity: 0;
-    visibility: hidden;
-}
+@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+.loader-hidden { opacity: 0; visibility: hidden; }
 
 /* =========================================
-   6. UTILITAIRES SPECIFIQUES
+   6. CARTES CONTACT (NOUVEAU)
    ========================================= */
-.sticky-header {
-    background-color: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(12px);
+.staff-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.staff-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+.staff-img-container {
+    overflow: hidden;
+}
+.staff-img {
+    transition: transform 0.5s ease;
+}
+.staff-card:hover .staff-img {
+    transform: scale(1.05);
 }
 
 /* =========================================
-   7. CURSEUR PERSONNALISÉ (La Boule Verte)
+   7. CURSEUR PERSONNALISÉ
    ========================================= */
 #custom-cursor {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 20px;
-    height: 20px;
-    background-color: var(--patro-green);
-    border: 2px solid white; /* Petit bord blanc pour visibilité sur fond sombre */
-    border-radius: 50%;
-    pointer-events: none; /* Important : permet de cliquer au travers */
-    z-index: 10000; /* Toujours au-dessus de tout */
+    position: fixed; top: 0; left: 0; width: 20px; height: 20px;
+    background-color: var(--patro-green); border: 2px solid white;
+    border-radius: 50%; pointer-events: none; z-index: 10000;
     transform: translate(-50%, -50%);
     transition: width 0.2s, height 0.2s, background-color 0.2s, transform 0.05s linear;
     box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }
-
-/* Effet quand on survole un lien ou un bouton (la boule grossit) */
+/* Effet hover */
 body:has(a:hover, button:hover, .hover-trigger:hover) #custom-cursor {
-    width: 40px;
-    height: 40px;
-    background-color: rgba(0, 144, 69, 0.3); /* Devient transparent */
-    border-color: var(--patro-green);
+    width: 40px; height: 40px;
+    background-color: rgba(0, 144, 69, 0.3); border-color: var(--patro-green);
+}
+@media (hover: none) and (pointer: coarse) {
+    #custom-cursor { display: none; }
+    html, body, a, button { cursor: auto !important; }
 }
 
-/* Fallback pour mobile : on masque le curseur custom sur tactile */
-@media (hover: none) and (pointer: coarse) {
-    #custom-cursor {
-        display: none;
-    }
-    html, body, a, button {
-        cursor: auto !important;
-    }
+/* Logos Partenaires Footer */
+.partner-logo {
+    filter: grayscale(100%) opacity(0.7);
+    transition: all 0.3s;
+}
+.partner-logo:hover {
+    filter: grayscale(0%) opacity(1);
 }
