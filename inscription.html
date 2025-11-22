@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
-    <script src="layout.js"></script> <!-- IMPORT DU LAYOUT JS -->
+    <script src="layout.js"></script>
 
     <script>
         tailwind.config = { theme: { extend: { colors: { patro: { yellow: '#FFD700', green: '#009045', dark: '#1a1a1a', light: '#f8fafc' } }, fontFamily: { sans: ['Poppins', 'sans-serif'], display: ['Fredoka', 'sans-serif'] } } } }
@@ -17,11 +17,17 @@
 <body class="font-sans text-slate-800 bg-patro-light antialiased">
 
     <div id="custom-cursor"></div>
-    <div id="loader"><div class="spinner mb-4"></div></div>
+    
+    <!-- Loader avec Texte -->
+    <div id="loader">
+        <div class="spinner mb-4"></div>
+        <p class="text-patro-green font-bold font-display animate-pulse">Chargement...</p>
+    </div>
+    
     <div id="navbar-placeholder"></div>
 
     <div class="relative bg-patro-green pt-32 pb-24 overflow-hidden">
-        <div class="absolute inset-0 opacity-10" style="background-image: url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23ffffff\' fill-opacity=\'1\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
+        <div class="absolute inset-0 opacity-10" style="background-image: url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23ffffff\' fill-opacity=\'1\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
             <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white text-sm font-semibold mb-6">
                 <i data-lucide="sparkles" class="w-4 h-4 text-patro-yellow"></i>
@@ -34,7 +40,6 @@
                 Remplissez le formulaire ci-dessous pour démarrer l'inscription.
             </p>
         </div>
-        <!-- Vague -->
         <div class="absolute bottom-0 w-full leading-none text-patro-light">
             <svg class="block w-full h-12 md:h-24" viewBox="0 0 1440 320" preserveAspectRatio="none">
                 <path fill="currentColor" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,112C672,96,768,96,864,112C960,128,1056,160,1152,160C1248,160,1344,128,1392,112L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
@@ -45,7 +50,6 @@
     <section class="pb-20 bg-patro-light">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-10 relative z-20">
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                <!-- Infos -->
                 <div class="lg:col-span-1 space-y-6">
                     <div class="bg-white p-8 rounded-2xl shadow-sm border-t-4 border-patro-yellow">
                         <h2 class="text-2xl font-display font-bold text-patro-green mb-4">Pourquoi s'inscrire ?</h2>
@@ -62,7 +66,6 @@
                         </a>
                     </div>
                 </div>
-                <!-- Formulaire -->
                 <div class="lg:col-span-2">
                     <div class="bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden h-full min-h-[800px]">
                         <iframe src="https://patrovaldhaine.wixstudio.com/patrovdh/intranet/inscriptionpatro" width="100%" height="100%" style="min-height: 1000px; border: none;" title="Formulaire d'inscription Patro" loading="lazy"></iframe>
