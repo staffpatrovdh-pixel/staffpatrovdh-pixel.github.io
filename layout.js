@@ -71,7 +71,6 @@ document.addEventListener("DOMContentLoaded", function () {
                     <!-- Colonne 1: Info Modifiée -->
                     <div>
                         <span class="font-display font-bold text-2xl text-white block mb-4">Le Patro Val d'Haine de Maurage</span>
-                        <!-- MODIFICATION ICI -->
                         <p class="text-gray-400 text-sm mb-4">
                             Mouvement de jeunesse affilié à la Fédération Nationale des Patros.
                         </p>
