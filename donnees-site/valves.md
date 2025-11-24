@@ -1,4 +1,4 @@
-**Bienvenue aux nouveaux**
+**Bienvenue sur notre nouveau site internet**
 
 Bienvenue sur le nouveau site du Patro, il est enfin là et plus complet !
 
