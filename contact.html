@@ -8,7 +8,8 @@
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
-    <script src="layout.js?v=3"></script>
+    <!-- J'ai changé la version ici pour forcer la mise à jour -->
+    <script src="layout.js?v=4"></script>
 
     <script>
         tailwind.config = { theme: { extend: { colors: { patro: { yellow: '#FFD700', green: '#009045', dark: '#1a1a1a', light: '#f8fafc' } }, fontFamily: { sans: ['Poppins', 'sans-serif'], display: ['Fredoka', 'sans-serif'] } } } }
@@ -39,7 +40,6 @@
                 <!-- Nevala -->
                 <div class="staff-card bg-white rounded-2xl shadow-md overflow-hidden">
                     <div class="h-64 w-full staff-img-container bg-gray-100 relative group">
-                        <!-- Image avec chemin local -->
                         <img src="donnees-site/photos-staff/Nevala_(Aurelie).png" 
                              alt="Nevala" 
                              class="w-full h-full object-cover object-top staff-img"
@@ -100,7 +100,6 @@
                 <!-- Logan -->
                 <div class="staff-card bg-white rounded-2xl shadow-md overflow-hidden">
                     <div class="h-64 w-full staff-img-container bg-gray-100 relative">
-                        <!-- Note: J'ai mis Logan.png car il n'y avait pas de prénom spécifié entre parenthèses -->
                         <img src="donnees-site/photos-staff/Logan.png" 
                              alt="Logan" 
                              class="w-full h-full object-cover object-top staff-img"
@@ -167,6 +166,132 @@
                         <div class="space-y-2 text-sm text-gray-500">
                             <p class="flex justify-center items-center gap-2"><i data-lucide="phone" class="w-4 h-4"></i> 0478/61.09.16</p>
                         </div>
+                    </div>
+                </div>
+
+                <!-- Laura -->
+                <div class="staff-card bg-white rounded-2xl shadow-md overflow-hidden">
+                    <div class="h-64 w-full staff-img-container bg-gray-100 relative">
+                        <img src="donnees-site/photos-staff/Laura.png" 
+                             alt="Laura" 
+                             class="w-full h-full object-cover object-top staff-img"
+                             onerror="this.src='https://placehold.co/600x800?text=Photo+Manquante';">
+                    </div>
+                    <div class="p-6 text-center">
+                        <h3 class="text-2xl font-display font-bold text-patro-green">Laura</h3>
+                        <p class="text-gray-500 text-sm mb-4">&nbsp;</p>
+                        <p class="text-gray-700 font-medium mb-4">Animatrice Chevaliers/Etincelles</p>
+                        <div class="space-y-2 text-sm text-gray-500">
+                            <p class="flex justify-center items-center gap-2"><i data-lucide="phone" class="w-4 h-4"></i> 0492/93.54.57</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Kikaou -->
+                <div class="staff-card bg-white rounded-2xl shadow-md overflow-hidden">
+                    <div class="h-64 w-full staff-img-container bg-gray-100 relative">
+                        <img src="donnees-site/photos-staff/Kikaou_(Marine).png" 
+                             alt="Kikaou" 
+                             class="w-full h-full object-cover object-top staff-img"
+                             onerror="this.src='https://placehold.co/600x800?text=Photo+Manquante';">
+                    </div>
+                    <div class="p-6 text-center">
+                        <h3 class="text-2xl font-display font-bold text-patro-green">Kikaou</h3>
+                        <p class="text-gray-500 text-sm mb-4">(Marine)</p>
+                        <p class="text-gray-700 font-medium mb-4">Accompagnatrice adulte</p>
+                        <div class="space-y-2 text-sm text-gray-500">
+                            <p class="flex justify-center items-center gap-2"><i data-lucide="phone" class="w-4 h-4"></i> 0479/84.02.55</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Yunbao -->
+                <div class="staff-card bg-white rounded-2xl shadow-md overflow-hidden">
+                    <div class="h-64 w-full staff-img-container bg-gray-100 relative">
+                        <img src="donnees-site/photos-staff/Yunbao_(Alexiane).png" 
+                             alt="Yunbao" 
+                             class="w-full h-full object-cover object-top staff-img"
+                             onerror="this.src='https://placehold.co/600x800?text=Photo+Manquante';">
+                    </div>
+                    <div class="p-6 text-center">
+                        <h3 class="text-2xl font-display font-bold text-patro-green">Yunbao</h3>
+                        <p class="text-gray-500 text-sm mb-4">(Alexiane)</p>
+                        <p class="text-gray-700 font-medium mb-4">Accompagnatrice adulte</p>
+                    </div>
+                </div>
+
+                <!-- Nonius -->
+                <div class="staff-card bg-white rounded-2xl shadow-md overflow-hidden">
+                    <div class="h-64 w-full staff-img-container bg-gray-100 relative">
+                        <img src="donnees-site/photos-staff/Nonius_(Alessandro).png" 
+                             alt="Nonius" 
+                             class="w-full h-full object-cover object-top staff-img"
+                             onerror="this.src='https://placehold.co/600x800?text=Photo+Manquante';">
+                    </div>
+                    <div class="p-6 text-center">
+                        <h3 class="text-2xl font-display font-bold text-patro-green">Nonius</h3>
+                        <p class="text-gray-500 text-sm mb-4">(Alessandro)</p>
+                        <p class="text-gray-700 font-medium mb-4">Accompagnateur adulte</p>
+                    </div>
+                </div>
+
+                <!-- Monax -->
+                <div class="staff-card bg-white rounded-2xl shadow-md overflow-hidden">
+                    <div class="h-64 w-full staff-img-container bg-gray-100 relative">
+                        <img src="donnees-site/photos-staff/Monax_(Elliot).png" 
+                             alt="Monax" 
+                             class="w-full h-full object-cover object-top staff-img"
+                             onerror="this.src='https://placehold.co/600x800?text=Photo+Manquante';">
+                    </div>
+                    <div class="p-6 text-center">
+                        <h3 class="text-2xl font-display font-bold text-patro-green">Monax</h3>
+                        <p class="text-gray-500 text-sm mb-4">(Elliot)</p>
+                        <p class="text-gray-700 font-medium mb-4">Accompagnateur adulte</p>
+                    </div>
+                </div>
+
+                <!-- Okami -->
+                <div class="staff-card bg-white rounded-2xl shadow-md overflow-hidden">
+                    <div class="h-64 w-full staff-img-container bg-gray-100 relative">
+                        <img src="donnees-site/photos-staff/Okami_(Charles).png" 
+                             alt="Okami" 
+                             class="w-full h-full object-cover object-top staff-img"
+                             onerror="this.src='https://placehold.co/600x800?text=Photo+Manquante';">
+                    </div>
+                    <div class="p-6 text-center">
+                        <h3 class="text-2xl font-display font-bold text-patro-green">Okami</h3>
+                        <p class="text-gray-500 text-sm mb-4">(Charles)</p>
+                        <p class="text-gray-700 font-medium mb-4">Accompagnateur adulte</p>
+                    </div>
+                </div>
+
+                <!-- Laurine -->
+                <div class="staff-card bg-white rounded-2xl shadow-md overflow-hidden">
+                    <div class="h-64 w-full staff-img-container bg-gray-100 relative">
+                        <img src="donnees-site/photos-staff/Laurine.png" 
+                             alt="Laurine" 
+                             class="w-full h-full object-cover object-top staff-img"
+                             onerror="this.src='https://placehold.co/600x800?text=Photo+Manquante';">
+                    </div>
+                    <div class="p-6 text-center">
+                        <h3 class="text-2xl font-display font-bold text-patro-green">Laurine</h3>
+                        <p class="text-gray-500 text-sm mb-4">&nbsp;</p>
+                        <p class="text-gray-700 font-medium mb-4">Accompagnatrice adulte</p>
+                    </div>
+                </div>
+
+                <!-- Chaoui -->
+                <div class="staff-card bg-white rounded-2xl shadow-md overflow-hidden">
+                    <div class="h-64 w-full staff-img-container bg-gray-100 relative">
+                        <img src="donnees-site/photos-staff/Chaoui_(Maelie).png" 
+                             alt="Chaoui" 
+                             class="w-full h-full object-cover object-top staff-img"
+                             onerror="this.src='https://placehold.co/600x800?text=Photo+Manquante';">
+                    </div>
+                    <div class="p-6 text-center">
+                        <h3 class="text-2xl font-display font-bold text-patro-green">Chaoui</h3>
+                        <p class="text-gray-500 text-sm mb-4">(Maëlie)</p>
+                        <p class="text-gray-700 font-medium mb-4">Intendante</p>
                     </div>
                 </div>
 
