@@ -15,9 +15,10 @@ document.addEventListener("DOMContentLoaded", function () {
                     <!-- Desktop Menu -->
                     <div class="hidden lg:flex space-x-5 items-center">
                         <a href="index.html" class="nav-link text-gray-600 hover:text-patro-green font-medium transition">Accueil</a>
-                        <a href="contact.html" class="nav-link text-gray-600 hover:text-patro-green font-medium transition">Le Staff</a>
-                        
                         <a href="informations.html" class="nav-link text-gray-600 hover:text-patro-green font-medium transition">Infos & agenda</a>
+                        
+                        <!-- Menu Contact -->
+                        <a href="contact.html" class="nav-link text-gray-600 hover:text-patro-green font-medium transition">Contact</a>
                         
                         <a href="documents.html" class="nav-link text-gray-600 hover:text-patro-green font-medium transition">Documents</a>
                         
@@ -45,7 +46,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 <div class="px-4 pt-2 pb-6 space-y-2 shadow-lg">
                     <a href="index.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-patro-green hover:bg-yellow-50">Accueil</a>
                     <a href="informations.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-patro-green hover:bg-yellow-50">Infos & agenda</a>
-                    <a href="contact.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-patro-green hover:bg-yellow-50">Le Staff</a>
+                    <a href="contact.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-patro-green hover:bg-yellow-50">Contact</a>
                     <a href="documents.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-patro-green hover:bg-yellow-50">Documents</a>
                     
                     <a href="souper.html" class="flex items-center gap-2 px-3 py-2 rounded-md text-base font-bold text-patro-green bg-green-50 hover:bg-green-100">
@@ -70,7 +71,7 @@ document.addEventListener("DOMContentLoaded", function () {
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12 text-center md:text-left">
-                    <!-- Colonne 1: Info -->
+                    <!-- Colonne 1: Info Modifiée -->
                     <div>
                         <span class="font-display font-bold text-2xl text-white block mb-4">Le Patro Val d'Haine de Maurage</span>
                         <p class="text-gray-400 text-sm mb-4">
