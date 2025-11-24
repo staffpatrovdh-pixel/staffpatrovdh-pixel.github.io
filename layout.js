@@ -13,17 +13,27 @@ document.addEventListener("DOMContentLoaded", function () {
                     </a>
 
                     <!-- Desktop Menu -->
-                    <div class="hidden md:flex space-x-8 items-center">
+                    <div class="hidden lg:flex space-x-5 items-center">
                         <a href="index.html" class="nav-link text-gray-600 hover:text-patro-green font-medium transition">Accueil</a>
                         <a href="contact.html" class="nav-link text-gray-600 hover:text-patro-green font-medium transition">Le Staff</a>
+                        
+                        <!-- NOUVEAU LIEN -->
+                        <a href="informations.html" class="nav-link text-gray-600 hover:text-patro-green font-medium transition">Infos & Agenda</a>
+                        
                         <a href="documents.html" class="nav-link text-gray-600 hover:text-patro-green font-medium transition">Documents</a>
-                        <a href="inscription.html" class="btn-nav bg-patro-green text-white px-5 py-2.5 rounded-full font-semibold hover:bg-green-700 transition shadow-md hover:shadow-lg transform hover:-translate-y-0.5">
+                        
+                        <a href="souper.html" class="flex items-center gap-1 text-patro-green hover:text-patro-yellow font-bold transition bg-green-50 px-3 py-1 rounded-full border border-green-100 text-sm">
+                            <i data-lucide="utensils" class="w-4 h-4"></i>
+                            Souper
+                        </a>
+
+                        <a href="inscription.html" class="bg-patro-green text-white px-4 py-2 rounded-full font-semibold hover:bg-green-700 transition shadow-md hover:shadow-lg transform hover:-translate-y-0.5 text-sm">
                             Nous rejoindre
                         </a>
                     </div>
 
                     <!-- Mobile Menu Button -->
-                    <div class="md:hidden flex items-center">
+                    <div class="lg:hidden flex items-center">
                         <button onclick="toggleMenu()" class="text-gray-600 hover:text-patro-green focus:outline-none">
                             <i data-lucide="menu" class="w-8 h-8"></i>
                         </button>
@@ -32,11 +42,18 @@ document.addEventListener("DOMContentLoaded", function () {
             </div>
 
             <!-- Mobile Menu Panel -->
-            <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
+            <div id="mobile-menu" class="hidden lg:hidden bg-white border-t">
                 <div class="px-4 pt-2 pb-6 space-y-2 shadow-lg">
                     <a href="index.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-patro-green hover:bg-yellow-50">Accueil</a>
+                    <a href="informations.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-patro-green hover:bg-yellow-50">Infos & Agenda</a>
                     <a href="contact.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-patro-green hover:bg-yellow-50">Le Staff</a>
                     <a href="documents.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-patro-green hover:bg-yellow-50">Documents</a>
+                    
+                    <a href="souper.html" class="flex items-center gap-2 px-3 py-2 rounded-md text-base font-bold text-patro-green bg-green-50 hover:bg-green-100">
+                        <i data-lucide="utensils" class="w-4 h-4"></i>
+                        Souper du Patro
+                    </a>
+
                     <a href="inscription.html" class="block w-full text-center mt-4 px-5 py-3 rounded-md font-bold bg-patro-yellow text-patro-green">
                         S'inscrire maintenant
                     </a>
@@ -134,18 +151,15 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
-// --- 5. GESTION DU LOADER (ATTENDRE LE CHARGEMENT COMPLET) ---
-// On utilise 'load' au lieu de DOMContentLoaded pour attendre les images
+// --- 5. GESTION DU LOADER ---
 window.addEventListener('load', function() {
     const loader = document.getElementById('loader');
     if(loader) {
         loader.classList.add('loader-hidden');
-        // Suppression du DOM après l'animation CSS (0.6s)
         setTimeout(() => loader.style.display = 'none', 600);
     }
 });
 
-// Fonction globale pour le menu mobile
 function toggleMenu() {
     const menu = document.getElementById('mobile-menu');
     if (menu) menu.classList.toggle('hidden');
