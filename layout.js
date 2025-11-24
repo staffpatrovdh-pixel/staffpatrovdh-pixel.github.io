@@ -68,11 +68,12 @@ document.addEventListener("DOMContentLoaded", function () {
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12 text-center md:text-left">
-                    <!-- Colonne 1: Info -->
+                    <!-- Colonne 1: Info Modifiée -->
                     <div>
                         <span class="font-display font-bold text-2xl text-white block mb-4">Le Patro Val d'Haine de Maurage</span>
+                        <!-- MODIFICATION ICI -->
                         <p class="text-gray-400 text-sm mb-4">
-                            Association de fait reconnue par la Fédération Wallonie-Bruxelles.
+                            Mouvement de jeunesse affilié à la Fédération Nationale des Patros.
                         </p>
                         <div class="flex flex-col items-center md:items-start space-y-2 text-sm text-gray-500">
                             <span>Rue du Roeulx 23, 7110 Maurage</span>
@@ -152,7 +153,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    // --- 5. GESTION BANDEAU COOKIES (NOUVEAU) ---
+    // --- 5. GESTION BANDEAU COOKIES ---
     checkCookieConsent();
 });
 
@@ -215,7 +216,6 @@ function acceptCookies() {
 
 function refuseCookies() {
     localStorage.setItem('patroCookieConsent', 'refused');
-    // Ici on pourrait désactiver Google Maps/Calendar si on voulait aller très loin
     closeCookieBanner();
 }
 
