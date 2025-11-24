@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mentions Légales | Patro du Val d'Haine</title>
+    
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="layout.js?v=3"></script>
+
+    <script>
+        tailwind.config = { theme: { extend: { colors: { patro: { yellow: '#FFD700', green: '#009045', dark: '#1a1a1a', light: '#f8fafc' } }, fontFamily: { sans: ['Poppins', 'sans-serif'], display: ['Fredoka', 'sans-serif'] } } } }
+    </script>
+</head>
+<body class="font-sans text-slate-800 bg-patro-light antialiased">
+
+    <div id="custom-cursor"></div>
+    <div id="loader"><div class="spinner mb-4"></div><p class="text-patro-green font-bold font-display animate-pulse">Chargement...</p></div>
+    <div id="navbar-placeholder"></div>
+
+    <!-- En-tête -->
+    <div class="pt-32 pb-12 bg-gray-900 text-center relative overflow-hidden">
+        <h1 class="text-3xl md:text-4xl font-display font-bold text-white relative z-10">Mentions Légales</h1>
+        <p class="text-gray-400 mt-2 relative z-10 text-sm">Conformité RGPD et Droit Belge</p>
+    </div>
+
+    <section class="py-16 px-4">
+        <div class="max-w-4xl mx-auto space-y-8">
+            
+            <!-- 1. Identification et Propriété -->
+            <div class="bg-white p-8 rounded-2xl shadow-sm border-l-4 border-patro-yellow">
+                <h2 class="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
+                    <i data-lucide="building" class="w-5 h-5 text-patro-green"></i>
+                    1. Identification et Propriété
+                </h2>
+                <div class="text-gray-600 text-sm leading-relaxed space-y-3">
+                    <p>Conformément aux dispositions légales belges, voici les informations concernant l'éditeur du site :</p>
+                    <ul class="list-disc pl-5 space-y-1">
+                        <li><strong>Propriétaire et Éditeur :</strong> Patro du Val d'Haine de Maurage</li>
+                        <li><strong>Forme juridique :</strong> Association de fait (Mouvement de jeunesse)</li>
+                        <li><strong>Siège social (Local) :</strong> Rue du Roeulx 23, 7110 Maurage, Belgique</li>
+                        <li><strong>Responsable de la publication :</strong> Aurélie (Nevala) - Présidente</li>
+                        <li><strong>Contact :</strong> <a href="mailto:patrovaldhaine@patro.be" class="text-patro-green hover:underline">patrovaldhaine@patro.be</a> | 0488/08.86.03</li>
+                    </ul>
+                    <p class="pt-2 border-t border-gray-100 mt-2">
+                        <strong>Développement :</strong> Le présent site a été entièrement conçu, développé et géré par l'équipe d'animation du <strong>Patro du Val d'Haine de Maurage</strong>. Il demeure la propriété exclusive de l'association.
+                    </p>
+                </div>
+            </div>
+
+            <!-- 2. Hébergement -->
+            <div class="bg-white p-8 rounded-2xl shadow-sm border-l-4 border-patro-green">
+                <h2 class="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
+                    <i data-lucide="server" class="w-5 h-5 text-patro-green"></i>
+                    2. Hébergement
+                </h2>
+                <div class="text-gray-600 text-sm leading-relaxed">
+                    <p class="mb-2">Le site est hébergé sur les serveurs de :</p>
+                    <p class="font-bold text-gray-800">OVH Cloud SAS</p>
+                    <p>2 rue Kellermann, 59100 Roubaix, France</p>
+                    <p>Site web : <a href="https://www.ovhcloud.com" target="_blank" class="text-patro-green hover:underline">www.ovhcloud.com</a></p>
+                </div>
+            </div>
+
+            <!-- 3. Protection des données (RGPD) -->
+            <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
+                <h2 class="text-xl font-bold text-gray-800 mb-4">3. Protection de la vie privée (RGPD)</h2>
+                <p class="text-gray-600 text-sm leading-relaxed mb-4">
+                    Le Patro du Val d'Haine s'engage à respecter la législation en vigueur en Belgique et en Europe (RGPD - Règlement 2016/679) concernant la protection des données personnelles.
+                </p>
+                <ul class="list-disc pl-5 space-y-2 text-sm text-gray-600">
+                    <li><strong>Collecte des données :</strong> Les données personnelles (nom, prénom, date de naissance, coordonnées, informations médicales) collectées via les formulaires d'inscription sont strictement nécessaires à la gestion administrative, à la sécurité des enfants et à l'organisation des activités (camps, assurances).</li>
+                    <li><strong>Utilisation :</strong> Ces données sont exclusivement réservées à l'usage interne du Staff (animateurs responsables) et ne sont jamais vendues ou transmises à des tiers à des fins commerciales.</li>
+                    <li><strong>Conservation :</strong> Les données sont conservées durant la période d'affiliation du membre et supprimées sur demande ou après son départ définitif du mouvement.</li>
+                    <li><strong>Vos droits :</strong> Conformément à la loi, vous disposez d'un droit d'accès, de rectification et de suppression des données vous concernant. Pour exercer ce droit, contactez-nous à : <a href="mailto:patrovaldhaine@patro.be" class="text-patro-green hover:underline">patrovaldhaine@patro.be</a>.</li>
+                </ul>
+            </div>
+
+            <!-- 4. Droit à l'image -->
+            <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
+                <h2 class="text-xl font-bold text-gray-800 mb-4">4. Droit à l'image</h2>
+                <p class="text-gray-600 text-sm leading-relaxed mb-3">
+                    Dans le cadre de nos activités, des photos et vidéos sont prises pour illustrer la vie du Patro (site web, page Facebook/Instagram, journal interne).
+                </p>
+                <p class="text-gray-600 text-sm leading-relaxed">
+                    En inscrivant votre enfant, vous consentez implicitement à l'utilisation de son image dans un cadre non commercial et respectueux. Toutefois, <strong>vous gardez le droit de retirer votre consentement à tout moment</strong>. Si vous souhaitez qu'une photo spécifique soit retirée ou que votre enfant n'apparaisse pas sur nos supports, une simple demande écrite par email suffit.
+                </p>
+            </div>
+
+            <!-- 5. Cookies et Liens -->
+            <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
+                <h2 class="text-xl font-bold text-gray-800 mb-4">5. Cookies et Liens externes</h2>
+                <p class="text-gray-600 text-sm leading-relaxed">
+                    Ce site utilise des cookies techniques essentiels à son fonctionnement (notamment pour l'affichage des cartes et calendriers via Google/Microsoft). Nous n'utilisons pas de cookies publicitaires. Le site contient des liens vers des plateformes externes (Google Drive, Microsoft Forms) sur lesquelles le Patro n'exerce aucun contrôle concernant leur politique de confidentialité.
+                </p>
+            </div>
+
+            <!-- 6. Droit applicable -->
+            <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
+                <h2 class="text-xl font-bold text-gray-800 mb-4">6. Droit applicable</h2>
+                <p class="text-gray-600 text-sm leading-relaxed">
+                    Les présentes mentions légales sont régies par le droit belge. En cas de litige et à défaut d'accord amiable, seuls les tribunaux de l'arrondissement judiciaire du Hainaut (Division Mons/La Louvière) seront compétents.
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+    <div id="footer-placeholder"></div>
+</body>
+</html>
