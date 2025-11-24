@@ -8,7 +8,8 @@
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
-    <script src="layout.js"></script>
+    <!-- Mise à jour version 6 pour charger le bandeau cookies -->
+    <script src="layout.js?v=6"></script>
 
     <script>
         tailwind.config = { theme: { extend: { colors: { patro: { yellow: '#FFD700', green: '#009045', dark: '#1a1a1a', light: '#f8fafc' } }, fontFamily: { sans: ['Poppins', 'sans-serif'], display: ['Fredoka', 'sans-serif'] } } } }
@@ -129,13 +130,12 @@
         </div>
     </section>
 
-    <!-- Infos Pratiques & Calendar (REMANIÉ - FIX STICKY) -->
+    <!-- Infos Pratiques & Calendar -->
     <section id="infos" class="py-20 bg-patro-light relative">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
                 
                 <!-- Colonne Gauche : Infos Pratiques -->
-                <!-- MODIFICATION ICI : Ajout de lg: devant sticky et top-28 -->
                 <div class="lg:sticky lg:top-28">
                     <h2 class="text-patro-green font-bold tracking-wide uppercase text-sm mb-2">En Pratique</h2>
                     <h3 class="text-3xl md:text-4xl font-display font-bold text-gray-900 mb-6">C'est où & quand ?</h3>
@@ -176,7 +176,7 @@
                     </div>
                 </div>
 
-                <!-- Colonne Droite : Calendrier Dynamique (Sans Map, Sans Google Agenda) -->
+                <!-- Colonne Droite : Calendrier Dynamique -->
                 <div class="space-y-6">
                     <div class="bg-white rounded-2xl shadow-xl border-4 border-white p-6 min-h-[400px]">
                         <h4 class="font-display font-bold text-2xl text-gray-800 mb-6 border-b pb-2">Prochains événements</h4>
@@ -205,7 +205,6 @@
         const branch = 'main'; 
         const calendarUrl = `https://raw.githubusercontent.com/${repoOwner}/${repoName}/${branch}/donnees-site/calendrier.txt?t=${Date.now()}`;
 
-        // Mapping des mois
         const monthMap = {
             '01': 'Janv', '02': 'Fév', '03': 'Mars', '04': 'Avr', '05': 'Mai', '06': 'Juin',
             '07': 'Juil', '08': 'Août', '09': 'Sept', '10': 'Oct', '11': 'Nov', '12': 'Déc'
@@ -222,8 +221,6 @@
 
                 const lines = text.split('\n');
                 let hasEvents = false;
-
-                // On affiche max 5 événements sur l'accueil pour ne pas surcharger
                 let count = 0;
                 const maxEvents = 5;
 
@@ -233,15 +230,14 @@
                     const parts = line.split('|');
                     if (parts.length >= 2) {
                         hasEvents = true;
-                        const dateRaw = parts[0].trim(); // 15/03/2025
+                        const dateRaw = parts[0].trim(); 
                         const title = parts[1].trim();
                         const place = parts[2] ? parts[2].trim() : '';
 
-                        // Transformation de la date
                         const dateParts = dateRaw.split('/');
                         const day = dateParts[0];
                         const monthNum = dateParts[1];
-                        const monthName = monthMap[monthNum] || monthNum; // Utilise le nom raccourci ou le numéro si pas trouvé
+                        const monthName = monthMap[monthNum] || monthNum;
 
                         const html = `
                             <div class="flex items-center gap-4 p-3 hover:bg-gray-50 rounded-lg transition group">
@@ -263,7 +259,6 @@
                 if (!hasEvents) {
                     container.innerHTML = '<p class="text-gray-500 italic text-center py-4">Aucune date prévue pour le moment.</p>';
                 }
-                
                 if(typeof lucide !== 'undefined') lucide.createIcons();
 
             } catch (error) {
