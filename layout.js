@@ -16,10 +16,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     <div class="hidden lg:flex space-x-5 items-center">
                         <a href="index.html" class="nav-link text-gray-600 hover:text-patro-green font-medium transition">Accueil</a>
                         <a href="informations.html" class="nav-link text-gray-600 hover:text-patro-green font-medium transition">Infos & agenda</a>
-                        
-                        <!-- Menu Contact -->
-                        <a href="contact.html" class="nav-link text-gray-600 hover:text-patro-green font-medium transition">Contact</a>
-                        
+                        <a href="contact.html" class="nav-link text-gray-600 hover:text-patro-green font-medium transition">Le Staff</a>
                         <a href="documents.html" class="nav-link text-gray-600 hover:text-patro-green font-medium transition">Documents</a>
                         
                         <a href="souper.html" class="flex items-center gap-1 text-patro-green hover:text-patro-yellow font-bold transition bg-green-50 px-3 py-1 rounded-full border border-green-100 text-sm">
@@ -46,7 +43,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 <div class="px-4 pt-2 pb-6 space-y-2 shadow-lg">
                     <a href="index.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-patro-green hover:bg-yellow-50">Accueil</a>
                     <a href="informations.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-patro-green hover:bg-yellow-50">Infos & agenda</a>
-                    <a href="contact.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-patro-green hover:bg-yellow-50">Contact</a>
+                    <a href="contact.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-patro-green hover:bg-yellow-50">Le Staff</a>
                     <a href="documents.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-patro-green hover:bg-yellow-50">Documents</a>
                     
                     <a href="souper.html" class="flex items-center gap-2 px-3 py-2 rounded-md text-base font-bold text-patro-green bg-green-50 hover:bg-green-100">
@@ -71,7 +68,7 @@ document.addEventListener("DOMContentLoaded", function () {
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12 text-center md:text-left">
-                    <!-- Colonne 1: Info Modifiée -->
+                    <!-- Colonne 1: Info -->
                     <div>
                         <span class="font-display font-bold text-2xl text-white block mb-4">Le Patro Val d'Haine de Maurage</span>
                         <p class="text-gray-400 text-sm mb-4">
@@ -113,6 +110,8 @@ document.addEventListener("DOMContentLoaded", function () {
                     <p>© 2025 Patro du Val d'Haine – Tous droits réservés</p>
                     <span class="hidden md:inline">•</span>
                     <a href="legal.html" class="hover:text-white transition">Mentions légales</a>
+                    <span class="hidden md:inline">•</span>
+                    <a href="cookies.html" class="hover:text-white transition">Politique Cookies</a>
                 </div>
             </div>
         </footer>
@@ -152,9 +151,12 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         }
     });
+
+    // --- 5. GESTION BANDEAU COOKIES (NOUVEAU) ---
+    checkCookieConsent();
 });
 
-// --- 5. GESTION DU LOADER ---
+// --- 6. GESTION DU LOADER ---
 window.addEventListener('load', function() {
     const loader = document.getElementById('loader');
     if(loader) {
@@ -166,4 +168,61 @@ window.addEventListener('load', function() {
 function toggleMenu() {
     const menu = document.getElementById('mobile-menu');
     if (menu) menu.classList.toggle('hidden');
+}
+
+// --- FONCTIONS COOKIES ---
+function checkCookieConsent() {
+    if (!localStorage.getItem('patroCookieConsent')) {
+        const banner = document.createElement('div');
+        banner.id = 'cookie-banner';
+        banner.className = 'fixed bottom-0 left-0 w-full bg-white shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)] p-4 md:p-6 z-50 transform transition-transform duration-500 translate-y-full flex flex-col md:flex-row items-center justify-between gap-4 border-t border-gray-100';
+        banner.innerHTML = `
+            <div class="flex items-start gap-3 max-w-3xl">
+                <div class="p-2 bg-patro-yellow/20 rounded-full text-patro-dark hidden md:block">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-cookie"><path d="M12 2a10 10 0 1 0 10 10 4 4 0 0 1-5-5 4 4 0 0 1-5-5"/><path d="M8.5 8.5v.01"/><path d="M16 15.5v.01"/><path d="M12 12v.01"/><path d="M11 17v.01"/><path d="M7 14v.01"/></svg>
+                </div>
+                <div>
+                    <h4 class="font-bold text-gray-800 mb-1">🍪 On utilise des cookies (mais pas pour les manger)</h4>
+                    <p class="text-sm text-gray-600">
+                        Nous utilisons des cookies essentiels pour le bon fonctionnement du site (cartes, calendrier). 
+                        En continuant, vous acceptez leur utilisation.
+                        <a href="cookies.html" class="text-patro-green underline hover:text-patro-yellow">En savoir plus</a>.
+                    </p>
+                </div>
+            </div>
+            <div class="flex gap-3 w-full md:w-auto">
+                <button onclick="acceptCookies()" class="flex-1 md:flex-none px-6 py-2.5 bg-patro-green text-white font-bold rounded-lg hover:bg-green-700 transition shadow-sm text-sm">
+                    J'accepte
+                </button>
+                <button onclick="refuseCookies()" class="flex-1 md:flex-none px-6 py-2.5 bg-gray-100 text-gray-600 font-bold rounded-lg hover:bg-gray-200 transition text-sm">
+                    Refuser
+                </button>
+            </div>
+        `;
+        document.body.appendChild(banner);
+        
+        // Animation d'entrée
+        setTimeout(() => {
+            banner.classList.remove('translate-y-full');
+        }, 1000);
+    }
+}
+
+function acceptCookies() {
+    localStorage.setItem('patroCookieConsent', 'accepted');
+    closeCookieBanner();
+}
+
+function refuseCookies() {
+    localStorage.setItem('patroCookieConsent', 'refused');
+    // Ici on pourrait désactiver Google Maps/Calendar si on voulait aller très loin
+    closeCookieBanner();
+}
+
+function closeCookieBanner() {
+    const banner = document.getElementById('cookie-banner');
+    if(banner) {
+        banner.classList.add('translate-y-full');
+        setTimeout(() => banner.remove(), 500);
+    }
 }
