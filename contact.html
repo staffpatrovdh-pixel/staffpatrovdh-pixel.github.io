@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
-    <script src="layout.js"></script>
+    <script src="layout.js?v=3"></script>
 
     <script>
         tailwind.config = { theme: { extend: { colors: { patro: { yellow: '#FFD700', green: '#009045', dark: '#1a1a1a', light: '#f8fafc' } }, fontFamily: { sans: ['Poppins', 'sans-serif'], display: ['Fredoka', 'sans-serif'] } } } }
@@ -18,7 +18,7 @@
 
     <div id="custom-cursor"></div>
     
-    <!-- Loader avec Texte -->
+    <!-- Loader -->
     <div id="loader">
         <div class="spinner mb-4"></div>
         <p class="text-patro-green font-bold font-display animate-pulse">Chargement...</p>
@@ -38,8 +38,12 @@
                 
                 <!-- Nevala -->
                 <div class="staff-card bg-white rounded-2xl shadow-md overflow-hidden">
-                    <div class="h-64 w-full staff-img-container bg-gray-200">
-                        <img src="https://lh3.googleusercontent.com/sitesv/AAzXCkdsUhpBSS2A7_OU7yO6OukKAp8Fix5NhZ2T01NWAwrkqqlncXN-IFbFyWG8SNYeZn3fMonk3d3b769BVvfRvU7YK3ITHPJrIaYUoH7ZbQ6uFOc7es9gbdsay12FdCvZfsocnx56uxGYuzPkElTkDrqsJga0P_RpdUDcUyxMszy1Dx0wu3CRGTJwXD7RZbAiupFmbS__qcCCbgHWeZx-vlJ18rEgP3uAjtr0AF0=w1280" alt="Nevala" class="w-full h-full object-cover staff-img">
+                    <div class="h-64 w-full staff-img-container bg-gray-100 relative group">
+                        <!-- Image avec chemin local -->
+                        <img src="donnees-site/photos-staff/Nevala_(Aurélie).png" 
+                             alt="Nevala" 
+                             class="w-full h-full object-cover object-top staff-img"
+                             onerror="this.src='https://placehold.co/600x800?text=Photo+Manquante';">
                     </div>
                     <div class="p-6 text-center">
                         <h3 class="text-2xl font-display font-bold text-patro-green">Nevala</h3>
@@ -55,8 +59,11 @@
 
                 <!-- Choucas -->
                 <div class="staff-card bg-white rounded-2xl shadow-md overflow-hidden">
-                    <div class="h-64 w-full staff-img-container bg-gray-200">
-                        <img src="https://lh3.googleusercontent.com/sitesv/AAzXCkeuGiqEJBc8Z1-8nrypTmk0U2QTHz85loujTZMGc5mqczNsQDQrpT6NrNXbSQkrOIdaV4ZUIYZrk5_M0NFkKlRxdOJD4MVfrxtW8yZCDnkIfAyVv8a7vuGNCmGd7iIrFo7PKm-myIFRNXfWZldQQN3iExPzXYJYwy1-qjwVBAzHWJUsj3D84wf7LeoFcMIxZJpFirBD3ZSAqAz3wUHQ_NCj1tvfPaXmSyUhFuk=w1280" alt="Choucas" class="w-full h-full object-cover staff-img">
+                    <div class="h-64 w-full staff-img-container bg-gray-100 relative">
+                        <img src="donnees-site/photos-staff/Choucas_(Romain).png" 
+                             alt="Choucas" 
+                             class="w-full h-full object-cover object-top staff-img"
+                             onerror="this.src='https://placehold.co/600x800?text=Photo+Manquante';">
                     </div>
                     <div class="p-6 text-center">
                         <h3 class="text-2xl font-display font-bold text-patro-green">Choucas</h3>
@@ -72,8 +79,11 @@
 
                 <!-- Duma -->
                 <div class="staff-card bg-white rounded-2xl shadow-md overflow-hidden">
-                    <div class="h-64 w-full staff-img-container bg-gray-200">
-                        <img src="https://lh3.googleusercontent.com/sitesv/AAzXCkf_tkiEsQyhjL2psbwQwtDrLzaLl86jNwaImb2WRqGhfaOszga1GFsZw-lDRnyjePx8EKJ-q4o2MTRzqdNaU5hqRB9gnHB2js64u0TCyQnMSx8wXQHY6ex_s0csEh81033tAhMT7wO5GHFVc_ua9lLYJk8hDkxMxrVegFLp4VP8KmmA5wn7WZdIoGsQxPCvkuuskiC8DxjHqTiPKU5S9DtE0TNc3a3h1jZud7g=w1280" alt="Duma" class="w-full h-full object-cover staff-img">
+                    <div class="h-64 w-full staff-img-container bg-gray-100 relative">
+                        <img src="donnees-site/photos-staff/Duma_(Jonathan).png" 
+                             alt="Duma" 
+                             class="w-full h-full object-cover object-top staff-img"
+                             onerror="this.src='https://placehold.co/600x800?text=Photo+Manquante';">
                     </div>
                     <div class="p-6 text-center">
                         <h3 class="text-2xl font-display font-bold text-patro-green">Duma</h3>
@@ -89,8 +99,12 @@
 
                 <!-- Logan -->
                 <div class="staff-card bg-white rounded-2xl shadow-md overflow-hidden">
-                    <div class="h-64 w-full staff-img-container bg-gray-200">
-                        <img src="https://lh3.googleusercontent.com/sitesv/AAzXCkdPYB1WV2-cobioOKD9-21qjGtuOniLTr_KXdSx-Z9KMm5xw_Wf18PWDwadaIX3P_GtsrOXP3Hgm8w81_IgJ9RLDNQEOj3MkG4wRUR5EIX2SoGjo9wlz-iHBgISmvLmuU-L1ab4lI-BIWrQmmhwfO5AqMsT0iaR7-TAIuynCUksAhRyNZWgdeSsc69EoHpGvORvckxZsCIAfWobHOW6wVwir6t4pslQpKEpfYg=w1280" alt="Logan" class="w-full h-full object-cover staff-img">
+                    <div class="h-64 w-full staff-img-container bg-gray-100 relative">
+                        <!-- Note: J'ai mis Logan.png car il n'y avait pas de prénom spécifié entre parenthèses -->
+                        <img src="donnees-site/photos-staff/Logan.png" 
+                             alt="Logan" 
+                             class="w-full h-full object-cover object-top staff-img"
+                             onerror="this.src='https://placehold.co/600x800?text=Photo+Manquante';">
                     </div>
                     <div class="p-6 text-center">
                         <h3 class="text-2xl font-display font-bold text-patro-green">Logan</h3>
@@ -104,8 +118,11 @@
 
                 <!-- Hyrax -->
                 <div class="staff-card bg-white rounded-2xl shadow-md overflow-hidden">
-                    <div class="h-64 w-full staff-img-container bg-gray-200">
-                        <img src="https://lh3.googleusercontent.com/sitesv/AAzXCkcx8CR7uizmNpMzSS6b-JITYAkJTbUI5No4BgjBVl7x1JhOYXkoF0J_G8CZHskj6h3zDoMqeIc5LIFuf0-tfLjrDIPjv-TCDQd8K2fTZzkaI-5piJ0QT-XJilcZT9WxlyVnImL2mD4BXSb-M4nzG6zFWte7lZra4S8quGK76iPaBd9uTNNAGU3yEKOqx3-PmTjdxV_nmZmAMnMGs9KTXHpHbZ3QPprtMlamAac=w1280" alt="Hyrax" class="w-full h-full object-cover staff-img">
+                    <div class="h-64 w-full staff-img-container bg-gray-100 relative">
+                        <img src="donnees-site/photos-staff/Hyrax_(Kelya).png" 
+                             alt="Hyrax" 
+                             class="w-full h-full object-cover object-top staff-img"
+                             onerror="this.src='https://placehold.co/600x800?text=Photo+Manquante';">
                     </div>
                     <div class="p-6 text-center">
                         <h3 class="text-2xl font-display font-bold text-patro-green">Hyrax</h3>
@@ -119,8 +136,11 @@
 
                 <!-- Pomsky -->
                 <div class="staff-card bg-white rounded-2xl shadow-md overflow-hidden">
-                    <div class="h-64 w-full staff-img-container bg-gray-200">
-                        <img src="https://lh3.googleusercontent.com/sitesv/AAzXCkf-suP_j_qaG4APkVPn4rW46JWQAsTi4PXeTlzPFX0cYdlNgcPDfw4oIspcSskLwiqNDAmo8wZPY1L4CpSWJ2-GtlmNZoUsS2zqu68_VkwOofc-newShbtGc7ZZAkkVr_RRE35alsfwUyRUEkYlsxktcI_aWJxfVl-xlhRVyRdhIvrOnBIRRJXuYPPOxPFrZb3aZ-DhRhWULtzD329OqwMCNObC-CI1WRq7TWI=w1280" alt="Pomsky" class="w-full h-full object-cover staff-img">
+                    <div class="h-64 w-full staff-img-container bg-gray-100 relative">
+                        <img src="donnees-site/photos-staff/Pomsky_(Maelia).png" 
+                             alt="Pomsky" 
+                             class="w-full h-full object-cover object-top staff-img"
+                             onerror="this.src='https://placehold.co/600x800?text=Photo+Manquante';">
                     </div>
                     <div class="p-6 text-center">
                         <h3 class="text-2xl font-display font-bold text-patro-green">Pomsky</h3>
@@ -134,8 +154,11 @@
 
                  <!-- Wombat -->
                  <div class="staff-card bg-white rounded-2xl shadow-md overflow-hidden">
-                    <div class="h-64 w-full staff-img-container bg-gray-200">
-                        <img src="https://lh3.googleusercontent.com/sitesv/AAzXCkdSv0ZRgcvSu8jvHALl9Y57EFMTGVv7myMGFFCa0_VpALD4aiGyNfCOjhK5ISlIp5XJBwrcK3aVv4nTArWKUquEiSYKODDxSKlFauRTGYa-4MIKfUASFGP4GkOVFKQ3yLvfmPefj4TPYePFeN-BdFzSU5K7_1EFmTshF3UkU3DwttJ1Iphm99or-RguzCxvtTftP8IPMATDp3a0hqgu6IL78sXjeXdL_m7rnsk=w1280" alt="Wombat" class="w-full h-full object-cover staff-img">
+                    <div class="h-64 w-full staff-img-container bg-gray-100 relative">
+                        <img src="donnees-site/photos-staff/Wombat_(Chloé).png" 
+                             alt="Wombat" 
+                             class="w-full h-full object-cover object-top staff-img"
+                             onerror="this.src='https://placehold.co/600x800?text=Photo+Manquante';">
                     </div>
                     <div class="p-6 text-center">
                         <h3 class="text-2xl font-display font-bold text-patro-green">Wombat</h3>
