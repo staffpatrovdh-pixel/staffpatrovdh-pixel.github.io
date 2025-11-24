@@ -8,8 +8,8 @@
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
-    <!-- J'ai changé la version ici pour forcer la mise à jour -->
-    <script src="layout.js?v=4"></script>
+    <!-- Mise à jour version 6 -->
+    <script src="layout.js?v=6"></script>
 
     <script>
         tailwind.config = { theme: { extend: { colors: { patro: { yellow: '#FFD700', green: '#009045', dark: '#1a1a1a', light: '#f8fafc' } }, fontFamily: { sans: ['Poppins', 'sans-serif'], display: ['Fredoka', 'sans-serif'] } } } }
@@ -18,16 +18,9 @@
 <body class="font-sans text-slate-800 bg-patro-light antialiased">
 
     <div id="custom-cursor"></div>
-    
-    <!-- Loader -->
-    <div id="loader">
-        <div class="spinner mb-4"></div>
-        <p class="text-patro-green font-bold font-display animate-pulse">Chargement...</p>
-    </div>
-    
+    <div id="loader"><div class="spinner mb-4"></div><p class="text-patro-green font-bold font-display animate-pulse">Chargement...</p></div>
     <div id="navbar-placeholder"></div>
 
-    <!-- En-tête Page -->
     <div class="pt-32 pb-12 bg-patro-green text-center">
         <h1 class="text-4xl font-display font-bold text-white">Notre Staff</h1>
         <p class="text-green-100 mt-2">Une équipe de choc pour animer vos enfants !</p>
@@ -40,10 +33,7 @@
                 <!-- Nevala -->
                 <div class="staff-card bg-white rounded-2xl shadow-md overflow-hidden">
                     <div class="h-64 w-full staff-img-container bg-gray-100 relative group">
-                        <img src="donnees-site/photos-staff/Nevala_(Aurelie).png" 
-                             alt="Nevala" 
-                             class="w-full h-full object-cover object-top staff-img"
-                             onerror="this.src='https://placehold.co/600x800?text=Photo+Manquante';">
+                        <img src="donnees-site/photos-staff/Nevala_(Aurelie).png" alt="Nevala" class="w-full h-full object-cover object-top staff-img" onerror="this.src='https://placehold.co/600x800?text=Photo+Manquante';">
                     </div>
                     <div class="p-6 text-center">
                         <h3 class="text-2xl font-display font-bold text-patro-green">Nevala</h3>
@@ -60,10 +50,7 @@
                 <!-- Choucas -->
                 <div class="staff-card bg-white rounded-2xl shadow-md overflow-hidden">
                     <div class="h-64 w-full staff-img-container bg-gray-100 relative">
-                        <img src="donnees-site/photos-staff/Choucas_(Romain).png" 
-                             alt="Choucas" 
-                             class="w-full h-full object-cover object-top staff-img"
-                             onerror="this.src='https://placehold.co/600x800?text=Photo+Manquante';">
+                        <img src="donnees-site/photos-staff/Choucas_(Romain).png" alt="Choucas" class="w-full h-full object-cover object-top staff-img" onerror="this.src='https://placehold.co/600x800?text=Photo+Manquante';">
                     </div>
                     <div class="p-6 text-center">
                         <h3 class="text-2xl font-display font-bold text-patro-green">Choucas</h3>
@@ -80,10 +67,7 @@
                 <!-- Duma -->
                 <div class="staff-card bg-white rounded-2xl shadow-md overflow-hidden">
                     <div class="h-64 w-full staff-img-container bg-gray-100 relative">
-                        <img src="donnees-site/photos-staff/Duma_(Jonathan).png" 
-                             alt="Duma" 
-                             class="w-full h-full object-cover object-top staff-img"
-                             onerror="this.src='https://placehold.co/600x800?text=Photo+Manquante';">
+                        <img src="donnees-site/photos-staff/Duma_(Jonathan).png" alt="Duma" class="w-full h-full object-cover object-top staff-img" onerror="this.src='https://placehold.co/600x800?text=Photo+Manquante';">
                     </div>
                     <div class="p-6 text-center">
                         <h3 class="text-2xl font-display font-bold text-patro-green">Duma</h3>
@@ -100,10 +84,7 @@
                 <!-- Logan -->
                 <div class="staff-card bg-white rounded-2xl shadow-md overflow-hidden">
                     <div class="h-64 w-full staff-img-container bg-gray-100 relative">
-                        <img src="donnees-site/photos-staff/Logan.png" 
-                             alt="Logan" 
-                             class="w-full h-full object-cover object-top staff-img"
-                             onerror="this.src='https://placehold.co/600x800?text=Photo+Manquante';">
+                        <img src="donnees-site/photos-staff/Logan.png" alt="Logan" class="w-full h-full object-cover object-top staff-img" onerror="this.src='https://placehold.co/600x800?text=Photo+Manquante';">
                     </div>
                     <div class="p-6 text-center">
                         <h3 class="text-2xl font-display font-bold text-patro-green">Logan</h3>
@@ -118,10 +99,7 @@
                 <!-- Hyrax -->
                 <div class="staff-card bg-white rounded-2xl shadow-md overflow-hidden">
                     <div class="h-64 w-full staff-img-container bg-gray-100 relative">
-                        <img src="donnees-site/photos-staff/Hyrax_(Kelya).png" 
-                             alt="Hyrax" 
-                             class="w-full h-full object-cover object-top staff-img"
-                             onerror="this.src='https://placehold.co/600x800?text=Photo+Manquante';">
+                        <img src="donnees-site/photos-staff/Hyrax_(Kelya).png" alt="Hyrax" class="w-full h-full object-cover object-top staff-img" onerror="this.src='https://placehold.co/600x800?text=Photo+Manquante';">
                     </div>
                     <div class="p-6 text-center">
                         <h3 class="text-2xl font-display font-bold text-patro-green">Hyrax</h3>
@@ -136,10 +114,7 @@
                 <!-- Pomsky -->
                 <div class="staff-card bg-white rounded-2xl shadow-md overflow-hidden">
                     <div class="h-64 w-full staff-img-container bg-gray-100 relative">
-                        <img src="donnees-site/photos-staff/Pomsky_(Maelia).png" 
-                             alt="Pomsky" 
-                             class="w-full h-full object-cover object-top staff-img"
-                             onerror="this.src='https://placehold.co/600x800?text=Photo+Manquante';">
+                        <img src="donnees-site/photos-staff/Pomsky_(Maelia).png" alt="Pomsky" class="w-full h-full object-cover object-top staff-img" onerror="this.src='https://placehold.co/600x800?text=Photo+Manquante';">
                     </div>
                     <div class="p-6 text-center">
                         <h3 class="text-2xl font-display font-bold text-patro-green">Pomsky</h3>
@@ -154,10 +129,7 @@
                  <!-- Wombat -->
                  <div class="staff-card bg-white rounded-2xl shadow-md overflow-hidden">
                     <div class="h-64 w-full staff-img-container bg-gray-100 relative">
-                        <img src="donnees-site/photos-staff/Wombat_(Chloe).png" 
-                             alt="Wombat" 
-                             class="w-full h-full object-cover object-top staff-img"
-                             onerror="this.src='https://placehold.co/600x800?text=Photo+Manquante';">
+                        <img src="donnees-site/photos-staff/Wombat_(Chloe).png" alt="Wombat" class="w-full h-full object-cover object-top staff-img" onerror="this.src='https://placehold.co/600x800?text=Photo+Manquante';">
                     </div>
                     <div class="p-6 text-center">
                         <h3 class="text-2xl font-display font-bold text-patro-green">Wombat</h3>
@@ -172,10 +144,7 @@
                 <!-- Laura -->
                 <div class="staff-card bg-white rounded-2xl shadow-md overflow-hidden">
                     <div class="h-64 w-full staff-img-container bg-gray-100 relative">
-                        <img src="donnees-site/photos-staff/Laura.png" 
-                             alt="Laura" 
-                             class="w-full h-full object-cover object-top staff-img"
-                             onerror="this.src='https://placehold.co/600x800?text=Photo+Manquante';">
+                        <img src="donnees-site/photos-staff/Laura.png" alt="Laura" class="w-full h-full object-cover object-top staff-img" onerror="this.src='https://placehold.co/600x800?text=Photo+Manquante';">
                     </div>
                     <div class="p-6 text-center">
                         <h3 class="text-2xl font-display font-bold text-patro-green">Laura</h3>
@@ -190,10 +159,7 @@
                 <!-- Kikaou -->
                 <div class="staff-card bg-white rounded-2xl shadow-md overflow-hidden">
                     <div class="h-64 w-full staff-img-container bg-gray-100 relative">
-                        <img src="donnees-site/photos-staff/Kikaou_(Marine).png" 
-                             alt="Kikaou" 
-                             class="w-full h-full object-cover object-top staff-img"
-                             onerror="this.src='https://placehold.co/600x800?text=Photo+Manquante';">
+                        <img src="donnees-site/photos-staff/Kikaou_(Marine).png" alt="Kikaou" class="w-full h-full object-cover object-top staff-img" onerror="this.src='https://placehold.co/600x800?text=Photo+Manquante';">
                     </div>
                     <div class="p-6 text-center">
                         <h3 class="text-2xl font-display font-bold text-patro-green">Kikaou</h3>
@@ -208,10 +174,7 @@
                 <!-- Yunbao -->
                 <div class="staff-card bg-white rounded-2xl shadow-md overflow-hidden">
                     <div class="h-64 w-full staff-img-container bg-gray-100 relative">
-                        <img src="donnees-site/photos-staff/Yunbao_(Alexiane).png" 
-                             alt="Yunbao" 
-                             class="w-full h-full object-cover object-top staff-img"
-                             onerror="this.src='https://placehold.co/600x800?text=Photo+Manquante';">
+                        <img src="donnees-site/photos-staff/Yunbao_(Alexiane).png" alt="Yunbao" class="w-full h-full object-cover object-top staff-img" onerror="this.src='https://placehold.co/600x800?text=Photo+Manquante';">
                     </div>
                     <div class="p-6 text-center">
                         <h3 class="text-2xl font-display font-bold text-patro-green">Yunbao</h3>
@@ -223,10 +186,7 @@
                 <!-- Nonius -->
                 <div class="staff-card bg-white rounded-2xl shadow-md overflow-hidden">
                     <div class="h-64 w-full staff-img-container bg-gray-100 relative">
-                        <img src="donnees-site/photos-staff/Nonius_(Alessandro).png" 
-                             alt="Nonius" 
-                             class="w-full h-full object-cover object-top staff-img"
-                             onerror="this.src='https://placehold.co/600x800?text=Photo+Manquante';">
+                        <img src="donnees-site/photos-staff/Nonius_(Alessandro).png" alt="Nonius" class="w-full h-full object-cover object-top staff-img" onerror="this.src='https://placehold.co/600x800?text=Photo+Manquante';">
                     </div>
                     <div class="p-6 text-center">
                         <h3 class="text-2xl font-display font-bold text-patro-green">Nonius</h3>
@@ -238,10 +198,7 @@
                 <!-- Monax -->
                 <div class="staff-card bg-white rounded-2xl shadow-md overflow-hidden">
                     <div class="h-64 w-full staff-img-container bg-gray-100 relative">
-                        <img src="donnees-site/photos-staff/Monax_(Elliot).png" 
-                             alt="Monax" 
-                             class="w-full h-full object-cover object-top staff-img"
-                             onerror="this.src='https://placehold.co/600x800?text=Photo+Manquante';">
+                        <img src="donnees-site/photos-staff/Monax_(Elliot).png" alt="Monax" class="w-full h-full object-cover object-top staff-img" onerror="this.src='https://placehold.co/600x800?text=Photo+Manquante';">
                     </div>
                     <div class="p-6 text-center">
                         <h3 class="text-2xl font-display font-bold text-patro-green">Monax</h3>
@@ -253,10 +210,7 @@
                 <!-- Okami -->
                 <div class="staff-card bg-white rounded-2xl shadow-md overflow-hidden">
                     <div class="h-64 w-full staff-img-container bg-gray-100 relative">
-                        <img src="donnees-site/photos-staff/Okami_(Charles).png" 
-                             alt="Okami" 
-                             class="w-full h-full object-cover object-top staff-img"
-                             onerror="this.src='https://placehold.co/600x800?text=Photo+Manquante';">
+                        <img src="donnees-site/photos-staff/Okami_(Charles).png" alt="Okami" class="w-full h-full object-cover object-top staff-img" onerror="this.src='https://placehold.co/600x800?text=Photo+Manquante';">
                     </div>
                     <div class="p-6 text-center">
                         <h3 class="text-2xl font-display font-bold text-patro-green">Okami</h3>
@@ -268,10 +222,7 @@
                 <!-- Laurine -->
                 <div class="staff-card bg-white rounded-2xl shadow-md overflow-hidden">
                     <div class="h-64 w-full staff-img-container bg-gray-100 relative">
-                        <img src="donnees-site/photos-staff/Laurine.png" 
-                             alt="Laurine" 
-                             class="w-full h-full object-cover object-top staff-img"
-                             onerror="this.src='https://placehold.co/600x800?text=Photo+Manquante';">
+                        <img src="donnees-site/photos-staff/Laurine.png" alt="Laurine" class="w-full h-full object-cover object-top staff-img" onerror="this.src='https://placehold.co/600x800?text=Photo+Manquante';">
                     </div>
                     <div class="p-6 text-center">
                         <h3 class="text-2xl font-display font-bold text-patro-green">Laurine</h3>
@@ -283,10 +234,7 @@
                 <!-- Chaoui -->
                 <div class="staff-card bg-white rounded-2xl shadow-md overflow-hidden">
                     <div class="h-64 w-full staff-img-container bg-gray-100 relative">
-                        <img src="donnees-site/photos-staff/Chaoui_(Maelie).png" 
-                             alt="Chaoui" 
-                             class="w-full h-full object-cover object-top staff-img"
-                             onerror="this.src='https://placehold.co/600x800?text=Photo+Manquante';">
+                        <img src="donnees-site/photos-staff/Chaoui_(Maelie).png" alt="Chaoui" class="w-full h-full object-cover object-top staff-img" onerror="this.src='https://placehold.co/600x800?text=Photo+Manquante';">
                     </div>
                     <div class="p-6 text-center">
                         <h3 class="text-2xl font-display font-bold text-patro-green">Chaoui</h3>
