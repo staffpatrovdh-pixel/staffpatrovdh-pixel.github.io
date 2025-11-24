@@ -10,12 +10,15 @@
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
-    <!-- On charge le layout mais sans le menu pour éviter les fuites, on fera un header simple -->
+
     <script>
         tailwind.config = { theme: { extend: { colors: { patro: { yellow: '#FFD700', green: '#009045', dark: '#1a1a1a', light: '#f8fafc' } }, fontFamily: { sans: ['Poppins', 'sans-serif'], display: ['Fredoka', 'sans-serif'] } } } }
     </script>
 </head>
 <body class="font-sans text-slate-800 bg-patro-light antialiased min-h-screen flex flex-col">
+
+    <!-- 1. LA BOULE VERTE (DIV DU CURSEUR) -->
+    <div id="custom-cursor"></div>
 
     <!-- Header Simple -->
     <div class="bg-gray-900 text-white py-4 px-6 flex justify-between items-center shadow-md">
@@ -28,7 +31,7 @@
         </a>
     </div>
 
-    <!-- Zone de Login (Visible si pas de token) -->
+    <!-- Zone de Login -->
     <div id="login-section" class="flex-grow flex items-center justify-center p-4">
         <div class="bg-white p-8 rounded-2xl shadow-xl max-w-md w-full border-t-4 border-patro-green">
             <h2 class="text-2xl font-bold text-gray-800 mb-4 text-center">Connexion Sécurisée</h2>
@@ -42,7 +45,7 @@
         </div>
     </div>
 
-    <!-- Zone d'édition (Cachée par défaut) -->
+    <!-- Zone d'édition -->
     <div id="editor-section" class="hidden flex-grow p-4 md:p-8 max-w-6xl mx-auto w-full">
         
         <div class="flex justify-between items-center mb-8">
@@ -86,17 +89,29 @@
     </div>
 
     <script>
-        // Configuration
         const repoOwner = 'staffpatrovdh-pixel';
         const repoName = 'staffpatrovdh-pixel.github.io';
-        const branch = 'main'; // Ou 'master'
-
-        // Stockage des SHAs (nécessaire pour l'API GitHub)
+        const branch = 'main';
         let fileShas = {};
 
         document.addEventListener('DOMContentLoaded', () => {
             lucide.createIcons();
             checkAuth();
+            
+            // 2. SCRIPT DU CURSEUR (Intégré directement ici)
+            if (window.matchMedia("(pointer: fine)").matches) {
+                const cursor = document.getElementById('custom-cursor');
+                if(cursor) {
+                    document.addEventListener('mousemove', (e) => {
+                        requestAnimationFrame(() => {
+                            cursor.style.left = e.clientX + 'px';
+                            cursor.style.top = e.clientY + 'px';
+                        });
+                    });
+                    document.addEventListener('mouseout', () => { cursor.style.opacity = '0'; });
+                    document.addEventListener('mouseover', () => { cursor.style.opacity = '1'; });
+                }
+            }
         });
 
         function checkAuth() {
@@ -104,7 +119,6 @@
             if (token) {
                 document.getElementById('login-section').classList.add('hidden');
                 document.getElementById('editor-section').classList.remove('hidden');
-                // Charger les données
                 loadFile('donnees-site/calendrier.txt', 'calendar-content', 'status-calendar');
                 loadFile('donnees-site/valves.md', 'valves-content', 'status-valves');
             } else {
@@ -130,20 +144,14 @@
             }
         }
 
-        // --- FONCTIONS API GITHUB ---
-
-        // 1. CHARGER UN FICHIER
         async function loadFile(path, elementId, statusId) {
             const statusEl = document.getElementById(statusId);
             const token = localStorage.getItem('gh_token');
-            
             statusEl.textContent = "Chargement...";
             statusEl.className = "text-xs font-medium text-blue-500";
 
             try {
-                // On ajoute un timestamp pour éviter le cache
                 const url = `https://api.github.com/repos/${repoOwner}/${repoName}/contents/${path}?ref=${branch}&t=${Date.now()}`;
-                
                 const response = await fetch(url, {
                     headers: {
                         'Authorization': `token ${token}`,
@@ -154,9 +162,7 @@
                 if (!response.ok) throw new Error(`Erreur ${response.status}`);
 
                 const data = await response.json();
-                fileShas[path] = data.sha; // Important : on garde le SHA pour la mise à jour
-
-                // Décoder le contenu (Base64 -> UTF-8)
+                fileShas[path] = data.sha;
                 const content = new TextDecoder().decode(Uint8Array.from(atob(data.content), c => c.charCodeAt(0)));
                 
                 document.getElementById(elementId).value = content;
@@ -174,7 +180,6 @@
             }
         }
 
-        // 2. SAUVEGARDER UN FICHIER
         async function saveFile(path, elementId, statusId) {
             const content = document.getElementById(elementId).value;
             const statusEl = document.getElementById(statusId);
@@ -190,9 +195,7 @@
             statusEl.className = "text-xs font-medium text-orange-500 animate-pulse";
 
             try {
-                // Encoder le contenu (UTF-8 -> Base64)
                 const encodedContent = btoa(String.fromCharCode(...new TextEncoder().encode(content)));
-
                 const body = {
                     message: `Mise à jour ${path} via Admin Panel`,
                     content: encodedContent,
@@ -201,7 +204,6 @@
                 };
 
                 const url = `https://api.github.com/repos/${repoOwner}/${repoName}/contents/${path}`;
-
                 const response = await fetch(url, {
                     method: 'PUT',
                     headers: {
@@ -214,12 +216,10 @@
                 if (!response.ok) throw new Error("Erreur lors de la sauvegarde");
 
                 const data = await response.json();
-                fileShas[path] = data.content.sha; // Mettre à jour le SHA
+                fileShas[path] = data.content.sha;
 
                 statusEl.textContent = "Sauvegardé !";
                 statusEl.className = "text-xs font-bold text-green-600";
-                
-                // Petit effet visuel
                 setTimeout(() => {
                     statusEl.textContent = "Prêt";
                     statusEl.className = "text-xs font-medium text-green-500";
