@@ -63,13 +63,14 @@ document.addEventListener("DOMContentLoaded", function () {
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12 text-center md:text-left">
                     <!-- Colonne 1: Info -->
                     <div>
-                        <span class="font-display font-bold text-2xl text-white block mb-4">Patro Val d'Haine</span>
+                        <span class="font-display font-bold text-2xl text-white block mb-4">Le Patro Val d'Haine de Maurage</span>
                         <p class="text-gray-400 text-sm mb-4">
-                            Association de fait reconnue par la Fédération Wallonie-Bruxelles.
+                            Mouvement de jeunesse affilié à la Fédération Nationale des Patros.
                         </p>
                         <div class="flex flex-col items-center md:items-start space-y-2 text-sm text-gray-500">
                             <span>Rue du Roeulx 23, 7110 Maurage</span>
                             <span>patrovaldhaine@patro.be</span>
+                            <span>0488/08.86.03</span>
                         </div>
                     </div>
 
