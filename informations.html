@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
-    <!-- Bibliothèque pour convertir le Markdown des valves en HTML -->
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script src="layout.js"></script>
 
@@ -22,7 +21,6 @@
     <div id="loader"><div class="spinner mb-4"></div><p class="text-patro-green font-bold font-display animate-pulse">Chargement...</p></div>
     <div id="navbar-placeholder"></div>
 
-    <!-- En-tête -->
     <div class="pt-32 pb-12 bg-patro-green text-center relative overflow-hidden">
         <div class="absolute inset-0 opacity-10" style="background-image: url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23ffffff\' fill-opacity=\'1\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
         <h1 class="text-4xl font-display font-bold text-white relative z-10">Valves & Agenda</h1>
@@ -41,9 +39,7 @@
                     <h2 class="text-2xl font-bold text-gray-800 font-display">Prochaines Dates</h2>
                 </div>
 
-                <!-- Container Calendrier -->
                 <div id="calendar-container" class="space-y-4">
-                    <!-- Chargement -->
                     <div class="animate-pulse flex space-x-4 bg-white p-4 rounded-xl">
                         <div class="rounded-full bg-gray-200 h-10 w-10"></div>
                         <div class="flex-1 space-y-2 py-1">
@@ -63,15 +59,12 @@
                     <h2 class="text-2xl font-bold text-gray-800 font-display">Aux Valves</h2>
                 </div>
 
-                <!-- Container Valves (Style papier/post-it) -->
                 <div class="bg-white p-8 rounded-3xl shadow-lg border border-gray-100 relative overflow-hidden min-h-[400px]">
-                    <!-- Effet punaise -->
                     <div class="absolute top-0 right-0 p-4 opacity-10">
                         <i data-lucide="pin" class="w-12 h-12 text-patro-dark transform rotate-45"></i>
                     </div>
 
                     <div id="valves-content" class="prose prose-green max-w-none">
-                        <!-- Le contenu Markdown sera injecté ici -->
                         <div class="flex flex-col items-center justify-center h-64 text-gray-400">
                             <div class="spinner mb-4 border-gray-300 border-t-patro-green"></div>
                             <p>Récupération des dernières infos...</p>
@@ -85,24 +78,25 @@
 
     <div id="footer-placeholder"></div>
 
-    <!-- SCRIPT MAGIQUE -->
     <script>
-        // Configuration GitHub
         const repoOwner = 'staffpatrovdh-pixel'; 
         const repoName = 'staffpatrovdh-pixel.github.io';
-        const branch = 'main'; // Ou 'master' selon votre config
+        const branch = 'main'; 
         
-        // URLs des fichiers bruts (Raw)
-        // On ajoute un timestamp ?t=... pour éviter que le navigateur ne garde une vieille version en cache
         const calendarUrl = `https://raw.githubusercontent.com/${repoOwner}/${repoName}/${branch}/donnees-site/calendrier.txt?t=${Date.now()}`;
         const valvesUrl = `https://raw.githubusercontent.com/${repoOwner}/${repoName}/${branch}/donnees-site/valves.md?t=${Date.now()}`;
+
+        // Mapping Mois
+        const monthMap = {
+            '01': 'Janv', '02': 'Fév', '03': 'Mars', '04': 'Avr', '05': 'Mai', '06': 'Juin',
+            '07': 'Juil', '08': 'Août', '09': 'Sept', '10': 'Oct', '11': 'Nov', '12': 'Déc'
+        };
 
         document.addEventListener('DOMContentLoaded', () => {
             loadCalendar();
             loadValves();
         });
 
-        // 1. CHARGEMENT DU CALENDRIER
         async function loadCalendar() {
             try {
                 const response = await fetch(calendarUrl);
@@ -110,29 +104,32 @@
                 const text = await response.text();
                 
                 const container = document.getElementById('calendar-container');
-                container.innerHTML = ''; // Vider le loader
+                container.innerHTML = '';
 
                 const lines = text.split('\n');
                 let hasEvents = false;
 
                 lines.forEach(line => {
-                    // Ignorer les lignes vides
                     if (!line.trim()) return;
 
-                    // Format attendu : Date | Titre | Lieu
                     const parts = line.split('|');
                     if (parts.length >= 2) {
                         hasEvents = true;
-                        const date = parts[0].trim();
+                        const dateRaw = parts[0].trim();
                         const title = parts[1].trim();
                         const place = parts[2] ? parts[2].trim() : '';
 
-                        // Création HTML de la carte événement
+                        // Transformation Date
+                        const dateParts = dateRaw.split('/');
+                        const day = dateParts[0];
+                        const monthNum = dateParts[1];
+                        const monthName = monthMap[monthNum] || monthNum;
+
                         const html = `
                             <div class="bg-white p-4 rounded-xl shadow-sm border-l-4 border-patro-yellow hover:shadow-md transition flex items-start gap-4">
                                 <div class="flex-shrink-0 bg-gray-50 rounded-lg p-2 text-center min-w-[60px]">
-                                    <span class="block text-xs text-gray-500 font-bold uppercase">${date.split('/')[1] || ''}</span> <!-- Mois -->
-                                    <span class="block text-xl font-bold text-patro-dark">${date.split('/')[0]}</span> <!-- Jour -->
+                                    <span class="block text-xs text-gray-500 font-bold uppercase">${monthName}</span>
+                                    <span class="block text-xl font-bold text-patro-dark">${day}</span>
                                 </div>
                                 <div>
                                     <h3 class="font-bold text-gray-800 text-lg">${title}</h3>
@@ -157,20 +154,14 @@
             }
         }
 
-        // 2. CHARGEMENT DES VALVES (MARKDOWN)
         async function loadValves() {
             try {
                 const response = await fetch(valvesUrl);
                 if (!response.ok) throw new Error("Fichier valves introuvable");
                 const markdownText = await response.text();
-                
                 const container = document.getElementById('valves-content');
-                
-                // Conversion Markdown -> HTML via la librairie 'marked'
-                // On configure pour que les sauts de ligne soient respectés
                 marked.setOptions({ breaks: true });
                 container.innerHTML = marked.parse(markdownText);
-
             } catch (error) {
                 console.error(error);
                 document.getElementById('valves-content').innerHTML = 
@@ -179,7 +170,6 @@
         }
     </script>
 
-    <!-- Styles spécifiques pour le contenu Markdown (Prose) -->
     <style>
         .prose h1 { font-family: 'Fredoka', sans-serif; color: var(--patro-green); font-size: 1.8em; margin-bottom: 0.5em; margin-top: 1em; }
         .prose h1:first-child { margin-top: 0; }
