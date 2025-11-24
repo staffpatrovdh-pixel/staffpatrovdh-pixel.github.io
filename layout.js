@@ -15,17 +15,12 @@ document.addEventListener("DOMContentLoaded", function () {
                     <!-- Desktop Menu -->
                     <div class="hidden lg:flex space-x-5 items-center">
                         <a href="index.html" class="nav-link text-gray-600 hover:text-patro-green font-medium transition">Accueil</a>
-                        <a href="contact.html" class="nav-link text-gray-600 hover:text-patro-green font-medium transition">Le Staff</a>
+                        <a href="contact.html" class="nav-link text-gray-600 hover:text-patro-green font-medium transition">Contact</a>
                         
                         <!-- NOUVEAU LIEN -->
-                        <a href="informations.html" class="nav-link text-gray-600 hover:text-patro-green font-medium transition">Infos & Agenda</a>
+                        <a href="informations.html" class="nav-link text-gray-600 hover:text-patro-green font-medium transition">Infos & agenda</a>
                         
                         <a href="documents.html" class="nav-link text-gray-600 hover:text-patro-green font-medium transition">Documents</a>
-                        
-                        <a href="souper.html" class="flex items-center gap-1 text-patro-green hover:text-patro-yellow font-bold transition bg-green-50 px-3 py-1 rounded-full border border-green-100 text-sm">
-                            <i data-lucide="utensils" class="w-4 h-4"></i>
-                            Souper
-                        </a>
 
                         <a href="inscription.html" class="bg-patro-green text-white px-4 py-2 rounded-full font-semibold hover:bg-green-700 transition shadow-md hover:shadow-lg transform hover:-translate-y-0.5 text-sm">
                             Nous rejoindre
@@ -45,14 +40,9 @@ document.addEventListener("DOMContentLoaded", function () {
             <div id="mobile-menu" class="hidden lg:hidden bg-white border-t">
                 <div class="px-4 pt-2 pb-6 space-y-2 shadow-lg">
                     <a href="index.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-patro-green hover:bg-yellow-50">Accueil</a>
-                    <a href="informations.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-patro-green hover:bg-yellow-50">Infos & Agenda</a>
-                    <a href="contact.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-patro-green hover:bg-yellow-50">Le Staff</a>
+                    <a href="informations.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-patro-green hover:bg-yellow-50">Infos & agenda</a>
+                    <a href="contact.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-patro-green hover:bg-yellow-50">Contact</a>
                     <a href="documents.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-patro-green hover:bg-yellow-50">Documents</a>
-                    
-                    <a href="souper.html" class="flex items-center gap-2 px-3 py-2 rounded-md text-base font-bold text-patro-green bg-green-50 hover:bg-green-100">
-                        <i data-lucide="utensils" class="w-4 h-4"></i>
-                        Souper du Patro
-                    </a>
 
                     <a href="inscription.html" class="block w-full text-center mt-4 px-5 py-3 rounded-md font-bold bg-patro-yellow text-patro-green">
                         S'inscrire maintenant
