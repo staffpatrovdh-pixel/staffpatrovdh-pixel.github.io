@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tableau de bord | Patro Admin</title>
+    <meta name="robots" content="noindex, nofollow">
+    
+    <!-- On remonte d'un dossier pour le CSS -->
+    <link rel="stylesheet" href="../style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <script>
+        tailwind.config = { theme: { extend: { colors: { patro: { yellow: '#FFD700', green: '#009045', dark: '#1a1a1a', light: '#f8fafc' } }, fontFamily: { sans: ['Poppins', 'sans-serif'], display: ['Fredoka', 'sans-serif'] } } } }
+    </script>
+</head>
+<body class="font-sans text-slate-800 bg-gray-100 antialiased min-h-screen flex flex-col">
+
+    <!-- Header -->
+    <header class="bg-white border-b h-16 flex items-center justify-between px-6 shadow-sm sticky top-0 z-20">
+        <div class="flex items-center gap-3">
+            <!-- Logo qui retourne à l'accueil du tableau de bord -->
+            <a href="index.html" class="hover:opacity-70 transition"><img src="https://static.wixstatic.com/shapes/99150c_262f50afd9f748c1b2820587168d19f3.svg" class="h-8"></a>
+            <span class="font-bold text-lg text-patro-green hidden md:block">Administration</span>
+        </div>
+        <div class="flex items-center gap-4">
+            <span class="text-sm text-gray-500 hidden md:inline">Connecté en tant que <strong id="user-display-name">...</strong></span>
+            <button onclick="logout()" class="text-red-500 hover:bg-red-50 p-2 rounded-full transition" title="Déconnexion"><i data-lucide="log-out" class="w-5 h-5"></i></button>
+        </div>
+    </header>
+
+    <div class="flex flex-1 max-w-7xl w-full mx-auto p-6 gap-8">
+        
+        <!-- Sidebar -->
+        <aside class="w-64 hidden md:block flex-shrink-0">
+            <nav class="space-y-1">
+                <a href="#" class="flex items-center gap-3 px-4 py-3 bg-white text-patro-green font-bold shadow-sm rounded-lg transition">
+                    <i data-lucide="layout-dashboard" class="w-5 h-5"></i> Tableau de bord
+                </a>
+                
+                <p class="px-4 pt-4 pb-2 text-xs font-bold text-gray-400 uppercase">Contenu</p>
+                <a href="texts.html" class="flex items-center gap-3 px-4 py-3 text-gray-600 hover:bg-white hover:shadow-sm rounded-lg transition">
+                    <i data-lucide="file-edit" class="w-5 h-5"></i> Textes & Agenda
+                </a>
+                <a href="files.html" class="flex items-center gap-3 px-4 py-3 text-gray-600 hover:bg-white hover:shadow-sm rounded-lg transition">
+                    <i data-lucide="folder-open" class="w-5 h-5"></i> Gestion Fichiers
+                </a>
+
+                <div id="admin-menu" class="hidden">
+                    <p class="px-4 pt-4 pb-2 text-xs font-bold text-gray-400 uppercase">Administration</p>
+                    <a href="users.html" class="flex items-center gap-3 px-4 py-3 text-gray-600 hover:bg-white hover:shadow-sm rounded-lg transition">
+                        <i data-lucide="users" class="w-5 h-5"></i> Utilisateurs
+                    </a>
+                </div>
+
+                <div class="pt-4 mt-4 border-t border-gray-200">
+                    <a href="profile.html" class="flex items-center gap-3 px-4 py-3 text-gray-600 hover:bg-white hover:shadow-sm rounded-lg transition">
+                        <i data-lucide="user" class="w-5 h-5"></i> Mon Profil
+                    </a>
+                    <a href="../index.html" target="_blank" class="flex items-center gap-3 px-4 py-3 text-gray-400 hover:text-gray-600 transition">
+                        <i data-lucide="external-link" class="w-5 h-5"></i> Voir le site
+                    </a>
+                </div>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex-1">
+            
+            <div class="mb-8">
+                <h1 class="text-3xl font-display font-bold text-gray-800">Bonjour, <span id="welcome-name" class="text-patro-green">Staff</span> !</h1>
+                <p class="text-gray-500">Que souhaitez-vous gérer aujourd'hui ?</p>
+            </div>
+
+            <!-- Grid de Raccourcis -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                
+                <!-- Carte Agenda -->
+                <a href="texts.html" class="group bg-white p-6 rounded-xl shadow-sm border border-gray-200 hover:shadow-md hover:border-patro-yellow transition flex flex-col h-full">
+                    <div class="w-12 h-12 bg-yellow-50 rounded-lg flex items-center justify-center mb-4 group-hover:bg-patro-yellow group-hover:text-white transition text-yellow-600">
+                        <i data-lucide="calendar" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="font-bold text-lg text-gray-800 mb-2">Agenda & Valves</h3>
+                    <p class="text-sm text-gray-500 flex-1">Modifier les dates du calendrier et les annonces importantes.</p>
+                </a>
+
+                <!-- Carte Fichiers -->
+                <a href="files.html" class="group bg-white p-6 rounded-xl shadow-sm border border-gray-200 hover:shadow-md hover:border-patro-green transition flex flex-col h-full">
+                    <div class="w-12 h-12 bg-green-50 rounded-lg flex items-center justify-center mb-4 group-hover:bg-patro-green group-hover:text-white transition text-green-600">
+                        <i data-lucide="folder-open" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="font-bold text-lg text-gray-800 mb-2">Fichiers & Photos</h3>
+                    <p class="text-sm text-gray-500 flex-1">Gérer les documents PDF, les photos du staff et de l'accueil.</p>
+                </a>
+
+                <!-- Carte Profil -->
+                <a href="profile.html" class="group bg-white p-6 rounded-xl shadow-sm border border-gray-200 hover:shadow-md hover:border-blue-500 transition flex flex-col h-full">
+                    <div class="w-12 h-12 bg-blue-50 rounded-lg flex items-center justify-center mb-4 group-hover:bg-blue-500 group-hover:text-white transition text-blue-600">
+                        <i data-lucide="user-circle" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="font-bold text-lg text-gray-800 mb-2">Mon Profil</h3>
+                    <p class="text-sm text-gray-500 flex-1">Modifier mon mot de passe ou mes informations personnelles.</p>
+                </a>
+
+                <!-- Carte Utilisateurs (Admin Only) -->
+                <a href="users.html" id="card-users" class="hidden group bg-white p-6 rounded-xl shadow-sm border border-gray-200 hover:shadow-md hover:border-purple-500 transition flex flex-col h-full">
+                    <div class="w-12 h-12 bg-purple-50 rounded-lg flex items-center justify-center mb-4 group-hover:bg-purple-500 group-hover:text-white transition text-purple-600">
+                        <i data-lucide="users" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="font-bold text-lg text-gray-800 mb-2">Utilisateurs</h3>
+                    <p class="text-sm text-gray-500 flex-1">Ajouter ou supprimer des comptes animateurs.</p>
+                </a>
+
+            </div>
+
+            <!-- Section Aide Rapide -->
+            <div class="mt-10 bg-blue-50 rounded-xl p-6 border border-blue-100">
+                <h4 class="font-bold text-blue-800 flex items-center gap-2 mb-2">
+                    <i data-lucide="info" class="w-4 h-4"></i> Besoin d'aide ?
+                </h4>
+                <p class="text-sm text-blue-600">
+                    N'oubliez pas que toute modification sur les fichiers ou les textes peut prendre <strong>1 à 2 minutes</strong> avant d'apparaître sur le site public (le temps que GitHub mette à jour).
+                </p>
+            </div>
+
+        </main>
+    </div>
+
+    <script>
+        lucide.createIcons();
+
+        // Vérification Auth & Affichage conditionnel
+        try {
+            const userJson = sessionStorage.getItem('patro_user');
+            if (!userJson) {
+                window.location.href = '../admin.html'; // Redirection vers le login racine si pas connecté
+            } else {
+                const user = JSON.parse(userJson);
+                
+                // Remplissage des infos
+                document.getElementById('user-display-name').innerText = user.prenom;
+                document.getElementById('welcome-name').innerText = user.prenom;
+
+                // Gestion des droits Admin
+                if (user.role === 'admin') {
+                    document.getElementById('admin-menu').classList.remove('hidden');
+                    document.getElementById('card-users').classList.remove('hidden');
+                    document.getElementById('card-users').classList.add('flex'); // Pour rétablir le flex
+                }
+            }
+        } catch (e) {
+            console.error("Erreur session", e);
+            window.location.href = '../admin.html';
+        }
+
+        function logout() {
+            sessionStorage.clear();
+            window.location.href = '../admin.html';
+        }
+    </script>
+</body>
+</html>
