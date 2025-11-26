@@ -133,25 +133,55 @@
         // Vérification Auth & Affichage conditionnel
         try {
             const userJson = sessionStorage.getItem('patro_user');
+            
             if (!userJson) {
-                window.location.href = '../admin.html'; // Redirection vers le login racine si pas connecté
+                // Gestion robuste de la redirection pour éviter les erreurs "Invalid URL"
+                // Si la redirection auto échoue (ex: sandbox), on affiche un lien manuel
+                try {
+                    window.location.href = '../admin.html'; 
+                } catch(e) {
+                    console.warn("Redirection automatique bloquée, affichage manuel.");
+                    document.body.innerHTML = `
+                        <div class="flex items-center justify-center h-screen flex-col gap-4 bg-gray-50 text-center p-4">
+                            <h1 class="text-2xl font-bold text-gray-800">Session expirée</h1>
+                            <p class="text-gray-500">Veuillez vous reconnecter pour accéder au tableau de bord.</p>
+                            <a href="../admin.html" class="bg-patro-green text-white px-6 py-3 rounded-lg font-bold shadow-md hover:bg-green-700 transition">
+                                Retour à la connexion
+                            </a>
+                        </div>
+                    `;
+                }
             } else {
+                // Utilisateur connecté : chargement des infos
                 const user = JSON.parse(userJson);
                 
                 // Remplissage des infos
-                document.getElementById('user-display-name').innerText = user.prenom;
-                document.getElementById('welcome-name').innerText = user.prenom;
+                const displayName = document.getElementById('user-display-name');
+                const welcomeName = document.getElementById('welcome-name');
+                
+                if(displayName) displayName.innerText = user.prenom;
+                if(welcomeName) welcomeName.innerText = user.prenom;
 
                 // Gestion des droits Admin
                 if (user.role === 'admin') {
-                    document.getElementById('admin-menu').classList.remove('hidden');
-                    document.getElementById('card-users').classList.remove('hidden');
-                    document.getElementById('card-users').classList.add('flex'); // Pour rétablir le flex
+                    const adminMenu = document.getElementById('admin-menu');
+                    const cardUsers = document.getElementById('card-users');
+                    
+                    if(adminMenu) adminMenu.classList.remove('hidden');
+                    if(cardUsers) {
+                        cardUsers.classList.remove('hidden');
+                        cardUsers.classList.add('flex'); // Pour rétablir le flex
+                    }
                 }
             }
         } catch (e) {
             console.error("Erreur session", e);
-            window.location.href = '../admin.html';
+            // En cas d'erreur critique de parsing, on propose aussi le retour
+            try {
+                window.location.href = '../admin.html';
+            } catch(err) {
+                // Fallback visuel si la redirection échoue
+            }
         }
 
         function logout() {
