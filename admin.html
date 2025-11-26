@@ -21,7 +21,7 @@
         .sidebar-link.active { background-color: #dbeafe; color: #1e40af; font-weight: 600; }
         
         /* Grille Fichiers */
-        .file-card { background: white; border: 1px solid #e5e7eb; border-radius: 8px; overflow: hidden; transition: box-shadow 0.2s; }
+        .file-card { background: white; border: 1px solid #e5e7eb; border-radius: 8px; overflow: hidden; transition: box-shadow 0.2s; display: flex; flex-direction: column; }
         .file-card:hover { box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); border-color: var(--patro-green); }
         
         /* Loader Overlay */
@@ -133,18 +133,13 @@
                     </div>
 
                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                        
                         <!-- Calendrier Interactif -->
                         <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden flex flex-col h-[500px]">
                             <div class="p-4 border-b bg-gray-50 flex justify-between items-center">
                                 <h3 class="font-bold text-gray-700 flex items-center gap-2"><i data-lucide="calendar" class="w-5 h-5 text-patro-yellow"></i> Agenda</h3>
                                 <button onclick="saveCalendar()" class="text-xs bg-patro-yellow text-patro-dark px-3 py-1.5 rounded font-bold hover:bg-yellow-400 transition">Sauvegarder</button>
                             </div>
-                            
-                            <div class="flex-1 overflow-y-auto p-4 bg-gray-50/50" id="calendar-list">
-                                <!-- Les lignes seront injectées ici par JS -->
-                            </div>
-
+                            <div class="flex-1 overflow-y-auto p-4 bg-gray-50/50 space-y-2" id="calendar-list"></div>
                             <div class="p-3 border-t bg-white">
                                 <button onclick="addCalendarRow()" class="w-full py-2 border-2 border-dashed border-gray-300 rounded-lg text-gray-500 font-bold hover:border-patro-yellow hover:text-patro-yellow hover:bg-yellow-50 transition flex justify-center items-center gap-2">
                                     <i data-lucide="plus" class="w-4 h-4"></i> Ajouter une date
@@ -152,23 +147,19 @@
                             </div>
                         </div>
 
-                        <!-- Valves avec Toolbar -->
+                        <!-- Valves -->
                         <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden flex flex-col h-[500px]">
                             <div class="p-4 border-b bg-gray-50 flex justify-between items-center">
                                 <h3 class="font-bold text-gray-700 flex items-center gap-2"><i data-lucide="bell" class="w-5 h-5 text-patro-green"></i> Valves Info</h3>
                                 <button onclick="saveValves()" class="text-xs bg-patro-green text-white px-3 py-1.5 rounded font-bold hover:bg-green-700 transition">Sauvegarder</button>
                             </div>
-                            
-                            <!-- Toolbar Simple -->
                             <div class="px-4 py-2 border-b bg-white flex gap-2 flex-wrap">
-                                <button onclick="insertMarkdown('**', '**')" class="toolbar-btn" title="Gras">B</button>
-                                <button onclick="insertMarkdown('*', '*')" class="toolbar-btn italic" title="Italique">I</button>
-                                <div class="w-px h-6 bg-gray-200 mx-1"></div>
-                                <button onclick="insertMarkdown('# ', '')" class="toolbar-btn" title="Titre">Titre</button>
-                                <button onclick="insertMarkdown('- ', '')" class="toolbar-btn" title="Liste">Liste</button>
+                                <button onclick="insertMarkdown('**', '**')" class="px-2 py-1 bg-gray-100 rounded text-xs font-bold hover:bg-gray-200">Gras</button>
+                                <button onclick="insertMarkdown('*', '*')" class="px-2 py-1 bg-gray-100 rounded text-xs italic hover:bg-gray-200">Italique</button>
+                                <button onclick="insertMarkdown('# ', '')" class="px-2 py-1 bg-gray-100 rounded text-xs font-bold hover:bg-gray-200">Titre</button>
+                                <button onclick="insertMarkdown('- ', '')" class="px-2 py-1 bg-gray-100 rounded text-xs hover:bg-gray-200">Liste</button>
                             </div>
-
-                            <textarea id="val-content" class="flex-1 p-4 font-mono text-sm focus:outline-none resize-none text-gray-700 leading-relaxed" spellcheck="false" placeholder="Écrivez vos infos ici..."></textarea>
+                            <textarea id="val-content" class="flex-1 p-4 font-mono text-sm focus:outline-none resize-none text-gray-700 leading-relaxed bg-gray-50" spellcheck="false" placeholder="Écrivez vos infos ici..."></textarea>
                         </div>
                     </div>
                 </div>
@@ -191,7 +182,6 @@
                         </div>
                     </div>
 
-                    <!-- Grille -->
                     <div id="file-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 pb-20">
                         <!-- Les fichiers seront injectés ici -->
                     </div>
@@ -208,9 +198,7 @@
                 <h3 id="preview-name" class="font-bold text-gray-700">Aperçu</h3>
                 <button onclick="closePreview()" class="p-2 hover:bg-red-100 rounded-full text-red-500 transition"><i data-lucide="x" class="w-6 h-6"></i></button>
             </div>
-            <div id="preview-body" class="flex-1 bg-gray-100 flex items-center justify-center overflow-hidden p-4">
-                <!-- Contenu ici -->
-            </div>
+            <div id="preview-body" class="flex-1 bg-gray-100 flex items-center justify-center overflow-hidden p-4"></div>
         </div>
     </div>
 
@@ -230,7 +218,7 @@
             initCursor();
             if(sessionStorage.getItem('gh_token')) {
                 userToken = sessionStorage.getItem('gh_token');
-                initAdmin(sessionStorage.getItem('gh_user'));
+                initAdmin(JSON.parse(sessionStorage.getItem('gh_user')));
             }
         });
 
@@ -250,8 +238,8 @@
                 if (data.success) {
                     userToken = data.token;
                     sessionStorage.setItem('gh_token', data.token);
-                    sessionStorage.setItem('gh_user', data.prenom + ' ' + data.nom);
-                    initAdmin(data.prenom + ' ' + data.nom);
+                    sessionStorage.setItem('gh_user', JSON.stringify(data.user));
+                    initAdmin(data.user);
                 } else {
                     error.textContent = data.message || "Erreur de connexion"; error.classList.remove('hidden');
                 }
@@ -259,10 +247,10 @@
             finally { btn.innerHTML = "Se connecter"; btn.disabled = false; }
         });
 
-        function initAdmin(name) {
+        function initAdmin(user) {
             document.getElementById('login-screen').classList.add('hidden');
             document.getElementById('admin-interface').classList.remove('hidden');
-            document.getElementById('user-name').textContent = name;
+            document.getElementById('user-name').textContent = user.prenom;
             showSection('texts');
             loadTextFile('donnees-site/valves.md', 'val-content');
             loadCalendarUI();
@@ -287,7 +275,7 @@
             document.querySelectorAll('.sidebar-link').forEach(el => el.classList.remove('active'));
             
             if(path.includes('staff')) document.getElementById('nav-staff').classList.add('active');
-            else document.getElementById('nav-docs').classList.add('active'); // Photos accueil retiré
+            else document.getElementById('nav-docs').classList.add('active');
 
             document.getElementById('fm-title').textContent = title;
             document.getElementById('fm-path').textContent = path;
@@ -306,8 +294,7 @@
                 fileShas['donnees-site/calendrier.txt'] = data.sha;
                 const content = new TextDecoder().decode(Uint8Array.from(atob(data.content), c => c.charCodeAt(0)));
                 container.innerHTML = '';
-                const lines = content.split('\n');
-                lines.forEach(line => {
+                content.split('\n').forEach(line => {
                     if(!line.trim()) return;
                     const parts = line.split('|');
                     addCalendarRow(parts[0]?.trim(), parts[1]?.trim(), parts[2]?.trim());
@@ -320,9 +307,9 @@
             const div = document.createElement('div');
             div.className = 'cal-row grid grid-cols-[100px_1fr_1fr_auto] gap-2 mb-2 items-center';
             div.innerHTML = `
-                <input type="text" class="cal-date w-full p-2 border rounded text-sm font-mono text-center focus:ring-2 focus:ring-patro-yellow outline-none" placeholder="JJ/MM/AAAA" value="${date}">
-                <input type="text" class="cal-title w-full p-2 border rounded text-sm focus:ring-2 focus:ring-patro-yellow outline-none" placeholder="Titre de l'événement" value="${title}">
-                <input type="text" class="cal-place w-full p-2 border rounded text-sm focus:ring-2 focus:ring-patro-yellow outline-none" placeholder="Lieu (Optionnel)" value="${place}">
+                <input type="text" class="cal-date w-full p-2 border rounded text-sm font-mono text-center focus:ring-2 focus:ring-patro-yellow outline-none bg-white" placeholder="JJ/MM/AAAA" value="${date}">
+                <input type="text" class="cal-title w-full p-2 border rounded text-sm focus:ring-2 focus:ring-patro-yellow outline-none bg-white" placeholder="Titre" value="${title}">
+                <input type="text" class="cal-place w-full p-2 border rounded text-sm focus:ring-2 focus:ring-patro-yellow outline-none bg-white" placeholder="Lieu" value="${place}">
                 <button onclick="this.parentElement.remove()" class="p-2 text-red-400 hover:text-red-600 hover:bg-red-50 rounded transition"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
             `;
             container.appendChild(div);
@@ -353,8 +340,7 @@
         }
 
         async function saveValves() {
-            const content = document.getElementById('val-content').value;
-            saveRawFile('donnees-site/valves.md', content);
+            saveRawFile('donnees-site/valves.md', document.getElementById('val-content').value);
         }
 
         async function saveRawFile(path, content) {
@@ -373,12 +359,9 @@
 
         function insertMarkdown(start, end) {
             const textarea = document.getElementById('val-content');
-            const s = textarea.selectionStart;
-            const e = textarea.selectionEnd;
-            const text = textarea.value;
-            textarea.value = text.substring(0, s) + start + text.substring(s, e) + end + text.substring(e);
+            const s = textarea.selectionStart; const e = textarea.selectionEnd;
+            textarea.value = textarea.value.substring(0, s) + start + textarea.value.substring(s, e) + end + textarea.value.substring(e);
             textarea.focus();
-            textarea.setSelectionRange(s + start.length, e + start.length);
         }
 
         // 5. GESTION FICHIERS
@@ -401,12 +384,12 @@
                         if (isPdf) preview = `<div class="h-32 bg-red-50 flex items-center justify-center"><i data-lucide="file-text" class="w-10 h-10 text-red-500"></i></div>`;
 
                         const card = document.createElement('div');
-                        card.className = 'file-card group relative flex flex-col';
+                        card.className = 'file-card';
                         card.innerHTML = `
                             ${preview}
-                            <div class="p-3">
+                            <div class="p-3 flex-1 flex flex-col">
                                 <p class="text-xs font-bold text-gray-700 truncate mb-3" title="${f.name}">${f.name}</p>
-                                <div class="grid grid-cols-3 gap-2">
+                                <div class="grid grid-cols-3 gap-2 mt-auto">
                                     <button onclick="previewFile('${f.download_url}', '${f.name}')" class="py-1.5 bg-blue-50 text-blue-600 hover:bg-blue-100 rounded text-xs font-bold flex justify-center"><i data-lucide="eye" class="w-4 h-4"></i></button>
                                     <button onclick="renameFile('${f.name}')" class="py-1.5 bg-yellow-50 text-yellow-600 hover:bg-yellow-100 rounded text-xs font-bold flex justify-center"><i data-lucide="pencil" class="w-4 h-4"></i></button>
                                     <button onclick="deleteFile('${f.name}', '${f.sha}')" class="py-1.5 bg-red-50 text-red-600 hover:bg-red-100 rounded text-xs font-bold flex justify-center"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
