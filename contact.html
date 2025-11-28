@@ -8,8 +8,7 @@
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
-    <!-- Mise à jour version 6 -->
-    <script src="layout.js?v=6"></script>
+    <script src="layout.js?v=8"></script>
 
     <script>
         tailwind.config = { theme: { extend: { colors: { patro: { yellow: '#FFD700', green: '#009045', dark: '#1a1a1a', light: '#f8fafc' } }, fontFamily: { sans: ['Poppins', 'sans-serif'], display: ['Fredoka', 'sans-serif'] } } } }
@@ -21,6 +20,7 @@
     <div id="loader"><div class="spinner mb-4"></div><p class="text-patro-green font-bold font-display animate-pulse">Chargement...</p></div>
     <div id="navbar-placeholder"></div>
 
+    <!-- En-tête -->
     <div class="pt-32 pb-12 bg-patro-green text-center">
         <h1 class="text-4xl font-display font-bold text-white">Notre Staff</h1>
         <p class="text-green-100 mt-2">Une équipe de choc pour animer vos enfants !</p>
@@ -28,225 +28,65 @@
 
     <section class="py-16 px-4">
         <div class="max-w-7xl mx-auto">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                
-                <!-- Nevala -->
-                <div class="staff-card bg-white rounded-2xl shadow-md overflow-hidden">
-                    <div class="h-64 w-full staff-img-container bg-gray-100 relative group">
-                        <img src="donnees-site/photos-staff/Nevala_(Aurelie).png" alt="Nevala" class="w-full h-full object-cover object-top staff-img" onerror="this.src='https://placehold.co/600x800?text=Photo+Manquante';">
-                    </div>
-                    <div class="p-6 text-center">
-                        <h3 class="text-2xl font-display font-bold text-patro-green">Nevala</h3>
-                        <p class="text-gray-500 text-sm mb-4">(Aurélie)</p>
-                        <div class="inline-block px-3 py-1 bg-patro-yellow text-xs font-bold rounded-full mb-2">Présidente</div>
-                        <p class="text-gray-700 font-medium mb-4">Cheffe Poussins & Benjamins</p>
-                        <div class="space-y-2 text-sm text-gray-500">
-                            <p class="flex justify-center items-center gap-2"><i data-lucide="phone" class="w-4 h-4"></i> 0488/08.86.03</p>
-                            <p class="flex justify-center items-center gap-2"><i data-lucide="mail" class="w-4 h-4"></i> patrovaldhaine@patro.be</p>
-                        </div>
-                    </div>
+            <!-- Grille générée par JS -->
+            <div id="staff-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Chargement... -->
+                <div class="col-span-full text-center py-12">
+                    <div class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-patro-green"></div>
                 </div>
-
-                <!-- Choucas -->
-                <div class="staff-card bg-white rounded-2xl shadow-md overflow-hidden">
-                    <div class="h-64 w-full staff-img-container bg-gray-100 relative">
-                        <img src="donnees-site/photos-staff/Choucas_(Romain).png" alt="Choucas" class="w-full h-full object-cover object-top staff-img" onerror="this.src='https://placehold.co/600x800?text=Photo+Manquante';">
-                    </div>
-                    <div class="p-6 text-center">
-                        <h3 class="text-2xl font-display font-bold text-patro-green">Choucas</h3>
-                        <p class="text-gray-500 text-sm mb-4">(Romain)</p>
-                        <div class="inline-block px-3 py-1 bg-gray-200 text-gray-800 text-xs font-bold rounded-full mb-2">Vice-Président</div>
-                        <p class="text-gray-700 font-medium mb-4">Chef Alpines/Conq. & Aventuriers</p>
-                        <div class="space-y-2 text-sm text-gray-500">
-                            <p class="flex justify-center items-center gap-2"><i data-lucide="phone" class="w-4 h-4"></i> 0494/20.72.98</p>
-                            <p class="flex justify-center items-center gap-2"><i data-lucide="mail" class="w-4 h-4"></i> patrovaldhaine@patro.be</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Duma -->
-                <div class="staff-card bg-white rounded-2xl shadow-md overflow-hidden">
-                    <div class="h-64 w-full staff-img-container bg-gray-100 relative">
-                        <img src="donnees-site/photos-staff/Duma_(Jonathan).png" alt="Duma" class="w-full h-full object-cover object-top staff-img" onerror="this.src='https://placehold.co/600x800?text=Photo+Manquante';">
-                    </div>
-                    <div class="p-6 text-center">
-                        <h3 class="text-2xl font-display font-bold text-patro-green">Duma</h3>
-                        <p class="text-gray-500 text-sm mb-4">(Jonathan)</p>
-                        <div class="inline-block px-3 py-1 bg-gray-200 text-gray-800 text-xs font-bold rounded-full mb-2">Trésorier</div>
-                        <p class="text-gray-700 font-medium mb-4">Anim. Alpines/Conq. & Aventuriers</p>
-                        <div class="space-y-2 text-sm text-gray-500">
-                            <p class="flex justify-center items-center gap-2"><i data-lucide="phone" class="w-4 h-4"></i> 0468/08.92.86</p>
-                            <p class="flex justify-center items-center gap-2"><i data-lucide="mail" class="w-4 h-4"></i> patrovaldhaine@patro.be</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Logan -->
-                <div class="staff-card bg-white rounded-2xl shadow-md overflow-hidden">
-                    <div class="h-64 w-full staff-img-container bg-gray-100 relative">
-                        <img src="donnees-site/photos-staff/Logan.png" alt="Logan" class="w-full h-full object-cover object-top staff-img" onerror="this.src='https://placehold.co/600x800?text=Photo+Manquante';">
-                    </div>
-                    <div class="p-6 text-center">
-                        <h3 class="text-2xl font-display font-bold text-patro-green">Logan</h3>
-                        <p class="text-gray-500 text-sm mb-4">&nbsp;</p>
-                        <p class="text-gray-700 font-medium mb-4">Chef Chevaliers/Etincelles</p>
-                        <div class="space-y-2 text-sm text-gray-500">
-                            <p class="flex justify-center items-center gap-2"><i data-lucide="phone" class="w-4 h-4"></i> 0472/28.21.23</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Hyrax -->
-                <div class="staff-card bg-white rounded-2xl shadow-md overflow-hidden">
-                    <div class="h-64 w-full staff-img-container bg-gray-100 relative">
-                        <img src="donnees-site/photos-staff/Hyrax_(Kelya).png" alt="Hyrax" class="w-full h-full object-cover object-top staff-img" onerror="this.src='https://placehold.co/600x800?text=Photo+Manquante';">
-                    </div>
-                    <div class="p-6 text-center">
-                        <h3 class="text-2xl font-display font-bold text-patro-green">Hyrax</h3>
-                        <p class="text-gray-500 text-sm mb-4">(Kelya)</p>
-                        <p class="text-gray-700 font-medium mb-4">Animatrice Poussins/Benjamins</p>
-                        <div class="space-y-2 text-sm text-gray-500">
-                            <p class="flex justify-center items-center gap-2"><i data-lucide="phone" class="w-4 h-4"></i> 0495/69.10.98</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Pomsky -->
-                <div class="staff-card bg-white rounded-2xl shadow-md overflow-hidden">
-                    <div class="h-64 w-full staff-img-container bg-gray-100 relative">
-                        <img src="donnees-site/photos-staff/Pomsky_(Maelia).png" alt="Pomsky" class="w-full h-full object-cover object-top staff-img" onerror="this.src='https://placehold.co/600x800?text=Photo+Manquante';">
-                    </div>
-                    <div class="p-6 text-center">
-                        <h3 class="text-2xl font-display font-bold text-patro-green">Pomsky</h3>
-                        <p class="text-gray-500 text-sm mb-4">(Maelia)</p>
-                        <p class="text-gray-700 font-medium mb-4">Animatrice Poussins/Benjamins</p>
-                        <div class="space-y-2 text-sm text-gray-500">
-                            <p class="flex justify-center items-center gap-2"><i data-lucide="phone" class="w-4 h-4"></i> 0488/93.96.90</p>
-                        </div>
-                    </div>
-                </div>
-
-                 <!-- Wombat -->
-                 <div class="staff-card bg-white rounded-2xl shadow-md overflow-hidden">
-                    <div class="h-64 w-full staff-img-container bg-gray-100 relative">
-                        <img src="donnees-site/photos-staff/Wombat_(Chloe).png" alt="Wombat" class="w-full h-full object-cover object-top staff-img" onerror="this.src='https://placehold.co/600x800?text=Photo+Manquante';">
-                    </div>
-                    <div class="p-6 text-center">
-                        <h3 class="text-2xl font-display font-bold text-patro-green">Wombat</h3>
-                        <p class="text-gray-500 text-sm mb-4">(Chloé)</p>
-                        <p class="text-gray-700 font-medium mb-4">Aide animatrice Poussins/Benjamins</p>
-                        <div class="space-y-2 text-sm text-gray-500">
-                            <p class="flex justify-center items-center gap-2"><i data-lucide="phone" class="w-4 h-4"></i> 0478/61.09.16</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Laura -->
-                <div class="staff-card bg-white rounded-2xl shadow-md overflow-hidden">
-                    <div class="h-64 w-full staff-img-container bg-gray-100 relative">
-                        <img src="donnees-site/photos-staff/Laura.png" alt="Laura" class="w-full h-full object-cover object-top staff-img" onerror="this.src='https://placehold.co/600x800?text=Photo+Manquante';">
-                    </div>
-                    <div class="p-6 text-center">
-                        <h3 class="text-2xl font-display font-bold text-patro-green">Laura</h3>
-                        <p class="text-gray-500 text-sm mb-4">&nbsp;</p>
-                        <p class="text-gray-700 font-medium mb-4">Animatrice Chevaliers/Etincelles</p>
-                        <div class="space-y-2 text-sm text-gray-500">
-                            <p class="flex justify-center items-center gap-2"><i data-lucide="phone" class="w-4 h-4"></i> 0492/93.54.57</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Kikaou -->
-                <div class="staff-card bg-white rounded-2xl shadow-md overflow-hidden">
-                    <div class="h-64 w-full staff-img-container bg-gray-100 relative">
-                        <img src="donnees-site/photos-staff/Kikaou_(Marine).png" alt="Kikaou" class="w-full h-full object-cover object-top staff-img" onerror="this.src='https://placehold.co/600x800?text=Photo+Manquante';">
-                    </div>
-                    <div class="p-6 text-center">
-                        <h3 class="text-2xl font-display font-bold text-patro-green">Kikaou</h3>
-                        <p class="text-gray-500 text-sm mb-4">(Marine)</p>
-                        <p class="text-gray-700 font-medium mb-4">Accompagnatrice adulte</p>
-                        <div class="space-y-2 text-sm text-gray-500">
-                            <p class="flex justify-center items-center gap-2"><i data-lucide="phone" class="w-4 h-4"></i> 0479/84.02.55</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Yunbao -->
-                <div class="staff-card bg-white rounded-2xl shadow-md overflow-hidden">
-                    <div class="h-64 w-full staff-img-container bg-gray-100 relative">
-                        <img src="donnees-site/photos-staff/Yunbao_(Alexiane).png" alt="Yunbao" class="w-full h-full object-cover object-top staff-img" onerror="this.src='https://placehold.co/600x800?text=Photo+Manquante';">
-                    </div>
-                    <div class="p-6 text-center">
-                        <h3 class="text-2xl font-display font-bold text-patro-green">Yunbao</h3>
-                        <p class="text-gray-500 text-sm mb-4">(Alexiane)</p>
-                        <p class="text-gray-700 font-medium mb-4">Accompagnatrice adulte</p>
-                    </div>
-                </div>
-
-                <!-- Nonius -->
-                <div class="staff-card bg-white rounded-2xl shadow-md overflow-hidden">
-                    <div class="h-64 w-full staff-img-container bg-gray-100 relative">
-                        <img src="donnees-site/photos-staff/Nonius_(Alessandro).png" alt="Nonius" class="w-full h-full object-cover object-top staff-img" onerror="this.src='https://placehold.co/600x800?text=Photo+Manquante';">
-                    </div>
-                    <div class="p-6 text-center">
-                        <h3 class="text-2xl font-display font-bold text-patro-green">Nonius</h3>
-                        <p class="text-gray-500 text-sm mb-4">(Alessandro)</p>
-                        <p class="text-gray-700 font-medium mb-4">Accompagnateur adulte</p>
-                    </div>
-                </div>
-
-                <!-- Monax -->
-                <div class="staff-card bg-white rounded-2xl shadow-md overflow-hidden">
-                    <div class="h-64 w-full staff-img-container bg-gray-100 relative">
-                        <img src="donnees-site/photos-staff/Monax_(Elliot).png" alt="Monax" class="w-full h-full object-cover object-top staff-img" onerror="this.src='https://placehold.co/600x800?text=Photo+Manquante';">
-                    </div>
-                    <div class="p-6 text-center">
-                        <h3 class="text-2xl font-display font-bold text-patro-green">Monax</h3>
-                        <p class="text-gray-500 text-sm mb-4">(Elliot)</p>
-                        <p class="text-gray-700 font-medium mb-4">Accompagnateur adulte</p>
-                    </div>
-                </div>
-
-                <!-- Okami -->
-                <div class="staff-card bg-white rounded-2xl shadow-md overflow-hidden">
-                    <div class="h-64 w-full staff-img-container bg-gray-100 relative">
-                        <img src="donnees-site/photos-staff/Okami_(Charles).png" alt="Okami" class="w-full h-full object-cover object-top staff-img" onerror="this.src='https://placehold.co/600x800?text=Photo+Manquante';">
-                    </div>
-                    <div class="p-6 text-center">
-                        <h3 class="text-2xl font-display font-bold text-patro-green">Okami</h3>
-                        <p class="text-gray-500 text-sm mb-4">(Charles)</p>
-                        <p class="text-gray-700 font-medium mb-4">Accompagnateur adulte</p>
-                    </div>
-                </div>
-
-                <!-- Laurine -->
-                <div class="staff-card bg-white rounded-2xl shadow-md overflow-hidden">
-                    <div class="h-64 w-full staff-img-container bg-gray-100 relative">
-                        <img src="donnees-site/photos-staff/Laurine.png" alt="Laurine" class="w-full h-full object-cover object-top staff-img" onerror="this.src='https://placehold.co/600x800?text=Photo+Manquante';">
-                    </div>
-                    <div class="p-6 text-center">
-                        <h3 class="text-2xl font-display font-bold text-patro-green">Laurine</h3>
-                        <p class="text-gray-500 text-sm mb-4">&nbsp;</p>
-                        <p class="text-gray-700 font-medium mb-4">Accompagnatrice adulte</p>
-                    </div>
-                </div>
-
-                <!-- Chaoui -->
-                <div class="staff-card bg-white rounded-2xl shadow-md overflow-hidden">
-                    <div class="h-64 w-full staff-img-container bg-gray-100 relative">
-                        <img src="donnees-site/photos-staff/Chaoui_(Maelie).png" alt="Chaoui" class="w-full h-full object-cover object-top staff-img" onerror="this.src='https://placehold.co/600x800?text=Photo+Manquante';">
-                    </div>
-                    <div class="p-6 text-center">
-                        <h3 class="text-2xl font-display font-bold text-patro-green">Chaoui</h3>
-                        <p class="text-gray-500 text-sm mb-4">(Maëlie)</p>
-                        <p class="text-gray-700 font-medium mb-4">Intendante</p>
-                    </div>
-                </div>
-
             </div>
         </div>
     </section>
 
     <div id="footer-placeholder"></div>
+
+    <script>
+        const REPO = "staffpatrovdh-pixel/staffpatrovdh-pixel.github.io";
+        const BRANCH = "main";
+        const JSON_URL = `https://raw.githubusercontent.com/${REPO}/${BRANCH}/donnees-site/staff.json?t=${Date.now()}`;
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            try {
+                const res = await fetch(JSON_URL);
+                if(!res.ok) throw new Error();
+                const staff = await res.json();
+                
+                const grid = document.getElementById('staff-grid');
+                grid.innerHTML = '';
+
+                staff.forEach(member => {
+                    // Image : On cherche dans le dossier photos-staff
+                    const imgUrl = `donnees-site/photos-staff/${member.photo}`;
+                    
+                    grid.innerHTML += `
+                    <div class="staff-card bg-white rounded-2xl shadow-md overflow-hidden group hover:-translate-y-1 transition duration-300">
+                        <div class="h-64 w-full bg-gray-100 relative overflow-hidden">
+                            <img src="${imgUrl}" 
+                                 alt="${member.totem}" 
+                                 class="w-full h-full object-cover object-top transition duration-500 group-hover:scale-105"
+                                 onerror="this.src='https://placehold.co/600x800/eee/999?text=Photo+Manquante'">
+                        </div>
+                        <div class="p-6 text-center">
+                            <h3 class="text-2xl font-display font-bold text-patro-green">${member.totem}</h3>
+                            <p class="text-gray-500 text-sm mb-4">(${member.nom})</p>
+                            
+                            ${member.role ? `<div class="inline-block px-3 py-1 bg-patro-yellow text-xs font-bold rounded-full mb-2">${member.role}</div>` : ''}
+                            
+                            <p class="text-gray-700 font-medium mb-4 h-10 flex items-center justify-center">${member.fonction}</p>
+                            
+                            <div class="space-y-2 text-sm text-gray-500 pt-4 border-t border-gray-100">
+                                ${member.tel ? `<p class="flex justify-center items-center gap-2"><i data-lucide="phone" class="w-4 h-4"></i> ${member.tel}</p>` : ''}
+                                ${member.mail ? `<p class="flex justify-center items-center gap-2"><i data-lucide="mail" class="w-4 h-4"></i> ${member.mail}</p>` : ''}
+                            </div>
+                        </div>
+                    </div>`;
+                });
+                lucide.createIcons();
+
+            } catch (e) {
+                document.getElementById('staff-grid').innerHTML = `<p class="col-span-full text-center text-red-500">Impossible de charger le staff.</p>`;
+            }
+        });
+    </script>
 </body>
 </html>
