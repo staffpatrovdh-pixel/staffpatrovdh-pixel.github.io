@@ -9,29 +9,41 @@
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://unpkg.com/turndown/dist/turndown.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     
     <script>
         const REPO_OWNER = "staffpatrovdh-pixel";
         const REPO_NAME = "staffpatrovdh-pixel.github.io";
         const BRANCH = "main";
+        // URL de votre API PHP AlwaysData
+        const API_URL = "https://pvdhloginapi.alwaysdata.net/api.php"; 
         
         tailwind.config = { theme: { extend: { colors: { patro: { yellow: '#FFD700', green: '#009045', dark: '#1a1a1a', light: '#f8fafc' } }, fontFamily: { sans: ['Poppins', 'sans-serif'], display: ['Fredoka', 'sans-serif'] } } } }
     </script>
 
     <style>
         body { background: #f3f4f6; font-family: 'Poppins', sans-serif; }
-        .sidebar-btn { display: flex; align-items: center; gap: 10px; padding: 12px 16px; width: 100%; text-align: left; border-radius: 8px; transition: 0.2s; color: #4b5563; font-weight: 500; }
+        .sidebar-btn { display: flex; align-items: center; gap: 10px; padding: 12px 16px; width: 100%; text-align: left; border-radius: 8px; transition: 0.2s; color: #4b5563; font-weight: 500; cursor: pointer; }
         .sidebar-btn:hover { background: #e5e7eb; color: #1f2937; }
         .sidebar-btn.active { background: #dcfce7; color: #166534; font-weight: 600; }
         
-        .file-card { background: white; border: 1px solid #e5e7eb; border-radius: 8px; overflow: hidden; transition: 0.2s; }
+        .file-card { background: white; border: 1px solid #e5e7eb; border-radius: 8px; overflow: hidden; transition: 0.2s; position: relative; }
         .file-card:hover { transform: translateY(-2px); box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); border-color: #009045; }
         
         #loader { position: fixed; inset: 0; background: rgba(255,255,255,0.9); z-index: 100; display: none; justify-content: center; align-items: center; flex-direction: column; }
         
         /* Staff Card Admin */
-        .staff-row { display: flex; align-items: center; gap: 10px; padding: 10px; background: white; border: 1px solid #e5e7eb; border-radius: 8px; margin-bottom: 8px; }
-        .staff-img-preview { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; background: #eee; }
+        .staff-row { display: flex; align-items: center; gap: 10px; padding: 10px; background: white; border: 1px solid #e5e7eb; border-radius: 8px; margin-bottom: 8px; transition: 0.2s; }
+        .staff-row:hover { border-color: #009045; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+
+        /* Editeur Valves */
+        .wysiwyg-toolbar { display: flex; gap: 5px; padding: 5px; background: #f9fafb; border-bottom: 1px solid #e5e7eb; border-radius: 8px 8px 0 0; }
+        .wysiwyg-btn { padding: 5px 10px; border-radius: 4px; font-weight: bold; font-size: 12px; border: 1px solid transparent; cursor: pointer; transition: 0.1s; }
+        .wysiwyg-btn:hover { background: #e5e7eb; border-color: #d1d5db; }
+        .wysiwyg-content { min-height: 300px; padding: 15px; outline: none; overflow-y: auto; background: white; border-radius: 0 0 8px 8px; }
+        .wysiwyg-content ul { list-style-type: disc; padding-left: 20px; }
+        .wysiwyg-content h3 { font-weight: bold; font-size: 1.2em; margin-top: 10px; color: #009045; }
     </style>
 </head>
 <body class="text-slate-800 min-h-screen flex flex-col">
@@ -44,8 +56,12 @@
         <div class="bg-white w-full max-w-md p-8 rounded-2xl shadow-xl border-t-4 border-patro-green text-center">
             <img src="https://static.wixstatic.com/shapes/99150c_262f50afd9f748c1b2820587168d19f3.svg" class="h-20 mx-auto mb-6">
             <h1 class="text-2xl font-bold text-gray-800 mb-2">Accès Staff</h1>
-            <form onsubmit="login(event)" class="space-y-4 mt-6">
-                <input type="password" id="token-input" placeholder="Clé d'accès (Token)" class="w-full p-3 border rounded-lg outline-none focus:ring-2 focus:ring-patro-green" required>
+            <p class="text-sm text-gray-500 mb-6">Utilisez vos identifiants Wix (Membre)</p>
+            
+            <form onsubmit="login(event)" class="space-y-4">
+                <input type="text" id="username" placeholder="Email / Identifiant" class="w-full p-3 border rounded-lg outline-none focus:ring-2 focus:ring-patro-green" required>
+                <input type="password" id="password" placeholder="Mot de passe" class="w-full p-3 border rounded-lg outline-none focus:ring-2 focus:ring-patro-green" required>
+                <p id="login-error" class="text-red-500 text-sm font-bold hidden"></p>
                 <button class="w-full bg-patro-green text-white font-bold py-3 rounded-lg hover:bg-green-700 transition">Connexion</button>
             </form>
         </div>
@@ -58,51 +74,74 @@
                 <img src="https://static.wixstatic.com/shapes/99150c_262f50afd9f748c1b2820587168d19f3.svg" class="h-8">
                 <span class="font-bold text-lg text-patro-green">Administration</span>
             </div>
-            <button onclick="logout()" class="text-red-500 hover:bg-red-50 px-3 py-1.5 rounded-md transition flex gap-2 font-medium"><i data-lucide="log-out" class="w-5 h-5"></i> Déconnexion</button>
+            <div class="flex items-center gap-4">
+                <span class="text-sm text-gray-500 hidden md:inline">Bonjour, <strong id="user-name">...</strong></span>
+                <button onclick="logout()" class="text-red-500 hover:bg-red-50 px-3 py-1.5 rounded-md transition flex gap-2 font-medium"><i data-lucide="log-out" class="w-5 h-5"></i> Déconnexion</button>
+            </div>
         </header>
 
         <div class="flex flex-1 overflow-hidden">
-            <aside class="w-64 bg-white border-r flex flex-col overflow-y-auto p-4 space-y-1">
+            <aside class="w-64 bg-white border-r flex flex-col overflow-y-auto p-4 space-y-1 flex-shrink-0">
                 <p class="px-3 text-xs font-bold text-gray-400 uppercase mb-2">Gestion</p>
                 <button onclick="loadSection('staff')" class="sidebar-btn" id="btn-staff"><i data-lucide="users" class="w-5 h-5 text-blue-500"></i> Gestion Équipe</button>
                 <button onclick="loadSection('texts')" class="sidebar-btn active" id="btn-texts"><i data-lucide="file-edit" class="w-5 h-5 text-gray-500"></i> Agenda & Valves</button>
                 
                 <p class="px-3 text-xs font-bold text-gray-400 uppercase mb-2 mt-6">Fichiers</p>
                 <button onclick="loadFileManager('documents', 'Documents')" class="sidebar-btn" id="btn-docs"><i data-lucide="file-text" class="w-5 h-5 text-yellow-500"></i> Documents PDF</button>
+                <button onclick="loadFileManager('donnees-site/photos-staff', 'Photos Staff')" class="sidebar-btn" id="btn-photos-staff"><i data-lucide="image" class="w-5 h-5 text-green-500"></i> Photos Staff</button>
                 <button onclick="loadFileManager('donnees-site/photos-site-accueil', 'Accueil')" class="sidebar-btn" id="btn-home"><i data-lucide="image" class="w-5 h-5 text-purple-500"></i> Photos Accueil</button>
+                
+                <div class="mt-auto pt-8 px-4">
+                     <a href="index.html" target="_blank" class="flex items-center justify-center gap-2 w-full py-2 border border-gray-300 rounded-lg text-sm text-gray-600 hover:bg-gray-50 transition"><i data-lucide="external-link" class="w-4 h-4"></i> Voir le site</a>
+                </div>
             </aside>
 
             <main class="flex-1 overflow-y-auto p-8 bg-gray-50">
                 
-                <!-- VUE : GESTION STAFF (NOUVEAU) -->
+                <!-- VUE : GESTION STAFF -->
                 <div id="view-staff" class="hidden space-y-6">
-                    <div class="flex justify-between items-center">
+                    <div class="flex justify-between items-center border-b pb-4">
                         <h2 class="text-2xl font-bold text-gray-800">L'équipe d'animation</h2>
-                        <button onclick="addNewMember()" class="bg-blue-600 text-white px-4 py-2 rounded-lg font-bold hover:bg-blue-700 flex gap-2"><i data-lucide="plus" class="w-5 h-5"></i> Ajouter un membre</button>
+                        <button onclick="addNewMember()" class="bg-blue-600 text-white px-4 py-2 rounded-lg font-bold hover:bg-blue-700 flex gap-2"><i data-lucide="plus" class="w-5 h-5"></i> Ajouter</button>
                     </div>
-
-                    <div id="staff-list" class="space-y-4">
-                        <!-- Liste générée par JS -->
-                    </div>
-                    
+                    <div id="staff-list" class="space-y-4"></div>
                     <div class="flex justify-end pt-4 border-t">
                         <button onclick="saveStaffJSON()" class="bg-green-600 text-white px-6 py-3 rounded-lg font-bold hover:bg-green-700 shadow-lg flex gap-2"><i data-lucide="save" class="w-5 h-5"></i> Enregistrer les modifications</button>
                     </div>
                 </div>
 
-                <!-- VUE : TEXTES -->
-                <div id="view-texts" class="space-y-6">
+                <!-- VUE : TEXTES (Ludique) -->
+                <div id="view-texts" class="space-y-8">
                     <h2 class="text-2xl font-bold text-gray-800 mb-4">Textes du site</h2>
                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                        <div class="bg-white p-6 rounded-xl shadow-sm border">
-                            <div class="flex justify-between mb-4"><h3 class="font-bold flex gap-2"><i data-lucide="calendar" class="w-5 h-5 text-patro-yellow"></i> Calendrier</h3><span class="text-xs text-gray-400">calendrier.txt</span></div>
-                            <textarea id="cal-content" class="w-full h-64 p-3 border rounded-lg font-mono text-sm resize-none outline-none focus:border-patro-green"></textarea>
-                            <button onclick="saveFile('donnees-site/calendrier.txt', 'cal-content')" class="mt-4 w-full bg-patro-yellow text-patro-dark font-bold py-2 rounded hover:bg-yellow-400">Sauvegarder</button>
+                        
+                        <!-- Agenda Interactif -->
+                        <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden flex flex-col h-[600px]">
+                            <div class="p-4 border-b bg-gray-50 flex justify-between items-center">
+                                <h3 class="font-bold text-gray-700 flex items-center gap-2"><i data-lucide="calendar" class="w-5 h-5 text-patro-yellow"></i> Agenda</h3>
+                                <button onclick="saveCalendar()" class="text-xs bg-patro-yellow text-patro-dark px-3 py-1.5 rounded font-bold hover:bg-yellow-400 transition">Sauvegarder</button>
+                            </div>
+                            <div class="flex-1 overflow-y-auto p-4 bg-gray-50/50 space-y-2" id="calendar-list"></div>
+                            <div class="p-3 border-t bg-white">
+                                <button onclick="addCalendarRow()" class="w-full py-2 border-2 border-dashed border-gray-300 rounded-lg text-gray-500 font-bold hover:border-patro-yellow hover:text-patro-yellow hover:bg-yellow-50 transition flex justify-center items-center gap-2"><i data-lucide="plus" class="w-4 h-4"></i> Ajouter une date</button>
+                            </div>
                         </div>
-                        <div class="bg-white p-6 rounded-xl shadow-sm border">
-                            <div class="flex justify-between mb-4"><h3 class="font-bold flex gap-2"><i data-lucide="bell" class="w-5 h-5 text-patro-green"></i> Valves</h3><span class="text-xs text-gray-400">valves.md</span></div>
-                            <textarea id="val-content" class="w-full h-64 p-3 border rounded-lg font-mono text-sm resize-none outline-none focus:border-patro-green"></textarea>
-                            <button onclick="saveFile('donnees-site/valves.md', 'val-content')" class="mt-4 w-full bg-patro-green text-white font-bold py-2 rounded hover:bg-green-700">Sauvegarder</button>
+
+                        <!-- Valves WYSIWYG -->
+                        <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden flex flex-col h-[600px]">
+                            <div class="p-4 border-b bg-gray-50 flex justify-between items-center">
+                                <h3 class="font-bold text-gray-700 flex items-center gap-2"><i data-lucide="bell" class="w-5 h-5 text-patro-green"></i> Valves Info</h3>
+                                <button onclick="saveValves()" class="text-xs bg-patro-green text-white px-3 py-1.5 rounded font-bold hover:bg-green-700 transition">Sauvegarder</button>
+                            </div>
+                            <div class="wysiwyg-toolbar">
+                                <button onclick="execCmd('bold')" class="wysiwyg-btn" title="Gras"><b>B</b></button>
+                                <button onclick="execCmd('italic')" class="wysiwyg-btn italic" title="Italique">I</button>
+                                <button onclick="execCmd('underline')" class="wysiwyg-btn underline" title="Souligné">U</button>
+                                <div class="w-px h-6 bg-gray-300 mx-1"></div>
+                                <button onclick="execCmd('formatBlock', 'H3')" class="wysiwyg-btn" title="Titre">Titre</button>
+                                <button onclick="execCmd('insertUnorderedList')" class="wysiwyg-btn" title="Liste"><i data-lucide="list" class="w-3 h-3"></i></button>
+                            </div>
+                            <div id="valves-editor" class="wysiwyg-content" contenteditable="true"></div>
                         </div>
                     </div>
                 </div>
@@ -112,7 +151,7 @@
                     <div class="flex justify-between items-center mb-6 border-b pb-4">
                         <div><h2 class="text-2xl font-bold text-gray-800" id="fm-title">Dossier</h2><p class="text-gray-500 text-sm font-mono mt-1 bg-gray-200 px-2 rounded inline-block" id="fm-path">...</p></div>
                         <div class="flex gap-3">
-                            <button onclick="refreshFiles()" class="p-2 bg-white border rounded-lg hover:bg-gray-100"><i data-lucide="refresh-cw" class="w-5 h-5"></i></button>
+                            <button onclick="refreshFiles()" class="p-2 bg-white border rounded-lg hover:bg-gray-100" title="Actualiser"><i data-lucide="refresh-cw" class="w-5 h-5"></i></button>
                             <label class="cursor-pointer bg-green-600 text-white px-4 py-2 rounded-lg font-bold hover:bg-green-700 transition flex items-center gap-2 shadow-sm"><i data-lucide="upload" class="w-5 h-5"></i> Ajouter<input type="file" id="file-upload" class="hidden" onchange="uploadFile(this)"></label>
                         </div>
                     </div>
@@ -123,41 +162,73 @@
         </div>
     </div>
 
-    <!-- SCRIPT -->
+    <!-- MODALE APERÇU -->
+    <div id="preview-modal" class="fixed inset-0 z-50 hidden bg-black/80 flex items-center justify-center p-4 backdrop-blur-sm" onclick="closePreview()">
+        <div class="bg-white rounded-xl w-full max-w-5xl max-h-[90vh] flex flex-col overflow-hidden relative" onclick="event.stopPropagation()">
+            <div class="flex justify-between items-center p-4 border-b bg-gray-50">
+                <h3 id="preview-name" class="font-bold text-gray-700">Aperçu</h3>
+                <button onclick="closePreview()" class="p-2 hover:bg-red-100 rounded-full text-red-500 transition"><i data-lucide="x" class="w-6 h-6"></i></button>
+            </div>
+            <div id="preview-body" class="flex-1 bg-gray-100 flex items-center justify-center overflow-hidden p-4"></div>
+        </div>
+    </div>
+
     <script>
         let TOKEN = localStorage.getItem('patro_token');
-        let currentPath = ''; let fileShas = {};
-        let staffData = []; // Stocke les données du staff localement
+        let currentPath = ''; let fileShas = {}; let staffData = [];
+        const turndownService = new TurndownService();
 
         document.addEventListener('DOMContentLoaded', () => {
             lucide.createIcons();
             if (TOKEN) showDashboard();
-            
-            // Curseur
-            const c = document.getElementById('custom-cursor');
-            if(window.matchMedia("(pointer:fine)").matches){
-                document.addEventListener('mousemove', e => { c.style.left = e.clientX + 'px'; c.style.top = e.clientY + 'px'; });
-            }
         });
 
-        function login(e) {
+        // 1. LOGIN (Via API PHP AlwaysData)
+        async function login(e) {
             e.preventDefault();
-            const t = document.getElementById('token-input').value.trim();
-            if(t.startsWith('ghp_') || t.startsWith('github_pat_')) {
-                localStorage.setItem('patro_token', t); TOKEN = t; showDashboard();
-            } else { alert("Token invalide"); }
+            const u = document.getElementById('username').value;
+            const p = document.getElementById('password').value;
+            const error = document.getElementById('login-error');
+            
+            error.classList.add('hidden');
+            showLoader("Connexion...");
+
+            try {
+                const res = await fetch(API_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ action: 'login', username: u, password: p })
+                });
+                const data = await res.json();
+
+                if (data.success) {
+                    localStorage.setItem('patro_token', data.token); // Token GitHub
+                    localStorage.setItem('patro_user_name', data.user.prenom);
+                    TOKEN = data.token;
+                    showDashboard();
+                } else {
+                    error.textContent = data.message || "Erreur connexion";
+                    error.classList.remove('hidden');
+                }
+            } catch (err) {
+                error.textContent = "Erreur serveur.";
+                error.classList.remove('hidden');
+            } finally { hideLoader(); }
         }
 
         function showDashboard() {
             document.getElementById('login-screen').classList.add('hidden');
             document.getElementById('dashboard').classList.remove('hidden');
+            document.getElementById('user-name').innerText = localStorage.getItem('patro_user_name') || 'Staff';
+            
             loadSection('texts');
-            loadText('donnees-site/calendrier.txt', 'cal-content');
-            loadText('donnees-site/valves.md', 'val-content');
+            loadCalendarUI();
+            loadValvesUI();
         }
 
-        function logout() { localStorage.removeItem('patro_token'); location.reload(); }
+        function logout() { localStorage.clear(); location.reload(); }
 
+        // 2. NAVIGATION
         function loadSection(id) {
             document.getElementById('view-texts').classList.add('hidden');
             document.getElementById('view-files').classList.add('hidden');
@@ -166,7 +237,6 @@
             
             document.getElementById('view-'+id).classList.remove('hidden');
             document.getElementById('btn-'+id).classList.add('active');
-
             if(id === 'staff') loadStaffEditor();
         }
 
@@ -178,148 +248,128 @@
             refreshFiles();
         }
 
-        // --- GESTION STAFF (JSON EDITOR) ---
+        // 3. API GITHUB
+        async function ghFetch(path, method='GET', body=null) {
+            const opts = { headers: { 'Authorization': `token ${TOKEN}`, 'Accept': 'application/vnd.github.v3+json' } };
+            if(method !== 'GET') { opts.method = method; opts.body = JSON.stringify(body); }
+            const res = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${path}?ref=${BRANCH}&t=${Date.now()}`, opts);
+            if(!res.ok) throw new Error();
+            return await res.json();
+        }
+
+        // 4. CALENDRIER LUDIQUE
+        async function loadCalendarUI() {
+            const container = document.getElementById('calendar-list');
+            container.innerHTML = '<p class="text-center text-gray-400 text-xs py-4">Chargement...</p>';
+            try {
+                const data = await ghFetch('donnees-site/calendrier.txt');
+                fileShas['donnees-site/calendrier.txt'] = data.sha;
+                const content = new TextDecoder().decode(Uint8Array.from(atob(data.content), c => c.charCodeAt(0)));
+                container.innerHTML = '';
+                content.split('\n').forEach(line => {
+                    if(!line.trim()) return;
+                    const parts = line.split('|');
+                    addCalendarRow(parts[0]?.trim(), parts[1]?.trim(), parts[2]?.trim());
+                });
+            } catch (e) { container.innerHTML = '<p class="text-red-500 text-xs text-center">Erreur</p>'; }
+        }
+
+        function addCalendarRow(date='', title='', place='') {
+            const div = document.createElement('div');
+            div.className = 'cal-row grid grid-cols-[100px_1fr_1fr_auto] gap-2 mb-2 items-center bg-white p-2 rounded border border-gray-200 shadow-sm';
+            div.innerHTML = `<input type="text" class="cal-date w-full p-1.5 border rounded text-sm text-center" placeholder="JJ/MM/AAAA" value="${date}"><input type="text" class="cal-title w-full p-1.5 border rounded text-sm" placeholder="Titre" value="${title}"><input type="text" class="cal-place w-full p-1.5 border rounded text-sm" placeholder="Lieu" value="${place}"><button onclick="this.parentElement.remove()" class="p-1.5 text-red-400 hover:text-red-600 hover:bg-red-50 rounded"><i data-lucide="trash-2" class="w-4 h-4"></i></button>`;
+            document.getElementById('calendar-list').appendChild(div);
+            lucide.createIcons();
+        }
+
+        async function saveCalendar() {
+            let content = "";
+            document.querySelectorAll('.cal-row').forEach(row => {
+                const d = row.querySelector('.cal-date').value.trim();
+                const t = row.querySelector('.cal-title').value.trim();
+                const p = row.querySelector('.cal-place').value.trim();
+                if(d && t) content += `${d} | ${t} | ${p}\n`;
+            });
+            saveRawFile('donnees-site/calendrier.txt', content, loadCalendarUI);
+        }
+
+        // 5. VALVES LUDIQUE
+        async function loadValvesUI() {
+            const editor = document.getElementById('valves-editor');
+            editor.innerHTML = '<p class="text-center text-gray-400 text-xs py-4">Chargement...</p>';
+            try {
+                const data = await ghFetch('donnees-site/valves.md');
+                fileShas['donnees-site/valves.md'] = data.sha;
+                const md = new TextDecoder().decode(Uint8Array.from(atob(data.content), c => c.charCodeAt(0)));
+                editor.innerHTML = marked.parse(md);
+            } catch (e) {}
+        }
+
+        function execCmd(cmd, val=null) { document.execCommand(cmd, false, val); document.getElementById('valves-editor').focus(); }
+
+        async function saveValves() {
+            const html = document.getElementById('valves-editor').innerHTML;
+            const md = turndownService.turndown(html);
+            saveRawFile('donnees-site/valves.md', md, loadValvesUI);
+        }
+
+        async function saveRawFile(path, content, cb) {
+            showLoader("Sauvegarde...");
+            try {
+                const encoded = btoa(unescape(encodeURIComponent(content)));
+                await ghFetch(path, 'PUT', { message: `Update ${path}`, content: encoded, sha: fileShas[path], branch: BRANCH });
+                if(cb) cb();
+                alert("Sauvegardé !");
+            } catch(e) { alert("Erreur sauvegarde"); } finally { hideLoader(); }
+        }
+
+        // 6. STAFF
         async function loadStaffEditor() {
-            showLoader('Chargement du staff...');
+            showLoader('Chargement staff...');
             try {
                 const data = await ghFetch('donnees-site/staff.json');
                 fileShas['donnees-site/staff.json'] = data.sha;
-                const content = new TextDecoder().decode(Uint8Array.from(atob(data.content), c => c.charCodeAt(0)));
-                staffData = JSON.parse(content);
-                renderStaffList();
-            } catch(e) { console.error(e); } finally { hideLoader(); }
+                staffData = JSON.parse(new TextDecoder().decode(Uint8Array.from(atob(data.content), c => c.charCodeAt(0))));
+                renderStaff();
+            } catch(e){} finally { hideLoader(); }
         }
 
-        function renderStaffList() {
-            const list = document.getElementById('staff-list');
-            list.innerHTML = '';
-            staffData.forEach((member, index) => {
-                const div = document.createElement('div');
-                div.className = 'staff-row flex items-start gap-4 bg-white p-4 rounded-lg border shadow-sm';
-                div.innerHTML = `
-                    <div class="flex-shrink-0 text-center space-y-2">
-                        <img src="donnees-site/photos-staff/${member.photo}" class="w-16 h-16 rounded-full object-cover bg-gray-100 border mx-auto" onerror="this.src='https://placehold.co/100'">
-                        <button onclick="changePhoto(${index})" class="text-xs text-blue-500 hover:underline block">Changer photo</button>
-                        <input type="file" id="photo-input-${index}" class="hidden" onchange="uploadStaffPhoto(${index}, this)">
+        function renderStaff() {
+            const list = document.getElementById('staff-list'); list.innerHTML = '';
+            staffData.forEach((m, i) => {
+                list.innerHTML += `
+                <div class="staff-row">
+                    <img src="donnees-site/photos-staff/${m.photo}" class="staff-img-preview" onerror="this.src='https://placehold.co/40'">
+                    <div class="grid grid-cols-2 gap-2 flex-1">
+                        <input type="text" value="${m.totem||''}" onchange="staffData[${i}].totem=this.value" class="p-1 border rounded text-sm font-bold" placeholder="Totem">
+                        <input type="text" value="${m.nom||''}" onchange="staffData[${i}].nom=this.value" class="p-1 border rounded text-sm" placeholder="Nom">
+                        <input type="text" value="${m.role||''}" onchange="staffData[${i}].role=this.value" class="p-1 border rounded text-sm" placeholder="Rôle">
+                        <input type="text" value="${m.fonction||''}" onchange="staffData[${i}].fonction=this.value" class="p-1 border rounded text-sm" placeholder="Fonction">
                     </div>
-                    <div class="grid grid-cols-2 gap-3 flex-1">
-                        <div><label class="text-xs font-bold text-gray-400">Totem</label><input type="text" value="${member.totem || ''}" onchange="updateStaff(${index}, 'totem', this.value)" class="w-full p-1 border rounded text-sm font-bold"></div>
-                        <div><label class="text-xs font-bold text-gray-400">Nom Réel</label><input type="text" value="${member.nom || ''}" onchange="updateStaff(${index}, 'nom', this.value)" class="w-full p-1 border rounded text-sm"></div>
-                        <div><label class="text-xs font-bold text-gray-400">Rôle (Tag)</label><input type="text" value="${member.role || ''}" onchange="updateStaff(${index}, 'role', this.value)" class="w-full p-1 border rounded text-sm"></div>
-                        <div><label class="text-xs font-bold text-gray-400">Fonction</label><input type="text" value="${member.fonction || ''}" onchange="updateStaff(${index}, 'fonction', this.value)" class="w-full p-1 border rounded text-sm"></div>
-                        <div><label class="text-xs font-bold text-gray-400">Téléphone</label><input type="text" value="${member.tel || ''}" onchange="updateStaff(${index}, 'tel', this.value)" class="w-full p-1 border rounded text-sm"></div>
-                        <div><label class="text-xs font-bold text-gray-400">Email</label><input type="text" value="${member.mail || ''}" onchange="updateStaff(${index}, 'mail', this.value)" class="w-full p-1 border rounded text-sm"></div>
-                    </div>
-                    <button onclick="removeMember(${index})" class="text-red-500 hover:bg-red-50 p-2 rounded"><i data-lucide="trash-2"></i></button>
-                `;
-                list.appendChild(div);
+                    <button onclick="staffData.splice(${i},1);renderStaff()" class="text-red-500 p-2"><i data-lucide="trash-2"></i></button>
+                </div>`;
             });
             lucide.createIcons();
         }
 
-        function updateStaff(index, key, value) { staffData[index][key] = value; }
-
-        function addNewMember() {
-            staffData.push({ totem: "Nouveau", nom: "", role: "", fonction: "Animateur", photo: "default.png" });
-            renderStaffList();
-        }
-
-        function removeMember(index) {
-            if(confirm("Supprimer ce membre ?")) {
-                staffData.splice(index, 1);
-                renderStaffList();
-            }
-        }
-
-        function changePhoto(index) { document.getElementById(`photo-input-${index}`).click(); }
-
-        async function uploadStaffPhoto(index, input) {
-            if(input.files[0]) {
-                const file = input.files[0];
-                showLoader("Upload photo...");
-                // 1. Upload image to GitHub
-                const reader = new FileReader();
-                reader.onload = async (e) => {
-                    const content = e.target.result.split(',')[1];
-                    const path = `donnees-site/photos-staff/${file.name}`;
-                    
-                    // Check if exists (get SHA)
-                    let sha = null;
-                    try { const check = await ghFetch(path); sha = check.sha; } catch(e){}
-
-                    try {
-                        await apiCall(path, 'PUT', { message: `Upload photo ${file.name}`, content: content, branch: BRANCH, sha: sha });
-                        // 2. Update JSON data reference
-                        staffData[index].photo = file.name;
-                        renderStaffList();
-                        alert("Photo mise à jour ! Pensez à enregistrer le staff.");
-                    } catch(err) { alert("Erreur upload photo"); } finally { hideLoader(); }
-                };
-                reader.readAsDataURL(file);
-            }
-        }
+        function addNewMember() { staffData.push({totem:"Nouveau", nom:"", role:"", fonction:"Animateur", photo:"default.png"}); renderStaff(); }
 
         async function saveStaffJSON() {
-            showLoader("Sauvegarde Staff...");
-            const jsonString = JSON.stringify(staffData, null, 2);
-            const encoded = btoa(unescape(encodeURIComponent(jsonString)));
-            
+            showLoader("Sauvegarde...");
             try {
-                await apiCall('donnees-site/staff.json', 'PUT', {
-                    message: "Update Staff List",
-                    content: encoded,
-                    sha: fileShas['donnees-site/staff.json'],
-                    branch: BRANCH
-                });
+                const encoded = btoa(unescape(encodeURIComponent(JSON.stringify(staffData, null, 2))));
+                await ghFetch('donnees-site/staff.json', 'PUT', { message: "Update Staff", content: encoded, sha: fileShas['donnees-site/staff.json'], branch: BRANCH });
                 // Refresh SHA
                 const data = await ghFetch('donnees-site/staff.json');
                 fileShas['donnees-site/staff.json'] = data.sha;
-                alert("Équipe mise à jour avec succès !");
-            } catch(e) { alert("Erreur sauvegarde"); } finally { hideLoader(); }
-        }
-
-        // --- API UTILS ---
-        async function ghFetch(path) {
-            const res = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${path}?ref=${BRANCH}&t=${Date.now()}`, { headers: { 'Authorization': `token ${TOKEN}`, 'Accept': 'application/vnd.github.v3+json' } });
-            if(!res.ok) throw new Error("Erreur GitHub");
-            return await res.json();
-        }
-
-        async function apiCall(path, method, body) {
-            const res = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${path}`, {
-                method: method,
-                headers: { 'Authorization': `token ${TOKEN}`, 'Content-Type': 'application/json' },
-                body: JSON.stringify(body)
-            });
-            if(!res.ok) throw new Error("Erreur API");
-            return await res.json();
-        }
-
-        // --- FONCTIONS STANDARDS (Textes & Fichiers) ---
-        async function loadText(path, elId) {
-            try {
-                const data = await ghFetch(path);
-                fileShas[path] = data.sha;
-                document.getElementById(elId).value = new TextDecoder().decode(Uint8Array.from(atob(data.content), c => c.charCodeAt(0)));
-            } catch(e) {}
-        }
-
-        async function saveFile(path, elId) {
-            showLoader("Sauvegarde...");
-            const content = document.getElementById(elId).value;
-            const encoded = btoa(unescape(encodeURIComponent(content)));
-            try {
-                await apiCall(path, 'PUT', { message: `Update ${path}`, content: encoded, sha: fileShas[path], branch: BRANCH });
-                // Refresh SHA
-                const data = await ghFetch(path);
-                fileShas[path] = data.sha;
-                alert("Sauvegardé !");
+                alert("Enregistré !");
             } catch(e) { alert("Erreur"); } finally { hideLoader(); }
         }
 
+        // 7. FICHIERS
         async function refreshFiles() {
             const grid = document.getElementById('file-grid');
-            grid.innerHTML = '<p class="col-span-full text-center text-gray-400">Chargement...</p>';
+            grid.innerHTML = '<p class="col-span-full text-center text-gray-400 py-8">Chargement...</p>';
             try {
                 const files = await ghFetch(currentPath);
                 grid.innerHTML = '';
@@ -328,14 +378,14 @@
                         fileShas[f.path] = f.sha;
                         const isImg = f.name.match(/\.(jpg|jpeg|png|gif)$/i);
                         const preview = isImg ? `<img src="${f.download_url}" class="w-full h-32 object-cover bg-gray-100">` : `<div class="w-full h-32 bg-gray-50 flex items-center justify-center"><i data-lucide="file-text" class="w-10 h-10 text-gray-400"></i></div>`;
-                        
                         grid.innerHTML += `
-                        <div class="file-card flex flex-col">
+                        <div class="file-card">
                             ${preview}
                             <div class="p-3">
                                 <p class="text-xs font-bold truncate mb-2" title="${f.name}">${f.name}</p>
                                 <div class="flex justify-between">
-                                    <a href="${f.download_url}" target="_blank" class="text-blue-500"><i data-lucide="eye" class="w-4 h-4"></i></a>
+                                    <button onclick="previewFile('${f.download_url}', '${f.name}')" class="text-blue-500"><i data-lucide="eye" class="w-4 h-4"></i></button>
+                                    <button onclick="renameFile('${f.name}')" class="text-yellow-600"><i data-lucide="pencil" class="w-4 h-4"></i></button>
                                     <button onclick="deleteFile('${f.name}', '${f.sha}')" class="text-red-500"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
                                 </div>
                             </div>
@@ -343,41 +393,61 @@
                     }
                 });
                 lucide.createIcons();
-            } catch(e) { grid.innerHTML = '<p class="col-span-full text-center text-gray-400">Dossier vide.</p>'; }
+            } catch(e) { grid.innerHTML='<p class="col-span-full text-center text-gray-400">Vide ou Erreur</p>'; }
         }
 
         async function uploadFile(input) {
             if(input.files[0]) {
-                showLoader("Envoi...");
                 const file = input.files[0];
                 const reader = new FileReader();
+                showLoader("Envoi...");
                 reader.onload = async (e) => {
                     const content = e.target.result.split(',')[1];
                     const path = `${currentPath}/${file.name}`;
-                    let sha = null;
-                    if(fileShas[path]) sha = fileShas[path]; // Overwrite
+                    const sha = fileShas[path] || null;
                     try {
-                        await apiCall(path, 'PUT', { message: `Add ${file.name}`, content: content, branch: BRANCH, sha: sha });
+                        await ghFetch(path, 'PUT', { message: `Add ${file.name}`, content: content, branch: BRANCH, sha: sha });
                         refreshFiles();
-                    } catch(e) { alert("Erreur upload"); } finally { hideLoader(); }
+                    } catch(e){} finally { hideLoader(); }
                 };
                 reader.readAsDataURL(file);
             }
             input.value = '';
         }
 
-        async function deleteFile(name, sha) {
-            if(confirm("Supprimer ?")) {
+        async function deleteFile(n, s) {
+            if(confirm('Supprimer ?')) {
                 showLoader("Suppression...");
-                try {
-                    await apiCall(`${currentPath}/${name}`, 'DELETE', { message: `Del ${name}`, sha: sha, branch: BRANCH });
-                    refreshFiles();
-                } catch(e) { alert("Erreur"); } finally { hideLoader(); }
+                try { await ghFetch(`${currentPath}/${n}`, 'DELETE', { message: `Del ${n}`, sha: s, branch: BRANCH }); refreshFiles(); }
+                catch(e){} finally { hideLoader(); }
             }
         }
 
-        function showLoader(t) { document.getElementById('loader-text').innerText = t; document.getElementById('loader').style.display = 'flex'; }
-        function hideLoader() { document.getElementById('loader').style.display = 'none'; }
+        async function renameFile(old) {
+            const n = prompt("Nouveau nom :", old);
+            if(!n || n===old) return;
+            showLoader("Renommage...");
+            try {
+                const d = await ghFetch(`${currentPath}/${old}`);
+                await ghFetch(`${currentPath}/${n}`, 'PUT', { message: `Ren ${n}`, content: d.content, branch: BRANCH });
+                await ghFetch(`${currentPath}/${old}`, 'DELETE', { message: `Del old`, sha: d.sha, branch: BRANCH });
+                refreshFiles();
+            } catch(e){} finally { hideLoader(); }
+        }
+
+        function previewFile(url, name) {
+            const m = document.getElementById('preview-modal');
+            const c = document.getElementById('preview-body');
+            document.getElementById('preview-name').innerText = name;
+            m.classList.remove('hidden');
+            if(name.match(/\.(jpg|jpeg|png|gif)$/i)) c.innerHTML = `<img src="${url}" class="max-h-full max-w-full shadow-lg">`;
+            else if(name.match(/\.pdf$/i)) c.innerHTML = `<iframe src="https://docs.google.com/gview?url=${encodeURIComponent(url)}&embedded=true" class="w-full h-full border-none bg-white"></iframe>`;
+            else c.innerHTML = '<p class="text-gray-500">Pas d\'aperçu.</p>';
+        }
+        function closePreview() { document.getElementById('preview-modal').classList.add('hidden'); }
+
+        function showLoader(t) { document.getElementById('loader-text').innerText=t; document.getElementById('loader').style.display='flex'; }
+        function hideLoader() { document.getElementById('loader').style.display='none'; }
     </script>
 </body>
 </html>
