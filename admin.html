@@ -16,7 +16,7 @@
         const REPO_OWNER = "staffpatrovdh-pixel";
         const REPO_NAME = "staffpatrovdh-pixel.github.io";
         const BRANCH = "main";
-        // URL de votre API PHP AlwaysData
+        // URL de votre API PHP
         const API_URL = "https://pvdhloginapi.alwaysdata.net/api.php"; 
         
         tailwind.config = { theme: { extend: { colors: { patro: { yellow: '#FFD700', green: '#009045', dark: '#1a1a1a', light: '#f8fafc' } }, fontFamily: { sans: ['Poppins', 'sans-serif'], display: ['Fredoka', 'sans-serif'] } } } }
@@ -37,13 +37,17 @@
         .staff-row { display: flex; align-items: center; gap: 10px; padding: 10px; background: white; border: 1px solid #e5e7eb; border-radius: 8px; margin-bottom: 8px; transition: 0.2s; }
         .staff-row:hover { border-color: #009045; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
 
-        /* Editeur Valves */
-        .wysiwyg-toolbar { display: flex; gap: 5px; padding: 5px; background: #f9fafb; border-bottom: 1px solid #e5e7eb; border-radius: 8px 8px 0 0; }
-        .wysiwyg-btn { padding: 5px 10px; border-radius: 4px; font-weight: bold; font-size: 12px; border: 1px solid transparent; cursor: pointer; transition: 0.1s; }
+        /* Editeur Valves & Agenda Ludique */
+        .wysiwyg-toolbar { display: flex; gap: 5px; padding: 8px; background: #f9fafb; border-bottom: 1px solid #e5e7eb; border-radius: 8px 8px 0 0; flex-wrap: wrap; }
+        .wysiwyg-btn { padding: 6px 10px; border-radius: 6px; font-weight: bold; font-size: 12px; border: 1px solid transparent; cursor: pointer; transition: 0.1s; background: white; border: 1px solid #e5e7eb; color: #374151; }
         .wysiwyg-btn:hover { background: #e5e7eb; border-color: #d1d5db; }
-        .wysiwyg-content { min-height: 300px; padding: 15px; outline: none; overflow-y: auto; background: white; border-radius: 0 0 8px 8px; }
-        .wysiwyg-content ul { list-style-type: disc; padding-left: 20px; }
-        .wysiwyg-content h3 { font-weight: bold; font-size: 1.2em; margin-top: 10px; color: #009045; }
+        .wysiwyg-content { min-height: 350px; padding: 20px; outline: none; overflow-y: auto; background: white; border-radius: 0 0 8px 8px; font-size: 14px; line-height: 1.6; }
+        
+        .wysiwyg-content ul { list-style-type: disc; padding-left: 20px; margin-bottom: 10px; }
+        .wysiwyg-content h3 { font-weight: bold; font-size: 1.2em; margin-top: 15px; margin-bottom: 5px; color: #009045; border-bottom: 2px solid #f3f4f6; padding-bottom: 4px; }
+        .wysiwyg-content p { margin-bottom: 10px; }
+        .cal-row { transition: all 0.2s; }
+        .cal-row:hover { background-color: #f9fafb; }
     </style>
 </head>
 <body class="text-slate-800 min-h-screen flex flex-col">
@@ -51,15 +55,15 @@
     <div id="loader"><div class="animate-spin rounded-full h-10 w-10 border-b-4 border-patro-green mb-2"></div><p class="text-sm font-bold text-gray-500" id="loader-text">Chargement...</p></div>
     <div id="custom-cursor"></div>
 
-    <!-- LOGIN -->
+    <!-- 1. LOGIN (Connecté à API) -->
     <div id="login-screen" class="fixed inset-0 z-50 bg-gray-100 flex items-center justify-center p-4">
         <div class="bg-white w-full max-w-md p-8 rounded-2xl shadow-xl border-t-4 border-patro-green text-center">
             <img src="https://static.wixstatic.com/shapes/99150c_262f50afd9f748c1b2820587168d19f3.svg" class="h-20 mx-auto mb-6">
             <h1 class="text-2xl font-bold text-gray-800 mb-2">Accès Staff</h1>
-            <p class="text-sm text-gray-500 mb-6">Utilisez vos identifiants Wix (Membre)</p>
+            <p class="text-sm text-gray-500 mb-6">Connectez-vous avec votre compte Patro.</p>
             
-            <form onsubmit="login(event)" class="space-y-4">
-                <input type="text" id="username" placeholder="Email / Identifiant" class="w-full p-3 border rounded-lg outline-none focus:ring-2 focus:ring-patro-green" required>
+            <form onsubmit="loginWithApi(event)" class="space-y-4">
+                <input type="text" id="username" placeholder="Identifiant" class="w-full p-3 border rounded-lg outline-none focus:ring-2 focus:ring-patro-green" required>
                 <input type="password" id="password" placeholder="Mot de passe" class="w-full p-3 border rounded-lg outline-none focus:ring-2 focus:ring-patro-green" required>
                 <p id="login-error" class="text-red-500 text-sm font-bold hidden"></p>
                 <button class="w-full bg-patro-green text-white font-bold py-3 rounded-lg hover:bg-green-700 transition">Connexion</button>
@@ -67,7 +71,7 @@
         </div>
     </div>
 
-    <!-- DASHBOARD -->
+    <!-- 2. DASHBOARD -->
     <div id="dashboard" class="hidden flex flex-col h-screen">
         <header class="bg-white h-16 border-b flex items-center justify-between px-6 shadow-sm z-10 flex-shrink-0">
             <div class="flex items-center gap-3">
@@ -82,15 +86,21 @@
 
         <div class="flex flex-1 overflow-hidden">
             <aside class="w-64 bg-white border-r flex flex-col overflow-y-auto p-4 space-y-1 flex-shrink-0">
-                <p class="px-3 text-xs font-bold text-gray-400 uppercase mb-2">Gestion</p>
-                <button onclick="loadSection('staff')" class="sidebar-btn" id="btn-staff"><i data-lucide="users" class="w-5 h-5 text-blue-500"></i> Gestion Équipe</button>
+                <p class="px-3 text-xs font-bold text-gray-400 uppercase mb-2">Gestion Site</p>
                 <button onclick="loadSection('texts')" class="sidebar-btn active" id="btn-texts"><i data-lucide="file-edit" class="w-5 h-5 text-gray-500"></i> Agenda & Valves</button>
+                <button onclick="loadSection('staff')" class="sidebar-btn" id="btn-staff"><i data-lucide="users" class="w-5 h-5 text-blue-500"></i> Gestion Équipe</button>
                 
                 <p class="px-3 text-xs font-bold text-gray-400 uppercase mb-2 mt-6">Fichiers</p>
                 <button onclick="loadFileManager('documents', 'Documents')" class="sidebar-btn" id="btn-docs"><i data-lucide="file-text" class="w-5 h-5 text-yellow-500"></i> Documents PDF</button>
                 <button onclick="loadFileManager('donnees-site/photos-staff', 'Photos Staff')" class="sidebar-btn" id="btn-photos-staff"><i data-lucide="image" class="w-5 h-5 text-green-500"></i> Photos Staff</button>
                 <button onclick="loadFileManager('donnees-site/photos-site-accueil', 'Accueil')" class="sidebar-btn" id="btn-home"><i data-lucide="image" class="w-5 h-5 text-purple-500"></i> Photos Accueil</button>
                 
+                <!-- Section Admin (Visible seulement si role = admin) -->
+                <div id="admin-menu" class="hidden">
+                    <p class="px-3 text-xs font-bold text-gray-400 uppercase mb-2 mt-6">Administration</p>
+                    <button onclick="loadUsersList()" class="sidebar-btn" id="btn-users"><i data-lucide="shield" class="w-5 h-5 text-red-500"></i> Utilisateurs</button>
+                </div>
+
                 <div class="mt-auto pt-8 px-4">
                      <a href="index.html" target="_blank" class="flex items-center justify-center gap-2 w-full py-2 border border-gray-300 rounded-lg text-sm text-gray-600 hover:bg-gray-50 transition"><i data-lucide="external-link" class="w-4 h-4"></i> Voir le site</a>
                 </div>
@@ -98,10 +108,10 @@
 
             <main class="flex-1 overflow-y-auto p-8 bg-gray-50">
                 
-                <!-- VUE : GESTION STAFF -->
+                <!-- VUE : GESTION STAFF (JSON) -->
                 <div id="view-staff" class="hidden space-y-6">
                     <div class="flex justify-between items-center border-b pb-4">
-                        <h2 class="text-2xl font-bold text-gray-800">L'équipe d'animation</h2>
+                        <h2 class="text-2xl font-bold text-gray-800">L'équipe d'animation (Site)</h2>
                         <button onclick="addNewMember()" class="bg-blue-600 text-white px-4 py-2 rounded-lg font-bold hover:bg-blue-700 flex gap-2"><i data-lucide="plus" class="w-5 h-5"></i> Ajouter</button>
                     </div>
                     <div id="staff-list" class="space-y-4"></div>
@@ -110,28 +120,26 @@
                     </div>
                 </div>
 
-                <!-- VUE : TEXTES (Ludique) -->
+                <!-- VUE : TEXTES LUDIQUES -->
                 <div id="view-texts" class="space-y-8">
-                    <h2 class="text-2xl font-bold text-gray-800 mb-4">Textes du site</h2>
+                    <h2 class="text-2xl font-bold text-gray-800 mb-4">Contenu du site</h2>
                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                        
-                        <!-- Agenda Interactif -->
+                        <!-- Agenda -->
                         <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden flex flex-col h-[600px]">
                             <div class="p-4 border-b bg-gray-50 flex justify-between items-center">
                                 <h3 class="font-bold text-gray-700 flex items-center gap-2"><i data-lucide="calendar" class="w-5 h-5 text-patro-yellow"></i> Agenda</h3>
-                                <button onclick="saveCalendar()" class="text-xs bg-patro-yellow text-patro-dark px-3 py-1.5 rounded font-bold hover:bg-yellow-400 transition">Sauvegarder</button>
+                                <button onclick="saveCalendar()" class="text-xs bg-patro-yellow text-patro-dark px-3 py-1.5 rounded font-bold hover:bg-yellow-400 transition shadow-sm">Sauvegarder</button>
                             </div>
-                            <div class="flex-1 overflow-y-auto p-4 bg-gray-50/50 space-y-2" id="calendar-list"></div>
+                            <div class="flex-1 overflow-y-auto p-4 bg-gray-50/30 space-y-2" id="calendar-list"></div>
                             <div class="p-3 border-t bg-white">
                                 <button onclick="addCalendarRow()" class="w-full py-2 border-2 border-dashed border-gray-300 rounded-lg text-gray-500 font-bold hover:border-patro-yellow hover:text-patro-yellow hover:bg-yellow-50 transition flex justify-center items-center gap-2"><i data-lucide="plus" class="w-4 h-4"></i> Ajouter une date</button>
                             </div>
                         </div>
-
-                        <!-- Valves WYSIWYG -->
+                        <!-- Valves -->
                         <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden flex flex-col h-[600px]">
                             <div class="p-4 border-b bg-gray-50 flex justify-between items-center">
                                 <h3 class="font-bold text-gray-700 flex items-center gap-2"><i data-lucide="bell" class="w-5 h-5 text-patro-green"></i> Valves Info</h3>
-                                <button onclick="saveValves()" class="text-xs bg-patro-green text-white px-3 py-1.5 rounded font-bold hover:bg-green-700 transition">Sauvegarder</button>
+                                <button onclick="saveValves()" class="text-xs bg-patro-green text-white px-3 py-1.5 rounded font-bold hover:bg-green-700 transition shadow-sm">Sauvegarder</button>
                             </div>
                             <div class="wysiwyg-toolbar">
                                 <button onclick="execCmd('bold')" class="wysiwyg-btn" title="Gras"><b>B</b></button>
@@ -139,7 +147,7 @@
                                 <button onclick="execCmd('underline')" class="wysiwyg-btn underline" title="Souligné">U</button>
                                 <div class="w-px h-6 bg-gray-300 mx-1"></div>
                                 <button onclick="execCmd('formatBlock', 'H3')" class="wysiwyg-btn" title="Titre">Titre</button>
-                                <button onclick="execCmd('insertUnorderedList')" class="wysiwyg-btn" title="Liste"><i data-lucide="list" class="w-3 h-3"></i></button>
+                                <button onclick="execCmd('insertUnorderedList')" class="wysiwyg-btn" title="Liste"><i data-lucide="list" class="w-3 h-3"></i> Liste</button>
                             </div>
                             <div id="valves-editor" class="wysiwyg-content" contenteditable="true"></div>
                         </div>
@@ -158,6 +166,32 @@
                     <div id="file-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 pb-10"></div>
                 </div>
 
+                <!-- VUE : GESTION UTILISATEURS (ADMIN) -->
+                <div id="view-users" class="hidden space-y-6">
+                    <h2 class="text-2xl font-bold text-gray-800">Utilisateurs de l'administration</h2>
+                    
+                    <!-- Formulaire Création -->
+                    <div class="bg-white p-6 rounded-xl shadow-sm border mb-6">
+                        <h3 class="font-bold text-gray-700 mb-4">Créer un compte</h3>
+                        <form onsubmit="apiCreateUser(event)" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+                            <input type="text" id="new_prenom" placeholder="Prénom" required class="p-2 border rounded text-sm">
+                            <input type="text" id="new_nom" placeholder="Nom" required class="p-2 border rounded text-sm">
+                            <input type="text" id="new_username" placeholder="Identifiant" required class="p-2 border rounded text-sm">
+                            <input type="password" id="new_password" placeholder="Mot de passe" required class="p-2 border rounded text-sm">
+                            <select id="new_role" class="p-2 border rounded text-sm bg-white"><option value="animateur">Animateur</option><option value="admin">Admin</option></select>
+                            <button class="bg-green-600 text-white font-bold py-2 rounded text-sm hover:bg-green-700 col-span-full lg:col-span-1">Créer</button>
+                        </form>
+                    </div>
+
+                    <!-- Liste -->
+                    <div class="bg-white rounded-lg shadow overflow-hidden border">
+                        <table class="w-full text-left text-sm">
+                            <thead class="bg-gray-50 border-b"><tr><th class="p-3 font-bold text-gray-600">Nom</th><th class="p-3 font-bold text-gray-600">Login</th><th class="p-3 font-bold text-gray-600">Rôle</th><th class="p-3 text-right">Action</th></tr></thead>
+                            <tbody id="users-table-body"></tbody>
+                        </table>
+                    </div>
+                </div>
+
             </main>
         </div>
     </div>
@@ -174,23 +208,32 @@
     </div>
 
     <script>
-        let TOKEN = localStorage.getItem('patro_token');
-        let currentPath = ''; let fileShas = {}; let staffData = [];
+        let TOKEN = localStorage.getItem('patro_token'); // Token GitHub (reçu de l'API)
+        let USER = null;
+        let currentPath = ''; let fileShas = {};
+        let staffData = [];
         const turndownService = new TurndownService();
 
         document.addEventListener('DOMContentLoaded', () => {
             lucide.createIcons();
-            if (TOKEN) showDashboard();
+            // Vérif session locale
+            if (TOKEN) {
+                const u = localStorage.getItem('patro_user');
+                if(u) {
+                    USER = JSON.parse(u);
+                    initAdmin();
+                }
+            }
         });
 
-        // 1. LOGIN (Via API PHP AlwaysData)
-        async function login(e) {
+        // --- 1. LOGIN VIA API PHP ---
+        async function loginWithApi(e) {
             e.preventDefault();
             const u = document.getElementById('username').value;
             const p = document.getElementById('password').value;
-            const error = document.getElementById('login-error');
+            const err = document.getElementById('login-error');
             
-            error.classList.add('hidden');
+            err.classList.add('hidden');
             showLoader("Connexion...");
 
             try {
@@ -202,25 +245,29 @@
                 const data = await res.json();
 
                 if (data.success) {
-                    localStorage.setItem('patro_token', data.token); // Token GitHub
-                    localStorage.setItem('patro_user_name', data.user.prenom);
+                    localStorage.setItem('patro_token', data.token); // Stocke le token GitHub
+                    localStorage.setItem('patro_user', JSON.stringify(data.user));
                     TOKEN = data.token;
-                    showDashboard();
+                    USER = data.user;
+                    initAdmin();
                 } else {
-                    error.textContent = data.message || "Erreur connexion";
-                    error.classList.remove('hidden');
+                    err.textContent = data.message;
+                    err.classList.remove('hidden');
                 }
-            } catch (err) {
-                error.textContent = "Erreur serveur.";
-                error.classList.remove('hidden');
-            } finally { hideLoader(); }
+            } catch (e) { err.textContent = "Erreur serveur"; err.classList.remove('hidden'); }
+            finally { hideLoader(); }
         }
 
-        function showDashboard() {
+        function initAdmin() {
             document.getElementById('login-screen').classList.add('hidden');
             document.getElementById('dashboard').classList.remove('hidden');
-            document.getElementById('user-name').innerText = localStorage.getItem('patro_user_name') || 'Staff';
+            document.getElementById('user-name').textContent = USER.prenom;
             
+            // Afficher menu admin si admin
+            if(USER.role === 'admin') {
+                document.getElementById('admin-menu').classList.remove('hidden');
+            }
+
             loadSection('texts');
             loadCalendarUI();
             loadValvesUI();
@@ -228,16 +275,13 @@
 
         function logout() { localStorage.clear(); location.reload(); }
 
-        // 2. NAVIGATION
+        // --- 2. NAVIGATION ---
         function loadSection(id) {
-            document.getElementById('view-texts').classList.add('hidden');
-            document.getElementById('view-files').classList.add('hidden');
-            document.getElementById('view-staff').classList.add('hidden');
+            document.querySelectorAll('[id^="view-"]').forEach(el => el.classList.add('hidden'));
             document.querySelectorAll('.sidebar-btn').forEach(b => b.classList.remove('active'));
             
             document.getElementById('view-'+id).classList.remove('hidden');
             document.getElementById('btn-'+id).classList.add('active');
-            if(id === 'staff') loadStaffEditor();
         }
 
         function loadFileManager(path, title) {
@@ -247,8 +291,13 @@
             currentPath = path;
             refreshFiles();
         }
+        
+        function loadUsersList() {
+            loadSection('users');
+            apiListUsers();
+        }
 
-        // 3. API GITHUB
+        // --- 3. API GITHUB ---
         async function ghFetch(path, method='GET', body=null) {
             const opts = { headers: { 'Authorization': `token ${TOKEN}`, 'Accept': 'application/vnd.github.v3+json' } };
             if(method !== 'GET') { opts.method = method; opts.body = JSON.stringify(body); }
@@ -257,59 +306,40 @@
             return await res.json();
         }
 
-        // 4. CALENDRIER LUDIQUE
+        // --- 4. GESTION TEXTES ---
+        // Calendrier
         async function loadCalendarUI() {
             const container = document.getElementById('calendar-list');
-            container.innerHTML = '<p class="text-center text-gray-400 text-xs py-4">Chargement...</p>';
             try {
                 const data = await ghFetch('donnees-site/calendrier.txt');
                 fileShas['donnees-site/calendrier.txt'] = data.sha;
                 const content = new TextDecoder().decode(Uint8Array.from(atob(data.content), c => c.charCodeAt(0)));
                 container.innerHTML = '';
-                content.split('\n').forEach(line => {
-                    if(!line.trim()) return;
-                    const parts = line.split('|');
-                    addCalendarRow(parts[0]?.trim(), parts[1]?.trim(), parts[2]?.trim());
-                });
-            } catch (e) { container.innerHTML = '<p class="text-red-500 text-xs text-center">Erreur</p>'; }
+                content.split('\n').forEach(l => { if(l.trim()) { const p = l.split('|'); addCalendarRow(p[0]?.trim(), p[1]?.trim(), p[2]?.trim()); }});
+            } catch(e){}
         }
-
-        function addCalendarRow(date='', title='', place='') {
-            const div = document.createElement('div');
-            div.className = 'cal-row grid grid-cols-[100px_1fr_1fr_auto] gap-2 mb-2 items-center bg-white p-2 rounded border border-gray-200 shadow-sm';
-            div.innerHTML = `<input type="text" class="cal-date w-full p-1.5 border rounded text-sm text-center" placeholder="JJ/MM/AAAA" value="${date}"><input type="text" class="cal-title w-full p-1.5 border rounded text-sm" placeholder="Titre" value="${title}"><input type="text" class="cal-place w-full p-1.5 border rounded text-sm" placeholder="Lieu" value="${place}"><button onclick="this.parentElement.remove()" class="p-1.5 text-red-400 hover:text-red-600 hover:bg-red-50 rounded"><i data-lucide="trash-2" class="w-4 h-4"></i></button>`;
-            document.getElementById('calendar-list').appendChild(div);
-            lucide.createIcons();
+        function addCalendarRow(d='',t='',p='') {
+            const div = document.createElement('div'); div.className = 'cal-row grid grid-cols-[100px_1fr_1fr_auto] gap-2 mb-2 items-center bg-white p-2 rounded border shadow-sm';
+            div.innerHTML = `<input type="text" class="cal-date w-full p-1 border rounded text-sm text-center" value="${d}" placeholder="Date"><input type="text" class="cal-title w-full p-1 border rounded text-sm" value="${t}" placeholder="Titre"><input type="text" class="cal-place w-full p-1 border rounded text-sm" value="${p}" placeholder="Lieu"><button onclick="this.parentElement.remove()" class="text-red-500 p-1 hover:bg-red-50 rounded"><i data-lucide="trash-2" class="w-4 h-4"></i></button>`;
+            document.getElementById('calendar-list').appendChild(div); lucide.createIcons();
         }
-
         async function saveCalendar() {
-            let content = "";
-            document.querySelectorAll('.cal-row').forEach(row => {
-                const d = row.querySelector('.cal-date').value.trim();
-                const t = row.querySelector('.cal-title').value.trim();
-                const p = row.querySelector('.cal-place').value.trim();
-                if(d && t) content += `${d} | ${t} | ${p}\n`;
-            });
+            let content = ""; document.querySelectorAll('.cal-row').forEach(r => { const d=r.querySelector('.cal-date').value; const t=r.querySelector('.cal-title').value; const p=r.querySelector('.cal-place').value; if(d&&t) content += `${d} | ${t} | ${p}\n`; });
             saveRawFile('donnees-site/calendrier.txt', content, loadCalendarUI);
         }
 
-        // 5. VALVES LUDIQUE
+        // Valves
         async function loadValvesUI() {
-            const editor = document.getElementById('valves-editor');
-            editor.innerHTML = '<p class="text-center text-gray-400 text-xs py-4">Chargement...</p>';
             try {
                 const data = await ghFetch('donnees-site/valves.md');
                 fileShas['donnees-site/valves.md'] = data.sha;
                 const md = new TextDecoder().decode(Uint8Array.from(atob(data.content), c => c.charCodeAt(0)));
-                editor.innerHTML = marked.parse(md);
-            } catch (e) {}
+                document.getElementById('valves-editor').innerHTML = marked.parse(md);
+            } catch(e){}
         }
-
-        function execCmd(cmd, val=null) { document.execCommand(cmd, false, val); document.getElementById('valves-editor').focus(); }
-
+        function execCmd(c, v=null) { document.execCommand(c, false, v); }
         async function saveValves() {
-            const html = document.getElementById('valves-editor').innerHTML;
-            const md = turndownService.turndown(html);
+            const md = turndownService.turndown(document.getElementById('valves-editor').innerHTML);
             saveRawFile('donnees-site/valves.md', md, loadValvesUI);
         }
 
@@ -318,58 +348,13 @@
             try {
                 const encoded = btoa(unescape(encodeURIComponent(content)));
                 await ghFetch(path, 'PUT', { message: `Update ${path}`, content: encoded, sha: fileShas[path], branch: BRANCH });
-                if(cb) cb();
-                alert("Sauvegardé !");
-            } catch(e) { alert("Erreur sauvegarde"); } finally { hideLoader(); }
-        }
-
-        // 6. STAFF
-        async function loadStaffEditor() {
-            showLoader('Chargement staff...');
-            try {
-                const data = await ghFetch('donnees-site/staff.json');
-                fileShas['donnees-site/staff.json'] = data.sha;
-                staffData = JSON.parse(new TextDecoder().decode(Uint8Array.from(atob(data.content), c => c.charCodeAt(0))));
-                renderStaff();
-            } catch(e){} finally { hideLoader(); }
-        }
-
-        function renderStaff() {
-            const list = document.getElementById('staff-list'); list.innerHTML = '';
-            staffData.forEach((m, i) => {
-                list.innerHTML += `
-                <div class="staff-row">
-                    <img src="donnees-site/photos-staff/${m.photo}" class="staff-img-preview" onerror="this.src='https://placehold.co/40'">
-                    <div class="grid grid-cols-2 gap-2 flex-1">
-                        <input type="text" value="${m.totem||''}" onchange="staffData[${i}].totem=this.value" class="p-1 border rounded text-sm font-bold" placeholder="Totem">
-                        <input type="text" value="${m.nom||''}" onchange="staffData[${i}].nom=this.value" class="p-1 border rounded text-sm" placeholder="Nom">
-                        <input type="text" value="${m.role||''}" onchange="staffData[${i}].role=this.value" class="p-1 border rounded text-sm" placeholder="Rôle">
-                        <input type="text" value="${m.fonction||''}" onchange="staffData[${i}].fonction=this.value" class="p-1 border rounded text-sm" placeholder="Fonction">
-                    </div>
-                    <button onclick="staffData.splice(${i},1);renderStaff()" class="text-red-500 p-2"><i data-lucide="trash-2"></i></button>
-                </div>`;
-            });
-            lucide.createIcons();
-        }
-
-        function addNewMember() { staffData.push({totem:"Nouveau", nom:"", role:"", fonction:"Animateur", photo:"default.png"}); renderStaff(); }
-
-        async function saveStaffJSON() {
-            showLoader("Sauvegarde...");
-            try {
-                const encoded = btoa(unescape(encodeURIComponent(JSON.stringify(staffData, null, 2))));
-                await ghFetch('donnees-site/staff.json', 'PUT', { message: "Update Staff", content: encoded, sha: fileShas['donnees-site/staff.json'], branch: BRANCH });
-                // Refresh SHA
-                const data = await ghFetch('donnees-site/staff.json');
-                fileShas['donnees-site/staff.json'] = data.sha;
-                alert("Enregistré !");
+                if(cb) cb(); alert("Sauvegardé !");
             } catch(e) { alert("Erreur"); } finally { hideLoader(); }
         }
 
-        // 7. FICHIERS
+        // --- 5. GESTION FICHIERS ---
         async function refreshFiles() {
-            const grid = document.getElementById('file-grid');
-            grid.innerHTML = '<p class="col-span-full text-center text-gray-400 py-8">Chargement...</p>';
+            const grid = document.getElementById('file-grid'); grid.innerHTML = '<p class="col-span-full text-center text-gray-400 py-4">Chargement...</p>';
             try {
                 const files = await ghFetch(currentPath);
                 grid.innerHTML = '';
@@ -377,9 +362,9 @@
                     if(f.type === 'file') {
                         fileShas[f.path] = f.sha;
                         const isImg = f.name.match(/\.(jpg|jpeg|png|gif)$/i);
-                        const preview = isImg ? `<img src="${f.download_url}" class="w-full h-32 object-cover bg-gray-100">` : `<div class="w-full h-32 bg-gray-50 flex items-center justify-center"><i data-lucide="file-text" class="w-10 h-10 text-gray-400"></i></div>`;
+                        const preview = isImg ? `<img src="${f.download_url}" class="w-full h-32 object-cover bg-gray-100">` : `<div class="w-full h-32 bg-gray-100 flex items-center justify-center"><i data-lucide="file-text" class="w-10 h-10 text-gray-400"></i></div>`;
                         grid.innerHTML += `
-                        <div class="file-card">
+                        <div class="file-card flex flex-col">
                             ${preview}
                             <div class="p-3">
                                 <p class="text-xs font-bold truncate mb-2" title="${f.name}">${f.name}</p>
@@ -393,39 +378,35 @@
                     }
                 });
                 lucide.createIcons();
-            } catch(e) { grid.innerHTML='<p class="col-span-full text-center text-gray-400">Vide ou Erreur</p>'; }
+            } catch(e) { grid.innerHTML = '<p class="col-span-full text-center text-gray-400">Vide</p>'; }
         }
 
         async function uploadFile(input) {
             if(input.files[0]) {
+                showLoader("Upload...");
                 const file = input.files[0];
                 const reader = new FileReader();
-                showLoader("Envoi...");
                 reader.onload = async (e) => {
                     const content = e.target.result.split(',')[1];
                     const path = `${currentPath}/${file.name}`;
                     const sha = fileShas[path] || null;
-                    try {
-                        await ghFetch(path, 'PUT', { message: `Add ${file.name}`, content: content, branch: BRANCH, sha: sha });
-                        refreshFiles();
-                    } catch(e){} finally { hideLoader(); }
+                    try { await ghFetch(path, 'PUT', { message: `Add ${file.name}`, content: content, branch: BRANCH, sha: sha }); refreshFiles(); } 
+                    catch(e) { alert("Erreur"); } finally { hideLoader(); }
                 };
                 reader.readAsDataURL(file);
             }
             input.value = '';
         }
 
-        async function deleteFile(n, s) {
-            if(confirm('Supprimer ?')) {
+        async function deleteFile(name, sha) {
+            if(confirm("Supprimer ?")) {
                 showLoader("Suppression...");
-                try { await ghFetch(`${currentPath}/${n}`, 'DELETE', { message: `Del ${n}`, sha: s, branch: BRANCH }); refreshFiles(); }
-                catch(e){} finally { hideLoader(); }
+                try { await ghFetch(`${currentPath}/${name}`, 'DELETE', { message: `Del ${name}`, sha: sha, branch: BRANCH }); refreshFiles(); } catch(e){} finally { hideLoader(); }
             }
         }
 
         async function renameFile(old) {
-            const n = prompt("Nouveau nom :", old);
-            if(!n || n===old) return;
+            const n = prompt("Nouveau nom :", old); if(!n || n===old) return;
             showLoader("Renommage...");
             try {
                 const d = await ghFetch(`${currentPath}/${old}`);
@@ -436,18 +417,99 @@
         }
 
         function previewFile(url, name) {
-            const m = document.getElementById('preview-modal');
-            const c = document.getElementById('preview-body');
+            const m = document.getElementById('preview-modal'); m.classList.remove('hidden');
             document.getElementById('preview-name').innerText = name;
-            m.classList.remove('hidden');
-            if(name.match(/\.(jpg|jpeg|png|gif)$/i)) c.innerHTML = `<img src="${url}" class="max-h-full max-w-full shadow-lg">`;
-            else if(name.match(/\.pdf$/i)) c.innerHTML = `<iframe src="https://docs.google.com/gview?url=${encodeURIComponent(url)}&embedded=true" class="w-full h-full border-none bg-white"></iframe>`;
-            else c.innerHTML = '<p class="text-gray-500">Pas d\'aperçu.</p>';
+            const b = document.getElementById('preview-body');
+            if(name.match(/\.(jpg|jpeg|png|gif)$/i)) b.innerHTML = `<img src="${url}" class="max-h-full shadow-lg">`;
+            else b.innerHTML = `<iframe src="https://docs.google.com/gview?url=${encodeURIComponent(url)}&embedded=true" class="w-full h-full border-none bg-white"></iframe>`;
         }
         function closePreview() { document.getElementById('preview-modal').classList.add('hidden'); }
 
-        function showLoader(t) { document.getElementById('loader-text').innerText=t; document.getElementById('loader').style.display='flex'; }
-        function hideLoader() { document.getElementById('loader').style.display='none'; }
+        // --- 6. GESTION STAFF (JSON) ---
+        async function loadStaffEditor() {
+            showLoader('Chargement staff...');
+            try {
+                const data = await ghFetch('donnees-site/staff.json');
+                fileShas['donnees-site/staff.json'] = data.sha;
+                staffData = JSON.parse(new TextDecoder().decode(Uint8Array.from(atob(data.content), c => c.charCodeAt(0))));
+                renderStaff();
+            } catch(e){} finally { hideLoader(); }
+        }
+        function renderStaff() {
+            const list = document.getElementById('staff-list'); list.innerHTML = '';
+            staffData.forEach((m, i) => {
+                list.innerHTML += `
+                <div class="staff-row">
+                    <img src="donnees-site/photos-staff/${m.photo}" class="w-10 h-10 rounded-full object-cover bg-gray-100 border" onerror="this.src='https://placehold.co/40'">
+                    <div class="grid grid-cols-2 gap-2 flex-1">
+                        <input type="text" value="${m.totem||''}" onchange="staffData[${i}].totem=this.value" class="p-1 border rounded text-sm font-bold" placeholder="Totem">
+                        <input type="text" value="${m.nom||''}" onchange="staffData[${i}].nom=this.value" class="p-1 border rounded text-sm" placeholder="Nom">
+                        <input type="text" value="${m.role||''}" onchange="staffData[${i}].role=this.value" class="p-1 border rounded text-sm" placeholder="Rôle">
+                        <input type="text" value="${m.fonction||''}" onchange="staffData[${i}].fonction=this.value" class="p-1 border rounded text-sm" placeholder="Fonction">
+                    </div>
+                    <button onclick="staffData.splice(${i},1);renderStaff()" class="text-red-500 p-2"><i data-lucide="trash-2"></i></button>
+                </div>`;
+            });
+            lucide.createIcons();
+        }
+        function addNewMember() { staffData.push({totem:"Nouveau", nom:"", role:"", fonction:"Animateur", photo:"default.png"}); renderStaff(); }
+        async function saveStaffJSON() {
+            showLoader("Sauvegarde...");
+            try {
+                const encoded = btoa(unescape(encodeURIComponent(JSON.stringify(staffData, null, 2))));
+                await ghFetch('donnees-site/staff.json', 'PUT', { message: "Update Staff", content: encoded, sha: fileShas['donnees-site/staff.json'], branch: BRANCH });
+                // Refresh SHA
+                const data = await ghFetch('donnees-site/staff.json');
+                fileShas['donnees-site/staff.json'] = data.sha;
+                alert("Enregistré !");
+            } catch(e) { alert("Erreur"); } finally { hideLoader(); }
+        }
+
+        // --- 7. GESTION UTILISATEURS (VIA API PHP) ---
+        async function apiListUsers() {
+            const res = await fetch(API_URL, { method: 'POST', body: JSON.stringify({ action: 'list_users' }) });
+            const data = await res.json();
+            const tb = document.getElementById('users-table-body'); tb.innerHTML = '';
+            data.users.forEach(u => {
+                tb.innerHTML += `
+                    <tr class="border-b hover:bg-gray-50">
+                        <td class="p-3 font-bold">${u.prenom} ${u.nom}</td>
+                        <td class="p-3 text-gray-500">${u.username}</td>
+                        <td class="p-3"><span class="px-2 py-1 bg-gray-100 rounded text-xs font-bold">${u.role}</span></td>
+                        <td class="p-3 text-right"><button onclick="apiDeleteUser(${u.id})" class="text-red-500"><i data-lucide="trash-2" class="w-4 h-4"></i></button></td>
+                    </tr>`;
+            });
+            lucide.createIcons();
+        }
+        
+        async function apiCreateUser(e) {
+            e.preventDefault();
+            showLoader("Création...");
+            const p = {
+                action: 'create_user',
+                new_username: document.getElementById('new_username').value,
+                new_password: document.getElementById('new_password').value,
+                new_nom: document.getElementById('new_nom').value,
+                new_prenom: document.getElementById('new_prenom').value,
+                new_role: document.getElementById('new_role').value
+            };
+            try {
+                const res = await fetch(API_URL, { method: 'POST', body: JSON.stringify(p) });
+                const d = await res.json();
+                if(d.success) { e.target.reset(); apiListUsers(); alert("Utilisateur créé !"); }
+                else alert(d.message);
+            } catch(e){} finally { hideLoader(); }
+        }
+        
+        async function apiDeleteUser(id) {
+            if(confirm("Supprimer ?")) {
+                await fetch(API_URL, { method: 'POST', body: JSON.stringify({ action: 'delete_user', id_to_delete: id }) });
+                apiListUsers();
+            }
+        }
+
+        function showLoader(t) { document.getElementById('loader-text').innerText = t; document.getElementById('loader').style.display = 'flex'; }
+        function hideLoader() { document.getElementById('loader').style.display = 'none'; }
     </script>
 </body>
 </html>
