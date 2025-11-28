@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "totem": "Nevala",
+    "nom": "Aurélie",
+    "role": "Présidente",
+    "fonction": "Cheffe Poussins & Benjamins",
+    "tel": "0488/08.86.03",
+    "mail": "patrovaldhaine@patro.be",
+    "photo": "Nevala_(Aurelie).png"
+  },
+  {
+    "id": 2,
+    "totem": "Choucas",
+    "nom": "Romain",
+    "role": "Vice-Président",
+    "fonction": "Chef Alpines/Conquérants",
+    "tel": "0494/20.72.98",
+    "mail": "patrovaldhaine@patro.be",
+    "photo": "Choucas_(Romain).png"
+  },
+  {
+    "id": 3,
+    "totem": "Duma",
+    "nom": "Jonathan",
+    "role": "Trésorier",
+    "fonction": "Anim. Alpines/Conquérants",
+    "tel": "0468/08.92.86",
+    "mail": "patrovaldhaine@patro.be",
+    "photo": "Duma_(Jonathan).png"
+  }
+]
