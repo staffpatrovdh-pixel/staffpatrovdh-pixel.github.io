@@ -22,7 +22,7 @@
         
         tailwind.config = { theme: { extend: { colors: { patro: { yellow: '#FFD700', green: '#009045', dark: '#1a1a1a', light: '#f8fafc' } }, fontFamily: { sans: ['Poppins', 'sans-serif'], display: ['Fredoka', 'sans-serif'] } } } }
     </script>
-
+ 
     <style>
         body { background: #f3f4f6; font-family: 'Poppins', sans-serif; }
         .sidebar-btn { display: flex; align-items: center; gap: 10px; padding: 12px 16px; width: 100%; text-align: left; border-radius: 8px; transition: 0.2s; color: #4b5563; font-weight: 500; cursor: pointer; }
@@ -34,10 +34,6 @@
         
         #loader { position: fixed; inset: 0; background: rgba(255,255,255,0.9); z-index: 100; display: none; justify-content: center; align-items: center; flex-direction: column; }
         
-        /* Staff Card Admin */
-        .staff-row { display: flex; align-items: center; gap: 10px; padding: 10px; background: white; border: 1px solid #e5e7eb; border-radius: 8px; margin-bottom: 8px; transition: 0.2s; }
-        .staff-row:hover { border-color: #009045; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
-
         /* Editeur Ludique */
         .wysiwyg-toolbar { display: flex; gap: 5px; padding: 8px; background: #f9fafb; border-bottom: 1px solid #e5e7eb; border-radius: 8px 8px 0 0; flex-wrap: wrap; }
         .wysiwyg-btn { padding: 6px 10px; border-radius: 6px; font-weight: bold; font-size: 12px; border: 1px solid transparent; cursor: pointer; transition: 0.1s; background: white; border: 1px solid #e5e7eb; color: #374151; }
@@ -52,10 +48,10 @@
     </style>
 </head>
 <body class="text-slate-800 min-h-screen flex flex-col">
-
+ 
     <div id="loader"><div class="animate-spin rounded-full h-10 w-10 border-b-4 border-patro-green mb-2"></div><p class="text-sm font-bold text-gray-500" id="loader-text">Chargement...</p></div>
     <div id="custom-cursor"></div>
-
+ 
     <!-- 1. LOGIN (TOKEN) -->
     <div id="login-screen" class="fixed inset-0 z-50 bg-gray-100 flex items-center justify-center p-4">
         <div class="bg-white w-full max-w-md p-8 rounded-2xl shadow-xl border-t-4 border-patro-green text-center">
@@ -68,7 +64,7 @@
             </form>
         </div>
     </div>
-
+ 
     <!-- 2. DASHBOARD -->
     <div id="dashboard" class="hidden flex flex-col h-screen">
         <header class="bg-white h-16 border-b flex items-center justify-between px-6 shadow-sm z-10 flex-shrink-0">
@@ -81,38 +77,26 @@
                 <button onclick="logout()" class="text-red-500 hover:bg-red-50 px-3 py-1.5 rounded-md transition flex gap-2 font-medium"><i data-lucide="log-out" class="w-5 h-5"></i> Déconnexion</button>
             </div>
         </header>
-
+ 
         <div class="flex flex-1 overflow-hidden">
             <aside class="w-64 bg-white border-r flex flex-col overflow-y-auto p-4 space-y-1 flex-shrink-0">
                 <p class="px-3 text-xs font-bold text-gray-400 uppercase mb-2">Gestion</p>
-                <button onclick="loadSection('staff')" class="sidebar-btn" id="btn-staff"><i data-lucide="users" class="w-5 h-5 text-blue-500"></i> Gestion Équipe</button>
+                <!-- Bouton Staff supprimé -->
                 <button onclick="loadSection('texts')" class="sidebar-btn active" id="btn-texts"><i data-lucide="file-edit" class="w-5 h-5 text-gray-500"></i> Agenda & Valves</button>
-                
+               
                 <p class="px-3 text-xs font-bold text-gray-400 uppercase mb-2 mt-6">Fichiers</p>
-                <button onclick="loadFileManager('documents', 'Documents')" class="sidebar-btn" id="btn-docs"><i data-lucide="file-text" class="w-5 h-5 text-yellow-500"></i> Documents PDF</button>
-                <button onclick="loadFileManager('donnees-site/photos-staff', 'Photos Staff')" class="sidebar-btn" id="btn-photos-staff"><i data-lucide="image" class="w-5 h-5 text-green-500"></i> Photos Staff</button>
-                <button onclick="loadFileManager('donnees-site/photos-site-accueil', 'Accueil')" class="sidebar-btn" id="btn-home"><i data-lucide="image" class="w-5 h-5 text-purple-500"></i> Photos Accueil</button>
-                
+                <button onclick="loadFileManager('documents', 'Documents', 'btn-docs')" class="sidebar-btn" id="btn-docs"><i data-lucide="file-text" class="w-5 h-5 text-yellow-500"></i> Documents PDF</button>
+                <button onclick="loadFileManager('donnees-site/photos-staff', 'Photos Staff', 'btn-photos-staff')" class="sidebar-btn" id="btn-photos-staff"><i data-lucide="image" class="w-5 h-5 text-green-500"></i> Photos Staff</button>
+                <button onclick="loadFileManager('donnees-site/photos-site-accueil', 'Accueil', 'btn-home')" class="sidebar-btn" id="btn-home"><i data-lucide="image" class="w-5 h-5 text-purple-500"></i> Photos Accueil</button>
+               
                 <div class="mt-auto pt-8 px-4">
                      <a href="index.html" target="_blank" class="flex items-center justify-center gap-2 w-full py-2 border border-gray-300 rounded-lg text-sm text-gray-600 hover:bg-gray-50 transition"><i data-lucide="external-link" class="w-4 h-4"></i> Voir le site</a>
                 </div>
             </aside>
-
+ 
             <main class="flex-1 overflow-y-auto p-8 bg-gray-50">
-                
-                <!-- VUE : GESTION STAFF -->
-                <div id="view-staff" class="hidden space-y-6">
-                    <div class="flex justify-between items-center border-b pb-4">
-                        <h2 class="text-2xl font-bold text-gray-800">L'équipe d'animation</h2>
-                        <button onclick="addNewMember()" class="bg-blue-600 text-white px-4 py-2 rounded-lg font-bold hover:bg-blue-700 flex gap-2"><i data-lucide="plus" class="w-5 h-5"></i> Ajouter</button>
-                    </div>
-                    <div id="staff-list" class="space-y-4"></div>
-                    <div class="flex justify-end pt-4 border-t">
-                        <button onclick="saveStaffJSON()" class="bg-green-600 text-white px-6 py-3 rounded-lg font-bold hover:bg-green-700 shadow-lg flex gap-2"><i data-lucide="save" class="w-5 h-5"></i> Enregistrer les modifications</button>
-                    </div>
-                </div>
-
-                <!-- VUE : TEXTES LUDIQUES -->
+               
+                <!-- VUE : TEXTES LUDIQUES (Par défaut) -->
                 <div id="view-texts" class="space-y-8">
                     <h2 class="text-2xl font-bold text-gray-800 mb-4">Contenu du site</h2>
                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -132,7 +116,7 @@
                                 <button onclick="addCalendarRow()" class="w-full py-2 border-2 border-dashed border-gray-300 rounded-lg text-gray-500 font-bold hover:border-patro-yellow hover:text-patro-yellow hover:bg-yellow-50 transition flex justify-center items-center gap-2"><i data-lucide="plus" class="w-4 h-4"></i> Ajouter une date</button>
                             </div>
                         </div>
-
+ 
                         <!-- Valves WYSIWYG -->
                         <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden flex flex-col h-[600px]">
                             <div class="p-4 border-b bg-gray-50 flex justify-between items-center">
@@ -151,7 +135,7 @@
                         </div>
                     </div>
                 </div>
-
+ 
                 <!-- VUE : FICHIERS -->
                 <div id="view-files" class="hidden h-full flex flex-col">
                     <div class="flex justify-between items-center mb-6 border-b pb-4">
@@ -163,11 +147,11 @@
                     </div>
                     <div id="file-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 pb-10"></div>
                 </div>
-
+ 
             </main>
         </div>
     </div>
-
+ 
     <!-- MODALE APERÇU -->
     <div id="preview-modal" class="fixed inset-0 z-50 hidden bg-black/80 flex items-center justify-center p-4 backdrop-blur-sm" onclick="closePreview()">
         <div class="bg-white rounded-xl w-full max-w-5xl max-h-[90vh] flex flex-col overflow-hidden relative" onclick="event.stopPropagation()">
@@ -178,23 +162,22 @@
             <div id="preview-body" class="flex-1 bg-gray-100 flex items-center justify-center overflow-hidden p-4"></div>
         </div>
     </div>
-
+ 
     <script>
         let TOKEN = localStorage.getItem('patro_token');
         let currentPath = ''; let fileShas = {};
-        let staffData = [];
         const turndownService = new TurndownService();
-
+ 
         document.addEventListener('DOMContentLoaded', () => {
             lucide.createIcons();
             if (TOKEN) showDashboard();
-            
+           
             if(window.matchMedia("(pointer:fine)").matches){
                 const c = document.getElementById('custom-cursor');
                 document.addEventListener('mousemove', e => { c.style.left = e.clientX + 'px'; c.style.top = e.clientY + 'px'; });
             }
         });
-
+ 
         // 1. LOGIN
         function login(e) {
             e.preventDefault();
@@ -203,7 +186,7 @@
                 localStorage.setItem('patro_token', t); TOKEN = t; showDashboard();
             } else { alert("Token invalide"); }
         }
-
+ 
         function showDashboard() {
             document.getElementById('login-screen').classList.add('hidden');
             document.getElementById('dashboard').classList.remove('hidden');
@@ -211,51 +194,60 @@
             loadCalendarUI();
             loadValvesUI();
         }
-
+ 
         function logout() { localStorage.removeItem('patro_token'); location.reload(); }
-
+ 
         // 2. NAVIGATION
         function loadSection(id) {
             document.getElementById('view-texts').classList.add('hidden');
             document.getElementById('view-files').classList.add('hidden');
-            document.getElementById('view-staff').classList.add('hidden');
             document.querySelectorAll('.sidebar-btn').forEach(b => b.classList.remove('active'));
             
             document.getElementById('view-'+id).classList.remove('hidden');
-            document.getElementById('btn-'+id).classList.add('active');
-            if(id === 'staff') loadStaffEditor();
+            
+            // Correction BUG: Vérifier si le bouton existe avant d'ajouter la classe 'active'
+            const btn = document.getElementById('btn-'+id);
+            if (btn) btn.classList.add('active');
         }
-
-        function loadFileManager(path, title) {
+ 
+        function loadFileManager(path, title, btnId) {
             loadSection('files');
+            // Gestion manuelle de l'activation du bouton pour les fichiers
+            if(btnId && document.getElementById(btnId)) {
+                document.getElementById(btnId).classList.add('active');
+            }
             document.getElementById('fm-title').innerText = title;
             document.getElementById('fm-path').innerText = path;
             currentPath = path;
             refreshFiles();
         }
-
+ 
         // 3. API GITHUB
         async function ghFetch(path, method='GET', body=null) {
             const opts = { headers: { 'Authorization': `token ${TOKEN}`, 'Accept': 'application/vnd.github.v3+json' } };
             if(method !== 'GET') { opts.method = method; opts.body = JSON.stringify(body); }
             const res = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${path}?ref=${BRANCH}&t=${Date.now()}`, opts);
-            if(!res.ok) throw new Error("Erreur GitHub");
+            // On ne lance pas d'erreur 404 ici pour gérer les dossiers vides dans refreshFiles
+            if(!res.ok && res.status !== 404) throw new Error("Erreur GitHub");
+            if(res.status === 404) return []; // Retourne vide si dossier n'existe pas
             return await res.json();
         }
-
+ 
         // --- 4. CALENDRIER LUDIQUE ---
         async function loadCalendarUI() {
             const container = document.getElementById('calendar-list');
             container.innerHTML = '<p class="text-center text-gray-400 text-xs py-4">Chargement...</p>';
             try {
                 const data = await ghFetch('donnees-site/calendrier.txt');
+                if(Array.isArray(data)) { container.innerHTML = ''; return; } // Si vide
+                
                 fileShas['donnees-site/calendrier.txt'] = data.sha;
                 const content = new TextDecoder().decode(Uint8Array.from(atob(data.content), c => c.charCodeAt(0)));
                 container.innerHTML = '';
                 content.split('\n').forEach(l => { if(l.trim()) { const p = l.split('|'); addCalendarRow(p[0]?.trim(), p[1]?.trim(), p[2]?.trim()); }});
             } catch(e) { container.innerHTML = '<p class="text-red-500 text-xs text-center">Erreur chargement</p>'; }
         }
-
+ 
         function addCalendarRow(date='', title='', place='') {
             const div = document.createElement('div');
             div.className = 'cal-row grid grid-cols-[100px_1fr_1fr_auto] gap-2 mb-2 items-center bg-white p-2 rounded border border-gray-200 shadow-sm';
@@ -263,16 +255,17 @@
             document.getElementById('calendar-list').appendChild(div);
             lucide.createIcons();
         }
-
+ 
         async function saveCalendar() {
             let content = ""; document.querySelectorAll('.cal-row').forEach(r => { const d=r.querySelector('.cal-date').value.trim(); const t=r.querySelector('.cal-title').value.trim(); const p=r.querySelector('.cal-place').value.trim(); if(d&&t) content += `${d} | ${t} | ${p}\n`; });
             saveRawFile('donnees-site/calendrier.txt', content, loadCalendarUI);
         }
-
+ 
         // --- 5. VALVES LUDIQUE ---
         async function loadValvesUI() {
             try {
                 const data = await ghFetch('donnees-site/valves.md');
+                if(Array.isArray(data)) return;
                 fileShas['donnees-site/valves.md'] = data.sha;
                 const md = new TextDecoder().decode(Uint8Array.from(atob(data.content), c => c.charCodeAt(0)));
                 document.getElementById('valves-editor').innerHTML = marked.parse(md);
@@ -283,7 +276,7 @@
             const md = turndownService.turndown(document.getElementById('valves-editor').innerHTML);
             saveRawFile('donnees-site/valves.md', md, loadValvesUI);
         }
-
+ 
         async function saveRawFile(path, content, cb) {
             showLoader("Sauvegarde...");
             try {
@@ -292,20 +285,32 @@
                 if(cb) cb(); alert("Sauvegardé !");
             } catch(e) { alert("Erreur sauvegarde"); } finally { hideLoader(); }
         }
-
-        // --- 6. GESTION FICHIERS ---
+ 
+        // --- 6. GESTION FICHIERS AMÉLIORÉE (PDF FIX) ---
         async function refreshFiles() {
             const grid = document.getElementById('file-grid');
             grid.innerHTML = '<p class="col-span-full text-center text-gray-400 py-4">Chargement...</p>';
             try {
                 const files = await ghFetch(currentPath);
                 grid.innerHTML = '';
-                if(files.length === 0) { grid.innerHTML = '<p class="col-span-full text-center text-gray-400 py-10">Dossier vide</p>'; return; }
+                
+                // Si le dossier est vide ou n'existe pas
+                if(!files || files.length === 0) { 
+                    grid.innerHTML = '<div class="col-span-full text-center text-gray-400 py-10 flex flex-col items-center gap-2"><i data-lucide="folder-open" class="w-10 h-10 text-gray-300"></i><p>Dossier vide. Ajoutez votre premier fichier !</p></div>'; 
+                    lucide.createIcons();
+                    return; 
+                }
+ 
                 files.forEach(f => {
                     if(f.type === 'file') {
                         fileShas[f.path] = f.sha;
                         const isImg = f.name.match(/\.(jpg|jpeg|png|gif)$/i);
-                        const preview = isImg ? `<img src="${f.download_url}" class="w-full h-32 object-cover bg-gray-100">` : `<div class="w-full h-32 bg-gray-100 flex items-center justify-center"><i data-lucide="file-text" class="w-10 h-10 text-gray-400"></i></div>`;
+                        const isPdf = f.name.match(/\.pdf$/i);
+                        
+                        let preview = `<div class="w-full h-32 bg-gray-100 flex items-center justify-center"><i data-lucide="file-text" class="w-10 h-10 text-gray-400"></i></div>`;
+                        if(isImg) preview = `<img src="${f.download_url}" class="w-full h-32 object-cover bg-gray-100">`;
+                        if(isPdf) preview = `<div class="w-full h-32 bg-red-50 flex items-center justify-center"><i data-lucide="file-text" class="w-10 h-10 text-red-400"></i><span class="text-xs font-bold text-red-400 ml-2">PDF</span></div>`;
+ 
                         grid.innerHTML += `
                         <div class="file-card flex flex-col">
                             ${preview}
@@ -321,135 +326,88 @@
                     }
                 });
                 lucide.createIcons();
-            } catch(e) { grid.innerHTML = '<p class="col-span-full text-center text-red-500">Erreur chargement</p>'; }
+            } catch(e) { grid.innerHTML = '<p class="col-span-full text-center text-red-500">Erreur lors de la lecture du dossier.</p>'; }
         }
-
+ 
         async function uploadFile(input) {
             if(input.files[0]) {
-                showLoader("Upload...");
                 const file = input.files[0];
+                
+                // 1. Vérif Taille (Max 25Mo conseillé pour browser upload)
+                if(file.size > 25 * 1024 * 1024) {
+                    alert("Attention: Fichier trop volumineux (>25Mo). Cela risque de bloquer.");
+                    input.value = '';
+                    return;
+                }
+ 
+                showLoader("Upload en cours...");
+                
+                // 2. Nettoyage du nom de fichier (Espaces -> Underscores, pas d'accents)
+                const extension = file.name.split('.').pop();
+                const nameWithoutExt = file.name.substring(0, file.name.lastIndexOf('.'));
+                const cleanName = nameWithoutExt.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-zA-Z0-9\-_]/g, "_");
+                const finalName = `${cleanName}.${extension}`;
+ 
                 const reader = new FileReader();
                 reader.onload = async (e) => {
                     const content = e.target.result.split(',')[1];
-                    const path = `${currentPath}/${file.name}`;
+                    const path = `${currentPath}/${finalName}`;
                     const sha = fileShas[path] || null;
-                    try { await ghFetch(path, 'PUT', { message: `Add ${file.name}`, content: content, branch: BRANCH, sha: sha }); refreshFiles(); } 
-                    catch(e) { alert("Erreur upload"); } finally { hideLoader(); }
+                    try { 
+                        await ghFetch(path, 'PUT', { message: `Add ${finalName}`, content: content, branch: BRANCH, sha: sha }); 
+                        alert(`Fichier "${finalName}" envoyé avec succès !`);
+                        refreshFiles(); 
+                    } 
+                    catch(e) { 
+                        console.error(e);
+                        alert("Erreur lors de l'upload. Vérifiez votre connexion et vos droits."); 
+                    } 
+                    finally { hideLoader(); }
                 };
                 reader.readAsDataURL(file);
             }
             input.value = '';
         }
-
+ 
         async function deleteFile(name, sha) {
-            if(confirm("Supprimer ?")) {
+            if(confirm(`Voulez-vous vraiment supprimer "${name}" ?`)) {
                 showLoader("Suppression...");
                 try { await ghFetch(`${currentPath}/${name}`, 'DELETE', { message: `Del ${name}`, sha: sha, branch: BRANCH }); refreshFiles(); } catch(e){} finally { hideLoader(); }
             }
         }
-
+ 
         async function renameFile(old) {
-            const n = prompt("Nouveau nom :", old); if(!n || n===old) return;
+            const n = prompt("Nouveau nom (sans extension) :", old.split('.')[0]); 
+            if(!n || n === old.split('.')[0]) return;
+            
+            const ext = old.split('.').pop();
+            // Nettoyage nom
+            const cleanNewName = n.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-zA-Z0-9\-_]/g, "_") + "." + ext;
+ 
             showLoader("Renommage...");
             try {
                 const d = await ghFetch(`${currentPath}/${old}`);
-                await ghFetch(`${currentPath}/${n}`, 'PUT', { message: `Ren ${n}`, content: d.content, branch: BRANCH });
+                // Créer copie
+                await ghFetch(`${currentPath}/${cleanNewName}`, 'PUT', { message: `Ren ${cleanNewName}`, content: d.content, branch: BRANCH });
+                // Supprimer ancien
                 await ghFetch(`${currentPath}/${old}`, 'DELETE', { message: `Del old`, sha: d.sha, branch: BRANCH });
                 refreshFiles();
-            } catch(e){} finally { hideLoader(); }
+            } catch(e){ alert("Erreur lors du renommage"); } finally { hideLoader(); }
         }
-
+ 
         function previewFile(url, name) {
             const m = document.getElementById('preview-modal'); m.classList.remove('hidden');
             document.getElementById('preview-name').innerText = name;
             const b = document.getElementById('preview-body');
             if(name.match(/\.(jpg|jpeg|png|gif)$/i)) b.innerHTML = `<img src="${url}" class="max-h-full shadow-lg">`;
+            // Utilisation de Google Viewer pour les PDF
             else b.innerHTML = `<iframe src="https://docs.google.com/gview?url=${encodeURIComponent(url)}&embedded=true" class="w-full h-full border-none bg-white"></iframe>`;
         }
         function closePreview() { document.getElementById('preview-modal').classList.add('hidden'); }
-
-        // --- 7. GESTION STAFF (JSON + PHOTO UPLOAD) ---
-        async function loadStaffEditor() {
-            showLoader('Chargement staff...');
-            try {
-                const data = await ghFetch('donnees-site/staff.json');
-                fileShas['donnees-site/staff.json'] = data.sha;
-                staffData = JSON.parse(new TextDecoder().decode(Uint8Array.from(atob(data.content), c => c.charCodeAt(0))));
-                renderStaff();
-            } catch(e){} finally { hideLoader(); }
-        }
-
-        function renderStaff() {
-            const list = document.getElementById('staff-list'); list.innerHTML = '';
-            staffData.forEach((m, i) => {
-                list.innerHTML += `
-                <div class="staff-row bg-white p-4 rounded-lg border shadow-sm flex items-center gap-4">
-                    <div class="flex-shrink-0 text-center group relative">
-                        <img src="donnees-site/photos-staff/${m.photo}" class="w-16 h-16 rounded-full object-cover bg-gray-100 border cursor-pointer" onclick="changePhoto(${i})" onerror="this.src='https://placehold.co/100'">
-                        <p class="text-[10px] text-blue-500 mt-1 cursor-pointer hover:underline" onclick="changePhoto(${i})">Modifier</p>
-                        <input type="file" id="photo-input-${i}" class="hidden" onchange="uploadStaffPhoto(${i}, this)">
-                    </div>
-                    <div class="grid grid-cols-2 gap-3 flex-1">
-                        <input type="text" value="${m.totem||''}" onchange="staffData[${i}].totem=this.value" class="p-1.5 border rounded text-sm font-bold placeholder-gray-400" placeholder="Totem">
-                        <input type="text" value="${m.nom||''}" onchange="staffData[${i}].nom=this.value" class="p-1.5 border rounded text-sm placeholder-gray-400" placeholder="Nom Réel">
-                        <input type="text" value="${m.role||''}" onchange="staffData[${i}].role=this.value" class="p-1.5 border rounded text-sm placeholder-gray-400" placeholder="Rôle (ex: Président)">
-                        <input type="text" value="${m.fonction||''}" onchange="staffData[${i}].fonction=this.value" class="p-1.5 border rounded text-sm placeholder-gray-400" placeholder="Fonction (ex: Animateur)">
-                        <input type="text" value="${m.tel||''}" onchange="staffData[${i}].tel=this.value" class="p-1.5 border rounded text-sm placeholder-gray-400" placeholder="Téléphone">
-                        <input type="text" value="${m.mail||''}" onchange="staffData[${i}].mail=this.value" class="p-1.5 border rounded text-sm placeholder-gray-400" placeholder="Email">
-                    </div>
-                    <button onclick="staffData.splice(${i},1);renderStaff()" class="text-red-500 p-2 hover:bg-red-50 rounded"><i data-lucide="trash-2"></i></button>
-                </div>`;
-            });
-            lucide.createIcons();
-        }
-
-        function addNewMember() { staffData.push({totem:"", nom:"", role:"", fonction:"Animateur", photo:"default.png", tel:"", mail:""}); renderStaff(); }
-        
-        function changePhoto(index) { document.getElementById(`photo-input-${index}`).click(); }
-
-        async function uploadStaffPhoto(index, input) {
-            if(input.files[0]) {
-                const file = input.files[0];
-                showLoader("Upload photo...");
-                const reader = new FileReader();
-                reader.onload = async (e) => {
-                    const content = e.target.result.split(',')[1];
-                    // Nettoyage nom fichier (pas d'espaces)
-                    const safeName = file.name.replace(/\s+/g, '_');
-                    const path = `donnees-site/photos-staff/${safeName}`;
-                    
-                    // Check exists
-                    let sha = null;
-                    try { const check = await ghFetch(path); sha = check.sha; } catch(e){}
-
-                    try {
-                        // 1. Upload image
-                        await ghFetch(path, 'PUT', { message: `Upload photo staff ${safeName}`, content: content, branch: BRANCH, sha: sha });
-                        // 2. Update JSON reference locally
-                        staffData[index].photo = safeName;
-                        renderStaff(); // Refresh view
-                        alert("Photo envoyée ! Pensez à enregistrer le staff.");
-                    } catch(err) { alert("Erreur upload photo"); } finally { hideLoader(); }
-                };
-                reader.readAsDataURL(file);
-            }
-        }
-
-        async function saveStaffJSON() {
-            showLoader("Sauvegarde...");
-            try {
-                const encoded = btoa(unescape(encodeURIComponent(JSON.stringify(staffData, null, 2))));
-                await ghFetch('donnees-site/staff.json', 'PUT', { message: "Update Staff", content: encoded, sha: fileShas['donnees-site/staff.json'], branch: BRANCH });
-                const data = await ghFetch('donnees-site/staff.json');
-                fileShas['donnees-site/staff.json'] = data.sha;
-                alert("Enregistré !");
-            } catch(e) { alert("Erreur"); } finally { hideLoader(); }
-        }
-
+ 
         function showLoader(t) { document.getElementById('loader-text').innerText = t; document.getElementById('loader').style.display = 'flex'; }
         function hideLoader() { document.getElementById('loader').style.display = 'none'; }
         
-        // Curseur
         if(window.matchMedia("(pointer:fine)").matches){const c=document.getElementById('custom-cursor');document.addEventListener('mousemove',e=>{requestAnimationFrame(()=>{c.style.left=e.clientX+'px';c.style.top=e.clientY+'px';});});}
     </script>
 </body>
