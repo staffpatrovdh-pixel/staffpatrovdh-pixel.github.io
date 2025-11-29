@@ -10,56 +10,49 @@
     <script src="https://unpkg.com/lucide@latest"></script>
     <!-- Version 7 pour le layout -->
     <script src="layout.js?v=7"></script>
- 
+
     <script>
         tailwind.config = { theme: { extend: { colors: { patro: { yellow: '#FFD700', green: '#009045', dark: '#1a1a1a', light: '#f8fafc' } }, fontFamily: { sans: ['Poppins', 'sans-serif'], display: ['Fredoka', 'sans-serif'] } } } }
     </script>
 </head>
 <body class="font-sans text-slate-800 bg-patro-light antialiased">
- 
+
     <div id="custom-cursor"></div>
     <div id="loader"><div class="spinner mb-4"></div><p class="text-patro-green font-bold font-display animate-pulse">Chargement...</p></div>
     <div id="navbar-placeholder"></div>
- 
+
     <!-- Hero Section -->
-    <section id="accueil" class="relative pt-32 pb-32 lg:pt-48 lg:pb-48 overflow-hidden" style="background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 144, 69, 0.6)), url('https://static.wixstatic.com/media/99150c_fdc168f86c01429eb37adcee6a16b99c~mv2.jpg'); background-size: cover; background-position: center;">
-        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center z-10">
-            
-            <!-- NOUVEAU STYLE : Badge Fun "Sticker" -->
-            <div class="inline-block transform -rotate-3 hover:rotate-0 transition duration-300 cursor-default mb-8">
-                <div class="px-8 py-4 bg-patro-yellow border-4 border-white rounded-3xl shadow-[0_10px_20px_rgba(0,0,0,0.2)]">
-                    <span class="font-display font-black text-xl md:text-3xl text-patro-green uppercase tracking-wider flex items-center gap-3">
-                        👋 Bienvenue au Patro !
-                    </span>
-                </div>
+    <section id="accueil" class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden" style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 144, 69, 0.7)), url('https://static.wixstatic.com/media/99150c_fdc168f86c01429eb37adcee6a16b99c~mv2.jpg'); background-size: cover; background-position: center;">
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white text-sm font-semibold mb-6">
+                <span class="w-2 h-2 rounded-full bg-patro-yellow animate-pulse"></span>
+                Bienvenue au Patro du Val d'Haine
             </div>
- 
-            <h1 class="text-4xl md:text-6xl lg:text-7xl font-display font-extrabold text-white mb-6 leading-tight drop-shadow-md">
+            <h1 class="text-4xl md:text-6xl lg:text-7xl font-display font-extrabold text-white mb-6 leading-tight drop-shadow-sm">
                 L'aventure commence <br class="hidden md:block" />
-                <span class="text-patro-yellow text-shadow-sm">avec toi !</span>
+                <span class="text-patro-yellow">avec toi !</span>
             </h1>
-            <p class="mt-4 max-w-2xl mx-auto text-xl text-green-50 md:text-2xl font-medium font-display">
+            <p class="mt-4 max-w-2xl mx-auto text-xl text-green-50 md:text-2xl font-light">
                 Le Patro du Val d'Haine est un mouvement de jeunesse ouvert à tous à partir de 4 ans !
             </p>
             <div class="mt-10 flex flex-col sm:flex-row justify-center gap-4">
-                <a href="inscription.html" class="px-8 py-4 rounded-full bg-patro-yellow text-patro-green font-bold text-lg shadow-[0_4px_0_rgb(200,160,0)] hover:shadow-none hover:translate-y-[4px] transition-all duration-200 flex items-center justify-center gap-2 font-display uppercase tracking-wide border-2 border-white">
-                    <i data-lucide="user-plus" class="w-6 h-6"></i>
+                <a href="inscription.html" class="px-8 py-4 rounded-full bg-patro-yellow text-patro-green font-bold text-lg shadow-lg hover:bg-yellow-400 hover:scale-105 transition transform duration-200 flex items-center justify-center gap-2">
+                    <i data-lucide="user-plus" class="w-5 h-5"></i>
                     Je m'inscris
                 </a>
             </div>
         </div>
-        
-        <!-- NOUVEAU STYLE : Vague Statique et Visible -->
-        <div class="absolute bottom-0 left-0 w-full overflow-hidden leading-none z-20">
-            <svg class="relative block w-[calc(100%+1.3px)] h-[80px] md:h-[150px]" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
-                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" fill="#f8fafc"></path>
+        <div class="absolute bottom-0 w-full leading-none z-10">
+            <svg class="block w-full h-12 md:h-24 text-patro-light" viewBox="0 0 1440 320" preserveAspectRatio="none">
+                <path class="wave-anim-2" fill="currentColor" d="M0,224L48,213.3C96,203,192,181,288,181.3C384,181,480,203,576,224C672,245,768,267,864,261.3C960,256,1056,224,1152,202.7C1248,181,1344,171,1392,165.3L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+                <path class="wave-anim-1" fill="currentColor" fill-opacity="1" d="M0,224L48,213.3C96,203,192,181,288,181.3C384,181,480,203,576,224C672,245,768,267,864,261.3C960,256,1056,224,1152,202.7C1248,181,1344,171,1392,165.3L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
             </svg>
         </div>
     </section>
- 
-    <!-- NOUVEAU BLOC : Raccourcis Rapides (Ajustement marge pour la vague) -->
-    <section class="py-12 bg-patro-light relative z-20">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-12 md:-mt-24 relative z-30">
+
+    <!-- NOUVEAU BLOC : Raccourcis Rapides (Images Locales) -->
+    <section class="py-12 bg-patro-light relative z-20 -mt-6 md:-mt-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
                 
                 <!-- Espace Parents -->
@@ -76,7 +69,7 @@
                     </div>
                     <h3 class="text-lg md:text-xl font-display font-bold text-gray-800 group-hover:text-patro-green transition">Espace parents</h3>
                 </a>
- 
+
                 <!-- Documents -->
                 <a href="documents.html" class="group flex flex-col items-center text-center">
                     <div class="w-full aspect-square overflow-hidden rounded-2xl shadow-lg mb-4 relative border-4 border-white group-hover:-translate-y-2 transition duration-300">
@@ -91,7 +84,7 @@
                     </div>
                     <h3 class="text-lg md:text-xl font-display font-bold text-gray-800 group-hover:text-patro-green transition">Documents</h3>
                 </a>
- 
+
                 <!-- Contactez-nous -->
                 <a href="contact.html" class="group flex flex-col items-center text-center">
                     <div class="w-full aspect-square overflow-hidden rounded-2xl shadow-lg mb-4 relative border-4 border-white group-hover:-translate-y-2 transition duration-300">
@@ -106,7 +99,7 @@
                     </div>
                     <h3 class="text-lg md:text-xl font-display font-bold text-gray-800 group-hover:text-patro-green transition">Contactez-nous</h3>
                 </a>
- 
+
                 <!-- Infos Pratiques & Agenda -->
                 <a href="#infos" class="group flex flex-col items-center text-center">
                     <div class="w-full aspect-square overflow-hidden rounded-2xl shadow-lg mb-4 relative border-4 border-white group-hover:-translate-y-2 transition duration-300">
@@ -121,11 +114,11 @@
                     </div>
                     <h3 class="text-lg md:text-xl font-display font-bold text-gray-800 group-hover:text-patro-green transition">Infos pratiques & agenda</h3>
                 </a>
- 
+
             </div>
         </div>
     </section>
- 
+
     <!-- Presentation Textes Officiels -->
     <section class="py-20 bg-patro-light">
         <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -133,7 +126,7 @@
                 <h2 class="text-patro-green font-bold tracking-wide uppercase text-sm mb-2">Le Projet</h2>
                 <h3 class="text-3xl font-display font-bold text-gray-900">Le Patro en quelques mots</h3>
             </div>
- 
+
             <div class="bg-white rounded-3xl shadow-sm p-8 md:p-12 space-y-8">
                 <div>
                     <h4 class="text-xl font-bold text-patro-green mb-2">Par les jeunes, pour les jeunes !</h4>
@@ -155,7 +148,7 @@
             </div>
         </div>
     </section>
- 
+
     <!-- Sections (Age Groups) -->
     <section id="sections" class="py-20 bg-white relative">
         <div class="absolute top-0 w-full h-24 bg-gradient-to-b from-patro-light to-white"></div>
@@ -164,7 +157,7 @@
                 <h2 class="text-patro-green font-bold tracking-wide uppercase text-sm mb-2">Les sections</h2>
                 <h3 class="text-3xl md:text-4xl font-display font-bold text-gray-900">Selon l'âge...</h3>
             </div>
- 
+
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- Poussins -->
                 <div class="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 bg-yellow-50 border border-yellow-100 p-8 text-center">
@@ -205,7 +198,7 @@
             </div>
         </div>
     </section>
- 
+
     <!-- Infos Pratiques & Calendar -->
     <section id="infos" class="py-20 bg-patro-light relative">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -227,7 +220,7 @@
                                 <p class="text-sm text-gray-500 italic mt-1">Vérifiez toujours le calendrier ci-contre !</p>
                             </div>
                         </div>
- 
+
                         <div class="flex items-start gap-4">
                             <div class="bg-white p-3 rounded-lg shadow-sm text-patro-green">
                                 <i data-lucide="map-pin" class="w-6 h-6"></i>
@@ -238,7 +231,7 @@
                                 <p class="text-gray-600">Rue du Roeulx 23, 7110 Maurage</p>
                             </div>
                         </div>
- 
+
                         <div class="flex items-start gap-4">
                             <div class="bg-white p-3 rounded-lg shadow-sm text-patro-green">
                                 <i data-lucide="calendar-days" class="w-6 h-6"></i>
@@ -251,7 +244,7 @@
                         </div>
                     </div>
                 </div>
- 
+
                 <!-- Colonne Droite : Calendrier Dynamique -->
                 <div class="space-y-6">
                     <div class="bg-white rounded-2xl shadow-xl border-4 border-white p-6 min-h-[400px]">
@@ -267,25 +260,25 @@
                         </div>
                     </div>
                 </div>
- 
+
             </div>
         </div>
     </section>
- 
+
     <div id="footer-placeholder"></div>
- 
+
     <!-- SCRIPT CALENDRIER ACCUEIL -->
     <script>
         const repoOwner = 'staffpatrovdh-pixel'; 
         const repoName = 'staffpatrovdh-pixel.github.io';
         const branch = 'main'; 
         const calendarUrl = `https://raw.githubusercontent.com/${repoOwner}/${repoName}/${branch}/donnees-site/calendrier.txt?t=${Date.now()}`;
- 
+
         const monthMap = {
             '01': 'Janv', '02': 'Fév', '03': 'Mars', '04': 'Avr', '05': 'Mai', '06': 'Juin',
             '07': 'Juil', '08': 'Août', '09': 'Sept', '10': 'Oct', '11': 'Nov', '12': 'Déc'
         };
- 
+
         document.addEventListener('DOMContentLoaded', async () => {
             try {
                 const response = await fetch(calendarUrl);
@@ -294,27 +287,27 @@
                 
                 const container = document.getElementById('home-calendar-container');
                 container.innerHTML = '';
- 
+
                 const lines = text.split('\n');
                 let hasEvents = false;
                 let count = 0;
                 const maxEvents = 5;
- 
+
                 lines.forEach(line => {
                     if (!line.trim() || count >= maxEvents) return;
- 
+
                     const parts = line.split('|');
                     if (parts.length >= 2) {
                         hasEvents = true;
                         const dateRaw = parts[0].trim(); 
                         const title = parts[1].trim();
                         const place = parts[2] ? parts[2].trim() : '';
- 
+
                         const dateParts = dateRaw.split('/');
                         const day = dateParts[0];
                         const monthNum = dateParts[1];
                         const monthName = monthMap[monthNum] || monthNum;
- 
+
                         const html = `
                             <div class="flex items-center gap-4 p-3 hover:bg-gray-50 rounded-lg transition group">
                                 <div class="flex-shrink-0 bg-patro-yellow/20 text-patro-dark rounded-lg w-14 h-14 flex flex-col items-center justify-center border border-patro-yellow/30">
@@ -331,12 +324,12 @@
                         count++;
                     }
                 });
- 
+
                 if (!hasEvents) {
                     container.innerHTML = '<p class="text-gray-500 italic text-center py-4">Aucune date prévue pour le moment.</p>';
                 }
                 if(typeof lucide !== 'undefined') lucide.createIcons();
- 
+
             } catch (error) {
                 console.error(error);
                 document.getElementById('home-calendar-container').innerHTML = '<p class="text-red-400 text-sm text-center">Erreur de chargement.</p>';
