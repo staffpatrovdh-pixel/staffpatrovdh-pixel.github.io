@@ -30,7 +30,7 @@
             <div class="absolute inset-0 bg-gradient-to-t from-patro-dark/80 to-patro-dark/40"></div>
         </div>
 
-        <!-- Décoration de fond (conservée pour le style) -->
+        <!-- Décoration de fond -->
         <div class="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none z-10">
             <svg class="absolute -right-20 -top-20 text-white w-96 h-96" fill="currentColor" viewBox="0 0 200 200"><path d="M45,-76.2C58.9,-69.3,71.1,-59.1,79.8,-46.8C88.5,-34.5,93.6,-20.1,91.8,-6.2C90,7.6,81.3,20.9,71.8,32.7C62.3,44.5,52,54.8,40.6,63.1C29.2,71.4,16.7,77.7,2.8,72.9C-11.1,68.1,-26.4,52.2,-39.6,39.3C-52.8,26.4,-63.9,16.5,-68.6,3.8C-73.3,-8.9,-71.6,-24.4,-63.1,-37.2C-54.6,-50,-39.3,-60.1,-24.5,-66.4C-9.7,-72.7,4.6,-75.2,20,-78.5L45,-76.2Z" transform="translate(100 100)" /></svg>
         </div>
@@ -45,16 +45,16 @@
         </div>
     </div>
 
-    <!-- Contenu Principal -->
-    <section class="py-16 px-4 relative z-30 -mt-8">
-        <div class="max-w-6xl mx-auto space-y-16 bg-white rounded-3xl shadow-xl p-8 md:p-12">
-
-            <!-- Bloc Philosophie -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-                <div class="space-y-8">
-                    <div class="flex gap-4">
-                        <div class="flex-shrink-0 w-14 h-14 rounded-full bg-patro-yellow/20 flex items-center justify-center text-patro-dark font-bold">
-                            <i data-lucide="star" class="w-7 h-7"></i>
+    <!-- Contenu Principal (SANS CONTENEUR BLANC UNIQUE) -->
+    <main class="py-12 md:py-20 px-4 space-y-24">
+        
+        <!-- Bloc Philosophie -->
+        <section class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="space-y-10">
+                    <div class="flex gap-5">
+                        <div class="flex-shrink-0 w-16 h-16 rounded-full bg-white shadow-md flex items-center justify-center text-patro-dark font-bold border border-patro-yellow/30">
+                            <i data-lucide="star" class="w-8 h-8 text-patro-yellow"></i>
                         </div>
                         <div>
                             <h3 class="text-2xl font-display font-bold text-patro-green mb-2">Un potentiel à révéler</h3>
@@ -63,9 +63,9 @@
                             </p>
                         </div>
                     </div>
-                    <div class="flex gap-4">
-                        <div class="flex-shrink-0 w-14 h-14 rounded-full bg-patro-green/10 flex items-center justify-center text-patro-green font-bold">
-                            <i data-lucide="heart-handshake" class="w-7 h-7"></i>
+                    <div class="flex gap-5">
+                        <div class="flex-shrink-0 w-16 h-16 rounded-full bg-white shadow-md flex items-center justify-center text-patro-green font-bold border border-patro-green/20">
+                            <i data-lucide="heart-handshake" class="w-8 h-8"></i>
                         </div>
                         <div>
                             <h3 class="text-2xl font-display font-bold text-patro-green mb-2">L'école de la vie</h3>
@@ -76,105 +76,109 @@
                     </div>
                 </div>
                 
-                <!-- Image d'illustration (Nouvelle photo) -->
-                <div class="relative group">
-                    <div class="absolute inset-0 bg-patro-yellow rounded-2xl transform rotate-3 translate-x-3 translate-y-3 group-hover:rotate-1 group-hover:translate-x-1 group-hover:translate-y-1 transition-all duration-300"></div>
-                    <img src="donnees-site/photos-site-accueil/photo_inscription.jpg" alt="Ambiance Patro" class="relative rounded-2xl shadow-lg w-full h-[400px] object-cover border-4 border-white z-10">
+                <!-- Image d'illustration -->
+                <div class="relative group mt-8 lg:mt-0">
+                    <div class="absolute inset-0 bg-patro-yellow rounded-3xl transform rotate-2 translate-x-4 translate-y-4 group-hover:rotate-1 group-hover:translate-x-2 group-hover:translate-y-2 transition-all duration-300 opacity-50"></div>
+                    <img src="donnees-site/photos-site-accueil/photo_inscription.jpg" alt="Ambiance Patro" class="relative rounded-3xl shadow-xl w-full h-[300px] md:h-[450px] object-cover border-4 border-white z-10">
                 </div>
             </div>
+        </section>
 
-            <!-- Bloc Parents (Rassurant) -->
-            <div class="bg-green-50 rounded-3xl p-8 md:p-12 border border-patro-green/20 relative overflow-hidden">
-                <div class="absolute top-0 right-0 w-40 h-40 bg-patro-yellow/20 rounded-bl-full opacity-50"></div>
+        <!-- Bloc Parents (Largeur max contrôlée) -->
+        <section class="max-w-5xl mx-auto">
+            <div class="bg-white rounded-3xl p-8 md:p-12 shadow-lg border-t-4 border-patro-green relative overflow-hidden">
+                <!-- Décoration interne -->
+                <div class="absolute top-0 right-0 w-64 h-64 bg-patro-green/5 rounded-bl-full -mr-10 -mt-10"></div>
+                <div class="absolute bottom-0 left-0 w-32 h-32 bg-patro-yellow/10 rounded-tr-full -ml-5 -mb-5"></div>
                 
                 <div class="relative z-10 text-center max-w-3xl mx-auto">
-                    <div class="inline-block p-4 bg-white rounded-full text-patro-green mb-6 shadow-sm">
+                    <div class="inline-block p-4 bg-patro-green/10 rounded-full text-patro-green mb-6">
                         <i data-lucide="shield-check" class="w-10 h-10"></i>
                     </div>
                     <h2 class="text-3xl font-display font-bold text-gray-800 mb-6">Chers Parents,</h2>
-                    <p class="text-lg text-gray-700 leading-relaxed mb-8 font-medium">
+                    <p class="text-lg md:text-xl text-gray-700 leading-relaxed mb-8 font-medium">
                         Nous savons combien il est important de choisir une activité où votre enfant se sentira bien et pourra s’épanouir. 
                         C’est pourquoi nous mettons tout en œuvre pour offrir un <strong>accueil de qualité</strong> et des moments qui laisseront une empreinte positive, autant dans leur cœur que dans le vôtre !
                     </p>
-                    <p class="text-patro-green font-bold font-handwritten text-3xl transform -rotate-1">
+                    <p class="text-patro-green font-bold font-handwritten text-2xl md:text-3xl transform -rotate-1">
                         Votre confiance est notre moteur.
                     </p>
                 </div>
             </div>
+        </section>
 
-            <!-- Section Inscription (Double Option) -->
-            <div id="formulaire" class="pt-8 space-y-12">
-                <div class="text-center">
-                    <h3 class="text-4xl font-display font-bold text-gray-900 mb-4">Prêts à nous rejoindre ?</h3>
-                    <p class="text-xl text-gray-600 max-w-2xl mx-auto">
-                        Choisissez l'option qui vous convient le mieux. Nous sommes là pour vous accompagner !
-                    </p>
-                </div>
-
-                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
-                    
-                    <!-- OPTION 1 : EN LIGNE (Dominant) -->
-                    <div class="lg:col-span-2 bg-white rounded-2xl shadow-lg border-2 border-patro-green/30 overflow-hidden flex flex-col">
-                        <div class="bg-patro-green text-white py-4 px-6 font-bold flex justify-between items-center">
-                            <span class="text-lg flex items-center"><i data-lucide="laptop" class="w-6 h-6 mr-3"></i> Inscription en ligne</span>
-                            <span class="bg-patro-yellow text-patro-dark text-sm px-3 py-1 rounded-full uppercase font-bold shadow-sm animate-pulse">Recommandé</span>
-                        </div>
-                        
-                        <!-- Zone d'intégration du formulaire -->
-                        <div class="p-4 bg-gray-50 flex-1 min-h-[700px] relative">
-                            <!-- IFRAME WIX -->
-                            <iframe src="https://patrovaldhaine.wixstudio.com/patrovdh/intranet/inscriptionpatro-1" 
-                                    width="100%" 
-                                    height="100%" 
-                                    class="w-full h-[800px] border-0 rounded-xl bg-white shadow-inner"
-                                    title="Formulaire d'inscription">
-                                Chargement…
-                            </iframe>
-                            
-                            <!-- Bouton de secours si l'iframe bloque -->
-                            <div class="absolute top-4 right-4 z-10">
-                                <a href="https://patrovaldhaine.wixstudio.com/patrovdh/intranet/inscriptionpatro-1" target="_blank" class="text-sm bg-white hover:bg-gray-100 text-gray-700 border border-gray-300 px-3 py-2 rounded-lg shadow-md flex items-center gap-2 font-medium transition">
-                                    <i data-lucide="external-link" class="w-4 h-4"></i> Ouvrir en grand
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- OPTION 2 : PAPIER -->
-                    <div class="bg-white rounded-2xl shadow-md border border-gray-200 p-8 text-center sticky top-28">
-                        <div class="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6 text-gray-500">
-                            <i data-lucide="file-text" class="w-10 h-10"></i>
-                        </div>
-                        <h4 class="text-2xl font-display font-bold text-gray-800 mb-4">Version Papier</h4>
-                        <p class="text-gray-600 mb-8 leading-relaxed">
-                            Vous préférez remplir le document à la main ? Pas de souci ! Téléchargez le PDF ci-dessous.
-                        </p>
-                        
-                        <div class="space-y-6">
-                            <a href="documents/Inscription_PVDH.pdf" download class="block w-full py-4 bg-patro-yellow text-patro-dark font-bold text-lg rounded-xl hover:bg-yellow-400 transition shadow-md hover:shadow-lg flex items-center justify-center gap-3 group">
-                                <i data-lucide="download" class="w-6 h-6 group-hover:-translate-y-1 transition"></i>
-                                Télécharger le PDF
-                            </a>
-                            
-                            <div class="text-left bg-blue-50 p-5 rounded-xl border border-blue-200">
-                                <p class="font-bold text-blue-900 mb-2 flex items-center gap-2 text-lg"><i data-lucide="send" class="w-5 h-5"></i> Une fois rempli :</p>
-                                <p class="text-blue-800 mb-3">Renvoyez-le nous par mail ou donnez-le à un animateur.</p>
-                                <a href="mailto:patrovaldhaine@patro.be" class="text-patro-green font-bold break-all hover:underline flex items-center gap-2 text-lg">
-                                    <i data-lucide="mail" class="w-5 h-5"></i> patrovaldhaine@patro.be
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="text-center text-gray-500 pt-12 border-t">
-                    Une question ? N'hésitez pas à nous <a href="contact.html" class="text-patro-green font-bold hover:underline">contacter</a> avant de vous inscrire !
-                </div>
+        <!-- Section Inscription (Double Option) -->
+        <section id="formulaire" class="max-w-7xl mx-auto">
+            <div class="text-center mb-12">
+                <h3 class="text-4xl font-display font-bold text-gray-900 mb-4">Prêts à nous rejoindre ?</h3>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                    Choisissez l'option qui vous convient le mieux. Nous sommes là pour vous accompagner !
+                </p>
             </div>
 
-        </div>
-    </section>
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+                
+                <!-- OPTION 1 : EN LIGNE (Dominant) -->
+                <div class="lg:col-span-2 bg-white rounded-2xl shadow-xl border-2 border-patro-green/10 overflow-hidden flex flex-col">
+                    <div class="bg-patro-green text-white py-4 px-6 font-bold flex flex-wrap justify-between items-center gap-2">
+                        <span class="text-lg flex items-center"><i data-lucide="laptop" class="w-6 h-6 mr-3"></i> Inscription en ligne</span>
+                        <span class="bg-patro-yellow text-patro-dark text-sm px-3 py-1 rounded-full uppercase font-bold shadow-sm animate-pulse">Recommandé</span>
+                    </div>
+                    
+                    <!-- Zone d'intégration du formulaire -->
+                    <div class="p-2 md:p-4 bg-gray-50 flex-1 min-h-[700px] relative">
+                        <!-- IFRAME WIX -->
+                        <iframe src="https://patrovaldhaine.wixstudio.com/patrovdh/intranet/inscriptionpatro-1" 
+                                width="100%" 
+                                height="100%" 
+                                class="w-full h-[800px] border-0 rounded-xl bg-white shadow-inner"
+                                title="Formulaire d'inscription">
+                            Chargement…
+                        </iframe>
+                        
+                        <!-- Bouton de secours si l'iframe bloque -->
+                        <div class="absolute top-4 right-4 z-10 hidden md:block">
+                            <a href="https://patrovaldhaine.wixstudio.com/patrovdh/intranet/inscriptionpatro-1" target="_blank" class="text-sm bg-white hover:bg-gray-100 text-gray-700 border border-gray-300 px-3 py-2 rounded-lg shadow-md flex items-center gap-2 font-medium transition">
+                                <i data-lucide="external-link" class="w-4 h-4"></i> Ouvrir en grand
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- OPTION 2 : PAPIER -->
+                <div class="bg-white rounded-2xl shadow-lg border border-gray-200 p-8 text-center sticky top-28">
+                    <div class="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6 text-gray-500">
+                        <i data-lucide="file-text" class="w-10 h-10"></i>
+                    </div>
+                    <h4 class="text-2xl font-display font-bold text-gray-800 mb-4">Version Papier</h4>
+                    <p class="text-gray-600 mb-8 leading-relaxed">
+                        Vous préférez remplir le document à la main ? Pas de souci ! Téléchargez le PDF ci-dessous.
+                    </p>
+                    
+                    <div class="space-y-6">
+                        <a href="documents/Inscription_PVDH.pdf" download class="block w-full py-4 bg-patro-yellow text-patro-dark font-bold text-lg rounded-xl hover:bg-yellow-400 transition shadow-md hover:shadow-lg flex items-center justify-center gap-3 group">
+                            <i data-lucide="download" class="w-6 h-6 group-hover:-translate-y-1 transition"></i>
+                            Télécharger le PDF
+                        </a>
+                        
+                        <div class="text-left bg-blue-50 p-5 rounded-xl border border-blue-200">
+                            <p class="font-bold text-blue-900 mb-2 flex items-center gap-2 text-lg"><i data-lucide="send" class="w-5 h-5"></i> Une fois rempli :</p>
+                            <p class="text-blue-800 mb-3 text-sm md:text-base">Renvoyez-le nous par mail ou donnez-le à un animateur.</p>
+                            <a href="mailto:patrovaldhaine@patro.be" class="text-patro-green font-bold break-all hover:underline flex items-center gap-2 text-base md:text-lg">
+                                <i data-lucide="mail" class="w-5 h-5 flex-shrink-0"></i> patrovaldhaine@patro.be
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="text-center text-gray-500 pt-16">
+                Une question ? N'hésitez pas à nous <a href="contact.html" class="text-patro-green font-bold hover:underline">contacter</a> avant de vous inscrire !
+            </div>
+        </section>
+
+    </main>
 
     <div id="footer-placeholder"></div>
 
