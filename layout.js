@@ -9,14 +9,15 @@ document.addEventListener("DOMContentLoaded", function () {
                 <div class="flex justify-between items-center h-20">
                     <!-- Logo -->
                     <a href="index.html" class="flex-shrink-0 flex items-center gap-2">
-                        <!-- MODIFICATION : Logo local -->
                         <img src="donnees-site/LogoMaurageContour.svg" alt="Logo Patro Val d'Haine" class="h-14 w-auto">
                     </a>
 
                     <!-- Desktop Menu -->
                     <div class="hidden lg:flex space-x-5 items-center">
                         <a href="index.html" class="nav-link text-gray-600 hover:text-patro-green font-medium transition">Accueil</a>
-                        <a href="contact.html" class="nav-link text-gray-600 hover:text-patro-green font-medium transition">Contact</a>
+                        <!-- NOUVEAU LIEN AGENDA -->
+                        <a href="index.html#infos" class="nav-link text-gray-600 hover:text-patro-green font-medium transition">Agenda</a>
+                        <a href="contact.html" class="nav-link text-gray-600 hover:text-patro-green font-medium transition">Le Staff</a>
                         <a href="documents.html" class="nav-link text-gray-600 hover:text-patro-green font-medium transition">Documents</a>
                         <a href="informations.html" class="nav-link text-gray-600 hover:text-patro-green font-medium transition">Communications</a>
                         
@@ -38,7 +39,9 @@ document.addEventListener("DOMContentLoaded", function () {
             <div id="mobile-menu" class="hidden lg:hidden bg-white border-t">
                 <div class="px-4 pt-2 pb-6 space-y-2 shadow-lg">
                     <a href="index.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-patro-green hover:bg-yellow-50">Accueil</a>
-                    <a href="contact.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-patro-green hover:bg-yellow-50">Contactez-nous</a>
+                    <!-- NOUVEAU LIEN AGENDA MOBILE -->
+                    <a href="index.html#infos" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-patro-green hover:bg-yellow-50">Agenda</a>
+                    <a href="contact.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-patro-green hover:bg-yellow-50">Le Staff</a>
                     <a href="documents.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-patro-green hover:bg-yellow-50">Documents</a>
                     <a href="informations.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-patro-green hover:bg-yellow-50">Communications</a>
                     
@@ -64,7 +67,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12 text-center md:text-left">
                     <!-- Colonne 1: Info -->
                     <div class="flex flex-col items-center md:items-start">
-                        <!-- Logo Footer -->
                         <img src="donnees-site/LogoMaurageContour.svg" alt="Patro Maurage" class="h-24 w-auto mb-6">
                         
                         <span class="font-display font-bold text-2xl text-white block mb-4">Le Patro Val d'Haine de Maurage</span>
@@ -82,7 +84,6 @@ document.addEventListener("DOMContentLoaded", function () {
                     <div class="flex flex-col items-center md:items-start">
                         <h5 class="font-bold text-gray-200 mb-6 uppercase text-sm tracking-wider">Avec le soutien de :</h5>
                         <div id="sponsors-grid" class="grid grid-cols-2 gap-4 items-center">
-                            <!-- Les logos seront chargés ici par JS -->
                             <div class="animate-pulse h-16 w-24 bg-gray-800 rounded"></div>
                             <div class="animate-pulse h-16 w-24 bg-gray-800 rounded"></div>
                         </div>
@@ -109,23 +110,17 @@ document.addEventListener("DOMContentLoaded", function () {
                     <span class="hidden md:inline">•</span>
                     <a href="cookies.html" class="hover:text-white transition">Politique Cookies</a>
                     <span class="hidden md:inline">•</span>
-                    <!-- LIEN ADMIN DISCRET -->
                     <a href="admin.html" class="text-gray-700 hover:text-gray-500 transition" title="Accès Staff"><i data-lucide="lock" class="w-3 h-3"></i></a>
                 </div>
             </div>
         </footer>
         `;
         
-        // Charger les sponsors dynamiquement
         loadSponsors();
     }
 
-    // --- 3. INITIALISATION DES ICONS & MENU MOBILE ---
-    if (typeof lucide !== 'undefined') {
-        lucide.createIcons();
-    }
+    if (typeof lucide !== 'undefined') lucide.createIcons();
 
-    // --- 4. GESTION DU CURSEUR ---
     if (window.matchMedia("(pointer: fine)").matches) {
         const cursor = document.getElementById('custom-cursor');
         if(cursor) {
@@ -140,7 +135,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    // Effet de scroll sur la navbar
     window.addEventListener('scroll', function() {
         const nav = document.getElementById('navbar');
         if (nav) {
@@ -154,11 +148,9 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    // --- 5. GESTION BANDEAU COOKIES ---
     checkCookieConsent();
 });
 
-// --- 6. GESTION DU LOADER ---
 window.addEventListener('load', function() {
     const loader = document.getElementById('loader');
     if(loader) {
@@ -172,12 +164,14 @@ function toggleMenu() {
     if (menu) menu.classList.toggle('hidden');
 }
 
-// Fonction pour mettre en surbrillance le lien actif
 function highlightActiveLink() {
     const currentPath = window.location.pathname.split('/').pop() || 'index.html';
     const links = document.querySelectorAll('.nav-link');
     
     links.forEach(link => {
+        // Logique spécifique pour le lien Agenda (ancre)
+        if (link.getAttribute('href').includes('#')) return;
+
         if (link.getAttribute('href') === currentPath) {
             link.classList.remove('text-gray-600');
             link.classList.add('text-patro-green', 'font-bold');
@@ -185,7 +179,6 @@ function highlightActiveLink() {
     });
 }
 
-// --- NOUVELLE FONCTION: CHARGEMENT SPONSORS ---
 async function loadSponsors() {
     const repoOwner = "staffpatrovdh-pixel";
     const repoName = "staffpatrovdh-pixel.github.io";
@@ -199,7 +192,7 @@ async function loadSponsors() {
         if (!response.ok) throw new Error('Erreur API GitHub');
         const files = await response.json();
         
-        container.innerHTML = ''; // Vider les placeholders
+        container.innerHTML = '';
         
         const imageFiles = files.filter(file => file.name.match(/\.(jpg|jpeg|png|gif|svg)$/i));
         
@@ -210,20 +203,17 @@ async function loadSponsors() {
 
         imageFiles.forEach(file => {
             const img = document.createElement('img');
-            img.src = file.download_url; // Utilise l'URL directe
+            img.src = file.download_url;
             img.alt = file.name.split('.')[0];
-            // MODIFICATION : Logos plus grands (h-16 au lieu de h-12)
             img.className = "partner-logo h-16 w-auto max-w-[160px] object-contain bg-white rounded p-2 transition hover:scale-105";
             container.appendChild(img);
         });
     } catch (error) {
         console.error("Impossible de charger les sponsors:", error);
-        // Fallback discret en cas d'erreur
         container.innerHTML = '<p class="text-gray-700 text-xs italic opacity-50">Sponsors</p>';
     }
 }
 
-// --- FONCTIONS COOKIES ---
 function checkCookieConsent() {
     if (!localStorage.getItem('patroCookieConsent')) {
         const banner = document.createElement('div');
@@ -254,7 +244,6 @@ function checkCookieConsent() {
         `;
         document.body.appendChild(banner);
         
-        // Animation d'entrée
         setTimeout(() => {
             banner.classList.remove('translate-y-full');
         }, 1000);
