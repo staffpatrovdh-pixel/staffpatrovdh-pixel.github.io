@@ -9,14 +9,15 @@ document.addEventListener("DOMContentLoaded", function () {
                 <div class="flex justify-between items-center h-20">
                     <!-- Logo -->
                     <a href="index.html" class="flex-shrink-0 flex items-center gap-2">
-                        <img src="https://static.wixstatic.com/shapes/99150c_262f50afd9f748c1b2820587168d19f3.svg" alt="Logo Patro Val d'Haine" class="h-14 w-auto">
+                        <!-- MODIFICATION : Logo local -->
+                        <img src="donnees-site/LogoMaurageContour.svg" alt="Logo Patro Val d'Haine" class="h-14 w-auto">
                     </a>
 
                     <!-- Desktop Menu -->
                     <div class="hidden lg:flex space-x-5 items-center">
                         <a href="index.html" class="nav-link text-gray-600 hover:text-patro-green font-medium transition">Accueil</a>
-                        <a href="informations.html" class="nav-link text-gray-600 hover:text-patro-green font-medium transition">Infos & agenda</a>
-                        <a href="contact.html" class="nav-link text-gray-600 hover:text-patro-green font-medium transition">Le Staff</a>
+                        <a href="informations.html" class="nav-link text-gray-600 hover:text-patro-green font-medium transition">Communications</a>
+                        <a href="contact.html" class="nav-link text-gray-600 hover:text-patro-green font-medium transition">Contact</a>
                         <a href="documents.html" class="nav-link text-gray-600 hover:text-patro-green font-medium transition">Documents</a>
                         
                         <a href="inscription.html" class="bg-patro-green text-white px-4 py-2 rounded-full font-semibold hover:bg-green-700 transition shadow-md hover:shadow-lg transform hover:-translate-y-0.5 text-sm">
@@ -37,8 +38,8 @@ document.addEventListener("DOMContentLoaded", function () {
             <div id="mobile-menu" class="hidden lg:hidden bg-white border-t">
                 <div class="px-4 pt-2 pb-6 space-y-2 shadow-lg">
                     <a href="index.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-patro-green hover:bg-yellow-50">Accueil</a>
-                    <a href="informations.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-patro-green hover:bg-yellow-50">Infos & agenda</a>
-                    <a href="contact.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-patro-green hover:bg-yellow-50">Le Staff</a>
+                    <a href="informations.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-patro-green hover:bg-yellow-50">Communications</a>
+                    <a href="contact.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-patro-green hover:bg-yellow-50">Contactez-nous</a>
                     <a href="documents.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-patro-green hover:bg-yellow-50">Documents</a>
                     
                     <a href="inscription.html" class="block w-full text-center mt-4 px-5 py-3 rounded-md font-bold bg-patro-yellow text-patro-green">
@@ -63,7 +64,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12 text-center md:text-left">
                     <!-- Colonne 1: Info -->
                     <div class="flex flex-col items-center md:items-start">
-                        <!-- NOUVEAU LOGO SITE -->
+                        <!-- Logo Footer -->
                         <img src="donnees-site/LogoMaurageContour.svg" alt="Patro Maurage" class="h-24 w-auto mb-6">
                         
                         <span class="font-display font-bold text-2xl text-white block mb-4">Le Patro Val d'Haine de Maurage</span>
@@ -82,8 +83,8 @@ document.addEventListener("DOMContentLoaded", function () {
                         <h5 class="font-bold text-gray-200 mb-6 uppercase text-sm tracking-wider">Avec le soutien de :</h5>
                         <div id="sponsors-grid" class="grid grid-cols-2 gap-4 items-center">
                             <!-- Les logos seront chargés ici par JS -->
-                            <div class="animate-pulse h-10 w-20 bg-gray-800 rounded"></div>
-                            <div class="animate-pulse h-10 w-20 bg-gray-800 rounded"></div>
+                            <div class="animate-pulse h-16 w-24 bg-gray-800 rounded"></div>
+                            <div class="animate-pulse h-16 w-24 bg-gray-800 rounded"></div>
                         </div>
                     </div>
 
@@ -211,7 +212,8 @@ async function loadSponsors() {
             const img = document.createElement('img');
             img.src = file.download_url; // Utilise l'URL directe
             img.alt = file.name.split('.')[0];
-            img.className = "partner-logo h-12 w-auto max-w-[120px] object-contain bg-white rounded p-1 transition hover:scale-105";
+            // MODIFICATION : Logos plus grands (h-16 au lieu de h-12)
+            img.className = "partner-logo h-16 w-auto max-w-[160px] object-contain bg-white rounded p-2 transition hover:scale-105";
             container.appendChild(img);
         });
     } catch (error) {
