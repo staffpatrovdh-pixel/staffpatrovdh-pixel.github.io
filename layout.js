@@ -19,8 +19,6 @@ document.addEventListener("DOMContentLoaded", function () {
                         <a href="contact.html" class="nav-link text-gray-600 hover:text-patro-green font-medium transition">Le Staff</a>
                         <a href="documents.html" class="nav-link text-gray-600 hover:text-patro-green font-medium transition">Documents</a>
                         
-                        <!-- Lien Souper SUPPRIMÉ ICI -->
-
                         <a href="inscription.html" class="bg-patro-green text-white px-4 py-2 rounded-full font-semibold hover:bg-green-700 transition shadow-md hover:shadow-lg transform hover:-translate-y-0.5 text-sm">
                             Nous rejoindre
                         </a>
@@ -43,8 +41,6 @@ document.addEventListener("DOMContentLoaded", function () {
                     <a href="contact.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-patro-green hover:bg-yellow-50">Le Staff</a>
                     <a href="documents.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-patro-green hover:bg-yellow-50">Documents</a>
                     
-                    <!-- Lien Souper Mobile SUPPRIMÉ ICI -->
-
                     <a href="inscription.html" class="block w-full text-center mt-4 px-5 py-3 rounded-md font-bold bg-patro-yellow text-patro-green">
                         S'inscrire maintenant
                     </a>
@@ -52,6 +48,9 @@ document.addEventListener("DOMContentLoaded", function () {
             </div>
         </nav>
         `;
+        
+        // Active le lien courant
+        highlightActiveLink();
     }
 
     // --- 2. INJECTION DU FOOTER ---
@@ -63,7 +62,10 @@ document.addEventListener("DOMContentLoaded", function () {
                 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12 text-center md:text-left">
                     <!-- Colonne 1: Info -->
-                    <div>
+                    <div class="flex flex-col items-center md:items-start">
+                        <!-- NOUVEAU LOGO SITE -->
+                        <img src="donnees-site/LogoMaurageContour.svg" alt="Patro Maurage" class="h-24 w-auto mb-6">
+                        
                         <span class="font-display font-bold text-2xl text-white block mb-4">Le Patro Val d'Haine de Maurage</span>
                         <p class="text-gray-400 text-sm mb-4">
                             Mouvement de jeunesse affilié à la Fédération Nationale des Patros.
@@ -75,14 +77,13 @@ document.addEventListener("DOMContentLoaded", function () {
                         </div>
                     </div>
 
-                    <!-- Colonne 2: Partenaires -->
+                    <!-- Colonne 2: Partenaires (DYNAMIQUE) -->
                     <div class="flex flex-col items-center md:items-start">
                         <h5 class="font-bold text-gray-200 mb-6 uppercase text-sm tracking-wider">Avec le soutien de :</h5>
-                        <div class="grid grid-cols-2 gap-4 items-center">
-                            <img src="https://www.federation-wallonie-bruxelles.be/fileadmin/sites/portail/pictures/projet-portail-230OK_03.png" alt="FWB" class="partner-logo h-10 w-auto object-contain bg-white rounded p-1">
-                            <img src="https://patro.be/wp-content/uploads/sites/5/2018/11/patro-logo.png" alt="Fédération Patro" class="partner-logo h-10 w-auto object-contain bg-white rounded p-1">
-                            <img src="https://ecolelibremaurage.be/wp-content/uploads/2022/04/cropped-Copie-de-Design-sans-nom-3.png" alt="École Libre Maurage" class="partner-logo h-12 w-auto object-contain bg-white rounded p-1">
-                            <img src="https://www.one.be/typo3conf/ext/etnic_one/Resources/Public/Icons/one.png" alt="ONE" class="partner-logo h-8 w-auto object-contain bg-white rounded p-1">
+                        <div id="sponsors-grid" class="grid grid-cols-2 gap-4 items-center">
+                            <!-- Les logos seront chargés ici par JS -->
+                            <div class="animate-pulse h-10 w-20 bg-gray-800 rounded"></div>
+                            <div class="animate-pulse h-10 w-20 bg-gray-800 rounded"></div>
                         </div>
                     </div>
 
@@ -90,10 +91,10 @@ document.addEventListener("DOMContentLoaded", function () {
                     <div class="flex flex-col items-center md:items-end">
                         <h5 class="font-bold text-gray-200 mb-4 uppercase text-sm tracking-wider">Suivez-nous</h5>
                         <div class="flex space-x-4">
-                            <a href="https://www.facebook.com/patrovaldhaine" class="bg-gray-800 p-3 rounded-full hover:bg-[#1877F2] hover:text-white transition duration-300">
+                            <a href="https://www.facebook.com/patrovaldhaine" target="_blank" class="bg-gray-800 p-3 rounded-full hover:bg-[#1877F2] hover:text-white transition duration-300">
                                 <i data-lucide="facebook" class="w-5 h-5"></i>
                             </a>
-                            <a href="https://www.instagram.com/patrovaldhaine/" class="bg-gray-800 p-3 rounded-full hover:bg-[#E4405F] hover:text-white transition duration-300">
+                            <a href="https://www.instagram.com/patrovaldhaine/" target="_blank" class="bg-gray-800 p-3 rounded-full hover:bg-[#E4405F] hover:text-white transition duration-300">
                                 <i data-lucide="instagram" class="w-5 h-5"></i>
                             </a>
                         </div>
@@ -113,6 +114,9 @@ document.addEventListener("DOMContentLoaded", function () {
             </div>
         </footer>
         `;
+        
+        // Charger les sponsors dynamiquement
+        loadSponsors();
     }
 
     // --- 3. INITIALISATION DES ICONS & MENU MOBILE ---
@@ -165,6 +169,56 @@ window.addEventListener('load', function() {
 function toggleMenu() {
     const menu = document.getElementById('mobile-menu');
     if (menu) menu.classList.toggle('hidden');
+}
+
+// Fonction pour mettre en surbrillance le lien actif
+function highlightActiveLink() {
+    const currentPath = window.location.pathname.split('/').pop() || 'index.html';
+    const links = document.querySelectorAll('.nav-link');
+    
+    links.forEach(link => {
+        if (link.getAttribute('href') === currentPath) {
+            link.classList.remove('text-gray-600');
+            link.classList.add('text-patro-green', 'font-bold');
+        }
+    });
+}
+
+// --- NOUVELLE FONCTION: CHARGEMENT SPONSORS ---
+async function loadSponsors() {
+    const repoOwner = "staffpatrovdh-pixel";
+    const repoName = "staffpatrovdh-pixel.github.io";
+    const path = "donnees-site/logos_sponsors";
+    const container = document.getElementById('sponsors-grid');
+    
+    if (!container) return;
+
+    try {
+        const response = await fetch(`https://api.github.com/repos/${repoOwner}/${repoName}/contents/${path}`);
+        if (!response.ok) throw new Error('Erreur API GitHub');
+        const files = await response.json();
+        
+        container.innerHTML = ''; // Vider les placeholders
+        
+        const imageFiles = files.filter(file => file.name.match(/\.(jpg|jpeg|png|gif|svg)$/i));
+        
+        if (imageFiles.length === 0) {
+            container.innerHTML = '<p class="text-gray-600 text-xs col-span-2">Aucun sponsor</p>';
+            return;
+        }
+
+        imageFiles.forEach(file => {
+            const img = document.createElement('img');
+            img.src = file.download_url; // Utilise l'URL directe
+            img.alt = file.name.split('.')[0];
+            img.className = "partner-logo h-12 w-auto max-w-[120px] object-contain bg-white rounded p-1 transition hover:scale-105";
+            container.appendChild(img);
+        });
+    } catch (error) {
+        console.error("Impossible de charger les sponsors:", error);
+        // Fallback discret en cas d'erreur
+        container.innerHTML = '<p class="text-gray-700 text-xs italic opacity-50">Sponsors</p>';
+    }
 }
 
 // --- FONCTIONS COOKIES ---
