@@ -8,8 +8,8 @@
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
-    <!-- Mise à jour version 6 -->
-    <script src="layout.js?v=6"></script>
+    <!-- Layout à jour -->
+    <script src="layout.js?v=8"></script>
 
     <script>
         tailwind.config = { theme: { extend: { colors: { patro: { yellow: '#FFD700', green: '#009045', dark: '#1a1a1a', light: '#f8fafc' } }, fontFamily: { sans: ['Poppins', 'sans-serif'], display: ['Fredoka', 'sans-serif'] } } } }
@@ -21,41 +21,53 @@
     <div id="loader"><div class="spinner mb-4"></div><p class="text-patro-green font-bold font-display animate-pulse">Chargement...</p></div>
     <div id="navbar-placeholder"></div>
 
-    <!-- En-tête -->
-    <div class="pt-32 pb-12 bg-patro-green text-center relative overflow-hidden">
-        <div class="absolute inset-0 opacity-10" style="background-image: url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23ffffff\' fill-opacity=\'1\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
-        <h1 class="text-4xl font-display font-bold text-white relative z-10">Documents disponibles</h1>
-        <p class="text-green-100 mt-2 relative z-10">Retrouvez ici tous les documents disponibles du Patro !</p>
+    <!-- En-tête avec Image de Fond -->
+    <div class="pt-32 pb-24 relative overflow-hidden bg-patro-dark">
+        <!-- Image de fond avec overlay sombre -->
+        <div class="absolute inset-0 z-0">
+            <img src="donnees-site/photos-site-accueil/Banniere_documents.jpg" alt="Bibliothèque Patro" class="w-full h-full object-cover opacity-50">
+            <div class="absolute inset-0 bg-gradient-to-t from-patro-dark/90 via-patro-dark/50 to-transparent"></div>
+        </div>
+
+        <div class="max-w-4xl mx-auto px-4 text-center relative z-20">
+            <h1 class="text-4xl md:text-6xl font-display font-bold text-patro-yellow mb-6 drop-shadow-lg">
+                La Biblio-Patro
+            </h1>
+            <p class="text-lg md:text-xl text-white font-medium max-w-3xl mx-auto leading-relaxed drop-shadow-md">
+                Chers parents, retrouvez ici tous les documents officiels distribués au Patro. <br class="hidden md:block">
+                Lettres de rentrée, fiches médicales, informations pour les camps ou attestations... <br>
+                Tout est centralisé ici pour vous simplifier la vie !
+            </p>
+        </div>
     </div>
 
-    <section class="py-16 px-4 min-h-[600px]">
+    <section class="py-16 px-4 min-h-[600px] relative z-30 -mt-10">
         <div class="max-w-6xl mx-auto">
             
-            <!-- Chargement -->
-            <div id="docs-loading" class="text-center py-12">
-                <div class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-patro-green mb-2"></div>
-                <p class="text-gray-500">Recherche des documents en cours...</p>
-                <p class="text-xs text-gray-400 mt-2">Interrogation du serveur...</p>
-            </div>
-
-            <!-- Grille des documents -->
-            <div id="docs-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 hidden"></div>
-
-            <!-- Message Vide / Erreur -->
-            <div id="docs-empty" class="hidden text-center py-12 bg-white rounded-xl shadow-sm border border-red-100">
-                <div class="inline-block p-4 bg-red-50 rounded-full mb-4 text-red-500">
-                    <i data-lucide="alert-circle" class="w-8 h-8"></i>
+            <!-- Zone principale blanche -->
+            <div class="bg-white rounded-3xl shadow-xl p-6 md:p-12 min-h-[400px]">
+            
+                <!-- Chargement -->
+                <div id="docs-loading" class="text-center py-12">
+                    <div class="inline-block animate-spin rounded-full h-10 w-10 border-b-4 border-patro-green mb-4"></div>
+                    <p class="text-gray-500 font-medium">Recherche des documents en cours...</p>
+                    <p class="text-xs text-gray-400 mt-2">Interrogation du serveur...</p>
                 </div>
-                <h3 class="text-lg font-bold text-gray-800">Oups, un souci !</h3>
-                <p id="error-message" class="text-gray-600 text-sm mt-2 max-w-md mx-auto">
-                    Impossible de trouver le dossier "documents".
-                </p>
-                <div class="mt-4 text-xs text-gray-400 bg-gray-50 p-3 rounded inline-block text-left">
-                    <strong>Conseils :</strong><br>
-                    1. Vérifiez que le dossier s'appelle exactement <code>documents</code> (minuscules).<br>
-                    2. Vérifiez qu'il contient au moins un fichier.<br>
-                    3. Attendez 5 min si vous venez de le créer.
+
+                <!-- Grille des documents -->
+                <div id="docs-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 hidden"></div>
+
+                <!-- Message Vide / Erreur -->
+                <div id="docs-empty" class="hidden text-center py-12 bg-red-50 rounded-xl border border-red-100">
+                    <div class="inline-block p-4 bg-white rounded-full mb-4 text-red-500 shadow-sm">
+                        <i data-lucide="alert-circle" class="w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-800">Aucun document trouvé</h3>
+                    <p id="error-message" class="text-gray-600 text-sm mt-2 max-w-md mx-auto">
+                        Le dossier semble vide pour le moment.
+                    </p>
                 </div>
+            
             </div>
 
         </div>
@@ -107,26 +119,24 @@
                     const displayName = file.name.replace(/\.[^/.]+$/, "").replace(/[-_]/g, " ");
                     
                     // Construction intelligente de l'URL
-                    // On utilise l'URL actuelle du site pour construire le chemin
-                    // Ex: https://www.patrovaldhaine.be + /documents/ + Fiche.pdf
                     const cleanUrl = `${window.location.origin}/${folderPath}/${encodeURIComponent(file.name)}`;
                     
-                    // URL pour la visionneuse Google (plus fiable pour l'iframe)
+                    // URL pour la visionneuse Google
                     const viewerUrl = `https://docs.google.com/gview?url=${encodeURIComponent(cleanUrl)}&embedded=true`;
 
                     return `
-                        <div class="group bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition border border-gray-100 flex flex-col items-start">
-                            <div class="bg-patro-light p-3 rounded-lg mb-4 group-hover:bg-green-50 transition">
-                                <i data-lucide="file-text" class="w-8 h-8 text-patro-green"></i>
+                        <div class="group bg-gray-50 hover:bg-white rounded-xl p-6 shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-100 hover:border-patro-green/30 flex flex-col items-start transform hover:-translate-y-1">
+                            <div class="bg-white p-4 rounded-xl shadow-sm mb-4 group-hover:bg-patro-green group-hover:text-white transition-colors duration-300 text-patro-green border border-gray-100">
+                                <i data-lucide="file-text" class="w-8 h-8"></i>
                             </div>
-                            <h3 class="font-bold text-gray-800 mb-1 capitalize text-lg line-clamp-1" title="${displayName}">${displayName}</h3>
-                            <p class="text-xs text-gray-400 mb-6 uppercase tracking-wider">PDF • Document officiel</p>
+                            <h3 class="font-bold text-gray-800 mb-2 capitalize text-lg line-clamp-2 leading-tight h-12" title="${displayName}">${displayName}</h3>
+                            <p class="text-xs text-gray-400 mb-6 uppercase tracking-wider font-bold bg-gray-200 px-2 py-1 rounded">PDF</p>
                             
-                            <div class="mt-auto w-full grid grid-cols-2 gap-2">
-                                <button onclick="openPreview('${viewerUrl}', '${cleanUrl}', '${displayName.replace(/'/g, "\\'")}')" class="w-full py-2 px-3 bg-gray-100 text-gray-700 font-semibold rounded-lg hover:bg-gray-200 transition flex items-center justify-center gap-2 text-sm">
+                            <div class="mt-auto w-full grid grid-cols-2 gap-3">
+                                <button onclick="openPreview('${viewerUrl}', '${cleanUrl}', '${displayName.replace(/'/g, "\\'")}')" class="w-full py-2.5 px-3 bg-white text-gray-600 font-bold rounded-lg border border-gray-200 hover:border-patro-green hover:text-patro-green transition flex items-center justify-center gap-2 text-sm shadow-sm">
                                     <i data-lucide="eye" class="w-4 h-4"></i> Aperçu
                                 </button>
-                                <a href="${cleanUrl}" target="_blank" download class="w-full py-2 px-3 bg-patro-yellow/10 text-patro-dark font-semibold rounded-lg hover:bg-patro-yellow transition flex items-center justify-center gap-2 text-sm">
+                                <a href="${cleanUrl}" target="_blank" download class="w-full py-2.5 px-3 bg-patro-yellow text-patro-dark font-bold rounded-lg hover:bg-yellow-400 transition flex items-center justify-center gap-2 text-sm shadow-sm">
                                     <i data-lucide="download" class="w-4 h-4"></i> PDF
                                 </a>
                             </div>
