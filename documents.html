@@ -31,43 +31,39 @@
 
         <div class="max-w-4xl mx-auto px-4 text-center relative z-20">
             <h1 class="text-4xl md:text-6xl font-display font-bold text-patro-yellow mb-6 drop-shadow-lg">
-                Documents disponibles
+                La Biblio-Patro
             </h1>
             <p class="text-lg md:text-xl text-white font-medium max-w-3xl mx-auto leading-relaxed drop-shadow-md">
-                Chers parents, retrouvez ici tous les documents distribués au Patro. <br class="hidden md:block">
+                Chers parents, retrouvez ici tous les documents officiels distribués au Patro. <br class="hidden md:block">
                 Lettres de rentrée, fiches médicales, informations pour les camps ou attestations... <br>
                 Tout est centralisé ici pour vous simplifier la vie !
             </p>
         </div>
     </div>
 
-    <section class="py-16 px-4 min-h-[600px] relative z-30 -mt-10">
-        <div class="max-w-6xl mx-auto">
+    <!-- Section Documents (Sans conteneur blanc fermé) -->
+    <section class="py-16 px-4 min-h-[600px] relative z-30">
+        <div class="max-w-7xl mx-auto">
             
-            <!-- Zone principale blanche -->
-            <div class="bg-white rounded-3xl shadow-xl p-6 md:p-12 min-h-[400px]">
-            
-                <!-- Chargement -->
-                <div id="docs-loading" class="text-center py-12">
-                    <div class="inline-block animate-spin rounded-full h-10 w-10 border-b-4 border-patro-green mb-4"></div>
-                    <p class="text-gray-500 font-medium">Recherche des documents en cours...</p>
-                    <p class="text-xs text-gray-400 mt-2">Interrogation du serveur...</p>
-                </div>
+            <!-- Chargement -->
+            <div id="docs-loading" class="text-center py-12">
+                <div class="inline-block animate-spin rounded-full h-10 w-10 border-b-4 border-patro-green mb-4"></div>
+                <p class="text-gray-500 font-medium">Recherche des documents en cours...</p>
+                <p class="text-xs text-gray-400 mt-2">Interrogation du serveur...</p>
+            </div>
 
-                <!-- Grille des documents -->
-                <div id="docs-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 hidden"></div>
+            <!-- Grille des documents -->
+            <div id="docs-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 hidden"></div>
 
-                <!-- Message Vide / Erreur -->
-                <div id="docs-empty" class="hidden text-center py-12 bg-red-50 rounded-xl border border-red-100">
-                    <div class="inline-block p-4 bg-white rounded-full mb-4 text-red-500 shadow-sm">
-                        <i data-lucide="alert-circle" class="w-8 h-8"></i>
-                    </div>
-                    <h3 class="text-lg font-bold text-gray-800">Aucun document trouvé</h3>
-                    <p id="error-message" class="text-gray-600 text-sm mt-2 max-w-md mx-auto">
-                        Le dossier semble vide pour le moment.
-                    </p>
+            <!-- Message Vide / Erreur -->
+            <div id="docs-empty" class="hidden text-center py-12 bg-red-50 rounded-xl border border-red-100 max-w-lg mx-auto">
+                <div class="inline-block p-4 bg-white rounded-full mb-4 text-red-500 shadow-sm">
+                    <i data-lucide="alert-circle" class="w-8 h-8"></i>
                 </div>
-            
+                <h3 class="text-lg font-bold text-gray-800">Aucun document trouvé</h3>
+                <p id="error-message" class="text-gray-600 text-sm mt-2 max-w-md mx-auto">
+                    Le dossier semble vide pour le moment.
+                </p>
             </div>
 
         </div>
@@ -94,6 +90,25 @@
         const repoName = 'staffpatrovdh-pixel.github.io';
         const folderPath = 'documents';
 
+        // Helper pour déterminer le type de fichier
+        function getFileInfo(filename) {
+            const ext = filename.split('.').pop().toLowerCase();
+            
+            if (['pdf'].includes(ext)) {
+                return { type: 'PDF', icon: 'file-text', color: 'text-red-500', bg: 'bg-red-50', border: 'hover:border-red-200' };
+            } else if (['doc', 'docx'].includes(ext)) {
+                return { type: 'WORD', icon: 'file-type-2', color: 'text-blue-600', bg: 'bg-blue-50', border: 'hover:border-blue-200' };
+            } else if (['xls', 'xlsx', 'csv'].includes(ext)) {
+                return { type: 'EXCEL', icon: 'sheet', color: 'text-green-600', bg: 'bg-green-50', border: 'hover:border-green-200' };
+            } else if (['jpg', 'jpeg', 'png', 'gif', 'webp'].includes(ext)) {
+                return { type: 'IMAGE', icon: 'image', color: 'text-purple-600', bg: 'bg-purple-50', border: 'hover:border-purple-200' };
+            } else if (['ppt', 'pptx'].includes(ext)) {
+                return { type: 'POWERPOINT', icon: 'presentation', color: 'text-orange-500', bg: 'bg-orange-50', border: 'hover:border-orange-200' };
+            } else {
+                return { type: ext.toUpperCase(), icon: 'file', color: 'text-gray-500', bg: 'bg-gray-100', border: 'hover:border-gray-300' };
+            }
+        }
+
         document.addEventListener('DOMContentLoaded', async () => {
             const grid = document.getElementById('docs-grid');
             const loading = document.getElementById('docs-loading');
@@ -117,27 +132,33 @@
                 // 2. Génération HTML
                 grid.innerHTML = docs.map(file => {
                     const displayName = file.name.replace(/\.[^/.]+$/, "").replace(/[-_]/g, " ");
+                    const fileInfo = getFileInfo(file.name);
                     
                     // Construction intelligente de l'URL
                     const cleanUrl = `${window.location.origin}/${folderPath}/${encodeURIComponent(file.name)}`;
                     
-                    // URL pour la visionneuse Google
-                    const viewerUrl = `https://docs.google.com/gview?url=${encodeURIComponent(cleanUrl)}&embedded=true`;
+                    // URL pour la visionneuse Google (supporte PDF, DOC, XLS, PPT)
+                    // Pour les images, on utilise directement l'URL
+                    const isImage = fileInfo.type === 'IMAGE';
+                    const viewerUrl = isImage ? cleanUrl : `https://docs.google.com/gview?url=${encodeURIComponent(cleanUrl)}&embedded=true`;
 
                     return `
-                        <div class="group bg-gray-50 hover:bg-white rounded-xl p-6 shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-100 hover:border-patro-green/30 flex flex-col items-start transform hover:-translate-y-1">
-                            <div class="bg-white p-4 rounded-xl shadow-sm mb-4 group-hover:bg-patro-green group-hover:text-white transition-colors duration-300 text-patro-green border border-gray-100">
-                                <i data-lucide="file-text" class="w-8 h-8"></i>
+                        <div class="group bg-white rounded-xl p-6 shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-100 ${fileInfo.border} flex flex-col items-start transform hover:-translate-y-1">
+                            <div class="flex justify-between w-full items-start mb-4">
+                                <div class="${fileInfo.bg} p-3 rounded-xl transition-colors duration-300 ${fileInfo.color}">
+                                    <i data-lucide="${fileInfo.icon}" class="w-8 h-8"></i>
+                                </div>
+                                <span class="text-[10px] font-bold ${fileInfo.color} ${fileInfo.bg} px-2 py-1 rounded uppercase tracking-wider">${fileInfo.type}</span>
                             </div>
-                            <h3 class="font-bold text-gray-800 mb-2 capitalize text-lg line-clamp-2 leading-tight h-12" title="${displayName}">${displayName}</h3>
-                            <p class="text-xs text-gray-400 mb-6 uppercase tracking-wider font-bold bg-gray-200 px-2 py-1 rounded">PDF</p>
+                            
+                            <h3 class="font-bold text-gray-800 mb-4 capitalize text-lg line-clamp-2 leading-tight h-12 w-full" title="${displayName}">${displayName}</h3>
                             
                             <div class="mt-auto w-full grid grid-cols-2 gap-3">
-                                <button onclick="openPreview('${viewerUrl}', '${cleanUrl}', '${displayName.replace(/'/g, "\\'")}')" class="w-full py-2.5 px-3 bg-white text-gray-600 font-bold rounded-lg border border-gray-200 hover:border-patro-green hover:text-patro-green transition flex items-center justify-center gap-2 text-sm shadow-sm">
+                                <button onclick="openPreview('${viewerUrl}', '${cleanUrl}', '${displayName.replace(/'/g, "\\'")}')" class="w-full py-2.5 px-3 bg-gray-50 text-gray-600 font-semibold rounded-lg border border-gray-200 hover:border-gray-300 hover:bg-gray-100 transition flex items-center justify-center gap-2 text-sm">
                                     <i data-lucide="eye" class="w-4 h-4"></i> Aperçu
                                 </button>
                                 <a href="${cleanUrl}" target="_blank" download class="w-full py-2.5 px-3 bg-patro-yellow text-patro-dark font-bold rounded-lg hover:bg-yellow-400 transition flex items-center justify-center gap-2 text-sm shadow-sm">
-                                    <i data-lucide="download" class="w-4 h-4"></i> PDF
+                                    <i data-lucide="download" class="w-4 h-4"></i> Télécharger
                                 </a>
                             </div>
                         </div>
