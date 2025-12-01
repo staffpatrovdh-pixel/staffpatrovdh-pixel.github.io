@@ -6,13 +6,17 @@
     <title>Patro du Val d'Haine | Maurage</title>
     
     <link rel="stylesheet" href="style.css">
+    <!-- Ajout de la police Indie Flower -->
+    <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <!-- Version 7 pour le layout -->
     <script src="layout.js?v=7"></script>
 
     <script>
-        tailwind.config = { theme: { extend: { colors: { patro: { yellow: '#FFD700', green: '#009045', dark: '#1a1a1a', light: '#f8fafc' } }, fontFamily: { sans: ['Poppins', 'sans-serif'], display: ['Fredoka', 'sans-serif'] } } } }
+        // Ajout de la font 'handwritten' pour Indie Flower
+        tailwind.config = { theme: { extend: { colors: { patro: { yellow: '#FFD700', green: '#009045', dark: '#1a1a1a', light: '#f8fafc' } }, fontFamily: { sans: ['Poppins', 'sans-serif'], display: ['Fredoka', 'sans-serif'], handwritten: ['Indie Flower', 'cursive'] } } } }
     </script>
 </head>
 <body class="font-sans text-slate-800 bg-patro-light antialiased">
@@ -24,10 +28,14 @@
     <!-- Hero Section -->
     <section id="accueil" class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden" style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 144, 69, 0.7)), url('https://static.wixstatic.com/media/99150c_fdc168f86c01429eb37adcee6a16b99c~mv2.jpg'); background-size: cover; background-position: center;">
         <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white text-sm font-semibold mb-6">
-                <span class="w-2 h-2 rounded-full bg-patro-yellow animate-pulse"></span>
-                Bienvenue au Patro du Val d'Haine
+            
+            <!-- MODIFICATION : Texte Bienvenue style manuscrit et incliné -->
+            <div class="mb-8 transform -rotate-3 origin-center inline-block">
+                <span class="font-handwritten text-3xl md:text-5xl text-patro-yellow font-bold drop-shadow-md tracking-wide">
+                    Bienvenue au Patro du Val d'Haine
+                </span>
             </div>
+
             <h1 class="text-4xl md:text-6xl lg:text-7xl font-display font-extrabold text-white mb-6 leading-tight drop-shadow-sm">
                 L'aventure commence <br class="hidden md:block" />
                 <span class="text-patro-yellow">avec toi !</span>
