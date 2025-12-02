@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patro Val D'Haine</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = { darkMode: 'class', theme: { extend: { colors: { 'patro-yellow': '#FFD700', 'patro-green': '#009045', 'patro-dark': '#1a1a1a', 'patro-light': '#f8fafc' }, fontFamily: { 'sans': ['Poppins'], 'display': ['Fredoka'] } } } };
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) document.documentElement.classList.add('dark');
+        function toggleTheme() { document.documentElement.classList.toggle('dark'); localStorage.theme = document.documentElement.classList.contains('dark') ? 'dark' : 'light'; }
+    </script>
+    <style>
+        body { font-family: 'Poppins', sans-serif; } .font-display { font-family: 'Fredoka', sans-serif; }
+        /* Masquer toutes les vues par défaut sauf login */
+        .view-section { display: none; }
+        .active-view { display: block; }
+    </style>
+</head>
+<body class="bg-slate-50 dark:bg-gray-900 dark:text-gray-100 transition-colors duration-300 h-screen flex flex-col overflow-hidden">
+
+    <!-- 1. LOGIN SCREEN -->
+    <div id="view-login" class="view-section h-full w-full flex items-center justify-center bg-patro-green absolute top-0 left-0 z-50">
+        <div class="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-2xl w-full max-w-md mx-4 border-b-4 border-patro-yellow">
+            <div class="text-center mb-6">
+                <!-- Place ton logo.svg dans le repo GitHub -->
+                <h1 class="text-3xl font-display font-bold text-patro-green dark:text-patro-yellow">My PVDH</h1>
+            </div>
+            <div id="login-error" class="hidden bg-red-100 text-red-700 p-3 rounded mb-4 text-sm"></div>
+            <form onsubmit="handleLogin(event)">
+                <div class="mb-4"><label class="block text-sm font-bold mb-2">Email</label><input type="email" id="login-email" class="w-full border p-3 rounded dark:bg-gray-700 dark:border-gray-600" required></div>
+                <div class="mb-6"><label class="block text-sm font-bold mb-2">Mot de passe</label><input type="password" id="login-pass" class="w-full border p-3 rounded dark:bg-gray-700 dark:border-gray-600" required></div>
+                <button class="w-full bg-patro-yellow text-patro-dark font-bold py-3 rounded-lg hover:brightness-110">Se connecter</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- 2. APP LAYOUT (Sidebar + Content) -->
+    <div id="app-layout" class="view-section flex h-full hidden">
+        
+        <!-- SIDEBAR -->
+        <aside class="w-64 bg-patro-green text-white hidden md:flex flex-col dark:bg-green-900">
+            <div class="p-6 text-center border-b border-green-600 dark:border-green-800">
+                <h2 class="text-2xl font-display font-bold text-patro-yellow">PATRO</h2>
+                <button onclick="toggleTheme()" class="mt-2 bg-white/20 px-3 py-1 rounded-full text-xs hover:bg-white/30">Mode</button>
+            </div>
+            <nav class="flex-1 p-4 space-y-1 overflow-y-auto">
+                <a href="#" onclick="nav('dashboard')" class="block px-4 py-2 rounded hover:bg-white/10"><i class="fa-solid fa-chart-pie w-6"></i> Tableau de bord</a>
+                
+                <div class="text-xs uppercase text-green-200 font-bold mt-6 mb-2">Gestion</div>
+                <a href="#" onclick="nav('membres')" class="block px-4 py-2 rounded hover:bg-white/10"><i class="fa-solid fa-users w-6"></i> Adhérents</a>
+                
+                <!-- Menu Staff Only -->
+                <div class="staff-only hidden">
+                    <a href="#" onclick="nav('activites')" class="block px-4 py-2 rounded hover:bg-white/10"><i class="fa-solid fa-campground w-6"></i> Activités</a>
+                    <a href="#" onclick="nav('mail')" class="block px-4 py-2 rounded hover:bg-white/10"><i class="fa-solid fa-envelope w-6"></i> Mail</a>
+                </div>
+                
+                <!-- Menu Finance Only -->
+                <div class="finance-only hidden">
+                    <a href="#" onclick="nav('tresorerie')" class="block px-4 py-2 rounded hover:bg-white/10"><i class="fa-solid fa-wallet w-6"></i> Trésorerie</a>
+                </div>
+
+                <!-- Menu Admin Only -->
+                <div class="admin-only hidden">
+                    <div class="text-xs uppercase text-green-200 font-bold mt-6 mb-2">Admin</div>
+                    <a href="#" onclick="nav('users')" class="block px-4 py-2 rounded hover:bg-white/10"><i class="fa-solid fa-user-shield w-6"></i> Utilisateurs</a>
+                </div>
+            </nav>
+            <div class="p-4 border-t border-green-600 dark:border-green-800">
+                <div class="text-sm mb-2"><span id="user-name" class="font-bold"></span></div>
+                <button onclick="logout()" class="text-red-200 hover:text-white text-sm"><i class="fa-solid fa-right-from-bracket"></i> Déconnexion</button>
+            </div>
+        </aside>
+
+        <!-- MAIN CONTENT AREA -->
+        <main class="flex-1 overflow-y-auto bg-slate-50 dark:bg-gray-900 p-6 relative">
+            
+            <!-- MOBILE HEADER -->
+            <div class="md:hidden flex justify-between items-center mb-6">
+                <span class="font-display font-bold text-xl text-patro-green dark:text-patro-yellow">My PVDH</span>
+                <button onclick="toggleTheme()"><i class="fa-solid fa-circle-half-stroke text-xl"></i></button>
+            </div>
+
+            <!-- VUE: DASHBOARD -->
+            <div id="view-dashboard" class="view-section">
+                <h2 class="text-3xl font-display font-bold mb-6 dark:text-white">Tableau de bord</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm border-l-4 border-patro-yellow">
+                        <div class="text-sm text-gray-500">Solde Banque</div>
+                        <div class="text-3xl font-bold text-blue-600" id="dash-banque">...</div>
+                    </div>
+                    <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm border-l-4 border-patro-green">
+                        <div class="text-sm text-gray-500">Activités à venir</div>
+                        <div class="text-3xl font-bold dark:text-white" id="dash-activites">...</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- VUE: MEMBRES -->
+            <div id="view-membres" class="view-section">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-3xl font-bold font-display dark:text-white">Adhérents</h2>
+                    <button onclick="openMemberModal()" class="staff-only hidden bg-patro-yellow text-patro-dark px-4 py-2 rounded-full font-bold hover:brightness-110"><i class="fa-solid fa-plus"></i> Nouveau</button>
+                </div>
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow overflow-hidden">
+                    <table class="min-w-full text-sm">
+                        <thead class="bg-gray-50 dark:bg-gray-700"><tr><th class="px-6 py-3 text-left">Nom</th><th class="px-6 py-3">Statut</th><th class="px-6 py-3"></th></tr></thead>
+                        <tbody id="membres-list" class="divide-y divide-gray-200 dark:divide-gray-700 dark:text-gray-200"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- VUE: TRESORERIE -->
+            <div id="view-tresorerie" class="view-section">
+                <h2 class="text-3xl font-bold font-display mb-6 dark:text-white">Trésorerie</h2>
+                <div class="grid grid-cols-3 gap-6 mb-8">
+                    <div class="bg-white dark:bg-gray-800 p-6 rounded shadow border-l-4 border-blue-500"><div class="text-sm text-gray-500">Banque</div><div class="text-2xl font-bold text-blue-600" id="treso-banque">0 €</div></div>
+                    <div class="bg-white dark:bg-gray-800 p-6 rounded shadow border-l-4 border-yellow-500"><div class="text-sm text-gray-500">Caisse</div><div class="text-2xl font-bold text-yellow-600" id="treso-caisse">0 €</div></div>
+                </div>
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <div class="bg-white dark:bg-gray-800 p-6 rounded shadow h-fit">
+                        <h3 class="font-bold mb-4 dark:text-white">Nouvelle Transaction</h3>
+                        <form onsubmit="saveTransaction(event)" class="space-y-3">
+                            <select name="compte" class="w-full border p-2 rounded dark:bg-gray-700 dark:border-gray-600"><option value="banque">Banque</option><option value="caisse">Caisse</option></select>
+                            <select name="type" class="w-full border p-2 rounded dark:bg-gray-700"><option value="recette">Recette (+)</option><option value="depense">Dépense (-)</option></select>
+                            <select name="categorie" class="w-full border p-2 rounded dark:bg-gray-700"><option>Cotisations</option><option>Bar</option><option>Matériel</option><option>Autre</option></select>
+                            <input type="text" name="description" placeholder="Description" class="w-full border p-2 rounded dark:bg-gray-700" required>
+                            <input type="number" name="montant" placeholder="Montant €" step="0.01" class="w-full border p-2 rounded dark:bg-gray-700" required>
+                            <input type="date" name="date_transaction" class="w-full border p-2 rounded dark:bg-gray-700" required>
+                            <button class="btn-patro w-full">Ajouter</button>
+                        </form>
+                    </div>
+                    <div class="lg:col-span-2 bg-white dark:bg-gray-800 rounded shadow overflow-hidden">
+                        <table class="min-w-full text-sm"><tbody id="treso-list" class="divide-y dark:divide-gray-700 dark:text-gray-300"></tbody></table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- VUE: MAIL -->
+            <div id="view-mail" class="view-section">
+                <h2 class="text-3xl font-bold mb-6 dark:text-white">Envoi Email</h2>
+                <form onsubmit="sendMail(event)" class="bg-white dark:bg-gray-800 p-6 rounded shadow max-w-2xl">
+                    <div class="mb-4"><label class="block font-bold mb-1 dark:text-white">À :</label><input type="email" id="mail-to" class="w-full border p-2 rounded dark:bg-gray-700" required></div>
+                    <div class="mb-4"><label class="block font-bold mb-1 dark:text-white">Sujet :</label><input type="text" id="mail-subject" class="w-full border p-2 rounded dark:bg-gray-700" required></div>
+                    <div class="mb-4"><label class="block font-bold mb-1 dark:text-white">Message :</label><textarea id="mail-msg" rows="6" class="w-full border p-2 rounded dark:bg-gray-700" required></textarea></div>
+                    <button class="btn-patro">Envoyer</button>
+                </form>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- MODAL AJOUT MEMBRE (Hidden by default) -->
+    <div id="modal-member" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-2xl w-full max-w-3xl max-h-[90vh] overflow-y-auto p-6">
+            <div class="flex justify-between mb-4"><h3 class="text-xl font-bold dark:text-white">Membre</h3><button onclick="closeModal('modal-member')" class="text-red-500"><i class="fa-solid fa-times"></i></button></div>
+            <form onsubmit="saveMember(event)" id="form-member">
+                <input type="hidden" name="id">
+                <div class="grid grid-cols-2 gap-4 mb-4">
+                    <input type="text" name="nom" placeholder="Nom" class="border p-2 rounded dark:bg-gray-700" required>
+                    <input type="text" name="prenom" placeholder="Prénom" class="border p-2 rounded dark:bg-gray-700" required>
+                    <input type="date" name="date_naissance" class="border p-2 rounded dark:bg-gray-700" required>
+                    <input type="text" name="adresse" placeholder="Adresse" class="border p-2 rounded dark:bg-gray-700">
+                </div>
+                <button class="btn-patro w-full">Enregistrer</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        const API_URL = 'https://pvdhloginapi.alwaysdata.net/api.php';
+        let currentUser = JSON.parse(localStorage.getItem('patro_user')) || null;
+
+        // --- INIT ---
+        function init() {
+            if (currentUser) {
+                document.getElementById('view-login').classList.remove('active-view');
+                document.getElementById('app-layout').classList.remove('hidden');
+                document.getElementById('user-name').innerText = currentUser.prenom;
+                
+                // Gestion des rôles
+                if(['admin','president','tresorier','cp','animateur'].includes(currentUser.role)) 
+                    document.querySelectorAll('.staff-only').forEach(el => el.classList.remove('hidden'));
+                if(['admin','president','tresorier'].includes(currentUser.role)) 
+                    document.querySelectorAll('.finance-only').forEach(el => el.classList.remove('hidden'));
+                if(currentUser.role === 'admin') 
+                    document.querySelectorAll('.admin-only').forEach(el => el.classList.remove('hidden'));
+
+                nav('dashboard'); // Page par défaut
+            } else {
+                document.getElementById('view-login').classList.add('active-view');
+            }
+        }
+
+        // --- NAVIGATION ---
+        function nav(viewId) {
+            document.querySelectorAll('.view-section').forEach(el => el.classList.remove('active-view'));
+            // Si on est déjà dans app-layout, on ne cache que les sous-vues
+            if(viewId !== 'login') {
+                ['dashboard','membres','tresorerie','mail'].forEach(v => document.getElementById('view-'+v).style.display = 'none');
+                document.getElementById('view-'+viewId).style.display = 'block';
+                loadData(viewId);
+            }
+        }
+
+        // --- API CALLS ---
+        async function api(action, method = 'GET', data = null) {
+            const options = { method };
+            if (data) {
+                // Pour le POST, on envoie du JSON
+                options.headers = { 'Content-Type': 'application/json' };
+                options.body = JSON.stringify({ ...data, user_id: currentUser?.id });
+            }
+            const url = method === 'GET' 
+                ? `${API_URL}?action=${action}&user_id=${currentUser?.id}&role=${currentUser?.role}` 
+                : `${API_URL}?action=${action}`; // action est aussi dans le body pour le POST mais bon de le mettre en URL pour le routeur PHP
+
+            const res = await fetch(url, options);
+            return await res.json();
+        }
+
+        // --- LOGIN ---
+        async function handleLogin(e) {
+            e.preventDefault();
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-pass').value;
+            
+            const res = await fetch(API_URL + '?action=login', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({ email, password, action: 'login' })
+            });
+            const json = await res.json();
+
+            if (json.success) {
+                localStorage.setItem('patro_user', JSON.stringify(json.user));
+                currentUser = json.user;
+                init();
+            } else {
+                document.getElementById('login-error').innerText = json.message;
+                document.getElementById('login-error').classList.remove('hidden');
+            }
+        }
+
+        function logout() {
+            localStorage.removeItem('patro_user');
+            location.reload();
+        }
+
+        // --- DATA LOADERS ---
+        async function loadData(view) {
+            if (view === 'dashboard') {
+                const stats = await api('get_dashboard');
+                document.getElementById('dash-banque').innerText = (stats.solde_banque || 0) + ' €';
+                document.getElementById('dash-activites').innerText = stats.activites || 0;
+            }
+            if (view === 'membres') {
+                const list = await api('get_members');
+                const tbody = document.getElementById('membres-list');
+                tbody.innerHTML = list.map(m => `
+                    <tr class="hover:bg-gray-100 dark:hover:bg-gray-700 border-b dark:border-gray-700">
+                        <td class="px-6 py-4 font-bold">${m.nom.toUpperCase()} ${m.prenom}</td>
+                        <td class="px-6 py-4">${m.cotisation_payee == 1 ? '<span class="text-green-600 bg-green-100 px-2 rounded">Cotisé</span>' : '<span class="text-red-600">Non</span>'}</td>
+                        <td class="px-6 py-4 text-right"><button class="text-blue-500">Voir</button></td>
+                    </tr>
+                `).join('');
+            }
+            if (view === 'tresorerie') {
+                const data = await api('get_tresorerie');
+                document.getElementById('treso-banque').innerText = data.solde_banque + ' €';
+                document.getElementById('treso-caisse').innerText = data.solde_caisse + ' €';
+                document.getElementById('treso-list').innerHTML = data.transactions.map(t => `
+                    <tr>
+                        <td class="px-4 py-2">${t.date_transaction}</td>
+                        <td class="px-4 py-2"><span class="px-2 text-xs rounded ${t.compte==='banque'?'bg-blue-100 text-blue-800':'bg-yellow-100 text-yellow-800'}">${t.compte}</span></td>
+                        <td class="px-4 py-2">${t.description}</td>
+                        <td class="px-4 py-2 text-right font-bold ${t.type==='recette'?'text-green-600':'text-red-600'}">${t.type==='recette'?'+':'-'}${t.montant} €</td>
+                    </tr>
+                `).join('');
+            }
+        }
+
+        // --- ACTIONS ---
+        async function saveTransaction(e) {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+            const data = Object.fromEntries(formData.entries());
+            data.action = 'save_transaction';
+            await api('save_transaction', 'POST', data);
+            e.target.reset();
+            loadData('tresorerie');
+        }
+
+        async function sendMail(e) {
+            e.preventDefault();
+            const to = document.getElementById('mail-to').value;
+            const subject = document.getElementById('mail-subject').value;
+            const message = document.getElementById('mail-msg').value;
+            
+            const res = await api('send_mail', 'POST', { to, subject, message, action: 'send_mail' });
+            if(res.success) alert('Mail envoyé !');
+            else alert('Erreur envoi.');
+        }
+
+        function openMemberModal() { document.getElementById('modal-member').classList.remove('hidden'); }
+        function closeModal(id) { document.getElementById(id).classList.add('hidden'); }
+
+        async function saveMember(e) {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+            const data = Object.fromEntries(formData.entries());
+            data.action = 'save_member';
+            // Conversion checkbox en booléens pour l'API si besoin
+            // ...
+            await api('save_member', 'POST', data);
+            closeModal('modal-member');
+            loadData('membres');
+        }
+
+        // Start
+        init();
+    </script>
+</body>
+</html>
