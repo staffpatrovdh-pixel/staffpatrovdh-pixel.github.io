@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deviens Animateur ! | Patro du Val d'Haine</title>
+    
+    <link rel="stylesheet" href="style.css">
+    <!-- Police manuscrite pour le fun -->
+    <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- On charge le layout pour le footer et le menu -->
+    <script src="layout.js?v=8"></script>
+
+    <script>
+        tailwind.config = { theme: { extend: { colors: { patro: { yellow: '#FFD700', green: '#009045', dark: '#1a1a1a', light: '#f8fafc' } }, fontFamily: { sans: ['Poppins', 'sans-serif'], display: ['Fredoka', 'sans-serif'], handwritten: ['Indie Flower', 'cursive'] } } } }
+    </script>
+</head>
+<body class="font-sans text-slate-800 bg-patro-light antialiased">
+
+    <div id="custom-cursor"></div>
+    <div id="loader"><div class="spinner mb-4"></div><p class="text-patro-green font-bold font-display animate-pulse">Chargement...</p></div>
+    <div id="navbar-placeholder"></div>
+
+    <!-- HERO : ACCROCHE FORTE -->
+    <div class="pt-32 pb-24 relative overflow-hidden bg-patro-green">
+        <!-- Image de fond avec overlay -->
+        <div class="absolute inset-0 z-0">
+            <img src="donnees-site/photos-site-accueil/Banniere_deveniranim.png" alt="Devenir Animateur" class="w-full h-full object-cover opacity-50">
+            <div class="absolute inset-0 bg-gradient-to-t from-patro-green/90 to-patro-green/40"></div>
+        </div>
+        
+        <div class="max-w-5xl mx-auto px-4 text-center relative z-20 text-white">
+            <span class="inline-block py-2 px-4 rounded-full bg-white text-patro-green font-bold text-sm mb-6 uppercase tracking-wider transform -rotate-2 shadow-lg">
+                Dès 16 ans
+            </span>
+            <h1 class="text-5xl md:text-7xl font-display font-bold mb-6 drop-shadow-md leading-tight">
+                Passe de l'autre côté <br>
+                <span class="text-patro-yellow font-handwritten transform rotate-2 inline-block mt-2">du foulard !</span>
+            </h1>
+            <p class="text-xl md:text-2xl font-light text-green-50 mb-10 max-w-3xl mx-auto drop-shadow-sm">
+                Tu as envie de bouger, de créer, de rire et de faire grandir ? <br>
+                Rejoins le staff et vis une expérience qui changera ta vie.
+            </p>
+            
+            <a href="#postuler" class="inline-flex items-center gap-3 px-8 py-4 bg-patro-yellow text-patro-dark font-black text-lg uppercase tracking-wider rounded-full hover:bg-white hover:scale-105 transition duration-300 shadow-xl border-4 border-transparent hover:border-patro-yellow">
+                <i data-lucide="hand"></i> Je me lance !
+            </a>
+        </div>
+    </div>
+
+    <!-- POURQUOI DEVENIR ANIMATEUR ? -->
+    <section class="py-20 px-4">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-5xl font-display font-bold text-gray-900 mb-4">Pourquoi s'engager ?</h2>
+                <p class="text-gray-500 text-lg">Être animateur, c'est bien plus que surveiller des enfants le dimanche.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                <!-- Carte 1 -->
+                <div class="bg-white p-8 rounded-3xl shadow-lg border-2 border-transparent hover:border-patro-yellow transition duration-300 group">
+                    <div class="w-16 h-16 bg-yellow-100 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-patro-yellow transition duration-300">
+                        <i data-lucide="users" class="w-8 h-8 text-yellow-600 group-hover:text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-display font-bold text-gray-800 mb-3">Une 2ème famille</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        Intégrer le staff, c'est rejoindre une bande de potes soudée. Des soirées, des week-ends, des fous rires et des souvenirs que tu garderas toute ta vie.
+                    </p>
+                </div>
+
+                <!-- Carte 2 -->
+                <div class="bg-white p-8 rounded-3xl shadow-lg border-2 border-transparent hover:border-patro-green transition duration-300 group mt-0 md:-mt-4">
+                    <div class="w-16 h-16 bg-green-100 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-patro-green transition duration-300">
+                        <i data-lucide="zap" class="w-8 h-8 text-green-600 group-hover:text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-display font-bold text-gray-800 mb-3">Booster ton CV</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        Leadership, créativité, gestion de projet, responsabilité... Des compétences en or pour ton avenir pro et tes études. Devenir CRACS, c'est du concret !
+                    </p>
+                </div>
+
+                <!-- Carte 3 -->
+                <div class="bg-white p-8 rounded-3xl shadow-lg border-2 border-transparent hover:border-patro-yellow transition duration-300 group">
+                    <div class="w-16 h-16 bg-purple-100 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-purple-500 transition duration-300">
+                        <i data-lucide="graduation-cap" class="w-8 h-8 text-purple-600 group-hover:text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-display font-bold text-gray-800 mb-3">Formation Officielle</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        Le Patro t'offre l'accès à des formations reconnues (BACV) pour devenir un animateur breveté. On t'accompagne à chaque étape.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LE DEAL (Ce qu'on attend de toi) -->
+    <section class="py-20 bg-gray-900 text-white relative overflow-hidden">
+        <!-- Déco -->
+        <div class="absolute top-0 right-0 w-64 h-64 bg-patro-green rounded-full mix-blend-overlay filter blur-[80px] opacity-20"></div>
+        <div class="absolute bottom-0 left-0 w-64 h-64 bg-patro-yellow rounded-full mix-blend-overlay filter blur-[80px] opacity-20"></div>
+
+        <div class="max-w-5xl mx-auto px-4 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="text-3xl md:text-5xl font-display font-bold mb-6 text-patro-yellow">T'es chaud ?</h2>
+                    <p class="text-xl mb-8 text-gray-300">On ne cherche pas des super-héros, mais des jeunes motivés ! Voici le profil qu'on recherche :</p>
+                    
+                    <ul class="space-y-4">
+                        <li class="flex items-center gap-4">
+                            <div class="bg-patro-green p-2 rounded-full"><i data-lucide="check" class="w-5 h-5"></i></div>
+                            <span class="font-medium text-lg">Tu as 16 ans (ou presque)</span>
+                        </li>
+                        <li class="flex items-center gap-4">
+                            <div class="bg-patro-green p-2 rounded-full"><i data-lucide="check" class="w-5 h-5"></i></div>
+                            <span class="font-medium text-lg">Tu es motivé(e) et dynamique</span>
+                        </li>
+                        <li class="flex items-center gap-4">
+                            <div class="bg-patro-green p-2 rounded-full"><i data-lucide="check" class="w-5 h-5"></i></div>
+                            <span class="font-medium text-lg">Tu es dispo le dimanche après-midi</span>
+                        </li>
+                        <li class="flex items-center gap-4">
+                            <div class="bg-patro-green p-2 rounded-full"><i data-lucide="check" class="w-5 h-5"></i></div>
+                            <span class="font-medium text-lg">Tu as envie d'apprendre et de partager</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Visuel Fun -->
+                <div class="relative">
+                    <div class="bg-white/10 backdrop-blur-md border border-white/20 p-8 rounded-3xl transform rotate-2 hover:rotate-0 transition duration-500">
+                        <div class="text-center">
+                            <i data-lucide="quote" class="w-12 h-12 text-patro-yellow mx-auto mb-4"></i>
+                            <p class="text-xl font-handwritten italic mb-6">
+                                "Être animateur, c'est la meilleure décision que j'ai prise. C'est fatiguant parfois, mais voir le sourire des gamins après un grand jeu, ça n'a pas de prix."
+                            </p>
+                            <div class="flex items-center justify-center gap-3">
+                                <div class="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center font-bold text-patro-yellow">A</div>
+                                <div class="text-left">
+                                    <p class="font-bold text-sm">Un animateur anonyme</p>
+                                    <p class="text-xs text-gray-400">Patro Val d'Haine</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION FORMULAIRE -->
+    <section id="postuler" class="py-24 px-4 bg-patro-light">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-4xl font-display font-bold text-gray-900 mb-4">Prêt à rejoindre l'aventure ?</h2>
+            <p class="text-gray-600 mb-12">Remplis ce petit formulaire pour nous dire qui tu es. On te recontactera très vite pour en discuter !</p>
+
+            <div class="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-200 min-h-[600px] relative">
+                
+                <!-- PLACEHOLDER DU FORMULAIRE (En attendant le lien) -->
+                <div class="absolute inset-0 flex flex-col items-center justify-center bg-gray-50 p-8 text-center">
+                    <div class="w-20 h-20 bg-patro-yellow/20 text-patro-dark rounded-full flex items-center justify-center mb-6">
+                        <i data-lucide="file-input" class="w-10 h-10"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-2">Formulaire à venir</h3>
+                    <p class="text-gray-500 max-w-md">
+                        Le formulaire de recrutement sera bientôt disponible ici. <br>
+                        En attendant, tu peux nous envoyer un message via la page contact !
+                    </p>
+                    <a href="contact.html" class="mt-6 text-patro-green font-bold hover:underline">Nous contacter</a>
+                </div>
+
+                <!-- 
+                ICI VOUS COLLEREZ VOTRE IFRAME MICROSOFT FORMS PLUS TARD 
+                Exemple :
+                <iframe width="100%" height="100%" style="border:none; min-height:800px;" 
+                        src="VOTRE_LIEN_MICROSOFT_FORMS_ICI" 
+                        allowfullscreen> 
+                </iframe>
+                -->
+
+            </div>
+        </div>
+    </section>
+
+    <div id="footer-placeholder"></div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            lucide.createIcons();
+        });
+    </script>
+</body>
+</html>
