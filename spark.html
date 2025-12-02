@@ -16,9 +16,12 @@
         body { font-family: 'Poppins', sans-serif; } .font-display { font-family: 'Fredoka', sans-serif; }
         .view-section { display: none; }
         .active-view { display: block; }
-        /* Loading Spinner */
         .loader { border: 4px solid #f3f3f3; border-top: 4px solid #009045; border-radius: 50%; width: 20px; height: 20px; animation: spin 1s linear infinite; display: inline-block; }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        /* Markdown-like styles for AI response */
+        .ai-response h3 { font-weight: bold; font-size: 1.2em; margin-top: 1em; color: #009045; }
+        .ai-response ul { list-style-type: disc; margin-left: 1.5em; }
+        .dark .ai-response h3 { color: #FFD700; }
     </style>
 </head>
 <body class="bg-slate-50 dark:bg-gray-900 dark:text-gray-100 transition-colors duration-300 h-screen flex flex-col overflow-hidden">
@@ -30,11 +33,11 @@
                 <h1 class="text-3xl font-display font-bold text-patro-green dark:text-patro-yellow">My PVDH</h1>
                 <p class="text-gray-500 dark:text-gray-400">Connexion Sécurisée</p>
             </div>
-            <div id="login-error" class="hidden bg-red-100 text-red-700 p-3 rounded mb-4 text-sm"></div>
+            <div id="login-error" class="hidden bg-red-100 text-red-700 p-3 rounded mb-4 text-sm font-bold border border-red-200 overflow-auto max-h-32"></div>
             <form onsubmit="handleLogin(event)">
                 <div class="mb-4"><label class="block text-sm font-bold mb-2">Email</label><input type="email" id="login-email" class="w-full border p-3 rounded dark:bg-gray-700 dark:border-gray-600" required></div>
                 <div class="mb-6"><label class="block text-sm font-bold mb-2">Mot de passe</label><input type="password" id="login-pass" class="w-full border p-3 rounded dark:bg-gray-700 dark:border-gray-600" required></div>
-                <button id="btn-login-submit" class="w-full bg-patro-yellow text-patro-dark font-bold py-3 rounded-lg hover:brightness-110 flex justify-center items-center">
+                <button id="btn-login-submit" class="w-full bg-patro-yellow text-patro-dark font-bold py-3 rounded-lg hover:brightness-110 flex justify-center items-center min-h-[50px]">
                     <span>Se connecter</span>
                 </button>
             </form>
@@ -52,9 +55,13 @@
                 <a href="#" onclick="nav('dashboard')" class="block px-4 py-2 rounded hover:bg-white/10"><i class="fa-solid fa-chart-pie w-6"></i> Tableau de bord</a>
                 <div class="text-xs uppercase text-green-200 font-bold mt-6 mb-2">Gestion</div>
                 <a href="#" onclick="nav('membres')" class="block px-4 py-2 rounded hover:bg-white/10"><i class="fa-solid fa-users w-6"></i> Adhérents</a>
+                
                 <div class="staff-only hidden">
                     <a href="#" onclick="nav('mail')" class="block px-4 py-2 rounded hover:bg-white/10"><i class="fa-solid fa-envelope w-6"></i> Mail</a>
+                    <!-- NOUVEAU MENU -->
+                    <a href="#" onclick="nav('ai')" class="block px-4 py-2 rounded hover:bg-white/10 text-patro-yellow font-bold"><i class="fa-solid fa-wand-magic-sparkles w-6"></i> Assistant IA</a>
                 </div>
+                
                 <div class="finance-only hidden">
                     <a href="#" onclick="nav('tresorerie')" class="block px-4 py-2 rounded hover:bg-white/10"><i class="fa-solid fa-wallet w-6"></i> Trésorerie</a>
                 </div>
@@ -74,7 +81,7 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                     <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm border-l-4 border-patro-yellow">
                         <div class="text-sm text-gray-500">Solde Banque</div>
-                        <div class="text-3xl font-bold text-blue-600" id="dash-banque">Chargement...</div>
+                        <div class="text-3xl font-bold text-blue-600" id="dash-banque">...</div>
                     </div>
                     <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm border-l-4 border-patro-green">
                         <div class="text-sm text-gray-500">Activités à venir</div>
@@ -134,12 +141,83 @@
                 </form>
             </div>
 
+            <!-- VUE: ASSISTANT IA (NOUVEAU) -->
+            <div id="view-ai" class="view-section">
+                <h2 class="text-3xl font-bold mb-6 flex items-center gap-2 dark:text-white">
+                    <i class="fa-solid fa-wand-magic-sparkles text-patro-yellow"></i> Assistant Créatif
+                </h2>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <div class="bg-white dark:bg-gray-800 p-6 rounded shadow h-fit">
+                        <h3 class="font-bold mb-4 dark:text-white">Que cherchez-vous ?</h3>
+                        <form onsubmit="askGemini(event)" class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-bold mb-1 dark:text-white">Type</label>
+                                <select id="ai-type" class="w-full border p-2 rounded dark:bg-gray-700 dark:text-white">
+                                    <option>Grand Jeu (Extérieur)</option>
+                                    <option>Petit Jeu (Intérieur)</option>
+                                    <option>Veillée</option>
+                                    <option>Bricolage</option>
+                                    <option>Thème de camp</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-bold mb-1 dark:text-white">Section / Âge</label>
+                                <select id="ai-age" class="w-full border p-2 rounded dark:bg-gray-700 dark:text-white">
+                                    <option>Poussins (4-6 ans)</option>
+                                    <option>Benjamins (6-9 ans)</option>
+                                    <option>Chevaliers (9-12 ans)</option>
+                                    <option>Conquérants (12-14 ans)</option>
+                                    <option>Grands (14-16 ans)</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-bold mb-1 dark:text-white">Thème (Optionnel)</label>
+                                <input type="text" id="ai-theme" placeholder="Ex: Pirates, Espace, Jungle..." class="w-full border p-2 rounded dark:bg-gray-700 dark:text-white">
+                            </div>
+                            <button id="btn-ask-ai" class="btn-patro w-full flex justify-center items-center">
+                                <span>Générer une idée</span>
+                            </button>
+                        </form>
+                    </div>
+
+                    <div class="lg:col-span-2 bg-white dark:bg-gray-800 p-8 rounded shadow min-h-[300px] relative">
+                        <div id="ai-loading" class="hidden absolute inset-0 bg-white/80 dark:bg-gray-800/80 flex items-center justify-center z-10">
+                            <div class="text-center">
+                                <div class="loader mb-2"></div>
+                                <p class="text-patro-green font-bold">L'IA réfléchit...</p>
+                            </div>
+                        </div>
+                        
+                        <div id="ai-result" class="ai-response dark:text-gray-200">
+                            <h3 class="text-xl text-gray-400 text-center mt-20">Le résultat apparaîtra ici...</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </main>
+    </div>
+    
+    <!-- MODAL AJOUT MEMBRE -->
+    <div id="modal-member" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-2xl w-full max-w-3xl max-h-[90vh] overflow-y-auto p-6">
+            <div class="flex justify-between mb-4"><h3 class="text-xl font-bold dark:text-white">Membre</h3><button onclick="closeModal('modal-member')" class="text-red-500"><i class="fa-solid fa-times"></i></button></div>
+            <form onsubmit="saveMember(event)" id="form-member">
+                <input type="hidden" name="id">
+                <div class="grid grid-cols-2 gap-4 mb-4">
+                    <input type="text" name="nom" placeholder="Nom" class="border p-2 rounded dark:bg-gray-700" required>
+                    <input type="text" name="prenom" placeholder="Prénom" class="border p-2 rounded dark:bg-gray-700" required>
+                    <input type="date" name="date_naissance" class="border p-2 rounded dark:bg-gray-700" required>
+                    <input type="text" name="adresse" placeholder="Adresse" class="border p-2 rounded dark:bg-gray-700">
+                </div>
+                <button class="btn-patro w-full">Enregistrer</button>
+            </form>
+        </div>
     </div>
 
     <!-- JAVASCRIPT LOGIC -->
     <script>
-        // IMPORTANT: LE 'S' à HTTPS est OBLIGATOIRE
         const API_URL = 'https://pvdhloginapi.alwaysdata.net/api.php'; 
         let currentUser = JSON.parse(localStorage.getItem('patro_user')) || null;
 
@@ -163,9 +241,9 @@
         function nav(viewId) {
             document.querySelectorAll('.view-section').forEach(el => el.classList.remove('active-view'));
             if(viewId !== 'login') {
-                ['dashboard','membres','tresorerie','mail'].forEach(v => document.getElementById('view-'+v).style.display = 'none');
+                ['dashboard','membres','tresorerie','mail','ai'].forEach(v => document.getElementById('view-'+v).style.display = 'none');
                 document.getElementById('view-'+viewId).style.display = 'block';
-                loadData(viewId);
+                if(viewId !== 'ai') loadData(viewId); // Pas de chargement auto pour l'IA
             }
         }
 
@@ -175,41 +253,45 @@
                 options.headers = { 'Content-Type': 'application/json' };
                 options.body = JSON.stringify({ ...data, user_id: currentUser?.id });
             }
-            // On construit l'URL
-            const url = method === 'GET' 
-                ? `${API_URL}?action=${action}&user_id=${currentUser?.id}&role=${currentUser?.role}` 
-                : API_URL;
+            const url = `${API_URL}?action=${action}&user_id=${currentUser?.id || ''}&role=${currentUser?.role || ''}`;
 
             try {
                 const res = await fetch(url, options);
-                const json = await res.json();
-                return json;
+                const text = await res.text(); 
+                try { return JSON.parse(text); } 
+                catch (e) {
+                    console.error("Réponse serveur invalide:", text);
+                    return { success: false, message: "Erreur Serveur: " + text.substring(0, 100) };
+                }
             } catch (error) {
-                console.error("Erreur API:", error);
-                alert("Erreur de connexion au serveur. Vérifiez la console.");
-                return null;
+                return { success: false, message: "Erreur connexion." };
             }
         }
 
         async function handleLogin(e) {
             e.preventDefault();
             const btn = document.getElementById('btn-login-submit');
-            btn.innerHTML = '<div class="loader"></div>'; // Spinner
-            
+            const errDiv = document.getElementById('login-error');
+            btn.innerHTML = '<div class="loader"></div>';
+            errDiv.classList.add('hidden');
             const email = document.getElementById('login-email').value;
             const password = document.getElementById('login-pass').value;
             
-            const res = await api('login', 'POST', { email, password, action: 'login' });
-            
-            if (res && res.success) {
-                localStorage.setItem('patro_user', JSON.stringify(res.user));
-                currentUser = res.user;
-                init();
-            } else {
-                btn.innerHTML = 'Se connecter';
-                const errDiv = document.getElementById('login-error');
-                errDiv.innerText = res ? res.message : "Erreur serveur";
+            try {
+                const res = await api('login', 'POST', { email, password, action: 'login' });
+                if (res && res.success) {
+                    localStorage.setItem('patro_user', JSON.stringify(res.user));
+                    currentUser = res.user;
+                    init();
+                } else {
+                    errDiv.innerText = res.message || "Erreur";
+                    errDiv.classList.remove('hidden');
+                }
+            } catch (err) {
+                errDiv.innerText = err.message;
                 errDiv.classList.remove('hidden');
+            } finally {
+                btn.innerHTML = '<span>Se connecter</span>';
             }
         }
 
@@ -218,10 +300,36 @@
             location.reload();
         }
 
+        // --- FONCTION IA (NOUVEAU) ---
+        async function askGemini(e) {
+            e.preventDefault();
+            const btn = document.getElementById('btn-ask-ai');
+            const loading = document.getElementById('ai-loading');
+            const resultDiv = document.getElementById('ai-result');
+            const type = document.getElementById('ai-type').value;
+            const age = document.getElementById('ai-age').value;
+            const theme = document.getElementById('ai-theme').value;
+
+            loading.classList.remove('hidden');
+            btn.disabled = true;
+
+            const res = await api('ask_gemini', 'POST', { type, age, theme, action: 'ask_gemini' });
+
+            loading.classList.add('hidden');
+            btn.disabled = false;
+
+            if (res.success) {
+                // Conversion basique des retours à la ligne pour l'affichage
+                resultDiv.innerHTML = res.ai_response.replace(/\n/g, '<br>');
+            } else {
+                resultDiv.innerHTML = `<p class="text-red-500">Erreur : ${res.message}</p>`;
+            }
+        }
+
         async function loadData(view) {
             if (view === 'dashboard') {
                 const stats = await api('get_dashboard');
-                if(stats) {
+                if(stats && !stats.message) {
                     document.getElementById('dash-banque').innerText = (stats.solde_banque || 0) + ' €';
                     document.getElementById('dash-activites').innerText = stats.activites || 0;
                 }
@@ -229,7 +337,7 @@
             if (view === 'membres') {
                 const list = await api('get_members');
                 const tbody = document.getElementById('membres-list');
-                if(list) {
+                if(Array.isArray(list)) {
                     tbody.innerHTML = list.map(m => `
                         <tr class="hover:bg-gray-100 dark:hover:bg-gray-700 border-b dark:border-gray-700">
                             <td class="px-6 py-4 font-bold">${m.nom.toUpperCase()} ${m.prenom}</td>
@@ -240,7 +348,7 @@
             }
             if (view === 'tresorerie') {
                 const data = await api('get_tresorerie');
-                if(data) {
+                if(data && !data.message) {
                     document.getElementById('treso-banque').innerText = data.solde_banque + ' €';
                     document.getElementById('treso-caisse').innerText = data.solde_caisse + ' €';
                     document.getElementById('treso-list').innerHTML = data.transactions.map(t => `
@@ -272,7 +380,20 @@
             const message = document.getElementById('mail-msg').value;
             const res = await api('send_mail', 'POST', { to, subject, message, action: 'send_mail' });
             if(res && res.success) alert('Mail envoyé !');
-            else alert('Erreur envoi.');
+            else alert('Erreur envoi : ' + (res.message || 'Inconnue'));
+        }
+        
+        function openMemberModal() { document.getElementById('modal-member').classList.remove('hidden'); }
+        function closeModal(id) { document.getElementById(id).classList.add('hidden'); }
+
+        async function saveMember(e) {
+            e.preventDefault();
+            const formData = new FormData(document.getElementById('form-member'));
+            const data = Object.fromEntries(formData.entries());
+            data.action = 'save_member';
+            await api('save_member', 'POST', data);
+            closeModal('modal-member');
+            loadData('membres');
         }
 
         init();
