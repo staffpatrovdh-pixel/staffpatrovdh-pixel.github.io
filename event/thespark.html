@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Spark Festival 2026 | Patro Val d'Haine</title>
+    
+    <link rel="stylesheet" href="style.css">
+    <!-- On garde les polices du site pour la cohérence, mais on va les utiliser différemment -->
+    <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- On charge le layout pour le footer et le menu, même si le style sera différent -->
+    <script src="layout.js?v=8"></script>
+
+    <script>
+        tailwind.config = { theme: { extend: { 
+            colors: { 
+                patro: { yellow: '#FFD700', green: '#009045', dark: '#1a1a1a' },
+                fest: { purple: '#4c1d95', pink: '#d946ef', lime: '#a3e635' } // Couleurs Festival
+            }, 
+            fontFamily: { sans: ['Poppins', 'sans-serif'], display: ['Fredoka', 'sans-serif'], handwritten: ['Indie Flower', 'cursive'] },
+            backgroundImage: {
+                'fest-gradient': 'linear-gradient(to right bottom, #1a1a1a, #2e1065, #0f172a)'
+            }
+        } } }
+    </script>
+
+    <style>
+        /* Override spécifique pour cette page pour rendre la navbar plus sombre si possible, 
+           sinon on garde le contraste. Ici on ajoute des effets de "Glow" */
+        .neon-text {
+            text-shadow: 0 0 10px rgba(163, 230, 53, 0.5), 0 0 20px rgba(163, 230, 53, 0.3);
+        }
+        .magic-text {
+            background: linear-gradient(to right, #d946ef, #FFD700);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .glitch-hover:hover {
+            animation: glitch 0.3s cubic-bezier(.25, .46, .45, .94) both infinite;
+            color: #a3e635;
+        }
+        @keyframes glitch {
+            0% { transform: translate(0) }
+            20% { transform: translate(-2px, 2px) }
+            40% { transform: translate(-2px, -2px) }
+            60% { transform: translate(2px, 2px) }
+            80% { transform: translate(2px, -2px) }
+            100% { transform: translate(0) }
+        }
+    </style>
+</head>
+<body class="font-sans text-white bg-gray-900 antialiased selection:bg-fest-lime selection:text-black">
+
+    <div id="custom-cursor"></div>
+    <div id="loader"><div class="spinner mb-4 border-fest-lime"></div><p class="text-fest-lime font-bold font-display animate-pulse">Loading Festival...</p></div>
+    
+    <!-- Navbar standard (via layout.js) -->
+    <div id="navbar-placeholder"></div>
+
+    <!-- HERO SECTION : VIBE DOUR/TOMORROWLAND -->
+    <div class="relative min-h-screen flex items-center justify-center overflow-hidden">
+        
+        <!-- Background animé (Image sombre + Gradient) -->
+        <div class="absolute inset-0 z-0">
+            <!-- Image d'ambiance festival (Placeholder sombre) -->
+            <img src="https://images.unsplash.com/photo-1470229722913-7ea549c1c5c4?q=80&w=2073&auto=format&fit=crop" class="w-full h-full object-cover opacity-30">
+            <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-purple-900/40 to-black/80"></div>
+        </div>
+
+        <!-- Particules/Lumières (Déco) -->
+        <div class="absolute top-1/4 left-1/4 w-64 h-64 bg-fest-purple rounded-full mix-blend-screen filter blur-[100px] opacity-30 animate-pulse"></div>
+        <div class="absolute bottom-1/4 right-1/4 w-64 h-64 bg-fest-lime rounded-full mix-blend-screen filter blur-[100px] opacity-20 animate-pulse" style="animation-delay: 1s;"></div>
+
+        <div class="relative z-10 text-center px-4 max-w-5xl mx-auto">
+            <p class="text-fest-lime tracking-[0.3em] uppercase text-sm md:text-base mb-4 font-bold glitch-hover cursor-default">
+                Patro Val d'Haine Présente
+            </p>
+            
+            <h1 class="text-6xl md:text-8xl lg:text-9xl font-display font-black mb-2 leading-none tracking-tight">
+                <span class="text-white">THE</span> <span class="magic-text">SPARK</span>
+            </h1>
+            <h2 class="text-3xl md:text-5xl font-display font-bold text-white mb-8">FESTIVAL</h2>
+
+            <div class="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8 text-lg md:text-xl font-medium text-gray-300 mb-12">
+                <div class="flex items-center gap-2">
+                    <i data-lucide="calendar" class="text-fest-lime"></i> 28 MARS 2026
+                </div>
+                <div class="hidden md:block w-2 h-2 bg-gray-600 rounded-full"></div>
+                <div class="flex items-center gap-2">
+                    <i data-lucide="clock" class="text-fest-lime"></i> 20H00 - 03H00
+                </div>
+                <div class="hidden md:block w-2 h-2 bg-gray-600 rounded-full"></div>
+                <div class="flex items-center gap-2">
+                    <i data-lucide="map-pin" class="text-fest-lime"></i> SALLE L'ÉTINCELLE
+                </div>
+            </div>
+
+            <!-- Compte à rebours -->
+            <div id="countdown" class="grid grid-cols-4 gap-4 max-w-2xl mx-auto mb-12 border border-white/10 bg-white/5 backdrop-blur-md p-6 rounded-2xl">
+                <div><span class="block text-3xl md:text-5xl font-bold text-white" id="days">00</span><span class="text-xs uppercase tracking-widest text-gray-400">Jours</span></div>
+                <div><span class="block text-3xl md:text-5xl font-bold text-white" id="hours">00</span><span class="text-xs uppercase tracking-widest text-gray-400">Heures</span></div>
+                <div><span class="block text-3xl md:text-5xl font-bold text-white" id="minutes">00</span><span class="text-xs uppercase tracking-widest text-gray-400">Min</span></div>
+                <div><span class="block text-3xl md:text-5xl font-bold text-fest-lime" id="seconds">00</span><span class="text-xs uppercase tracking-widest text-gray-400">Sec</span></div>
+            </div>
+
+            <a href="#tickets" class="inline-flex items-center gap-3 px-8 py-4 bg-white text-black font-black text-lg uppercase tracking-wider rounded-full hover:bg-fest-lime hover:scale-105 transition duration-300 shadow-[0_0_20px_rgba(255,255,255,0.3)]">
+                <i data-lucide="ticket"></i> Infos Billetterie
+            </a>
+        </div>
+    </div>
+
+    <!-- LINE UP & AMBIANCE -->
+    <section class="py-24 bg-gray-900 relative">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="text-center mb-16">
+                <h3 class="text-fest-pink font-handwritten text-3xl md:text-4xl mb-4 transform -rotate-2">L'expérience</h3>
+                <h2 class="text-4xl md:text-6xl font-display font-bold text-white">2 AMBIANCES, 1 LIEU</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Carte POP -->
+                <div class="group relative h-[400px] rounded-3xl overflow-hidden cursor-default">
+                    <img src="https://images.unsplash.com/photo-1493225255756-d9584f8606e9?q=80&w=2070&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover transition duration-700 group-hover:scale-110 opacity-60 group-hover:opacity-80">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
+                    <div class="absolute bottom-0 left-0 p-8">
+                        <h4 class="text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-pink-500 mb-2">POP HITS</h4>
+                        <p class="text-gray-300 text-lg">Les meilleurs sons des années 2000 à aujourd'hui. Chantez, dansez, vivez.</p>
+                    </div>
+                </div>
+
+                <!-- Carte TECHNO -->
+                <div class="group relative h-[400px] rounded-3xl overflow-hidden cursor-default">
+                    <img src="https://images.unsplash.com/photo-1574391884720-3852083162b7?q=80&w=2070&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover transition duration-700 group-hover:scale-110 opacity-60 group-hover:opacity-80 filter hue-rotate-90">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
+                    <div class="absolute bottom-0 left-0 p-8">
+                        <h4 class="text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-fest-lime to-emerald-500 mb-2">TECHNO STAGE</h4>
+                        <p class="text-gray-300 text-lg">Des basses lourdes, des lumières stroboscopiques et une ambiance Dour.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TICKETS -->
+    <section id="tickets" class="py-20 relative bg-black overflow-hidden border-t border-gray-800">
+        <!-- Effet background bruit -->
+        <div class="absolute inset-0 opacity-20" style="background-image: url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noise%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.65%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noise)%22 opacity=%221%22/%3E%3C/svg%3E');"></div>
+
+        <div class="max-w-4xl mx-auto px-4 text-center relative z-10">
+            <h2 class="text-3xl md:text-5xl font-display font-bold text-white mb-8">BILLETTERIE</h2>
+            
+            <div class="bg-gray-900/80 backdrop-blur-xl border border-gray-700 rounded-3xl p-8 md:p-12">
+                <div class="mb-8">
+                    <i data-lucide="lock" class="w-12 h-12 text-gray-500 mx-auto mb-4"></i>
+                    <h3 class="text-2xl font-bold text-white mb-2">Ouverture prochainement</h3>
+                    <p class="text-gray-400">La billetterie n'est pas encore ouverte. Revenez bientôt pour réserver vos places !</p>
+                </div>
+
+                <!-- Simulation de tickets désactivés -->
+                <div class="grid gap-4 max-w-lg mx-auto opacity-50 pointer-events-none select-none">
+                    <div class="flex justify-between items-center p-4 border border-gray-700 rounded-xl bg-gray-800">
+                        <div class="text-left">
+                            <span class="block font-bold text-white">EARLY BIRD</span>
+                            <span class="text-xs text-gray-400">Quantité limitée</span>
+                        </div>
+                        <span class="font-mono text-fest-lime">8€</span>
+                    </div>
+                    <div class="flex justify-between items-center p-4 border border-gray-700 rounded-xl bg-gray-800">
+                        <div class="text-left">
+                            <span class="block font-bold text-white">REGULAR</span>
+                            <span class="text-xs text-gray-400">Prévente</span>
+                        </div>
+                        <span class="font-mono text-fest-lime">10€</span>
+                    </div>
+                </div>
+
+                <div class="mt-8 pt-8 border-t border-gray-700">
+                    <p class="text-sm text-gray-500">Un événement organisé par le Patro du Val d'Haine.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div id="footer-placeholder"></div>
+
+    <script>
+        // SCRIPT COMPTE À REBOURS
+        const eventDate = new Date("March 28, 2026 20:00:00").getTime();
+
+        const x = setInterval(function() {
+            const now = new Date().getTime();
+            const distance = eventDate - now;
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById("days").innerText = days < 10 ? "0" + days : days;
+            document.getElementById("hours").innerText = hours < 10 ? "0" + hours : hours;
+            document.getElementById("minutes").innerText = minutes < 10 ? "0" + minutes : minutes;
+            document.getElementById("seconds").innerText = seconds < 10 ? "0" + seconds : seconds;
+
+            if (distance < 0) {
+                clearInterval(x);
+                document.getElementById("countdown").innerHTML = "<div class='col-span-4 text-2xl font-bold text-fest-lime'>L'ÉVÉNEMENT EST COMMENCÉ !</div>";
+            }
+        }, 1000);
+
+        document.addEventListener('DOMContentLoaded', () => {
+            if(typeof lucide !== 'undefined') lucide.createIcons();
+        });
+    </script>
+</body>
+</html>
