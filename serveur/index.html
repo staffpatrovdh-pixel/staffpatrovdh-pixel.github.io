@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connexion Serveur | Patro du Val d'Haine</title>
+    
+    <!-- Lien vers le CSS principal (remontée d'un dossier) -->
+    <link rel="stylesheet" href="../style.css">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Icônes Lucide -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <script>
+        // Configuration identique au reste du site
+        tailwind.config = { theme: { extend: { colors: { patro: { yellow: '#FFD700', green: '#009045', dark: '#1a1a1a', light: '#f8fafc' } }, fontFamily: { sans: ['Poppins', 'sans-serif'], display: ['Fredoka', 'sans-serif'] } } } }
+    </script>
+
+    <style>
+        /* Animation des points de connexion */
+        @keyframes pulse-flow {
+            0% { transform: scale(0.8); opacity: 0.5; }
+            50% { transform: scale(1.2); opacity: 1; }
+            100% { transform: scale(0.8); opacity: 0.5; }
+        }
+        .dot-anim { animation: pulse-flow 1.5s infinite ease-in-out; }
+        .delay-100 { animation-delay: 0.2s; }
+        .delay-200 { animation-delay: 0.4s; }
+    </style>
+</head>
+<body class="h-screen flex flex-col items-center justify-center p-4 overflow-hidden bg-patro-dark font-sans relative">
+
+    <!-- Fond décoratif aux couleurs du Patro -->
+    <div class="absolute inset-0 z-0 opacity-20">
+        <div class="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] bg-patro-green rounded-full blur-[120px]"></div>
+        <div class="absolute bottom-[-20%] right-[-10%] w-[50%] h-[50%] bg-patro-yellow rounded-full blur-[120px]"></div>
+    </div>
+
+    <!-- Carte de connexion style "Patro Tech" -->
+    <div class="z-10 w-full max-w-md bg-white/10 backdrop-blur-xl border border-white/20 p-8 rounded-3xl shadow-2xl text-center relative overflow-hidden">
+        
+        <!-- Logo ou Icône Serveur -->
+        <div class="mb-8 relative inline-block">
+            <div class="w-20 h-20 bg-patro-yellow rounded-full flex items-center justify-center shadow-lg mx-auto z-10 relative">
+                <i data-lucide="server" class="w-10 h-10 text-patro-dark"></i>
+            </div>
+            <!-- Effet d'onde derrière le logo -->
+            <div class="absolute inset-0 bg-patro-yellow rounded-full animate-ping opacity-20"></div>
+        </div>
+
+        <h1 class="text-2xl font-display font-bold text-white mb-2">Serveur Patro VDH</h1>
+        <p class="text-green-100 text-sm mb-8 font-light">Établissement de la liaison sécurisée...</p>
+
+        <!-- Animation de connexion visuelle -->
+        <div class="flex justify-center items-center gap-4 mb-8 text-patro-yellow">
+            <i data-lucide="smartphone" class="w-6 h-6 text-white/50"></i>
+            <div class="flex gap-2">
+                <div class="w-2 h-2 bg-patro-green rounded-full dot-anim"></div>
+                <div class="w-2 h-2 bg-patro-green rounded-full dot-anim delay-100"></div>
+                <div class="w-2 h-2 bg-patro-green rounded-full dot-anim delay-200"></div>
+            </div>
+            <i data-lucide="database" class="w-6 h-6 text-white"></i>
+        </div>
+
+        <!-- Logs (Style Console propre) -->
+        <div class="bg-black/30 rounded-xl p-4 mb-6 text-left h-24 overflow-hidden flex flex-col justify-end border border-white/5">
+            <div id="logs" class="space-y-1 font-mono text-xs text-green-400">
+                <p class="opacity-50">> Démarrage...</p>
+            </div>
+        </div>
+
+        <!-- Info IP -->
+        <div id="ip-badge" class="hidden inline-flex items-center gap-2 px-3 py-1 bg-white/10 rounded-full border border-white/10 text-xs text-gray-300 mb-6 transition-all duration-500">
+            <i data-lucide="globe" class="w-3 h-3"></i>
+            <span id="user-ip">Recherche IP...</span>
+        </div>
+
+        <!-- Barre de progression -->
+        <div class="w-full bg-gray-700/50 rounded-full h-2 overflow-hidden relative">
+            <div id="progress" class="bg-patro-yellow h-full rounded-full shadow-[0_0_10px_#FFD700]" style="width: 0%; transition: width 0.4s ease-out;"></div>
+        </div>
+        
+    </div>
+
+    <p class="text-white/20 text-xs mt-8 font-mono">Sécurisé via CloudFlare</p>
+
+    <script>
+        lucide.createIcons();
+        
+        const logs = document.getElementById('logs');
+        const progress = document.getElementById('progress');
+        const ipBadge = document.getElementById('ip-badge');
+        const userIpSpan = document.getElementById('user-ip');
+        const targetUrl = "https://ug.link/serveurlr";
+
+        function addLog(text, color = "text-green-400") {
+            const p = document.createElement('p');
+            p.className = color;
+            p.innerHTML = `> ${text}`;
+            logs.appendChild(p);
+            logs.scrollTop = logs.scrollHeight; // Auto-scroll vers le bas
+        }
+
+        async function startSequence() {
+            // Démarrage
+            await new Promise(r => setTimeout(r, 300));
+            progress.style.width = "15%";
+            addLog("Analyse connexion...");
+            
+            // IP
+            await new Promise(r => setTimeout(r, 600));
+            progress.style.width = "40%";
+            
+            try {
+                const response = await fetch('https://api.ipify.org?format=json');
+                const data = await response.json();
+                ipBadge.classList.remove('hidden');
+                userIpSpan.innerText = `IP: ${data.ip}`;
+                addLog(`Source identifiée : ${data.ip}`, "text-patro-yellow");
+            } catch (e) {
+                addLog("Mode anonyme détecté.", "text-gray-400");
+            }
+
+            // Sécurité
+            await new Promise(r => setTimeout(r, 800));
+            progress.style.width = "75%";
+            addLog("Vérification du foulard...", "text-white"); // Petit clin d'oeil Patro
+            
+            // Fin
+            await new Promise(r => setTimeout(r, 600));
+            progress.style.width = "100%";
+            addLog("Accès autorisé. Redirection !", "text-patro-yellow font-bold");
+            
+            // Redirection
+            setTimeout(() => {
+                window.location.href = targetUrl;
+            }, 800);
+        }
+
+        startSequence();
+    </script>
+</body>
+</html>
