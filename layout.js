@@ -110,7 +110,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     <span class="hidden md:inline">•</span>
                     <a href="cookies.html" class="hover:text-white transition">Politique Cookies</a>
                     <span class="hidden md:inline">•</span>
-                    <a href="admin.html" class="text-gray-700 hover:text-gray-500 transition" title="Accès Staff"><i data-lucide="lock" class="w-3 h-3"></i></a>
+                    <a href="serveur/index.html" class="text-gray-700 hover:text-gray-500 transition" title="Accès Staff"><i data-lucide="lock" class="w-3 h-3"></i></a>
                 </div>
             </div>
         </footer>
