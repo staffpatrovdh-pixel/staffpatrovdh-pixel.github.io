@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stocks Restants | Souper 2025</title>
+    
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <script>
+        tailwind.config = { theme: { extend: { colors: { patro: { yellow: '#FFD700', green: '#009045', dark: '#1a1a1a', light: '#f8fafc' } } } } }
+    </script>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans">
+
+    <!-- Bannière Simple -->
+    <div class="bg-patro-green py-8 shadow-md">
+        <div class="max-w-4xl mx-auto px-4 text-center">
+            <h1 class="text-3xl md:text-4xl font-bold text-white mb-2 flex justify-center items-center gap-3">
+                <i data-lucide="wine" class="text-patro-yellow"></i>
+                Bourse aux boissons
+            </h1>
+            <p class="text-green-100 text-lg">Souper de Saint-Nicolas 2025</p>
+        </div>
+    </div>
+
+    <div class="max-w-4xl mx-auto p-4 md:p-8 space-y-8 -mt-8 relative z-10">
+        
+        <!-- Carte Intro -->
+        <div class="bg-white rounded-2xl p-6 shadow-lg border-t-4 border-patro-yellow text-center">
+            <p class="text-gray-600 mb-4">
+                Chers partenaires, suite à notre souper, il nous reste quelques boissons en stock. <br>
+                Nous vous les proposons à prix coûtant ! <br>
+                <strong>Premier arrivé, premier servi.</strong>
+            </p>
+            <a href="mailto:patrovaldhaine@patro.be?subject=Réservation Stock Boissons" class="inline-flex items-center gap-2 px-6 py-3 bg-patro-green text-white font-bold rounded-full hover:bg-green-700 transition shadow-md hover:shadow-lg transform hover:-translate-y-0.5">
+                <i data-lucide="mail" class="w-5 h-5"></i>
+                Réserver par email
+            </a>
+        </div>
+
+        <!-- TABLEAU DES STOCKS -->
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
+            <div class="p-4 bg-gray-50 border-b border-gray-100 flex justify-between items-center">
+                <h2 class="font-bold text-gray-700 flex items-center gap-2">
+                    <i data-lucide="list" class="w-5 h-5 text-patro-green"></i> Liste des disponibilités
+                </h2>
+                <span class="text-xs text-gray-400 bg-white px-2 py-1 rounded border">Mise à jour en temps réel</span>
+            </div>
+            
+            <div class="overflow-x-auto">
+                <table class="w-full text-left text-sm">
+                    <thead class="bg-white text-gray-500 uppercase tracking-wider font-semibold border-b-2 border-gray-100">
+                        <tr>
+                            <th class="p-4">Produit</th>
+                            <th class="p-4 text-center">Format</th>
+                            <th class="p-4 text-right">Prix</th>
+                            <th class="p-4 text-center bg-gray-50/50 text-gray-400 font-normal text-xs">Déjà Réservé</th>
+                            <th class="p-4 text-center w-32">Disponible</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-100" id="stock-body">
+                        <!-- Rempli par JS -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Note Péremption -->
+        <div class="text-center text-xs text-gray-400 italic">
+            * Les dates de péremption sont indiquées à titre informatif. Tous les produits sont conservés dans de bonnes conditions.
+        </div>
+
+    </div>
+
+    <script>
+        // DONNÉES STOCKS
+        const inventory = [
+            { name: "Paix Dieu Blonde", vol: "33cl", stock: 27, price: "3,27 €", perim: "oct-27" },
+            { name: "Leffe Brune", vol: "33cl", stock: 48, price: "1,85 €", perim: "13/10/26" },
+            { name: "Hoegaarden rosé", vol: "25cl", stock: 24, price: "3,20 €", perim: "17/05/26" },
+            { name: "Jupiler", vol: "25cl", stock: 87, price: "0,85 €", perim: "9/08/26" },
+            { name: "Fanta orange", vol: "1,5L", stock: 8, price: "3,18 €", perim: "31/12/25" },
+            { name: "CocaCola 0%", vol: "1,5L", stock: 12, price: "3,10 €", perim: "30/04/26" },
+            { name: "CocaCola", vol: "1,5L", stock: 12, price: "3,33 €", perim: "30/04/26" },
+            { name: "Orange Spritz", vol: "75cl", stock: 8, price: "6,99 €", perim: "7/03/28" }
+        ];
+
+        // DONNÉES RÉSERVATIONS (Interne, utilisé pour le calcul)
+        const reservations = {
+            "Paix Dieu Blonde": 12,
+            "Leffe Brune": 48,
+            "CocaCola": 6,
+            "CocaCola 0%": 6,
+            "Hoegaarden rosé": 24
+        };
+
+        function renderStocks() {
+            const tbody = document.getElementById('stock-body');
+            tbody.innerHTML = '';
+
+            inventory.forEach(item => {
+                const reserved = reservations[item.name] || 0;
+                const available = item.stock - reserved;
+                
+                // Style conditionnel
+                let rowClass = "hover:bg-gray-50 transition";
+                let dispoBadge = `<span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-bold bg-green-100 text-green-700">${available}</span>`;
+                
+                // Si épuisé
+                if (available <= 0) {
+                    rowClass = "bg-gray-50 opacity-60 grayscale";
+                    dispoBadge = `<span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-gray-200 text-gray-500">Épuisé</span>`;
+                } 
+                // Si stock faible
+                else if (available <= 10) {
+                    dispoBadge = `<span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-bold bg-orange-100 text-orange-700 animate-pulse">${available} !</span>`;
+                }
+
+                const tr = document.createElement('tr');
+                tr.className = rowClass;
+                tr.innerHTML = `
+                    <td class="p-4">
+                        <div class="font-bold text-gray-800">${item.name}</div>
+                        <div class="text-[10px] text-gray-400">Péremption: ${item.perim}</div>
+                    </td>
+                    <td class="p-4 text-center text-gray-500">${item.vol}</td>
+                    <td class="p-4 text-right font-medium">${item.price}</td>
+                    <td class="p-4 text-center bg-gray-50/30 text-gray-400 font-mono text-xs">${reserved > 0 ? reserved : '-'}</td>
+                    <td class="p-4 text-center">${dispoBadge}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderStocks();
+            lucide.createIcons();
+        });
+    </script>
+</body>
+</html>
