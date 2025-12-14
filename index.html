@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Site en maintenance</title>
+    
+    <!-- On garde le style global -->
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        tailwind.config = { theme: { extend: { 
+            colors: { patro: { yellow: '#FFD700', green: '#009045', dark: '#1a1a1a', light: '#f8fafc' } }, 
+            fontFamily: { sans: ['Poppins', 'sans-serif'], display: ['Fredoka', 'sans-serif'], handwritten: ['Indie Flower', 'cursive'] },
+            animation: {
+                'bounce-slow': 'bounce 3s infinite',
+                'wiggle': 'wiggle 1s ease-in-out infinite',
+            },
+            keyframes: {
+                wiggle: {
+                    '0%, 100%': { transform: 'rotate(-3deg)' },
+                    '50%': { transform: 'rotate(3deg)' },
+                }
+            }
+        } } }
+    </script>
+
+    <style>
+        /* Fond rayé chantier Patro */
+        .construction-bg {
+            background-color: #009045;
+            background-image: repeating-linear-gradient(
+                45deg,
+                #009045,
+                #009045 20px,
+                #007a3a 20px,
+                #007a3a 40px
+            );
+        }
+    </style>
+</head>
+<body class="construction-bg min-h-screen flex items-center justify-center p-4">
+
+    <!-- Carte Centrale -->
+    <div class="bg-white max-w-2xl w-full rounded-3xl shadow-2xl overflow-hidden relative text-center p-8 md:p-12 border-4 border-patro-yellow">
+        
+        <!-- Déco coins -->
+        <div class="absolute top-0 left-0 w-16 h-16 bg-patro-yellow rounded-br-full z-0"></div>
+        <div class="absolute bottom-0 right-0 w-16 h-16 bg-patro-green rounded-tl-full z-0"></div>
+
+        <div class="relative z-10">
+            <!-- Icône Animée -->
+            <div class="mb-8 relative inline-block">
+                <div class="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto animate-bounce-slow">
+                    <i data-lucide="hammer" class="w-12 h-12 text-patro-green animate-wiggle"></i>
+                </div>
+                <!-- Petits écrous qui volent -->
+                <i data-lucide="settings" class="absolute top-0 right-0 w-6 h-6 text-patro-yellow animate-spin" style="animation-duration: 3s;"></i>
+                <i data-lucide="settings-2" class="absolute bottom-0 left-0 w-5 h-5 text-gray-400 animate-spin" style="animation-duration: 5s;"></i>
+            </div>
+
+            <h1 class="text-4xl md:text-5xl font-display font-bold text-gray-800 mb-4">
+                Oups, le site est en maintenance... Désolé !
+            </h1>
+            
+            <p class="text-xl font-handwritten text-patro-green font-bold mb-6 transform -rotate-1">
+                "Les animateurs doivent checker les brêlages du site..."
+            </p>
+
+            <p class="text-gray-600 mb-8 leading-relaxed">
+                Le site du <strong>Patro du Val d'Haine</strong> est en cours de maintenance. <br>
+                Maintenance en cours sur : calendrier.php ; index.html ; api.php.
+            </p>
+
+            <!-- Boutons de contact -->
+            <div class="flex flex-col md:flex-row justify-center gap-4">
+                <a href="https://www.facebook.com/patrovaldhaine" target="_blank" class="flex items-center justify-center gap-2 px-6 py-3 bg-[#1877F2] text-white font-bold rounded-xl hover:bg-blue-700 transition shadow-md transform hover:-translate-y-1">
+                    <i data-lucide="facebook" class="w-5 h-5"></i>
+                    Suivez-nous sur Facebook
+                </a>
+                <a href="mailto:patrovaldhaine@patro.be" class="flex items-center justify-center gap-2 px-6 py-3 bg-gray-800 text-white font-bold rounded-xl hover:bg-black transition shadow-md transform hover:-translate-y-1">
+                    <i data-lucide="mail" class="w-5 h-5"></i>
+                    Nous contacter
+                </a>
+            </div>
+
+            <div class="mt-8 pt-8 border-t border-dashed border-gray-200 text-sm text-gray-400">
+                &copy; Copyright 2025 Patro du Val d'Haine
+            </div>
+        </div>
+    </div>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
