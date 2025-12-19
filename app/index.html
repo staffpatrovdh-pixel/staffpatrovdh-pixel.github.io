@@ -5,14 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portail des Applications | Patro du Val d'Haine</title>
     
-    <link rel="stylesheet" href="style.css">
-    <!-- Police manuscrite -->
+    <!-- Chemins adaptés (../) -->
+    <link rel="stylesheet" href="../style.css">
     <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
     
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
-    <!-- On charge le layout pour le footer -->
-    <script src="layout.js?v=8"></script>
+    <script src="../layout.js?v=8"></script>
 
     <script>
         tailwind.config = { theme: { extend: { colors: { patro: { yellow: '#FFD700', green: '#009045', dark: '#1a1a1a', light: '#f8fafc' } }, fontFamily: { sans: ['Poppins', 'sans-serif'], display: ['Fredoka', 'sans-serif'], handwritten: ['Indie Flower', 'cursive'] } } } }
@@ -23,14 +22,12 @@
     <div id="custom-cursor"></div>
     <div id="loader"><div class="spinner mb-4"></div><p class="text-patro-green font-bold font-display animate-pulse">Chargement du portail...</p></div>
     
-    <!-- Navbar simplifiée pour le portail (Optionnel, sinon le layout.js le gère) -->
     <div id="navbar-placeholder"></div>
 
     <!-- En-tête Portail -->
     <div class="pt-32 pb-16 bg-patro-dark relative overflow-hidden">
-        <!-- Image de fond avec overlay -->
         <div class="absolute inset-0 z-0">
-            <img src="donnees-site/photos-site-accueil/portail.png" alt="Portail Patro" class="w-full h-full object-cover opacity-40">
+            <img src="../donnees-site/photos-site-accueil/portail.png" alt="Portail Patro" class="w-full h-full object-cover opacity-40">
             <div class="absolute inset-0 bg-gradient-to-t from-patro-dark/90 to-patro-dark/60"></div>
         </div>
 
