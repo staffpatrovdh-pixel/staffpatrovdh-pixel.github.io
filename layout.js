@@ -15,7 +15,6 @@ document.addEventListener("DOMContentLoaded", function () {
                     <!-- Desktop Menu -->
                     <div class="hidden lg:flex space-x-5 items-center">
                         <a href="index.html" class="nav-link text-gray-600 hover:text-patro-green font-medium transition">Accueil</a>
-                        <!-- NOUVEAU LIEN AGENDA -->
                         <a href="index.html#infos" class="nav-link text-gray-600 hover:text-patro-green font-medium transition">Agenda</a>
                         <a href="contact.html" class="nav-link text-gray-600 hover:text-patro-green font-medium transition">Le Staff</a>
                         <a href="documents.html" class="nav-link text-gray-600 hover:text-patro-green font-medium transition">Documents</a>
@@ -39,7 +38,6 @@ document.addEventListener("DOMContentLoaded", function () {
             <div id="mobile-menu" class="hidden lg:hidden bg-white border-t">
                 <div class="px-4 pt-2 pb-6 space-y-2 shadow-lg">
                     <a href="index.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-patro-green hover:bg-yellow-50">Accueil</a>
-                    <!-- NOUVEAU LIEN AGENDA MOBILE -->
                     <a href="index.html#infos" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-patro-green hover:bg-yellow-50">Agenda</a>
                     <a href="contact.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-patro-green hover:bg-yellow-50">Le Staff</a>
                     <a href="documents.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-patro-green hover:bg-yellow-50">Documents</a>
@@ -110,7 +108,13 @@ document.addEventListener("DOMContentLoaded", function () {
                     <span class="hidden md:inline">•</span>
                     <a href="cookies.html" class="hover:text-white transition">Politique Cookies</a>
                     <span class="hidden md:inline">•</span>
-                    <a href="serveur/index.html" class="text-gray-700 hover:text-gray-500 transition" title="Accès Staff"><i data-lucide="lock" class="w-3 h-3"></i></a>
+                    <!-- BOUTON PORTAIL APPS -->
+                    <a href="app/index.html" class="flex items-center gap-1 text-patro-yellow hover:text-white transition font-medium" title="Portail Apps">
+                        <i data-lucide="grid" class="w-3 h-3"></i> Portail Apps
+                    </a>
+                    <span class="hidden md:inline">•</span>
+                    <!-- LIEN ADMIN -->
+                    <a href="serveur/index.html" class="text-gray-700 hover:text-gray-500 transition" title="Accès Serveur"><i data-lucide="lock" class="w-3 h-3"></i></a>
                 </div>
             </div>
         </footer>
@@ -169,7 +173,6 @@ function highlightActiveLink() {
     const links = document.querySelectorAll('.nav-link');
     
     links.forEach(link => {
-        // Logique spécifique pour le lien Agenda (ancre)
         if (link.getAttribute('href').includes('#')) return;
 
         if (link.getAttribute('href') === currentPath) {
