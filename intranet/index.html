@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Espace Membres - Gestion</title>
+    
+    <!-- React & ReactDOM -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    
+    <!-- Tailwind CSS (Design) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Firebase SDKs (Version Compat pour fonctionnement simple en HTML) -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Styles Personnalisés -->
+    <style>
+        .loader {
+            border-top-color: #3498db;
+            -webkit-animation: spinner 1.5s linear infinite;
+            animation: spinner 1.5s linear infinite;
+        }
+        @keyframes spinner {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Ajustements pour mobile */
+        @media (max-width: 768px) {
+            .table-responsive {
+                display: block;
+                width: 100%;
+                overflow-x: auto;
+            }
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#2F855A', // Vert Scout
+                        secondary: '#C05621', // Orange/Marron
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans">
+    <div id="root"></div>
+
+    <script type="text/babel">
+        // --- 1. CONFIGURATION FIREBASE (INTEGRÉE) ---
+        const firebaseConfig = {
+            apiKey: "AIzaSyArZZZNv1IxgpA4zNsx6InAWPwv84Rzjlg",
+            authDomain: "gestionscouts-8d6f9.firebaseapp.com",
+            projectId: "gestionscouts-8d6f9",
+            storageBucket: "gestionscouts-8d6f9.firebasestorage.app",
+            messagingSenderId: "542583637412",
+            appId: "1:542583637412:web:cd25fa737565679523ad31",
+            measurementId: "G-8PPMS8LMRK"
+        };
+
+        // Initialisation sécurisée
+        if (!firebase.apps.length) {
+            firebase.initializeApp(firebaseConfig);
+        }
+        const auth = firebase.auth();
+        const db = firebase.firestore();
+
+        // --- 2. CONSTANTES ET UTILITAIRES ---
+        const ROLES = {
+            PARENT: 'Parent',
+            ANIMATEUR: 'Animateur',
+            TRESORIER: 'Trésorier',
+            PRESIDENT: 'Président',
+            VICE_PRESIDENT: 'Vice-président',
+            INTENDANT: 'Intendant',
+            ADMIN: 'Admin'
+        };
+
+        const SECTIONS = ['Baladins', 'Louveteaux', 'Eclaireurs', 'Pionniers'];
+
+        const calculateAge = (dob) => {
+            if (!dob) return 0;
+            const birthDate = new Date(dob);
+            const ageDifMs = Date.now() - birthDate.getTime();
+            const ageDate = new Date(ageDifMs);
+            return Math.abs(ageDate.getUTCFullYear() - 1970);
+        };
+
+        const hasPermission = (userRole, allowedRoles) => {
+            if (!userRole) return false;
+            if (userRole === ROLES.ADMIN) return true;
+            return allowedRoles.includes(userRole);
+        };
+
+        // --- 3. COMPOSANTS ---
+
+        const Icon = ({ name, size = 20, className = "" }) => {
+            React.useEffect(() => {
+                lucide.createIcons();
+            }, [name]);
+            return <i data-lucide={name} className={className} style={{ width: size, height: size }}></i>;
+        };
+
+        // Ecran de Connexion
+        const Login = () => {
+            const [email, setEmail] = React.useState('');
+            const [password, setPassword] = React.useState('');
+            const [error, setError] = React.useState('');
+            const [loading, setLoading] = React.useState(false);
+
+            const handleSubmit = async (e) => {
+                e.preventDefault();
+                setLoading(true);
+                setError('');
+                try {
+                    await auth.signInWithEmailAndPassword(email, password);
+                } catch (err) {
+                    setError("Erreur : Email ou mot de passe incorrect.");
+                } finally {
+                    setLoading(false);
+                }
+            };
+
+            return (
+                <div className="min-h-screen flex items-center justify-center bg-gray-100 p-4">
+                    <div className="bg-white p-8 rounded-lg shadow-xl w-full max-w-md border-t-4 border-primary">
+                        <div className="text-center mb-6">
+                            <h2 className="text-3xl font-bold text-primary">Scouts</h2>
+                            <p className="text-gray-500">Plateforme de gestion</p>
+                        </div>
+                        {error && <div className="bg-red-100 text-red-700 p-3 rounded mb-4 text-sm">{error}</div>}
+                        <form onSubmit={handleSubmit} className="space-y-4">
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700">Email</label>
+                                <input type="email" required className="w-full mt-1 p-2 border rounded focus:ring-2 focus:ring-primary outline-none" value={email} onChange={e => setEmail(e.target.value)} />
+                            </div>
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700">Mot de passe</label>
+                                <input type="password" required className="w-full mt-1 p-2 border rounded focus:ring-2 focus:ring-primary outline-none" value={password} onChange={e => setPassword(e.target.value)} />
+                            </div>
+                            <button disabled={loading} type="submit" className="w-full bg-primary text-white py-2 rounded hover:bg-green-700 transition font-bold shadow-md">
+                                {loading ? 'Connexion...' : 'Se Connecter'}
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            );
+        };
+
+        // Gestion des Affiliés
+        const AffiliateManager = ({ userRole, userId }) => {
+            const [affiliates, setAffiliates] = React.useState([]);
+            const [view, setView] = React.useState('list');
+            const [currentAffiliate, setCurrentAffiliate] = React.useState(null);
+            const [filters, setFilters] = React.useState({ paid: 'all', section: 'all', photo: 'all', search: '' });
+            const [allParents, setAllParents] = React.useState([]);
+
+            React.useEffect(() => {
+                const unsubscribe = db.collection('affiliates').onSnapshot(snapshot => {
+                    const data = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                    if (userRole === ROLES.PARENT) {
+                        // Un parent ne voit que ses enfants
+                        setAffiliates(data.filter(aff => aff.parentIds && aff.parentIds.includes(userId)));
+                    } else {
+                        setAffiliates(data);
+                    }
+                });
+                return () => unsubscribe();
+            }, [userRole, userId]);
+
+            React.useEffect(() => {
+                if (userRole !== ROLES.PARENT) {
+                    db.collection('users').where('role', '==', ROLES.PARENT).get().then(snap => {
+                        setAllParents(snap.docs.map(doc => ({ id: doc.id, ...doc.data() })));
+                    });
+                }
+            }, [userRole]);
+
+            const handleSave = async (e) => {
+                e.preventDefault();
+                const form = e.target;
+                const data = {
+                    lastName: form.lastName.value,
+                    firstName: form.firstName.value,
+                    dob: form.dob.value,
+                    address: form.address.value,
+                    photoAuth: form.photoAuth.checked,
+                    section: form.section.value,
+                    contactMain: {
+                        name: form.c1Name.value,
+                        firstName: form.c1First.value,
+                        email: form.c1Email.value,
+                        gsm: form.c1Gsm.value
+                    },
+                    contactSec: {
+                        name: form.c2Name.value,
+                        firstName: form.c2First.value,
+                        email: form.c2Email.value,
+                        gsm: form.c2Gsm.value
+                    },
+                    medical: {
+                        doctorName: form.docName.value,
+                        doctorPhone: form.docPhone.value,
+                        illness: form.illness.value,
+                        allergies: form.allergies.value,
+                        treatment: form.treatment.value,
+                        diet: form.diet.value
+                    },
+                    affiliationPaid: form.affiliationPaid?.checked || false,
+                    parentIds: form.parentIds ? Array.from(form.parentIds.selectedOptions).map(opt => opt.value) : (currentAffiliate?.parentIds || []),
+                    history: currentAffiliate?.history || [] 
+                };
+
+                try {
+                    if (view === 'create') {
+                        await db.collection('affiliates').add(data);
+                    } else {
+                        await db.collection('affiliates').doc(currentAffiliate.id).update(data);
+                    }
+                    setView('list');
+                } catch (err) {
+                    alert("Erreur: " + err.message);
+                }
+            };
+
+            const filteredAffiliates = affiliates.filter(aff => {
+                const matchesSearch = (aff.lastName + ' ' + aff.firstName).toLowerCase().includes(filters.search.toLowerCase());
+                const matchesPaid = filters.paid === 'all' ? true : (filters.paid === 'yes' ? aff.affiliationPaid : !aff.affiliationPaid);
+                const matchesSection = filters.section === 'all' ? true : aff.section === filters.section;
+                const matchesPhoto = filters.photo === 'all' ? true : (filters.photo === 'yes' ? aff.photoAuth : !aff.photoAuth);
+                return matchesSearch && matchesPaid && matchesSection && matchesPhoto;
+            });
+
+            const isReadOnly = userRole === ROLES.PARENT;
+
+            if (view === 'list') {
+                return (
+                    <div className="bg-white rounded shadow-md p-4 md:p-6">
+                        <div className="flex flex-col md:flex-row justify-between items-center mb-6 gap-4">
+                            <h2 className="text-2xl font-bold text-gray-700 flex items-center">
+                                <Icon name="users" className="mr-2"/> Affiliés
+                            </h2>
+                            {!isReadOnly && (
+                                <button onClick={() => { setCurrentAffiliate(null); setView('create'); }} className="w-full md:w-auto bg-primary text-white px-4 py-2 rounded flex items-center justify-center hover:bg-green-700">
+                                    <Icon name="plus" className="mr-2"/> Nouvel Affilié
+                                </button>
+                            )}
+                        </div>
+
+                        {/* Filtres (Cachés pour les parents s'ils n'ont que peu d'enfants) */}
+                        {!isReadOnly && (
+                            <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6 bg-gray-50 p-4 rounded border">
+                                <input type="text" placeholder="Rechercher nom..." className="p-2 border rounded" onChange={e => setFilters({...filters, search: e.target.value})} />
+                                <select className="p-2 border rounded" onChange={e => setFilters({...filters, section: e.target.value})}>
+                                    <option value="all">Toutes sections</option>
+                                    {SECTIONS.map(s => <option key={s} value={s}>{s}</option>)}
+                                </select>
+                                <select className="p-2 border rounded" onChange={e => setFilters({...filters, paid: e.target.value})}>
+                                    <option value="all">Paiement</option>
+                                    <option value="yes">Payé</option>
+                                    <option value="no">Non-payé</option>
+                                </select>
+                                <select className="p-2 border rounded" onChange={e => setFilters({...filters, photo: e.target.value})}>
+                                    <option value="all">Photos</option>
+                                    <option value="yes">Autorisé</option>
+                                    <option value="no">Refusé</option>
+                                </select>
+                            </div>
+                        )}
+
+                        <div className="overflow-x-auto">
+                            <table className="min-w-full divide-y divide-gray-200">
+                                <thead className="bg-gray-100">
+                                    <tr>
+                                        <th className="p-3 text-left text-xs font-medium text-gray-500 uppercase">Identité</th>
+                                        <th className="p-3 text-left text-xs font-medium text-gray-500 uppercase">Age</th>
+                                        <th className="p-3 text-left text-xs font-medium text-gray-500 uppercase">Section</th>
+                                        <th className="p-3 text-left text-xs font-medium text-gray-500 uppercase">Cotisation</th>
+                                        <th className="p-3 text-left text-xs font-medium text-gray-500 uppercase">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody className="bg-white divide-y divide-gray-200">
+                                    {filteredAffiliates.map(aff => (
+                                        <tr key={aff.id} className="hover:bg-gray-50">
+                                            <td className="p-3 font-medium">
+                                                <div className="text-gray-900">{aff.lastName} {aff.firstName}</div>
+                                                <div className="text-xs text-gray-500 md:hidden">{calculateAge(aff.dob)} ans - {aff.section}</div>
+                                            </td>
+                                            <td className="p-3 hidden md:table-cell">{calculateAge(aff.dob)} ans</td>
+                                            <td className="p-3 hidden md:table-cell"><span className="px-2 py-1 rounded bg-blue-100 text-blue-800 text-xs">{aff.section}</span></td>
+                                            <td className="p-3">
+                                                {aff.affiliationPaid 
+                                                    ? <span className="text-green-600 font-bold text-xs bg-green-100 px-2 py-1 rounded">Payée</span> 
+                                                    : <span className="text-red-600 font-bold text-xs bg-red-100 px-2 py-1 rounded">Non-payée</span>}
+                                            </td>
+                                            <td className="p-3">
+                                                <button onClick={() => { setCurrentAffiliate(aff); setView('edit'); }} className="text-blue-600 hover:text-blue-900 text-sm font-semibold">
+                                                    Voir fiche
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                            {filteredAffiliates.length === 0 && <p className="text-center py-8 text-gray-500 italic">Aucun affilié trouvé.</p>}
+                        </div>
+                    </div>
+                );
+            }
+
+            return (
+                <div className="bg-white rounded shadow-md p-6 max-w-4xl mx-auto">
+                    <div className="flex justify-between items-center mb-6 border-b pb-4">
+                        <h2 className="text-2xl font-bold text-gray-700">{view === 'create' ? 'Nouvel Affilié' : 'Fiche Affilié'}</h2>
+                        <button onClick={() => setView('list')} className="text-gray-600 hover:text-gray-800 flex items-center">
+                            <Icon name="arrow-left" className="mr-1"/> Retour
+                        </button>
+                    </div>
+
+                    <form onSubmit={handleSave} className="space-y-6">
+                        {/* Identité */}
+                        <div className="bg-gray-50 p-4 rounded border border-gray-200">
+                            <h3 className="text-lg font-bold text-primary mb-4 flex items-center"><Icon name="user" className="mr-2"/> Identité</h3>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <input name="lastName" placeholder="Nom" defaultValue={currentAffiliate?.lastName} required readOnly={isReadOnly} className="p-2 border rounded" />
+                                <input name="firstName" placeholder="Prénom" defaultValue={currentAffiliate?.firstName} required readOnly={isReadOnly} className="p-2 border rounded" />
+                                <div>
+                                    <label className="text-xs text-gray-500 block mb-1">Date de naissance</label>
+                                    <input type="date" name="dob" defaultValue={currentAffiliate?.dob} required readOnly={isReadOnly} className="w-full p-2 border rounded" />
+                                </div>
+                                <div>
+                                    <label className="text-xs text-gray-500 block mb-1">Section</label>
+                                    <select name="section" defaultValue={currentAffiliate?.section || 'Baladins'} disabled={isReadOnly} className="w-full p-2 border rounded">
+                                        {SECTIONS.map(s => <option key={s} value={s}>{s}</option>)}
+                                    </select>
+                                </div>
+                                <input name="address" placeholder="Adresse complète" defaultValue={currentAffiliate?.address} required readOnly={isReadOnly} className="md:col-span-2 p-2 border rounded" />
+                                
+                                <div className="flex flex-col space-y-2 md:col-span-2">
+                                    <label className="flex items-center space-x-2 bg-white p-2 rounded border">
+                                        <input type="checkbox" name="photoAuth" defaultChecked={currentAffiliate?.photoAuth} disabled={isReadOnly} />
+                                        <span>Autorisation prise de photos</span>
+                                    </label>
+                                    {!isReadOnly && (
+                                        <label className="flex items-center space-x-2 bg-white p-2 rounded border border-green-200">
+                                            <input type="checkbox" name="affiliationPaid" defaultChecked={currentAffiliate?.affiliationPaid} />
+                                            <span className="text-green-700 font-semibold">Cotisation Annuelle Payée</span>
+                                        </label>
+                                    )}
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Contacts */}
+                        <div className="bg-gray-50 p-4 rounded border border-gray-200">
+                            <h3 className="text-lg font-bold text-primary mb-4 flex items-center"><Icon name="phone" className="mr-2"/> Contacts</h3>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div className="md:col-span-2 text-sm font-semibold uppercase text-gray-500 border-b pb-1">Principal</div>
+                                <input name="c1Name" placeholder="Nom" defaultValue={currentAffiliate?.contactMain?.name} required readOnly={isReadOnly} className="p-2 border rounded" />
+                                <input name="c1First" placeholder="Prénom" defaultValue={currentAffiliate?.contactMain?.firstName} required readOnly={isReadOnly} className="p-2 border rounded" />
+                                <input name="c1Email" type="email" placeholder="Email" defaultValue={currentAffiliate?.contactMain?.email} required readOnly={isReadOnly} className="p-2 border rounded" />
+                                <input name="c1Gsm" placeholder="GSM" defaultValue={currentAffiliate?.contactMain?.gsm} required readOnly={isReadOnly} className="p-2 border rounded" />
+                                
+                                <div className="md:col-span-2 text-sm font-semibold uppercase text-gray-500 border-b pb-1 mt-4">Secondaire</div>
+                                <input name="c2Name" placeholder="Nom" defaultValue={currentAffiliate?.contactSec?.name} readOnly={isReadOnly} className="p-2 border rounded" />
+                                <input name="c2First" placeholder="Prénom" defaultValue={currentAffiliate?.contactSec?.firstName} readOnly={isReadOnly} className="p-2 border rounded" />
+                                <input name="c2Email" type="email" placeholder="Email" defaultValue={currentAffiliate?.contactSec?.email} readOnly={isReadOnly} className="p-2 border rounded" />
+                                <input name="c2Gsm" placeholder="GSM" defaultValue={currentAffiliate?.contactSec?.gsm} readOnly={isReadOnly} className="p-2 border rounded" />
+                            </div>
+                        </div>
+
+                        {/* Médical */}
+                        <div className="bg-gray-50 p-4 rounded border border-gray-200">
+                            <h3 className="text-lg font-bold text-primary mb-4 flex items-center"><Icon name="activity" className="mr-2"/> Fiche Médicale</h3>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <input name="docName" placeholder="Médecin Traitant" defaultValue={currentAffiliate?.medical?.doctorName} readOnly={isReadOnly} className="p-2 border rounded" />
+                                <input name="docPhone" placeholder="Tél Médecin" defaultValue={currentAffiliate?.medical?.doctorPhone} readOnly={isReadOnly} className="p-2 border rounded" />
+                                <textarea name="illness" placeholder="Maladies éventuelles" defaultValue={currentAffiliate?.medical?.illness} readOnly={isReadOnly} className="p-2 border rounded h-20 md:col-span-2"></textarea>
+                                <textarea name="allergies" placeholder="Allergies" defaultValue={currentAffiliate?.medical?.allergies} readOnly={isReadOnly} className="p-2 border rounded h-20 md:col-span-2"></textarea>
+                                <textarea name="treatment" placeholder="Traitement médical en cours" defaultValue={currentAffiliate?.medical?.treatment} readOnly={isReadOnly} className="p-2 border rounded h-20 md:col-span-2"></textarea>
+                                <textarea name="diet" placeholder="Régime alimentaire" defaultValue={currentAffiliate?.medical?.diet} readOnly={isReadOnly} className="p-2 border rounded h-20 md:col-span-2"></textarea>
+                            </div>
+                        </div>
+
+                         {/* Parents Liés (Staff uniquement) */}
+                         {!isReadOnly && (
+                            <div className="bg-orange-50 p-4 rounded border border-orange-200">
+                                <h3 className="text-lg font-bold text-secondary mb-4 flex items-center"><Icon name="link" className="mr-2"/> Lier aux parents</h3>
+                                <p className="text-sm text-gray-600 mb-2">Sélectionnez les utilisateurs "Parent" (Maintenir Ctrl pour plusieurs)</p>
+                                <select name="parentIds" multiple className="w-full p-2 border rounded h-32" defaultValue={currentAffiliate?.parentIds || []}>
+                                    {allParents.map(p => (
+                                        <option key={p.id} value={p.id}>{p.lastName} {p.firstName} ({p.email})</option>
+                                    ))}
+                                </select>
+                            </div>
+                        )}
+
+                        {/* Historique Activités (Lecture Seule) */}
+                        {currentAffiliate?.history && currentAffiliate.history.length > 0 && (
+                            <div className="bg-blue-50 p-4 rounded border border-blue-200">
+                                <h3 className="text-lg font-bold mb-2 text-blue-800 flex items-center"><Icon name="history" className="mr-2"/> Historique d'activités</h3>
+                                <ul className="space-y-1">
+                                    {currentAffiliate.history.map((h, idx) => (
+                                        <li key={idx} className="text-sm bg-white p-2 rounded shadow-sm border">
+                                            <span className="font-bold">{h.title}</span> <span className="text-gray-500">({h.startDate} au {h.endDate})</span>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        )}
+
+                        {!isReadOnly && (
+                            <div className="sticky bottom-0 bg-white p-4 border-t shadow-lg md:relative md:shadow-none md:border-0 md:p-0">
+                                <button type="submit" className="w-full bg-primary text-white py-3 rounded font-bold hover:bg-green-700 transition">Enregistrer la fiche</button>
+                            </div>
+                        )}
+                    </form>
+                </div>
+            );
+        };
+
+        // Trésorerie
+        const Treasury = () => {
+            const [affiliates, setAffiliates] = React.useState([]);
+            const [search, setSearch] = React.useState('');
+
+            React.useEffect(() => {
+                const unsub = db.collection('affiliates').onSnapshot(snap => {
+                    setAffiliates(snap.docs.map(doc => ({ id: doc.id, ...doc.data() })));
+                });
+                return () => unsub();
+            }, []);
+
+            const togglePayment = async (id, currentStatus) => {
+                await db.collection('affiliates').doc(id).update({ affiliationPaid: !currentStatus });
+            };
+
+            const filtered = affiliates.filter(a => (a.lastName + ' ' + a.firstName).toLowerCase().includes(search.toLowerCase()));
+
+            return (
+                <div className="bg-white rounded shadow-md p-6">
+                    <h2 className="text-2xl font-bold mb-4 text-gray-700 flex items-center"><Icon name="coins" className="mr-2"/> Trésorerie - Cotisations</h2>
+                    <input type="text" placeholder="Rechercher nom/prénom..." className="w-full p-2 border rounded mb-4" onChange={e => setSearch(e.target.value)} />
+                    <div className="overflow-x-auto">
+                        <table className="w-full text-left border-collapse">
+                            <thead className="bg-gray-100 uppercase text-xs text-gray-500">
+                                <tr>
+                                    <th className="p-3">Identité</th>
+                                    <th className="p-3">Section</th>
+                                    <th className="p-3">Statut</th>
+                                    <th className="p-3">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody className="divide-y">
+                                {filtered.map(a => (
+                                    <tr key={a.id} className="hover:bg-gray-50">
+                                        <td className="p-3">{a.lastName} {a.firstName}</td>
+                                        <td className="p-3">{a.section}</td>
+                                        <td className="p-3">
+                                            {a.affiliationPaid ? <span className="text-green-600 bg-green-100 px-2 py-1 rounded text-xs font-bold">PAYÉ</span> : <span className="text-red-600 bg-red-100 px-2 py-1 rounded text-xs font-bold">NON PAYÉ</span>}
+                                        </td>
+                                        <td className="p-3">
+                                            <button onClick={() => togglePayment(a.id, a.affiliationPaid)} className={`px-3 py-1 rounded text-white text-xs font-bold transition ${a.affiliationPaid ? 'bg-red-500 hover:bg-red-600' : 'bg-green-500 hover:bg-green-600'}`}>
+                                                {a.affiliationPaid ? 'Annuler' : 'Valider'}
+                                            </button>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            );
+        };
+
+        // Gestion Activités
+        const ActivitiesManager = () => {
+            const [activities, setActivities] = React.useState([]);
+            const [affiliates, setAffiliates] = React.useState([]);
+            const [view, setView] = React.useState('list');
+            const [currentActivity, setCurrentActivity] = React.useState(null);
+
+            React.useEffect(() => {
+                const unsubAct = db.collection('activities').onSnapshot(snap => setActivities(snap.docs.map(d => ({id: d.id, ...d.data()}))));
+                const unsubAff = db.collection('affiliates').onSnapshot(snap => setAffiliates(snap.docs.map(d => ({id: d.id, ...d.data()}))));
+                return () => { unsubAct(); unsubAff(); };
+            }, []);
+
+            const handleSave = async (e) => {
+                e.preventDefault();
+                const form = e.target;
+                const data = {
+                    title: form.title.value,
+                    address: form.address.value,
+                    start: form.start.value,
+                    end: form.end.value,
+                    price: parseFloat(form.price.value),
+                    description: form.description.value,
+                    participants: currentActivity?.participants || []
+                };
+
+                if (view === 'create') await db.collection('activities').add(data);
+                else await db.collection('activities').doc(currentActivity.id).update(data);
+                setView('list');
+            };
+
+            const toggleParticipant = async (affiliateId) => {
+                if (!currentActivity) return;
+                let parts = [...(currentActivity.participants || [])];
+                const index = parts.findIndex(p => p.affiliateId === affiliateId);
+                
+                if (index >= 0) {
+                    parts.splice(index, 1);
+                } else {
+                    parts.push({ affiliateId, paid: false });
+                    // Mise à jour historique affilié
+                    const affDoc = affiliates.find(a => a.id === affiliateId);
+                    const newHistory = [...(affDoc.history || []), { title: currentActivity.title, startDate: currentActivity.start, endDate: currentActivity.end }];
+                    await db.collection('affiliates').doc(affiliateId).update({ history: newHistory });
+                }
+                
+                await db.collection('activities').doc(currentActivity.id).update({ participants: parts });
+                setCurrentActivity({ ...currentActivity, participants: parts });
+            };
+
+            const toggleParticipantPayment = async (affiliateId) => {
+                 let parts = [...currentActivity.participants];
+                 const index = parts.findIndex(p => p.affiliateId === affiliateId);
+                 if (index >= 0) {
+                     parts[index].paid = !parts[index].paid;
+                     await db.collection('activities').doc(currentActivity.id).update({ participants: parts });
+                     setCurrentActivity({ ...currentActivity, participants: parts });
+                 }
+            };
+
+            if (view === 'list') {
+                return (
+                    <div className="bg-white rounded shadow-md p-6">
+                        <div className="flex justify-between mb-6">
+                            <h2 className="text-2xl font-bold flex items-center text-gray-700"><Icon name="tent" className="mr-2"/> Activités</h2>
+                            <button onClick={() => {setCurrentActivity(null); setView('create')}} className="bg-secondary text-white px-4 py-2 rounded flex items-center hover:bg-orange-700">
+                                <Icon name="plus" className="mr-2"/> Créer
+                            </button>
+                        </div>
+                        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+                            {activities.map(act => (
+                                <div key={act.id} className="border p-4 rounded hover:shadow-lg cursor-pointer transition bg-gray-50 hover:bg-white border-l-4 border-l-secondary" onClick={() => { setCurrentActivity(act); setView('manage'); }}>
+                                    <div className="flex justify-between items-start mb-2">
+                                        <h3 className="font-bold text-lg text-secondary">{act.title}</h3>
+                                        <span className="text-xs bg-gray-200 px-2 py-1 rounded">{act.price}€</span>
+                                    </div>
+                                    <p className="text-sm text-gray-500 mb-2"><Icon name="calendar" size={14} className="inline mr-1"/>{act.start}</p>
+                                    <p className="text-gray-600 text-sm truncate mb-4">{act.description}</p>
+                                    <div className="text-sm text-blue-600 font-semibold flex items-center">
+                                        <Icon name="users" size={16} className="mr-1"/> {(act.participants || []).length} participants
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                );
+            }
+
+            if (view === 'manage') {
+                return (
+                    <div className="bg-white rounded shadow-md p-6 h-full flex flex-col">
+                        <button onClick={() => setView('list')} className="mb-4 text-gray-500 flex items-center hover:text-black w-fit">
+                            <Icon name="arrow-left" className="mr-1"/> Retour aux activités
+                        </button>
+                        <h2 className="text-2xl font-bold mb-2 text-secondary">{currentActivity.title}</h2>
+                        <p className="text-gray-600 mb-6">{currentActivity.description} - <strong>{currentActivity.price}€</strong></p>
+                        
+                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 flex-1 overflow-hidden">
+                            <div className="flex flex-col h-[500px]">
+                                <h3 className="font-bold border-b-2 border-green-500 pb-2 mb-2 text-green-700">1. Ajouter des participants</h3>
+                                <div className="flex-1 overflow-y-auto border rounded p-2 bg-gray-50">
+                                    {affiliates.map(aff => {
+                                        const isPart = currentActivity.participants?.some(p => p.affiliateId === aff.id);
+                                        return (
+                                            <div key={aff.id} className="flex items-center justify-between p-3 mb-2 bg-white rounded shadow-sm hover:bg-gray-100 cursor-pointer" onClick={() => toggleParticipant(aff.id)}>
+                                                <span className="font-medium">{aff.lastName} {aff.firstName}</span>
+                                                <div className={`w-6 h-6 rounded-full border flex items-center justify-center ${isPart ? 'bg-green-500 border-green-500' : 'border-gray-300'}`}>
+                                                    {isPart && <Icon name="check" size={14} className="text-white"/>}
+                                                </div>
+                                            </div>
+                                        )
+                                    })}
+                                </div>
+                            </div>
+                            <div className="flex flex-col h-[500px]">
+                                <h3 className="font-bold border-b-2 border-blue-500 pb-2 mb-2 text-blue-700">2. Suivi des paiements</h3>
+                                <div className="flex-1 overflow-y-auto border rounded p-2 bg-gray-50">
+                                    {currentActivity.participants?.map(part => {
+                                        const aff = affiliates.find(a => a.id === part.affiliateId);
+                                        if(!aff) return null;
+                                        return (
+                                            <div key={part.affiliateId} className="flex items-center justify-between p-3 mb-2 bg-white rounded shadow-sm">
+                                                <span>{aff.lastName} {aff.firstName}</span>
+                                                <button onClick={() => toggleParticipantPayment(part.affiliateId)} 
+                                                    className={`px-3 py-1 text-xs rounded-full font-bold transition ${part.paid ? 'bg-green-100 text-green-700 border border-green-200' : 'bg-red-100 text-red-700 border border-red-200'}`}>
+                                                    {part.paid ? 'PAYÉ' : 'À PAYER'}
+                                                </button>
+                                            </div>
+                                        )
+                                    })}
+                                    {(!currentActivity.participants || currentActivity.participants.length === 0) && <p className="text-gray-400 text-center mt-10">Aucun participant inscrit.</p>}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                )
+            }
+            
+            return (
+                <div className="bg-white rounded shadow-md p-6 max-w-2xl mx-auto">
+                    <h2 className="text-xl font-bold mb-4">Créer une activité</h2>
+                    <form onSubmit={handleSave} className="space-y-4">
+                        <input name="title" placeholder="Titre de l'activité" required className="w-full p-2 border rounded" />
+                        <input name="address" placeholder="Adresse du rendez-vous" required className="w-full p-2 border rounded" />
+                        <div className="grid grid-cols-2 gap-4">
+                            <div>
+                                <label className="text-xs text-gray-500">Début</label>
+                                <input type="date" name="start" required className="w-full p-2 border rounded" />
+                            </div>
+                            <div>
+                                <label className="text-xs text-gray-500">Fin</label>
+                                <input type="date" name="end" required className="w-full p-2 border rounded" />
+                            </div>
+                        </div>
+                        <input type="number" name="price" placeholder="Prix (€)" required className="w-full p-2 border rounded" step="0.01" />
+                        <textarea name="description" placeholder="Description (matériel à prendre, infos...)" className="w-full p-2 border rounded h-32"></textarea>
+                        <div className="flex gap-4 pt-4">
+                            <button type="button" onClick={() => setView('list')} className="w-1/3 py-2 border rounded text-gray-600">Annuler</button>
+                            <button type="submit" className="w-2/3 py-2 bg-secondary text-white rounded font-bold hover:bg-orange-700">Créer l'activité</button>
+                        </div>
+                    </form>
+                </div>
+            )
+        };
+
+        // Gestion Utilisateurs (Admin)
+        const UserManager = () => {
+            const [users, setUsers] = React.useState([]);
+            const [newUser, setNewUser] = React.useState({ lastName: '', firstName: '', email: '', password: '', role: ROLES.PARENT });
+
+            React.useEffect(() => {
+                const unsub = db.collection('users').onSnapshot(snap => setUsers(snap.docs.map(d => ({ id: d.id, ...d.data() }))));
+                return () => unsub();
+            }, []);
+
+            const createUser = async (e) => {
+                e.preventDefault();
+                try {
+                    // Instance secondaire pour créer sans déconnecter l'admin
+                    const secondaryApp = firebase.initializeApp(firebaseConfig, "Secondary");
+                    const secondaryAuth = secondaryApp.auth();
+                    const userCredential = await secondaryAuth.createUserWithEmailAndPassword(newUser.email, newUser.password);
+                    
+                    await db.collection('users').doc(userCredential.user.uid).set({
+                        lastName: newUser.lastName,
+                        firstName: newUser.firstName,
+                        email: newUser.email,
+                        role: newUser.role
+                    });
+
+                    await secondaryAuth.signOut();
+                    secondaryApp.delete();
+                    alert("Utilisateur créé ! Transmettez les identifiants à la personne.");
+                    setNewUser({ ...newUser, email: '', password: '' });
+                } catch (err) {
+                    alert("Erreur: " + err.message);
+                }
+            };
+
+            return (
+                <div className="bg-white rounded shadow-md p-6">
+                    <h2 className="text-2xl font-bold mb-6 text-gray-700 flex items-center"><Icon name="user-cog" className="mr-2"/> Gestion Utilisateurs</h2>
+                    
+                    <div className="bg-blue-50 p-6 rounded-lg mb-8 border border-blue-200">
+                        <h3 className="font-bold mb-4 text-blue-800 text-lg">Ajouter un nouvel utilisateur</h3>
+                        <form onSubmit={createUser} className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <input placeholder="Nom" required value={newUser.lastName} onChange={e => setNewUser({...newUser, lastName: e.target.value})} className="p-2 border rounded" />
+                            <input placeholder="Prénom" required value={newUser.firstName} onChange={e => setNewUser({...newUser, firstName: e.target.value})} className="p-2 border rounded" />
+                            <input type="email" placeholder="Email (Identifiant)" required value={newUser.email} onChange={e => setNewUser({...newUser, email: e.target.value})} className="p-2 border rounded" />
+                            <input type="password" placeholder="Mot de passe" required value={newUser.password} onChange={e => setNewUser({...newUser, password: e.target.value})} className="p-2 border rounded" />
+                            <select value={newUser.role} onChange={e => setNewUser({...newUser, role: e.target.value})} className="p-2 border rounded md:col-span-2 bg-white">
+                                {Object.values(ROLES).map(r => <option key={r} value={r}>{r}</option>)}
+                            </select>
+                            <button type="submit" className="bg-blue-600 text-white py-2 rounded md:col-span-2 hover:bg-blue-700 font-bold shadow">Créer l'utilisateur</button>
+                        </form>
+                    </div>
+
+                    <div className="overflow-x-auto">
+                        <table className="w-full text-left border-collapse">
+                            <thead className="bg-gray-100 text-gray-500 uppercase text-xs">
+                                <tr>
+                                    <th className="p-3">Nom</th>
+                                    <th className="p-3">Email</th>
+                                    <th className="p-3">Rôle</th>
+                                </tr>
+                            </thead>
+                            <tbody className="divide-y">
+                                {users.map(u => (
+                                    <tr key={u.id} className="hover:bg-gray-50">
+                                        <td className="p-3 font-medium">{u.lastName} {u.firstName}</td>
+                                        <td className="p-3 text-sm text-gray-600">{u.email}</td>
+                                        <td className="p-3"><span className="bg-gray-200 px-2 py-1 rounded text-xs font-semibold">{u.role}</span></td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            )
+        };
+
+        // Paramètres
+        const Settings = () => {
+            const handleResetPayments = async () => {
+                if(!confirm("ATTENTION : Cette action est irréversible. Toutes les cotisations passeront en 'Non-Payé'. Confirmer ?")) return;
+                const snapshot = await db.collection('affiliates').get();
+                const batch = db.batch();
+                snapshot.docs.forEach(doc => batch.update(doc.ref, { affiliationPaid: false }));
+                await batch.commit();
+                alert("Réinitialisation terminée.");
+            };
+
+            return (
+                <div className="bg-white rounded shadow-md p-6 border-l-4 border-red-500">
+                    <h2 className="text-2xl font-bold mb-4 text-red-700 flex items-center"><Icon name="alert-triangle" className="mr-2"/> Zone Paramètres</h2>
+                    <div className="p-4 bg-red-50 rounded border border-red-100">
+                        <h3 className="font-bold text-red-800 mb-2">Nouvelle année scoute</h3>
+                        <p className="mb-4 text-sm text-red-700">Utilisez ce bouton en début d'année pour remettre à zéro le statut de paiement des cotisations de tous les affiliés.</p>
+                        <button onClick={handleResetPayments} className="bg-red-600 text-white px-6 py-2 rounded font-bold hover:bg-red-700 shadow">
+                            Remettre les cotisations à "Non-Payée"
+                        </button>
+                    </div>
+                </div>
+            )
+        }
+
+        // App Component
+        const App = () => {
+            const [user, setUser] = React.useState(null);
+            const [userData, setUserData] = React.useState(null);
+            const [loading, setLoading] = React.useState(true);
+            const [activeTab, setActiveTab] = React.useState('affiliates');
+            const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
+
+            React.useEffect(() => {
+                const unsubscribe = auth.onAuthStateChanged(async (u) => {
+                    if (u) {
+                        const doc = await db.collection('users').doc(u.uid).get();
+                        if (doc.exists) {
+                            setUserData({ id: doc.id, ...doc.data() });
+                            setUser(u);
+                        } else {
+                            // Fallback Admin initial
+                            if (u.email === "admin@scout.be" || u.email.includes("admin")) { 
+                                // On laisse passer si c'est le tout premier admin pas encore dans la DB, 
+                                // mais idéalement il faut créer la fiche dans Firestore comme expliqué.
+                                setUserData({ role: ROLES.ADMIN, lastName: 'Admin', firstName: 'System' });
+                                setUser(u);
+                            } else {
+                                // Si l'user existe dans Auth mais pas dans Firestore (bug ou erreur de création)
+                                alert("Erreur: Votre compte existe mais votre fiche utilisateur est introuvable. Contactez l'administrateur.");
+                                auth.signOut();
+                            }
+                        }
+                    } else {
+                        setUser(null);
+                        setUserData(null);
+                    }
+                    setLoading(false);
+                });
+                return () => unsubscribe();
+            }, []);
+
+            if (loading) return <div className="h-screen flex items-center justify-center bg-gray-100"><div className="loader ease-linear rounded-full border-4 border-t-4 border-gray-200 h-12 w-12"></div></div>;
+
+            if (!user) return <Login />;
+
+            const role = userData?.role;
+
+            const NavButton = ({ tab, icon, label, limitRoles }) => {
+                if (limitRoles && !hasPermission(role, limitRoles)) return null;
+                return (
+                    <button onClick={() => { setActiveTab(tab); setMobileMenuOpen(false); }} 
+                        className={`text-left p-3 rounded flex items-center transition w-full mb-1 ${activeTab === tab ? 'bg-green-800 shadow-inner font-semibold' : 'hover:bg-green-700'}`}>
+                        <Icon name={icon} className="mr-3" size={20}/> {label}
+                    </button>
+                )
+            };
+
+            return (
+                <div className="min-h-screen bg-gray-100 flex flex-col md:flex-row">
+                    {/* Mobile Header */}
+                    <div className="md:hidden bg-primary text-white p-4 flex justify-between items-center shadow-md z-20">
+                        <span className="font-bold text-lg">Espace Scouts</span>
+                        <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
+                            <Icon name={mobileMenuOpen ? "x" : "menu"} size={28}/>
+                        </button>
+                    </div>
+
+                    {/* Navigation Sidebar */}
+                    <nav className={`${mobileMenuOpen ? 'block' : 'hidden'} md:block bg-primary text-white w-full md:w-64 flex-shrink-0 p-4 flex flex-col md:h-screen sticky top-0 transition-all z-10`}>
+                        <h1 className="text-2xl font-bold mb-8 text-center border-b border-green-600 pb-4 hidden md:block">Espace Scouts</h1>
+                        
+                        <div className="text-xs uppercase text-green-200 mb-2 mt-2 md:mt-0 font-semibold tracking-wider">Menu</div>
+                        <div className="flex flex-col flex-1 overflow-y-auto">
+                            <NavButton tab="affiliates" icon="users" label="Affiliés" />
+                            <NavButton tab="treasury" icon="coins" label="Trésorerie" limitRoles={[ROLES.PRESIDENT, ROLES.VICE_PRESIDENT, ROLES.TRESORIER]} />
+                            <NavButton tab="activities" icon="tent" label="Activités" limitRoles={[ROLES.ANIMATEUR, ROLES.PRESIDENT, ROLES.VICE_PRESIDENT, ROLES.TRESORIER]} />
+                            <NavButton tab="users" icon="user-cog" label="Utilisateurs" limitRoles={[ROLES.PRESIDENT, ROLES.VICE_PRESIDENT, ROLES.ADMIN]} />
+                            <NavButton tab="settings" icon="settings" label="Paramètres" limitRoles={[ROLES.PRESIDENT, ROLES.VICE_PRESIDENT, ROLES.TRESORIER]} />
+                        </div>
+
+                        <div className="mt-auto pt-6 border-t border-green-600">
+                            <div className="mb-1 text-sm font-medium">{userData.firstName} {userData.lastName}</div>
+                            <div className="text-xs bg-green-900 inline-block px-2 py-1 rounded mb-4 text-green-100 border border-green-700">{role}</div>
+                            <button onClick={() => auth.signOut()} className="w-full bg-red-600 hover:bg-red-700 text-white py-2 rounded text-sm flex items-center justify-center shadow transition transform active:scale-95">
+                                <Icon name="log-out" size={16} className="mr-2"/> Déconnexion
+                            </button>
+                        </div>
+                    </nav>
+
+                    {/* Contenu Principal */}
+                    <main className="flex-1 p-4 md:p-8 overflow-y-auto h-screen">
+                        <div className="max-w-7xl mx-auto">
+                            {activeTab === 'affiliates' && <AffiliateManager userRole={role} userId={userData.id} />}
+                            {activeTab === 'treasury' && <Treasury />}
+                            {activeTab === 'activities' && <ActivitiesManager />}
+                            {activeTab === 'users' && <UserManager />}
+                            {activeTab === 'settings' && <Settings />}
+                        </div>
+                    </main>
+                </div>
+            );
+        };
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>
