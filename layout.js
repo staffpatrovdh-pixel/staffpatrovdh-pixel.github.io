@@ -8,19 +8,19 @@ document.addEventListener("DOMContentLoaded", function () {
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex justify-between items-center h-20">
                     <!-- Logo -->
-                    <a href="index.html" class="flex-shrink-0 flex items-center gap-2">
-                        <img src="donnees-site/LogoMaurageContour.svg" alt="Logo Patro Val d'Haine" class="h-14 w-auto">
+                    <a href="/index.html" class="flex-shrink-0 flex items-center gap-2">
+                        <img src="/donnees-site/LogoMaurageContour.svg" alt="Logo Patro Val d'Haine" class="h-14 w-auto">
                     </a>
 
                     <!-- Desktop Menu -->
                     <div class="hidden lg:flex space-x-5 items-center">
-                        <a href="index.html" class="nav-link text-gray-600 hover:text-patro-green font-medium transition">Accueil</a>
-                        <a href="index.html#infos" class="nav-link text-gray-600 hover:text-patro-green font-medium transition">Agenda</a>
-                        <a href="contact.html" class="nav-link text-gray-600 hover:text-patro-green font-medium transition">Le Staff</a>
-                        <a href="documents.html" class="nav-link text-gray-600 hover:text-patro-green font-medium transition">Documents</a>
-                        <a href="informations.html" class="nav-link text-gray-600 hover:text-patro-green font-medium transition">Communications</a>
+                        <a href="/index.html" class="nav-link text-gray-600 hover:text-patro-green font-medium transition">Accueil</a>
+                        <a href="/index.html#infos" class="nav-link text-gray-600 hover:text-patro-green font-medium transition">Agenda</a>
+                        <a href="/contact.html" class="nav-link text-gray-600 hover:text-patro-green font-medium transition">Le Staff</a>
+                        <a href="/documents.html" class="nav-link text-gray-600 hover:text-patro-green font-medium transition">Documents</a>
+                        <a href="/informations.html" class="nav-link text-gray-600 hover:text-patro-green font-medium transition">Communications</a>
                         
-                        <a href="inscription.html" class="bg-patro-green text-white px-4 py-2 rounded-full font-semibold hover:bg-green-700 transition shadow-md hover:shadow-lg transform hover:-translate-y-0.5 text-sm">
+                        <a href="/inscription.html" class="bg-patro-green text-white px-4 py-2 rounded-full font-semibold hover:bg-green-700 transition shadow-md hover:shadow-lg transform hover:-translate-y-0.5 text-sm">
                             Nous rejoindre
                         </a>
                     </div>
@@ -37,13 +37,13 @@ document.addEventListener("DOMContentLoaded", function () {
             <!-- Mobile Menu Panel -->
             <div id="mobile-menu" class="hidden lg:hidden bg-white border-t">
                 <div class="px-4 pt-2 pb-6 space-y-2 shadow-lg">
-                    <a href="index.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-patro-green hover:bg-yellow-50">Accueil</a>
-                    <a href="index.html#infos" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-patro-green hover:bg-yellow-50">Agenda</a>
-                    <a href="contact.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-patro-green hover:bg-yellow-50">Le Staff</a>
-                    <a href="documents.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-patro-green hover:bg-yellow-50">Documents</a>
-                    <a href="informations.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-patro-green hover:bg-yellow-50">Communications</a>
+                    <a href="/index.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-patro-green hover:bg-yellow-50">Accueil</a>
+                    <a href="/index.html#infos" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-patro-green hover:bg-yellow-50">Agenda</a>
+                    <a href="/contact.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-patro-green hover:bg-yellow-50">Le Staff</a>
+                    <a href="/documents.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-patro-green hover:bg-yellow-50">Documents</a>
+                    <a href="/informations.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-patro-green hover:bg-yellow-50">Communications</a>
                     
-                    <a href="inscription.html" class="block w-full text-center mt-4 px-5 py-3 rounded-md font-bold bg-patro-yellow text-patro-green">
+                    <a href="/inscription.html" class="block w-full text-center mt-4 px-5 py-3 rounded-md font-bold bg-patro-yellow text-patro-green">
                         S'inscrire maintenant
                     </a>
                 </div>
@@ -51,7 +51,6 @@ document.addEventListener("DOMContentLoaded", function () {
         </nav>
         `;
         
-        // Active le lien courant
         highlightActiveLink();
     }
 
@@ -65,7 +64,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12 text-center md:text-left">
                     <!-- Colonne 1: Info -->
                     <div class="flex flex-col items-center md:items-start">
-                        <img src="donnees-site/LogoMaurageContour.svg" alt="Patro Maurage" class="h-24 w-auto mb-6">
+                        <img src="/donnees-site/LogoMaurageContour.svg" alt="Patro Maurage" class="h-24 w-auto mb-6">
                         
                         <span class="font-display font-bold text-2xl text-white block mb-4">Le Patro Val d'Haine de Maurage</span>
                         <p class="text-gray-400 text-sm mb-4">
@@ -104,17 +103,17 @@ document.addEventListener("DOMContentLoaded", function () {
                 <div class="border-t border-gray-800 pt-8 text-center text-sm text-gray-500 flex flex-col md:flex-row justify-center items-center gap-4">
                     <p>© 2025 Patro du Val d'Haine – Tous droits réservés</p>
                     <span class="hidden md:inline">•</span>
-                    <a href="legal.html" class="hover:text-white transition">Mentions légales</a>
+                    <a href="/legal.html" class="hover:text-white transition">Mentions légales</a>
                     <span class="hidden md:inline">•</span>
-                    <a href="cookies.html" class="hover:text-white transition">Politique Cookies</a>
+                    <a href="/cookies.html" class="hover:text-white transition">Politique Cookies</a>
                     <span class="hidden md:inline">•</span>
                     <!-- BOUTON PORTAIL APPS -->
-                    <a href="app/index.html" class="flex items-center gap-1 text-patro-yellow hover:text-white transition font-medium" title="Portail Apps">
+                    <a href="/app/index.html" class="flex items-center gap-1 text-patro-yellow hover:text-white transition font-medium" title="Portail Apps">
                         <i data-lucide="grid" class="w-3 h-3"></i> Portail Apps
                     </a>
                     <span class="hidden md:inline">•</span>
                     <!-- LIEN ADMIN -->
-                    <a href="serveur/index.html" class="text-gray-700 hover:text-gray-500 transition" title="Accès Serveur"><i data-lucide="lock" class="w-3 h-3"></i></a>
+                    <a href="/serveur/index.html" class="text-gray-700 hover:text-gray-500 transition" title="Accès Serveur"><i data-lucide="lock" class="w-3 h-3"></i></a>
                 </div>
             </div>
         </footer>
@@ -232,7 +231,7 @@ function checkCookieConsent() {
                     <p class="text-sm text-gray-600">
                         Nous utilisons des cookies essentiels pour le bon fonctionnement du site (cartes, calendrier). 
                         En continuant, vous acceptez leur utilisation.
-                        <a href="cookies.html" class="text-patro-green underline hover:text-patro-yellow">En savoir plus</a>.
+                        <a href="/cookies.html" class="text-patro-green underline hover:text-patro-yellow">En savoir plus</a>.
                     </p>
                 </div>
             </div>
