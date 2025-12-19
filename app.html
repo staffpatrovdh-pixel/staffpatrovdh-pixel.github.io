@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portail des Applications | Patro du Val d'Haine</title>
+    
+    <!-- Chemins adaptés (../) -->
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="../layout.js?v=8"></script>
+
+    <script>
+        tailwind.config = { theme: { extend: { colors: { patro: { yellow: '#FFD700', green: '#009045', dark: '#1a1a1a', light: '#f8fafc' } }, fontFamily: { sans: ['Poppins', 'sans-serif'], display: ['Fredoka', 'sans-serif'], handwritten: ['Indie Flower', 'cursive'] } } } }
+    </script>
+</head>
+<body class="font-sans text-slate-800 bg-gray-50 antialiased min-h-screen flex flex-col">
+
+    <div id="custom-cursor"></div>
+    <div id="loader"><div class="spinner mb-4"></div><p class="text-patro-green font-bold font-display animate-pulse">Chargement du portail...</p></div>
+    
+    <div id="navbar-placeholder"></div>
+
+    <!-- En-tête Portail -->
+    <div class="pt-32 pb-16 bg-patro-dark relative overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <img src="../donnees-site/photos-site-accueil/portail.png" alt="Portail Patro" class="w-full h-full object-cover opacity-40">
+            <div class="absolute inset-0 bg-gradient-to-t from-patro-dark/90 to-patro-dark/60"></div>
+        </div>
+
+        <div class="max-w-4xl mx-auto px-4 text-center relative z-10">
+            <span class="inline-block py-1 px-3 rounded-full bg-white/10 border border-white/20 text-white text-xs font-bold uppercase tracking-widest mb-4">
+                Hub Numérique
+            </span>
+            <h1 class="text-4xl md:text-5xl font-display font-bold text-white mb-4">
+                Portail des Applications
+            </h1>
+            <p class="text-lg text-gray-400 max-w-2xl mx-auto">
+                Accédez à tous les outils numériques du Patro du Val d'Haine en un clic.
+            </p>
+        </div>
+    </div>
+
+    <!-- Contenu Principal -->
+    <main class="flex-grow py-16 px-4">
+        <div class="max-w-6xl mx-auto space-y-16">
+
+            <!-- ZONE PARENTS -->
+            <div>
+                <h2 class="text-2xl font-display font-bold text-patro-green mb-8 flex items-center gap-3">
+                    <i data-lucide="users" class="w-8 h-8"></i>
+                    Pour les Parents & Animés
+                </h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Carte Espace Parent -->
+                    <a href="https://patrovaldhaine.wixstudio.com/patrovdh/intranet" target="_blank" class="group bg-white rounded-2xl shadow-sm hover:shadow-xl border border-gray-200 p-6 transition-all duration-300 transform hover:-translate-y-1 flex flex-col h-full relative overflow-hidden">
+                        <div class="absolute top-0 right-0 w-24 h-24 bg-patro-yellow/10 rounded-bl-full transition group-hover:bg-patro-yellow/20"></div>
+                        
+                        <div class="w-14 h-14 bg-patro-yellow/20 rounded-xl flex items-center justify-center text-patro-dark mb-4 group-hover:scale-110 transition">
+                            <i data-lucide="layout-dashboard" class="w-7 h-7"></i>
+                        </div>
+                        
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Espace Parents</h3>
+                        <p class="text-gray-500 text-sm mb-6 flex-grow">
+                            Retrouvez les photos, les infos pratiques, les documents administratifs et bien plus encore.
+                        </p>
+                        
+                        <div class="text-patro-green font-bold text-sm flex items-center gap-2 group-hover:gap-3 transition-all">
+                            Accéder <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- SÉPARATEUR -->
+            <div class="border-t border-gray-200"></div>
+
+            <!-- ZONE STAFF (Accès Restreint visuel) -->
+            <div>
+                <h2 class="text-2xl font-display font-bold text-gray-800 mb-8 flex items-center gap-3">
+                    <i data-lucide="lock" class="w-6 h-6 text-gray-400"></i>
+                    Zone Staff
+                    <span class="text-xs font-sans font-normal bg-gray-200 text-gray-600 px-2 py-1 rounded ml-2">Accès Animateurs</span>
+                </h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    
+                    <!-- Carte Intranet Animateur -->
+                    <a href="https://patrovaldhaine.wixstudio.com/patrovdh/intranet" target="_blank" class="group bg-slate-800 rounded-2xl shadow-lg hover:shadow-2xl border border-slate-700 p-6 transition-all duration-300 transform hover:-translate-y-1 flex flex-col h-full relative overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-tr from-white/0 via-white/5 to-white/0 opacity-0 group-hover:opacity-100 transition duration-500"></div>
+                        <div class="w-14 h-14 bg-slate-700 rounded-xl flex items-center justify-center text-white mb-4 group-hover:bg-patro-green transition-colors">
+                            <i data-lucide="shield" class="w-7 h-7"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">Intranet Animateur</h3>
+                        <p class="text-slate-400 text-sm mb-6 flex-grow">
+                            Ressources pédagogiques, fiches techniques, contacts et outils de gestion interne.
+                        </p>
+                        <div class="text-white/80 font-bold text-sm flex items-center gap-2 group-hover:text-patro-green transition-colors">
+                            Connexion <i data-lucide="external-link" class="w-4 h-4"></i>
+                        </div>
+                    </a>
+
+                    <!-- Carte Planner / Doodle -->
+                    <a href="https://planner.patrovaldhaine.be/" target="_blank" class="group bg-white rounded-2xl shadow-sm hover:shadow-xl border-l-4 border-patro-green p-6 transition-all duration-300 transform hover:-translate-y-1 flex flex-col h-full">
+                        <div class="w-14 h-14 bg-green-50 rounded-xl flex items-center justify-center text-patro-green mb-4">
+                            <i data-lucide="calendar-check" class="w-7 h-7"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Planner / Doodle</h3>
+                        <p class="text-gray-500 text-sm mb-6 flex-grow">
+                            Planification des réunions, gestion des présences staff et organisation des événements.
+                        </p>
+                        <div class="text-gray-700 font-bold text-sm flex items-center gap-2 group-hover:text-patro-green transition-colors">
+                            Ouvrir <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </div>
+                    </a>
+
+                    <!-- Carte MonPatro.be -->
+                    <a href="https://www.monpatro.be/login" target="_blank" class="group bg-patro-yellow rounded-2xl shadow-lg hover:shadow-2xl p-6 transition-all duration-300 transform hover:-translate-y-1 flex flex-col h-full relative overflow-hidden">
+                        <div class="w-14 h-14 bg-white/20 rounded-xl flex items-center justify-center text-patro-dark mb-4">
+                            <i data-lucide="users-round" class="w-7 h-7"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-patro-dark mb-2">MonPatro.be</h3>
+                        <p class="text-patro-dark/70 text-sm mb-6 flex-grow">
+                            Gestion officielle des affiliations, listings membres et assurances FNP.
+                        </p>
+                        <div class="text-patro-dark font-bold text-sm flex items-center gap-2 group-hover:gap-3 transition-all">
+                            Accéder <i data-lucide="external-link" class="w-4 h-4"></i>
+                        </div>
+                    </a>
+
+                    <!-- Carte Espace ONE -->
+                    <a href="https://pro.one.be" target="_blank" class="group bg-white rounded-2xl shadow-sm hover:shadow-xl border-l-4 border-blue-500 p-6 transition-all duration-300 transform hover:-translate-y-1 flex flex-col h-full">
+                        <div class="w-14 h-14 bg-blue-50 rounded-xl flex items-center justify-center text-blue-600 mb-4">
+                            <i data-lucide="file-check" class="w-7 h-7"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Espace ONE</h3>
+                        <p class="text-gray-500 text-sm mb-6 flex-grow">
+                            Déclarations de présence, fiches de santé et encodage des activités ONE.
+                        </p>
+                        <div class="text-gray-700 font-bold text-sm flex items-center gap-2 group-hover:text-blue-600 transition-colors">
+                            Déclarer <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </div>
+                    </a>
+
+                    <!-- Carte Portail Microsoft -->
+                    <a href="https://fnpatro-my.sharepoint.com/" target="_blank" class="group bg-slate-800 rounded-2xl shadow-lg hover:shadow-2xl border border-slate-700 p-6 transition-all duration-300 transform hover:-translate-y-1 flex flex-col h-full relative overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-tr from-white/0 via-white/5 to-white/0 opacity-0 group-hover:opacity-100 transition duration-500"></div>
+                        <div class="w-14 h-14 bg-slate-700 rounded-xl flex items-center justify-center text-white mb-4 group-hover:bg-blue-500 transition-colors">
+                            <i data-lucide="cloud" class="w-7 h-7"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">Portail Microsoft</h3>
+                        <p class="text-slate-400 text-sm mb-6 flex-grow">
+                            SharePoint de la Fédération, documents officiels et cloud partagé.
+                        </p>
+                        <div class="text-white/80 font-bold text-sm flex items-center gap-2 group-hover:text-blue-400 transition-colors">
+                            Connexion <i data-lucide="external-link" class="w-4 h-4"></i>
+                        </div>
+                    </a>
+
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <div id="footer-placeholder"></div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            lucide.createIcons();
+        });
+    </script>
+</body>
+</html>
