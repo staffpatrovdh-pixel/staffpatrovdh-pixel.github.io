@@ -8,7 +8,8 @@
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
-    <script src="layout.js?v=5"></script>
+    <!-- Mise à jour version 8 -->
+    <script src="layout.js?v=8"></script>
 
     <script>
         tailwind.config = { theme: { extend: { colors: { patro: { yellow: '#FFD700', green: '#009045', dark: '#1a1a1a', light: '#f8fafc' } }, fontFamily: { sans: ['Poppins', 'sans-serif'], display: ['Fredoka', 'sans-serif'] } } } }
@@ -33,9 +34,10 @@
             <div class="bg-white p-8 rounded-2xl shadow-sm border-l-4 border-patro-yellow">
                 <h2 class="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
                     <i data-lucide="cookie" class="w-5 h-5 text-patro-green"></i>
-                    Qu'est-ce qu'un cookie ? Malheureusement pas un petit gateau rond au chocolat :(
+                    Qu'est-ce qu'un cookie ?
                 </h2>
                 <p class="text-gray-600 text-sm leading-relaxed">
+                    Malheureusement, ce n'est pas un petit gâteau rond au chocolat :( <br>
                     Un cookie est un petit fichier texte déposé sur votre ordinateur ou votre smartphone lorsque vous visitez un site. Ils sont largement utilisés pour faire fonctionner les sites web ou les rendre plus efficaces. Et parfois pour fournir des informations aux propriétaires du site pour établir des données analytiques, ce qui n'est pas le cas ici ^^.
                 </p>
             </div>
@@ -49,9 +51,9 @@
                     <div class="flex gap-4 items-start">
                         <div class="p-2 bg-blue-50 rounded-lg text-blue-600 mt-1"><i data-lucide="settings" class="w-5 h-5"></i></div>
                         <div>
-                            <h3 class="font-bold text-gray-800">Cookies techniques (Essentiels au fonctionnement du site)</h3>
+                            <h3 class="font-bold text-gray-800">Cookies techniques (Essentiels)</h3>
                             <p class="text-sm text-gray-500 mt-1">
-                                Ces cookies sont nécessaires au fonctionnement du site. Ils vous permettent de naviguer et d'utiliser les fonctionnalités de base (comme l'affichage du menu, du pied de page, d'éléments configuré sur les JavaScript du site, ...) Sans eux, le site ne peut pas fonctionner correctement.
+                                Ces cookies sont nécessaires au fonctionnement du site. Ils vous permettent de naviguer et d'utiliser les fonctionnalités de base (comme l'affichage du menu, du pied de page, d'éléments configurés sur les JavaScript du site...). Sans eux, le site ne peut pas fonctionner correctement.
                             </p>
                         </div>
                     </div>
@@ -60,19 +62,19 @@
                     <div class="flex gap-4 items-start">
                         <div class="p-2 bg-green-50 rounded-lg text-green-600 mt-1"><i data-lucide="share-2" class="w-5 h-5"></i></div>
                         <div>
-                            <h3 class="font-bold text-gray-800">Cookies Tiers (Google & Microsoft)</h3>
+                            <h3 class="font-bold text-gray-800">Cookies Tiers (Services externes)</h3>
                             <p class="text-sm text-gray-500 mt-1">
                                 Nous intégrons des services externes pour enrichir le site :
                             </p>
                             <ul class="list-disc pl-5 mt-2 text-sm text-gray-500 space-y-1">
-                                <li><strong>Google Maps :</strong> Pour afficher les cartes des pages d'éventuels événements du Patro.</li>
-                                <li><strong>Google Drive :</strong> Pour visualiser certains documents.</li>
-                                <li><strong>Microsoft Forms :</strong> Pour les formulaires d'inscription à des événements.</li>
-                                <li><strong>Intranet/Tempatro :</strong> Pour le formulaire d'inscription au Patro. Ce formulaire est externe au site car celui-ci est intégré à l'Intranet du Patro.</li>
-                                <li><strong>Fédération Nationale des Patros :</strong> Pour d'éventuels éléments intégrés issus du site web de la FNP (patro.be)</li>
+                                <li><strong>Google Maps :</strong> Pour afficher les cartes des lieux de rendez-vous ou d'événements.</li>
+                                <li><strong>Google Drive :</strong> Pour visualiser certains documents PDF directement sur le site.</li>
+                                <li><strong>Microsoft Forms :</strong> Pour les formulaires d'inscription aux événements (Souper, etc.).</li>
+                                <li><strong>Intranet / Tempatro :</strong> Le formulaire d'inscription principal est hébergé sur notre Intranet sécurisé.</li>
+                                <li><strong>Fédération Nationale des Patros :</strong> Pour certains éléments liés au site national (patro.be).</li>
                             </ul>
                             <p class="text-sm text-gray-500 mt-2 italic">
-                                Ces services peuvent déposer leurs propres cookies pour des raisons de sécurité ou de statistiques. Notre Patro ne contrôle pas ces cookies.
+                                Ces services peuvent déposer leurs propres cookies pour des raisons de sécurité ou de statistiques internes. Notre Patro ne contrôle pas ces cookies tiers.
                             </p>
                         </div>
                     </div>
@@ -85,10 +87,12 @@
                 <p class="text-gray-600 text-sm leading-relaxed mb-4">
                     Vous pouvez à tout moment choisir de révoquer ces cookies. Votre navigateur peut également être paramétré pour vous signaler les cookies qui sont déposés dans votre ordinateur et vous demander de les accepter ou non.
                 </p>
-                <div class="bg-gray-50 p-4 rounded-lg text-sm text-gray-600">
-                    <p class="font-bold mb-2">Réinitialiser votre choix pour notre site :</p>
-                    <button onclick="resetConsent()" class="px-4 py-2 bg-white border border-gray-300 rounded text-gray-700 hover:bg-gray-100 transition shadow-sm">
-                        Effacer mes préférences et réafficher le bandeau des cookies ^^
+                
+                <div class="bg-gray-50 p-4 rounded-lg text-sm text-gray-600 border border-gray-200">
+                    <p class="font-bold mb-3">Réinitialiser votre choix pour notre site :</p>
+                    <button onclick="resetConsent()" class="px-4 py-2 bg-white border border-gray-300 rounded-lg text-gray-700 hover:bg-patro-yellow hover:border-patro-yellow hover:text-patro-dark transition shadow-sm font-medium flex items-center gap-2">
+                        <i data-lucide="refresh-cw" class="w-4 h-4"></i>
+                        Effacer mes préférences et réafficher le bandeau ^^
                     </button>
                 </div>
             </div>
