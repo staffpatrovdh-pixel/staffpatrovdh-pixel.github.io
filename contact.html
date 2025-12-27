@@ -19,14 +19,28 @@
     <div id="custom-cursor"></div>
     <div id="navbar-placeholder"></div>
 
-    <!-- En-tête -->
-    <div class="pt-32 pb-12 bg-patro-green text-center">
-        <h1 class="text-4xl font-display font-bold text-white">Contactez-nous !</h1>
-        <p class="text-green-100 mt-2">Retrouvez ici les contacts utiles du Patro et le staff.</p>
+    <!-- En-tête avec Image de Fond -->
+    <div class="pt-32 pb-20 relative overflow-hidden bg-patro-green">
+        <!-- Image de fond avec overlay -->
+        <div class="absolute inset-0 z-0">
+            <img src="donnees-site/photos-intranet/Connexion_espace_parent.png" alt="Contact Patro" class="w-full h-full object-cover opacity-30">
+            <div class="absolute inset-0 bg-gradient-to-t from-patro-green/90 to-patro-green/50"></div>
+        </div>
+
+        <div class="max-w-4xl mx-auto px-4 text-center relative z-20 text-white">
+            <h1 class="text-4xl md:text-5xl font-display font-bold mb-4 drop-shadow-md">Contactez-nous !</h1>
+            <p class="text-green-50 mt-2 text-lg max-w-2xl mx-auto mb-8">Retrouvez ici les contacts utiles du Patro et le staff.</p>
+            
+            <!-- Bouton Discret vers Formulaire -->
+            <a href="#formulaire-contact" class="inline-flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-white/20 border border-white/30 rounded-full text-sm font-medium transition backdrop-blur-sm">
+                <i data-lucide="mail" class="w-4 h-4"></i>
+                Vers le formulaire de contact
+            </a>
+        </div>
     </div>
 
     <section class="py-16 px-4">
-        <div class="max-w-7xl mx-auto space-y-16">
+        <div class="max-w-7xl mx-auto space-y-20">
             
             <!-- SECTION ANIMATEURS -->
             <div>
@@ -41,6 +55,31 @@
                 <h2 class="text-3xl font-display font-bold text-patro-green mb-8 border-b-4 border-patro-yellow inline-block pb-1">Accompagnateurs & intendants</h2>
                 <div id="adults-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
                     <!-- Rempli par JS -->
+                </div>
+            </div>
+
+            <!-- SECTION FORMULAIRE DE CONTACT (Optimisé Mobile) -->
+            <div id="formulaire-contact" class="pt-8">
+                <div class="bg-white rounded-xl md:rounded-3xl shadow-lg border border-gray-100 overflow-hidden">
+                    <div class="bg-patro-green p-4 md:p-6 text-white text-center">
+                        <h2 class="text-xl md:text-2xl font-bold font-display flex items-center justify-center gap-2 md:gap-3">
+                            <i data-lucide="message-circle" class="w-6 h-6 md:w-8 md:h-8"></i>
+                            Envoyez-nous un message
+                        </h2>
+                        <p class="text-green-100 text-xs md:text-sm mt-2">Une question ? Une remarque ? Nous vous répondrons au plus vite.</p>
+                    </div>
+                    
+                    <div class="relative w-full h-[850px] bg-gray-50">
+                        <!-- Iframe du formulaire sans bords gênants -->
+                        <iframe src="https://manager.patrovaldhaine.be/espace-parent/forms-contact.php" 
+                                width="100%" 
+                                height="100%" 
+                                frameborder="0" 
+                                style="border:none;"
+                                title="Formulaire de contact">
+                            Chargement...
+                        </iframe>
+                    </div>
                 </div>
             </div>
 
