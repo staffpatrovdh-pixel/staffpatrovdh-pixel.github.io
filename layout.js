@@ -102,7 +102,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 </div>
 
                 <div class="border-t border-gray-800 pt-8 text-center text-sm text-gray-500 flex flex-col md:flex-row justify-center items-center gap-4">
-                    <p>© 2025 Patro du Val d'Haine – Tous droits réservés</p>
+                    <p>© 2026 Patro du Val d'Haine – Tous droits réservés</p>
                     <span class="hidden md:inline">•</span>
                     <a href="legal.html" class="hover:text-white transition">Mentions légales</a>
                     <span class="hidden md:inline">•</span>
