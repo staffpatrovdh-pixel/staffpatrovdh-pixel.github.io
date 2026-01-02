@@ -3,183 +3,298 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Deviens Animateur ! | Patro du Val d'Haine</title>
+    <title>Rejoindre le staff | Patro du Val d'Haine</title>
     
     <link rel="stylesheet" href="style.css">
-    <!-- Police manuscrite pour le fun -->
     <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;800&family=Fredoka:wght@400;600;700&display=swap" rel="stylesheet">
     
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
-    <!-- On charge le layout pour le footer et le menu -->
-    <script src="layout.js?v=8"></script>
+    
+    <!-- TON SCRIPT DE LAYOUT -->
+    <script src="layout.js?v=7"></script>
 
     <script>
-        tailwind.config = { theme: { extend: { colors: { patro: { yellow: '#FFD700', green: '#009045', dark: '#1a1a1a', light: '#f8fafc' } }, fontFamily: { sans: ['Poppins', 'sans-serif'], display: ['Fredoka', 'sans-serif'], handwritten: ['Indie Flower', 'cursive'] } } } }
+        tailwind.config = { 
+            theme: { 
+                extend: { 
+                    colors: { 
+                        patro: { 
+                            yellow: '#FFD700', 
+                            green: '#009045', 
+                            dark: '#1a1a1a', 
+                            light: '#f8fafc' 
+                        } 
+                    }, 
+                    fontFamily: { 
+                        sans: ['Poppins', 'sans-serif'], 
+                        display: ['Fredoka', 'sans-serif'], 
+                        handwritten: ['Indie Flower', 'cursive'] 
+                    },
+                    rotate: {
+                        '1': '1deg',
+                        '2': '2deg',
+                        '3': '3deg',
+                        '-1': '-1deg',
+                        '-2': '-2deg',
+                        '-3': '-3deg',
+                    }
+                } 
+            } 
+        }
     </script>
+    <style>
+        .text-shadow-custom {
+            text-shadow: 3px 3px 0px rgba(0,0,0,0.15);
+        }
+        @media (min-width: 768px) {
+            .text-shadow-custom {
+                text-shadow: 4px 4px 0px rgba(0,0,0,0.1);
+            }
+        }
+        .tag-sticker {
+            box-shadow: 3px 3px 0px #1a1a1a;
+        }
+        /* Amélioration du scroll sur mobile pour l'iframe */
+        iframe {
+            max-width: 100%;
+        }
+    </style>
 </head>
-<body class="font-sans text-slate-800 bg-patro-light antialiased">
+<body class="font-sans text-slate-800 bg-patro-light antialiased overflow-x-hidden">
 
-    <div id="custom-cursor"></div>
+    <!-- Elements globaux -->
+    <div id="custom-cursor" class="hidden md:block"></div> <!-- Masqué sur mobile pour perf -->
     <div id="loader"><div class="spinner mb-4"></div><p class="text-patro-green font-bold font-display animate-pulse">Chargement...</p></div>
     <div id="navbar-placeholder"></div>
 
-    <!-- HERO : ACCROCHE FORTE -->
-    <div class="pt-32 pb-24 relative overflow-hidden bg-patro-green">
-        <!-- Image de fond avec overlay -->
-        <div class="absolute inset-0 z-0">
-            <img src="donnees-site/photos-site-accueil/Banniere_deveniranim.png" alt="Devenir Animateur" class="w-full h-full object-cover opacity-50">
-            <div class="absolute inset-0 bg-gradient-to-t from-patro-green/90 to-patro-green/40"></div>
-        </div>
-        
-        <div class="max-w-5xl mx-auto px-4 text-center relative z-20 text-white">
-            <span class="inline-block py-2 px-4 rounded-full bg-white text-patro-green font-bold text-sm mb-6 uppercase tracking-wider transform -rotate-2 shadow-lg">
-                Dès 16 ans
-            </span>
-            <h1 class="text-5xl md:text-7xl font-display font-bold mb-6 drop-shadow-md leading-tight">
-                Passe de l'autre côté <br>
-                <span class="text-patro-yellow font-handwritten transform rotate-2 inline-block mt-2">du foulard !</span>
+    <!-- Hero Section : POV TIKTOK STYLE -->
+    <section class="relative pt-28 pb-16 md:pt-48 md:pb-32 overflow-hidden bg-patro-dark">
+        <!-- Background Image avec overlay sombre -->
+        <div class="absolute inset-0 bg-cover bg-center opacity-40" style="background-image: url('https://www.patrovaldhaine.be/donnees-site/photos-site-accueil/Banniere_deveniranim.png');"></div>
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent to-patro-dark/90"></div>
+
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center z-10">
+            
+            <!-- Tag style "Sticker Instagram" -->
+            <div class="mb-6 transform -rotate-3 hover:rotate-2 transition duration-300 inline-block">
+                <span class="bg-patro-yellow text-patro-dark px-3 py-1.5 md:px-4 md:py-2 font-handwritten font-bold text-lg md:text-3xl tag-sticker border-2 border-black">
+                    POV : Tes dimanches actuels 😴
+                </span>
+            </div>
+
+            <h1 class="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-display font-extrabold text-white mb-6 leading-none tracking-tight text-shadow-custom">
+                SWITCH LE <br/>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-patro-yellow to-yellow-300">MODE AVION</span>
             </h1>
-            <p class="text-xl md:text-2xl font-light text-green-50 mb-10 max-w-3xl mx-auto drop-shadow-sm">
-                Tu as envie de bouger, de créer, de rire et de faire grandir ? <br>
-                Rejoins le staff et vis une expérience qui changera ta vie.
+            
+            <p class="mt-4 md:mt-6 max-w-2xl mx-auto text-lg md:text-xl text-gray-300 font-medium font-sans px-2">
+                TikTok, Netflix... c'est bien, mais une bataille de peinture et un feu de camp le même jour ? <br class="hidden md:block">
+                <span class="text-white font-bold bg-patro-green px-1 mt-1 inline-block md:mt-0">C'est un autre délire.</span>
             </p>
             
-            <a href="#postuler" class="inline-flex items-center gap-3 px-8 py-4 bg-patro-yellow text-patro-dark font-black text-lg uppercase tracking-wider rounded-full hover:bg-white hover:scale-105 transition duration-300 shadow-xl border-4 border-transparent hover:border-patro-yellow">
-                <i data-lucide="hand"></i> Je me lance !
-            </a>
-        </div>
-    </div>
-
-    <!-- POURQUOI DEVENIR ANIMATEUR ? -->
-    <section class="py-20 px-4">
-        <div class="max-w-6xl mx-auto">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-5xl font-display font-bold text-gray-900 mb-4">Pourquoi s'engager ?</h2>
-                <p class="text-gray-500 text-lg">Être animateur, c'est bien plus que surveiller des enfants le dimanche.</p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
-                <!-- Carte 1 -->
-                <div class="bg-white p-8 rounded-3xl shadow-lg border-2 border-transparent hover:border-patro-yellow transition duration-300 group">
-                    <div class="w-16 h-16 bg-yellow-100 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-patro-yellow transition duration-300">
-                        <i data-lucide="users" class="w-8 h-8 text-yellow-600 group-hover:text-white"></i>
-                    </div>
-                    <h3 class="text-2xl font-display font-bold text-gray-800 mb-3">Une 2ème famille</h3>
-                    <p class="text-gray-600 leading-relaxed">
-                        Intégrer le staff, c'est rejoindre une bande de potes soudée. Des soirées, des week-ends, des fous rires et des souvenirs que tu garderas toute ta vie.
-                    </p>
-                </div>
-
-                <!-- Carte 2 -->
-                <div class="bg-white p-8 rounded-3xl shadow-lg border-2 border-transparent hover:border-patro-green transition duration-300 group mt-0 md:-mt-4">
-                    <div class="w-16 h-16 bg-green-100 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-patro-green transition duration-300">
-                        <i data-lucide="zap" class="w-8 h-8 text-green-600 group-hover:text-white"></i>
-                    </div>
-                    <h3 class="text-2xl font-display font-bold text-gray-800 mb-3">Booster ton CV</h3>
-                    <p class="text-gray-600 leading-relaxed">
-                        Leadership, créativité, gestion de projet, responsabilité... Des compétences en or pour ton avenir pro et tes études. Devenir CRACS, c'est du concret !
-                    </p>
-                </div>
-
-                <!-- Carte 3 -->
-                <div class="bg-white p-8 rounded-3xl shadow-lg border-2 border-transparent hover:border-patro-yellow transition duration-300 group">
-                    <div class="w-16 h-16 bg-purple-100 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-purple-500 transition duration-300">
-                        <i data-lucide="graduation-cap" class="w-8 h-8 text-purple-600 group-hover:text-white"></i>
-                    </div>
-                    <h3 class="text-2xl font-display font-bold text-gray-800 mb-3">Formation Officielle</h3>
-                    <p class="text-gray-600 leading-relaxed">
-                        Le Patro t'offre l'accès à des formations reconnues (BACV) pour devenir un animateur breveté. On t'accompagne à chaque étape.
-                    </p>
-                </div>
+            <div class="mt-8 md:mt-12 flex flex-col sm:flex-row justify-center gap-4 sm:gap-5 px-4">
+                <a href="#vibe-check" class="group relative w-full sm:w-auto px-6 py-3.5 md:px-8 md:py-4 bg-white text-patro-dark font-bold text-base md:text-lg rounded-xl border-b-4 border-gray-300 active:border-b-0 active:translate-y-1 transition-all flex items-center justify-center gap-2">
+                    Être animateur au Patro ?
+                </a>
+                <a href="#postuler" class="group relative w-full sm:w-auto px-6 py-3.5 md:px-8 md:py-4 bg-patro-green text-white font-bold text-base md:text-lg rounded-xl border-b-4 border-green-800 active:border-b-0 active:translate-y-1 hover:bg-green-600 transition-all flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(0,144,69,0.5)]">
+                    <i data-lucide="zap" class="w-5 h-5 group-hover:fill-current"></i>
+                    Je rejoins le staff direct !
+                </a>
             </div>
         </div>
     </section>
 
-    <!-- LE DEAL (Ce qu'on attend de toi) -->
-    <section class="py-20 bg-gray-900 text-white relative overflow-hidden">
-        <!-- Déco -->
-        <div class="absolute top-0 right-0 w-64 h-64 bg-patro-green rounded-full mix-blend-overlay filter blur-[80px] opacity-20"></div>
-        <div class="absolute bottom-0 left-0 w-64 h-64 bg-patro-yellow rounded-full mix-blend-overlay filter blur-[80px] opacity-20"></div>
-
-        <div class="max-w-5xl mx-auto px-4 relative z-10">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+    <!-- Section "Vibe Check" (Pourquoi c'est cool) -->
+    <section id="vibe-check" class="py-16 md:py-24 bg-patro-light relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row items-end justify-between mb-10 md:mb-16 gap-4 md:gap-6">
                 <div>
-                    <h2 class="text-3xl md:text-5xl font-display font-bold mb-6 text-patro-yellow">T'es chaud ?</h2>
-                    <p class="text-xl mb-8 text-gray-300">On ne cherche pas des super-héros, mais des jeunes motivés ! Voici le profil qu'on recherche :</p>
-                    
-                    <ul class="space-y-4">
-                        <li class="flex items-center gap-4">
-                            <div class="bg-patro-green p-2 rounded-full"><i data-lucide="check" class="w-5 h-5"></i></div>
-                            <span class="font-medium text-lg">Tu as 16 ans (ou presque)</span>
-                        </li>
-                        <li class="flex items-center gap-4">
-                            <div class="bg-patro-green p-2 rounded-full"><i data-lucide="check" class="w-5 h-5"></i></div>
-                            <span class="font-medium text-lg">Tu es motivé(e) et dynamique</span>
-                        </li>
-                        <li class="flex items-center gap-4">
-                            <div class="bg-patro-green p-2 rounded-full"><i data-lucide="check" class="w-5 h-5"></i></div>
-                            <span class="font-medium text-lg">Tu es dispo le dimanche après-midi</span>
-                        </li>
-                        <li class="flex items-center gap-4">
-                            <div class="bg-patro-green p-2 rounded-full"><i data-lucide="check" class="w-5 h-5"></i></div>
-                            <span class="font-medium text-lg">Tu as envie d'apprendre et de partager</span>
-                        </li>
-                    </ul>
+                    <!-- Correction: "Découvres" -> "Découvre" (Impératif) -->
+                    <h2 class="text-patro-green font-bold tracking-widest uppercase text-xs md:text-sm mb-2">Découvre ce qu'on fait</h2>
+                    <h3 class="text-3xl md:text-6xl font-display font-bold text-gray-900 leading-tight md:leading-none">
+                        C'est pas du bénévolat,<br>
+                        <span class="relative inline-block mt-1 md:mt-2">
+                            <span class="relative z-10">c'est une expérience incroyableeeeee !</span>
+                            <span class="absolute bottom-1 left-0 w-full h-2 md:h-3 bg-patro-yellow/60 -rotate-1"></span>
+                        </span>
+                    </h3>
                 </div>
+                <div class="hidden md:block transform rotate-12">
+                    <span class="text-6xl">✌️</span>
+                </div>
+            </div>
+
+            <!-- Bento Grid Layout -->
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-6">
                 
-                <!-- Visuel Fun -->
-                <div class="relative">
-                    <div class="bg-white/10 backdrop-blur-md border border-white/20 p-8 rounded-3xl transform rotate-2 hover:rotate-0 transition duration-500">
-                        <div class="text-center">
-                            <i data-lucide="quote" class="w-12 h-12 text-patro-yellow mx-auto mb-4"></i>
-                            <p class="text-xl font-handwritten italic mb-6">
-                                "Être animateur, c'est la meilleure décision que j'ai prise. C'est fatiguant parfois, mais voir le sourire des gamins après un grand jeu, ça n'a pas de prix."
-                            </p>
-                            <div class="flex items-center justify-center gap-3">
-                                <div class="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center font-bold text-patro-yellow">A</div>
-                                <div class="text-left">
-                                    <p class="font-bold text-sm">Un animateur anonyme</p>
-                                    <p class="text-xs text-gray-400">Patro Val d'Haine</p>
-                                </div>
-                            </div>
+                <!-- Box 1: Core Memories -->
+                <div class="md:col-span-7 bg-white rounded-3xl p-6 md:p-8 border-2 border-gray-100 shadow-xl hover:shadow-2xl transition hover:-translate-y-1 duration-300 relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 bg-patro-yellow text-[10px] md:text-xs font-bold px-3 py-1 rounded-bl-xl border-l-2 border-b-2 border-black">MEMORIES SNAP IRL</div>
+                    <div class="relative z-10">
+                        <div class="w-12 h-12 md:w-14 md:h-14 bg-purple-100 rounded-2xl flex items-center justify-center text-purple-600 mb-4 md:mb-6 -rotate-3 group-hover:rotate-0 transition">
+                            <i data-lucide="camera" class="w-6 h-6 md:w-7 md:h-7"></i>
                         </div>
+                        <h4 class="text-xl md:text-2xl font-display font-bold text-gray-900 mb-2 md:mb-3">Crée des souvenirs <br>que t'auras nulle part ailleurs</h4>
+                        <!-- Correction: "à ouvert" -> "a ouvert" (verbe avoir) -->
+                        <p class="text-sm md:text-base text-gray-600 font-medium leading-relaxed">Les délires en staff, les galères en hike (qui deviennent souvent les meilleures anecdotes), les soirées feu de camp, les fous rires parce qu'un des enfants a ouvert la porte des toilettes alors que tu posais une pêche 🥲 C'est des trucs que t'oublieras pas !</p>
                     </div>
+                </div>
+
+                <!-- Box 2: Cheat Code (Skills) -->
+                <div class="md:col-span-5 bg-patro-dark text-white rounded-3xl p-6 md:p-8 shadow-xl hover:shadow-2xl transition hover:-translate-y-1 duration-300 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 bg-patro-green text-[10px] md:text-xs font-bold px-3 py-1 rounded-bl-xl border-l-2 border-b-2 border-white">LEVEL UP</div>
+                    <div class="relative z-10">
+                        <div class="w-12 h-12 md:w-14 md:h-14 bg-white/10 rounded-2xl flex items-center justify-center text-patro-yellow mb-4 md:mb-6 rotate-3">
+                            <!-- Changement icône: Clé pour "Ouvrir des portes" -->
+                            <i data-lucide="key-round" class="w-6 h-6 md:w-7 md:h-7"></i>
+                        </div>
+                        <!-- Correction: "Ouvres" -> "Ouvre" -->
+                        <h4 class="text-xl md:text-2xl font-display font-bold mb-2 md:mb-3">Ouvre-toi des portes</h4>
+                        <p class="text-sm md:text-base text-gray-400 font-medium leading-relaxed">Tu crois qu'on fait que jouer ? Gérer un groupe, organiser un camp, gérer un budget... Sur un CV en vrai ça pèse gros, premier degré !</p>
+                    </div>
+                </div>
+
+                <!-- Box 3: Social -->
+                <div class="md:col-span-12 bg-patro-yellow rounded-3xl p-6 md:p-8 shadow-xl border-b-8 border-black hover:-translate-y-1 transition duration-300 flex flex-col md:flex-row items-start md:items-center gap-6 md:gap-8">
+                    <div class="flex-1">
+                        <div class="inline-block bg-white text-black font-bold px-3 py-1 rounded-full text-xs md:text-sm mb-3 md:mb-4 border-2 border-black">La base de notre staff</div>
+                        <h4 class="text-2xl md:text-3xl font-display font-bold text-black mb-2 md:mb-3">Un big groupe de potes <br>(un peu fous mais tkt...)</h4>
+                        <p class="text-black/80 font-bold text-base md:text-lg leading-relaxed">On ne va pas se mentir : on vient pour les animés, mais on reste pour l'ambiance qu'on a dans le staff. C'est genre un big groupe de potes, où on galère parfois (rarement) ensemble.</p>
+                    </div>
+                    <div class="flex -space-x-3 md:-space-x-4 self-center md:self-auto mt-2 md:mt-0">
+                        <!-- Avatars Animateurs -->
+                        <div class="w-12 h-12 md:w-16 md:h-16 rounded-full border-4 border-white bg-gray-300 overflow-hidden">
+                            <img src="https://www.patrovaldhaine.be/donnees-site/photos-staff/Nevala_(Aurelie).png" alt="Nevala" class="w-full h-full object-cover">
+                        </div>
+                        <div class="w-12 h-12 md:w-16 md:h-16 rounded-full border-4 border-white bg-gray-300 overflow-hidden">
+                            <img src="https://www.patrovaldhaine.be/donnees-site/photos-staff/Logan.png" alt="Logan" class="w-full h-full object-cover">
+                        </div>
+                        <div class="w-12 h-12 md:w-16 md:h-16 rounded-full border-4 border-white bg-gray-300 overflow-hidden">
+                            <img src="https://www.patrovaldhaine.be/donnees-site/photos-staff/Pomsky_(Maelia).png" alt="Pomsky" class="w-full h-full object-cover">
+                        </div>
+                        <div class="w-12 h-12 md:w-16 md:h-16 rounded-full border-4 border-white bg-patro-dark text-white flex items-center justify-center font-bold text-sm md:text-xl font-display">+TOI</div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Section "Starter Pack" (Checklist) -->
+    <section class="py-16 md:py-20 bg-white relative overflow-hidden">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            
+            <div class="text-center mb-8 md:mb-12">
+                <span class="bg-gray-100 text-gray-600 px-4 py-1 rounded-full text-xs md:text-sm font-bold uppercase tracking-wide">Le Starter Pack</span>
+                <h2 class="text-3xl md:text-5xl font-display font-bold text-gray-900 mt-4">T'es d'office animateur si...</h2>
+            </div>
+
+            <div class="bg-gray-50 rounded-3xl p-5 md:p-8 border-2 border-dashed border-gray-300 relative">
+                <!-- Déco Scotch -->
+                <div class="absolute -top-3 left-1/2 -translate-x-1/2 w-24 md:w-32 h-6 md:h-8 bg-patro-green/20 rotate-1"></div>
+
+                <ul class="space-y-3 md:space-y-4">
+                    <li class="flex items-center gap-3 md:gap-4 p-3 md:p-4 bg-white rounded-xl shadow-sm hover:shadow-md transition">
+                        <div class="flex-shrink-0 w-8 h-8 md:w-10 md:h-10 rounded-full bg-green-100 flex items-center justify-center text-green-600">
+                            <i data-lucide="check" class="w-5 h-5 md:w-6 md:h-6"></i>
+                        </div>
+                        <span class="font-bold text-base md:text-lg text-gray-800">T'as 16 ans (ou bientôt)</span>
+                        <span class="ml-auto text-xs md:text-sm text-gray-400 font-handwritten hidden sm:inline">C'est la base légale 🤠</span>
+                    </li>
+                    
+                    <li class="flex items-center gap-3 md:gap-4 p-3 md:p-4 bg-white rounded-xl shadow-sm hover:shadow-md transition">
+                        <div class="flex-shrink-0 w-8 h-8 md:w-10 md:h-10 rounded-full bg-green-100 flex items-center justify-center text-green-600">
+                            <!-- Changement icône : Pas (pour les chaussures) -->
+                            <i data-lucide="footprints" class="w-5 h-5 md:w-6 md:h-6"></i>
+                        </div>
+                        <span class="font-bold text-base md:text-lg text-gray-800">T'as pas peur de la boue</span>
+                        <span class="ml-auto text-xs md:text-sm text-gray-400 font-handwritten hidden sm:inline">Rip tes chaussures mdrr</span>
+                    </li>
+
+                    <li class="flex items-center gap-3 md:gap-4 p-3 md:p-4 bg-white rounded-xl shadow-sm hover:shadow-md transition">
+                        <div class="flex-shrink-0 w-8 h-8 md:w-10 md:h-10 rounded-full bg-green-100 flex items-center justify-center text-green-600">
+                            <!-- Changement icône : Mégaphone (pour crier) -->
+                            <i data-lucide="megaphone" class="w-5 h-5 md:w-6 md:h-6"></i>
+                        </div>
+                        <span class="font-bold text-base md:text-lg text-gray-800">Tu sais crier fort (très fort)</span>
+                        <span class="ml-auto text-xs md:text-sm text-gray-400 font-handwritten hidden sm:inline">Pour le rassemblement !</span>
+                    </li>
+
+                    <li class="flex items-center gap-3 md:gap-4 p-3 md:p-4 bg-white rounded-xl shadow-sm hover:shadow-md transition">
+                        <div class="flex-shrink-0 w-8 h-8 md:w-10 md:h-10 rounded-full bg-green-100 flex items-center justify-center text-green-600">
+                            <i data-lucide="flag" class="w-5 h-5 md:w-6 md:h-6"></i>
+                        </div>
+                        <span class="font-bold text-base md:text-lg text-gray-800">T'as gardé ton âme d'enfant</span>
+                        <span class="ml-auto text-xs md:text-sm text-gray-400 font-handwritten hidden sm:inline">Green flag absolu 🚩(y'a pas de drapeau vert)</span>
+                    </li>
+                </ul>
+
+                <div class="mt-6 md:mt-8 text-center transform rotate-1">
+                    <p class="font-handwritten text-xl md:text-2xl text-patro-green font-bold">
+                        "En vrai, viens comme t'es. On t'apprendra le reste tkt"
+                    </p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- SECTION FORMULAIRE -->
-    <section id="postuler" class="py-24 px-4 bg-patro-light">
-        <div class="max-w-4xl mx-auto text-center">
-            <h2 class="text-4xl font-display font-bold text-gray-900 mb-4">Prêt à rejoindre l'aventure ?</h2>
-            <p class="text-gray-600 mb-12">Remplis ce petit formulaire pour nous dire qui tu es. On te recontactera très vite pour en discuter !</p>
+    <!-- Section CTA Final -->
+    <section id="postuler" class="py-16 md:py-24 bg-patro-green relative overflow-hidden">
+        <!-- Abstract Shapes Background -->
+        <div class="absolute inset-0 opacity-10">
+            <div class="absolute top-10 left-10 w-20 h-20 md:w-32 md:h-32 bg-white rounded-full blur-3xl"></div>
+            <div class="absolute bottom-10 right-10 w-40 h-40 md:w-64 md:h-64 bg-patro-yellow rounded-full blur-3xl"></div>
+        </div>
 
-            <div class="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-200 min-h-[600px] relative">
-                
-                <!-- PLACEHOLDER DU FORMULAIRE (En attendant le lien) -->
-                <div class="absolute inset-0 flex flex-col items-center justify-center bg-gray-50 p-8 text-center">
-                    <div class="w-20 h-20 bg-patro-yellow/20 text-patro-dark rounded-full flex items-center justify-center mb-6">
-                        <i data-lucide="file-input" class="w-10 h-10"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold text-gray-800 mb-2">Formulaire à venir</h3>
-                    <p class="text-gray-500 max-w-md">
-                        Le formulaire de recrutement sera bientôt disponible ici. <br>
-                        En attendant, tu peux nous envoyer un message via la page contact !
-                    </p>
-                    <a href="contact.html" class="mt-6 text-patro-green font-bold hover:underline">Nous contacter</a>
+        <div class="max-w-4xl mx-auto px-4 text-center relative z-10">
+            <h2 class="text-3xl md:text-6xl font-display font-extrabold text-white mb-4 md:mb-8 drop-shadow-md">
+                On attend pas que toi, <br>
+                <span class="text-patro-yellow">mais presque.</span>
+            </h2>
+            
+            <p class="text-lg md:text-xl text-white/90 font-medium mb-6 md:mb-8">
+                <!-- Correction: "fait" -> "faite" (accord) -->
+                Pas besoin de CV, pas de lettre de motivation faite avec ChatGPT. <br class="hidden md:block">
+                Remplis ce formulaire ou envoie-nous un mail pour dire que t'es chaud(e).
+            </p>
+
+            <!-- Option Mail (en secondaire) -->
+            <div class="mb-8 md:mb-10">
+                <a href="mailto:staff@patrovaldhaine.be" class="inline-flex items-center gap-2 text-white/80 hover:text-white transition font-bold text-sm md:text-base border-b border-transparent hover:border-white pb-1">
+                    <i data-lucide="mail" class="w-4 h-4"></i>
+                    Tu préfères envoyer un mail
+                </a>
+            </div>
+
+            <!-- Intégration Iframe Formulaire -->
+            <div class="bg-white rounded-2xl md:rounded-3xl shadow-2xl overflow-hidden mx-auto transform hover:scale-[1.01] transition duration-500 w-full">
+                <!-- Fausse barre de fenêtre pour le style -->
+                <div class="w-full h-10 md:h-12 bg-gray-100 border-b border-gray-200 flex items-center px-4 gap-2">
+                    <div class="w-2.5 h-2.5 md:w-3 md:h-3 rounded-full bg-red-400"></div>
+                    <div class="w-2.5 h-2.5 md:w-3 md:h-3 rounded-full bg-yellow-400"></div>
+                    <div class="w-2.5 h-2.5 md:w-3 md:h-3 rounded-full bg-green-400"></div>
+                    <div class="ml-2 md:ml-4 text-[10px] md:text-xs text-gray-400 font-mono">Uiiii un peu d'administratif...</div>
                 </div>
+                <!-- Iframe avec scrolling fluide sur mobile -->
+                <div class="w-full overflow-y-auto -mb-2">
+                    <iframe 
+                        src="https://manager.patrovaldhaine.be/espace-parent/forms-recrutement.php" 
+                        title="Formulaire de recrutement"
+                        width="100%" 
+                        height="1200" 
+                        frameborder="0" 
+                        class="w-full bg-white block"
+                        style="min-height: 600px; max-width: 100%;">
+                    </iframe>
+                </div>
+            </div>
 
-                <!-- 
-                ICI VOUS COLLEREZ VOTRE IFRAME MICROSOFT FORMS PLUS TARD 
-                Exemple :
-                <iframe width="100%" height="100%" style="border:none; min-height:800px;" 
-                        src="VOTRE_LIEN_MICROSOFT_FORMS_ICI" 
-                        allowfullscreen> 
-                </iframe>
-                -->
-
+            <div class="mt-8 md:mt-12 opacity-60 hover:opacity-100 transition duration-500">
+                <p class="text-white text-sm md:text-lg font-handwritten rotate-1">
+                    (Promis on mange pas, sauf au goûter)
+                </p>
             </div>
         </div>
     </section>
@@ -187,9 +302,7 @@
     <div id="footer-placeholder"></div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            lucide.createIcons();
-        });
+        lucide.createIcons();
     </script>
 </body>
 </html>
