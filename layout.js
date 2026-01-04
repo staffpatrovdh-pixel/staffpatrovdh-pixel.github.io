@@ -1,5 +1,9 @@
 document.addEventListener("DOMContentLoaded", function () {
     
+    // --- VERSION CONTROL ---
+    // Permet de vérifier dans la console que la nouvelle version est bien chargée
+    console.log("Patro Layout Loaded - Version 8.0 (Cache Cleared)");
+
     // --- 1. INJECTION DU HEADER (NAVBAR) ---
     const navbarPlaceholder = document.getElementById("navbar-placeholder");
     if (navbarPlaceholder) {
@@ -108,7 +112,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     <span class="hidden md:inline">•</span>
                     <a href="cookies.html" class="hover:text-white transition">Politique Cookies</a>
                     <span class="hidden md:inline">•</span>
-                    <!-- BOUTON PORTAIL APPS (CORRIGÉ) -->
+                    <!-- BOUTON PORTAIL APPS -->
                     <a href="app.html" class="flex items-center gap-1 text-patro-yellow hover:text-white transition font-medium" title="Portail Apps">
                         <i data-lucide="grid" class="w-3 h-3"></i> Portail Apps
                     </a>
@@ -189,7 +193,10 @@ async function loadSponsors() {
     if (!container) return;
 
     try {
-        const response = await fetch(`https://api.github.com/repos/${repoOwner}/${repoName}/contents/${path}`);
+        // AJOUT DU TIMESTAMP pour forcer le rafraîchissement du cache API GitHub
+        const cacheBuster = `?t=${Date.now()}`;
+        const response = await fetch(`https://api.github.com/repos/${repoOwner}/${repoName}/contents/${path}${cacheBuster}`);
+        
         if (!response.ok) throw new Error('Erreur API GitHub');
         const files = await response.json();
         
@@ -211,11 +218,13 @@ async function loadSponsors() {
         });
     } catch (error) {
         console.error("Impossible de charger les sponsors:", error);
-        container.innerHTML = '<p class="text-gray-700 text-xs italic opacity-50">Sponsors</p>';
+        // Fallback propre
+        container.innerHTML = ''; 
     }
 }
 
 function checkCookieConsent() {
+    // On garde le stockage local, c'est mieux pour l'UX (pas besoin de vider ça)
     if (!localStorage.getItem('patroCookieConsent')) {
         const banner = document.createElement('div');
         banner.id = 'cookie-banner';
