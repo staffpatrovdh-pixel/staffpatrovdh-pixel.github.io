@@ -1,5 +1,8 @@
 document.addEventListener("DOMContentLoaded", function () {
     
+    // --- VERSION CONTROL ---
+    console.log("Patro Layout Loaded - Version 11.1 (Auto-Cursor Inject)");
+    
     // --- 1. INJECTION DU HEADER (NAVBAR) ---
     const navbarPlaceholder = document.getElementById("navbar-placeholder");
     if (navbarPlaceholder) {
@@ -16,7 +19,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     <div class="hidden lg:flex space-x-5 items-center">
                         <a href="index.html" class="nav-link text-gray-600 hover:text-patro-green font-medium transition">Accueil</a>
                         <a href="index.html#infos" class="nav-link text-gray-600 hover:text-patro-green font-medium transition">Agenda</a>
-                        <a href="contact.html" class="nav-link text-gray-600 hover:text-patro-green font-medium transition">Le Staff</a>
+                        <a href="contact.html" class="nav-link text-gray-600 hover:text-patro-green font-medium transition">Contact</a>
                         <a href="documents.html" class="nav-link text-gray-600 hover:text-patro-green font-medium transition">Documents</a>
                         <a href="informations.html" class="nav-link text-gray-600 hover:text-patro-green font-medium transition">Communications</a>
                         
@@ -39,7 +42,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 <div class="px-4 pt-2 pb-6 space-y-2 shadow-lg">
                     <a href="index.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-patro-green hover:bg-yellow-50">Accueil</a>
                     <a href="index.html#infos" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-patro-green hover:bg-yellow-50">Agenda</a>
-                    <a href="contact.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-patro-green hover:bg-yellow-50">Le Staff</a>
+                    <a href="contact.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-patro-green hover:bg-yellow-50">Contact</a>
                     <a href="documents.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-patro-green hover:bg-yellow-50">Documents</a>
                     <a href="informations.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-patro-green hover:bg-yellow-50">Communications</a>
                     
