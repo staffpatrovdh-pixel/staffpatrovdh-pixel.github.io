@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
     
     // --- VERSION CONTROL ---
-    console.log("Patro Layout Loaded - Version 9.3 (Mobile Accordion Menu)");
+    console.log("Patro Layout Loaded - Version 9.4 (Merged with Original Footer)");
 
     // --- 1. INJECTION DU HEADER (NAVBAR) ---
     const navbarPlaceholder = document.getElementById("navbar-placeholder");
@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         <a href="index.html#infos" class="nav-link text-gray-600 hover:text-patro-green font-medium transition">Agenda</a>
                         <a href="contact.html" class="nav-link text-gray-600 hover:text-patro-green font-medium transition">Contact</a>
                         
-                        <!-- DROPDOWN ESPACE PARENT (Desktop) -->
+                        <!-- DROPDOWN ESPACE PARENT -->
                         <div class="relative group">
                             <button class="nav-link text-gray-600 hover:text-patro-green font-medium transition flex items-center gap-1 outline-none">
                                 Espace Parent
@@ -99,11 +99,10 @@ document.addEventListener("DOMContentLoaded", function () {
         </nav>
         `;
         
-        // Active le lien courant
         highlightActiveLink();
     }
 
-    // --- 2. INJECTION DU FOOTER ---
+    // --- 2. INJECTION DU FOOTER (D'origine + Apps) ---
     const footerPlaceholder = document.getElementById("footer-placeholder");
     if (footerPlaceholder) {
         footerPlaceholder.innerHTML = `
@@ -213,7 +212,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // --- HELPER FUNCTIONS ---
 
-// Fonction globale pour le sous-menu mobile
 window.toggleMobileSubmenu = function() {
     const submenu = document.getElementById('mobile-submenu');
     const arrow = document.getElementById('mobile-submenu-arrow');
@@ -252,7 +250,7 @@ function highlightActiveLink() {
             link.classList.remove('text-gray-600');
             link.classList.add('text-patro-green', 'font-bold');
             
-            // Si on est dans un sous-menu, on active aussi le parent (Espace Parent)
+            // Activation du parent si sous-menu
             const parentGroup = link.closest('.group');
             if (parentGroup) {
                 const parentButton = parentGroup.querySelector('button');
