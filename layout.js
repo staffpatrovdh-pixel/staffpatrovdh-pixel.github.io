@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
     
     // --- VERSION CONTROL ---
-    console.log("Patro Layout Loaded - Version 9.0 (Menu Espace Parent)");
+    console.log("Patro Layout Loaded - Version 9.3 (Mobile Accordion Menu)");
 
     // --- 1. INJECTION DU HEADER (NAVBAR) ---
     const navbarPlaceholder = document.getElementById("navbar-placeholder");
@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         <a href="index.html#infos" class="nav-link text-gray-600 hover:text-patro-green font-medium transition">Agenda</a>
                         <a href="contact.html" class="nav-link text-gray-600 hover:text-patro-green font-medium transition">Contact</a>
                         
-                        <!-- DROPDOWN ESPACE PARENT -->
+                        <!-- DROPDOWN ESPACE PARENT (Desktop) -->
                         <div class="relative group">
                             <button class="nav-link text-gray-600 hover:text-patro-green font-medium transition flex items-center gap-1 outline-none">
                                 Espace Parent
@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", function () {
                                 </a>
                                 <div class="h-px bg-gray-100 my-1 mx-2"></div>
                                 <a href="https://manager.patrovaldhaine.be/espace-parent/" class="block px-5 py-3 text-sm font-bold text-patro-green hover:bg-green-50 transition flex items-center justify-between">
-                                    <span>Mon Espace Parent</span>
+                                    <span>Espace Parent</span>
                                     <i data-lucide="external-link" class="w-3 h-3"></i>
                                 </a>
                             </div>
@@ -59,25 +59,34 @@ document.addEventListener("DOMContentLoaded", function () {
             </div>
 
             <!-- Mobile Menu Panel -->
-            <div id="mobile-menu" class="hidden lg:hidden bg-white border-t max-h-[80vh] overflow-y-auto">
+            <div id="mobile-menu" class="hidden lg:hidden bg-white border-t max-h-[85vh] overflow-y-auto">
                 <div class="px-4 pt-4 pb-8 space-y-1 shadow-lg">
                     <a href="index.html" class="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-patro-green hover:bg-yellow-50">Accueil</a>
                     <a href="index.html#infos" class="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-patro-green hover:bg-yellow-50">Agenda</a>
                     <a href="contact.html" class="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-patro-green hover:bg-yellow-50">Contact</a>
                     
-                    <!-- Section Espace Parent Mobile -->
-                    <div class="mt-4 pt-4 border-t border-gray-100">
-                        <span class="px-3 text-xs font-bold text-gray-400 uppercase tracking-wider mb-2 block">Zone Parents</span>
+                    <!-- ACCORDÉON ESPACE PARENT MOBILE -->
+                    <div class="mt-2 border-t border-gray-100 pt-2">
+                        <button onclick="toggleMobileSubmenu()" class="w-full flex items-center justify-between px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-patro-green hover:bg-yellow-50 group focus:outline-none select-none">
+                            <span class="flex items-center gap-2">
+                                <i data-lucide="users" class="w-5 h-5 text-gray-400 group-hover:text-patro-green"></i>
+                                Espace Parent
+                            </span>
+                            <i data-lucide="chevron-down" id="mobile-submenu-arrow" class="w-5 h-5 text-gray-400 transition-transform duration-300"></i>
+                        </button>
                         
-                        <a href="documents.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-patro-green hover:bg-green-50 pl-6 border-l-4 border-transparent hover:border-patro-green flex items-center gap-2">
-                            <i data-lucide="file-text" class="w-4 h-4"></i> Documents
-                        </a>
-                        <a href="informations.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-patro-green hover:bg-green-50 pl-6 border-l-4 border-transparent hover:border-patro-green flex items-center gap-2">
-                            <i data-lucide="bell" class="w-4 h-4"></i> Communications
-                        </a>
-                        <a href="https://manager.patrovaldhaine.be/espace-parent/" class="block px-3 py-2 rounded-md text-base font-bold text-patro-green hover:bg-green-50 pl-6 border-l-4 border-patro-green/20 hover:border-patro-green flex items-center gap-2 mt-1">
-                            <i data-lucide="layout-dashboard" class="w-4 h-4"></i> Accès Manager
-                        </a>
+                        <!-- Sous-menu caché par défaut -->
+                        <div id="mobile-submenu" class="hidden pl-4 space-y-1 overflow-hidden transition-all bg-gray-50/50 rounded-lg pb-2">
+                            <a href="documents.html" class="block px-3 py-2 rounded-md text-sm font-medium text-gray-600 hover:text-patro-green hover:bg-green-50 flex items-center gap-2">
+                                <i data-lucide="file-text" class="w-4 h-4"></i> Documents
+                            </a>
+                            <a href="informations.html" class="block px-3 py-2 rounded-md text-sm font-medium text-gray-600 hover:text-patro-green hover:bg-green-50 flex items-center gap-2">
+                                <i data-lucide="bell" class="w-4 h-4"></i> Communications
+                            </a>
+                            <a href="https://manager.patrovaldhaine.be/espace-parent/" class="block px-3 py-2 rounded-md text-sm font-bold text-patro-green hover:bg-green-50 flex items-center gap-2 mt-1">
+                                <i data-lucide="layout-dashboard" class="w-4 h-4"></i> Espace Parent
+                            </a>
+                        </div>
                     </div>
                     
                     <div class="mt-6 pt-2">
@@ -162,17 +171,27 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (typeof lucide !== 'undefined') lucide.createIcons();
 
+    // --- CURSOR FIX ---
     if (window.matchMedia("(pointer: fine)").matches) {
         const cursor = document.getElementById('custom-cursor');
         if(cursor) {
+            cursor.style.position = 'fixed';
+            cursor.style.pointerEvents = 'none';
+            cursor.style.zIndex = '9999'; 
+            
             document.addEventListener('mousemove', (e) => {
                 requestAnimationFrame(() => {
                     cursor.style.left = e.clientX + 'px';
                     cursor.style.top = e.clientY + 'px';
+                    cursor.style.opacity = '1';
                 });
             });
-            document.addEventListener('mouseout', () => { cursor.style.opacity = '0'; });
-            document.addEventListener('mouseover', () => { cursor.style.opacity = '1'; });
+            
+            document.addEventListener('mouseout', (e) => {
+                if (e.relatedTarget === null) {
+                    cursor.style.opacity = '0';
+                }
+            });
         }
     }
 
@@ -191,6 +210,23 @@ document.addEventListener("DOMContentLoaded", function () {
 
     checkCookieConsent();
 });
+
+// --- HELPER FUNCTIONS ---
+
+// Fonction globale pour le sous-menu mobile
+window.toggleMobileSubmenu = function() {
+    const submenu = document.getElementById('mobile-submenu');
+    const arrow = document.getElementById('mobile-submenu-arrow');
+    
+    if (submenu && arrow) {
+        submenu.classList.toggle('hidden');
+        if (submenu.classList.contains('hidden')) {
+            arrow.style.transform = 'rotate(0deg)';
+        } else {
+            arrow.style.transform = 'rotate(180deg)';
+        }
+    }
+};
 
 window.addEventListener('load', function() {
     const loader = document.getElementById('loader');
