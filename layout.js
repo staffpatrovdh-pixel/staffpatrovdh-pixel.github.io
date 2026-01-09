@@ -1,8 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
     
-    // --- VERSION CONTROL ---
-    console.log("Patro Layout Loaded - Version 9.4 (Merged with Original Footer)");
-
     // --- 1. INJECTION DU HEADER (NAVBAR) ---
     const navbarPlaceholder = document.getElementById("navbar-placeholder");
     if (navbarPlaceholder) {
@@ -16,42 +13,21 @@ document.addEventListener("DOMContentLoaded", function () {
                     </a>
 
                     <!-- Desktop Menu -->
-                    <div class="hidden lg:flex space-x-6 items-center">
+                    <div class="hidden lg:flex space-x-5 items-center">
                         <a href="index.html" class="nav-link text-gray-600 hover:text-patro-green font-medium transition">Accueil</a>
                         <a href="index.html#infos" class="nav-link text-gray-600 hover:text-patro-green font-medium transition">Agenda</a>
-                        <a href="contact.html" class="nav-link text-gray-600 hover:text-patro-green font-medium transition">Contact</a>
+                        <a href="contact.html" class="nav-link text-gray-600 hover:text-patro-green font-medium transition">Le Staff</a>
+                        <a href="documents.html" class="nav-link text-gray-600 hover:text-patro-green font-medium transition">Documents</a>
+                        <a href="informations.html" class="nav-link text-gray-600 hover:text-patro-green font-medium transition">Communications</a>
                         
-                        <!-- DROPDOWN ESPACE PARENT -->
-                        <div class="relative group">
-                            <button class="nav-link text-gray-600 hover:text-patro-green font-medium transition flex items-center gap-1 outline-none">
-                                Espace Parent
-                                <i data-lucide="chevron-down" class="w-4 h-4 transition-transform group-hover:rotate-180"></i>
-                            </button>
-                            
-                            <!-- Menu Déroulant -->
-                            <div class="absolute top-full left-0 w-60 bg-white shadow-xl rounded-xl mt-2 py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform translate-y-2 group-hover:translate-y-0 border border-gray-100 overflow-hidden">
-                                <a href="documents.html" class="block px-5 py-3 text-sm text-gray-600 hover:bg-green-50 hover:text-patro-green transition flex items-center gap-2">
-                                    <i data-lucide="file-text" class="w-4 h-4"></i> Documents
-                                </a>
-                                <a href="informations.html" class="block px-5 py-3 text-sm text-gray-600 hover:bg-green-50 hover:text-patro-green transition flex items-center gap-2">
-                                    <i data-lucide="bell" class="w-4 h-4"></i> Communications
-                                </a>
-                                <div class="h-px bg-gray-100 my-1 mx-2"></div>
-                                <a href="https://manager.patrovaldhaine.be/espace-parent/" class="block px-5 py-3 text-sm font-bold text-patro-green hover:bg-green-50 transition flex items-center justify-between">
-                                    <span>Espace Parent</span>
-                                    <i data-lucide="external-link" class="w-3 h-3"></i>
-                                </a>
-                            </div>
-                        </div>
-                        
-                        <a href="inscription.html" class="bg-patro-green text-white px-5 py-2.5 rounded-full font-semibold hover:bg-green-700 transition shadow-md hover:shadow-lg transform hover:-translate-y-0.5 text-sm flex items-center gap-2">
-                            <i data-lucide="user-plus" class="w-4 h-4"></i> Nous rejoindre
+                        <a href="inscription.html" class="bg-patro-green text-white px-4 py-2 rounded-full font-semibold hover:bg-green-700 transition shadow-md hover:shadow-lg transform hover:-translate-y-0.5 text-sm">
+                            Nous rejoindre
                         </a>
                     </div>
 
                     <!-- Mobile Menu Button -->
                     <div class="lg:hidden flex items-center">
-                        <button onclick="toggleMenu()" class="text-gray-600 hover:text-patro-green focus:outline-none p-2">
+                        <button onclick="toggleMenu()" class="text-gray-600 hover:text-patro-green focus:outline-none">
                             <i data-lucide="menu" class="w-8 h-8"></i>
                         </button>
                     </div>
@@ -59,50 +35,27 @@ document.addEventListener("DOMContentLoaded", function () {
             </div>
 
             <!-- Mobile Menu Panel -->
-            <div id="mobile-menu" class="hidden lg:hidden bg-white border-t max-h-[85vh] overflow-y-auto">
-                <div class="px-4 pt-4 pb-8 space-y-1 shadow-lg">
-                    <a href="index.html" class="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-patro-green hover:bg-yellow-50">Accueil</a>
-                    <a href="index.html#infos" class="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-patro-green hover:bg-yellow-50">Agenda</a>
-                    <a href="contact.html" class="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-patro-green hover:bg-yellow-50">Contact</a>
+            <div id="mobile-menu" class="hidden lg:hidden bg-white border-t">
+                <div class="px-4 pt-2 pb-6 space-y-2 shadow-lg">
+                    <a href="index.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-patro-green hover:bg-yellow-50">Accueil</a>
+                    <a href="index.html#infos" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-patro-green hover:bg-yellow-50">Agenda</a>
+                    <a href="contact.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-patro-green hover:bg-yellow-50">Le Staff</a>
+                    <a href="documents.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-patro-green hover:bg-yellow-50">Documents</a>
+                    <a href="informations.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-patro-green hover:bg-yellow-50">Communications</a>
                     
-                    <!-- ACCORDÉON ESPACE PARENT MOBILE -->
-                    <div class="mt-2 border-t border-gray-100 pt-2">
-                        <button onclick="toggleMobileSubmenu()" class="w-full flex items-center justify-between px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-patro-green hover:bg-yellow-50 group focus:outline-none select-none">
-                            <span class="flex items-center gap-2">
-                                <i data-lucide="users" class="w-5 h-5 text-gray-400 group-hover:text-patro-green"></i>
-                                Espace Parent
-                            </span>
-                            <i data-lucide="chevron-down" id="mobile-submenu-arrow" class="w-5 h-5 text-gray-400 transition-transform duration-300"></i>
-                        </button>
-                        
-                        <!-- Sous-menu caché par défaut -->
-                        <div id="mobile-submenu" class="hidden pl-4 space-y-1 overflow-hidden transition-all bg-gray-50/50 rounded-lg pb-2">
-                            <a href="documents.html" class="block px-3 py-2 rounded-md text-sm font-medium text-gray-600 hover:text-patro-green hover:bg-green-50 flex items-center gap-2">
-                                <i data-lucide="file-text" class="w-4 h-4"></i> Documents
-                            </a>
-                            <a href="informations.html" class="block px-3 py-2 rounded-md text-sm font-medium text-gray-600 hover:text-patro-green hover:bg-green-50 flex items-center gap-2">
-                                <i data-lucide="bell" class="w-4 h-4"></i> Communications
-                            </a>
-                            <a href="https://manager.patrovaldhaine.be/espace-parent/" class="block px-3 py-2 rounded-md text-sm font-bold text-patro-green hover:bg-green-50 flex items-center gap-2 mt-1">
-                                <i data-lucide="layout-dashboard" class="w-4 h-4"></i> Espace Parent
-                            </a>
-                        </div>
-                    </div>
-                    
-                    <div class="mt-6 pt-2">
-                        <a href="inscription.html" class="block w-full text-center px-5 py-4 rounded-xl font-bold bg-patro-yellow text-patro-dark shadow-sm hover:shadow-md transition">
-                            S'inscrire maintenant
-                        </a>
-                    </div>
+                    <a href="inscription.html" class="block w-full text-center mt-4 px-5 py-3 rounded-md font-bold bg-patro-yellow text-patro-green">
+                        S'inscrire maintenant
+                    </a>
                 </div>
             </div>
         </nav>
         `;
         
+        // Active le lien courant
         highlightActiveLink();
     }
 
-    // --- 2. INJECTION DU FOOTER (D'origine + Apps) ---
+    // --- 2. INJECTION DU FOOTER ---
     const footerPlaceholder = document.getElementById("footer-placeholder");
     if (footerPlaceholder) {
         footerPlaceholder.innerHTML = `
@@ -155,7 +108,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     <span class="hidden md:inline">•</span>
                     <a href="cookies.html" class="hover:text-white transition">Politique Cookies</a>
                     <span class="hidden md:inline">•</span>
-                    <!-- BOUTON PORTAIL APPS -->
+                    <!-- BOUTON PORTAIL APPS (CORRIGÉ) -->
                     <a href="app.html" class="flex items-center gap-1 text-patro-yellow hover:text-white transition font-medium" title="Portail Apps">
                         <i data-lucide="grid" class="w-3 h-3"></i> Portail Apps
                     </a>
@@ -170,27 +123,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (typeof lucide !== 'undefined') lucide.createIcons();
 
-    // --- CURSOR FIX ---
     if (window.matchMedia("(pointer: fine)").matches) {
         const cursor = document.getElementById('custom-cursor');
         if(cursor) {
-            cursor.style.position = 'fixed';
-            cursor.style.pointerEvents = 'none';
-            cursor.style.zIndex = '9999'; 
-            
             document.addEventListener('mousemove', (e) => {
                 requestAnimationFrame(() => {
                     cursor.style.left = e.clientX + 'px';
                     cursor.style.top = e.clientY + 'px';
-                    cursor.style.opacity = '1';
                 });
             });
-            
-            document.addEventListener('mouseout', (e) => {
-                if (e.relatedTarget === null) {
-                    cursor.style.opacity = '0';
-                }
-            });
+            document.addEventListener('mouseout', () => { cursor.style.opacity = '0'; });
+            document.addEventListener('mouseover', () => { cursor.style.opacity = '1'; });
         }
     }
 
@@ -209,22 +152,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     checkCookieConsent();
 });
-
-// --- HELPER FUNCTIONS ---
-
-window.toggleMobileSubmenu = function() {
-    const submenu = document.getElementById('mobile-submenu');
-    const arrow = document.getElementById('mobile-submenu-arrow');
-    
-    if (submenu && arrow) {
-        submenu.classList.toggle('hidden');
-        if (submenu.classList.contains('hidden')) {
-            arrow.style.transform = 'rotate(0deg)';
-        } else {
-            arrow.style.transform = 'rotate(180deg)';
-        }
-    }
-};
 
 window.addEventListener('load', function() {
     const loader = document.getElementById('loader');
@@ -249,16 +176,6 @@ function highlightActiveLink() {
         if (link.getAttribute('href') === currentPath) {
             link.classList.remove('text-gray-600');
             link.classList.add('text-patro-green', 'font-bold');
-            
-            // Activation du parent si sous-menu
-            const parentGroup = link.closest('.group');
-            if (parentGroup) {
-                const parentButton = parentGroup.querySelector('button');
-                if (parentButton) {
-                    parentButton.classList.remove('text-gray-600');
-                    parentButton.classList.add('text-patro-green', 'font-bold');
-                }
-            }
         }
     });
 }
@@ -272,9 +189,7 @@ async function loadSponsors() {
     if (!container) return;
 
     try {
-        const cacheBuster = `?t=${Date.now()}`;
-        const response = await fetch(`https://api.github.com/repos/${repoOwner}/${repoName}/contents/${path}${cacheBuster}`);
-        
+        const response = await fetch(`https://api.github.com/repos/${repoOwner}/${repoName}/contents/${path}`);
         if (!response.ok) throw new Error('Erreur API GitHub');
         const files = await response.json();
         
@@ -296,7 +211,7 @@ async function loadSponsors() {
         });
     } catch (error) {
         console.error("Impossible de charger les sponsors:", error);
-        container.innerHTML = ''; 
+        container.innerHTML = '<p class="text-gray-700 text-xs italic opacity-50">Sponsors</p>';
     }
 }
 
