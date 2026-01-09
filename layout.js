@@ -1,8 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
     
     // --- VERSION CONTROL ---
-    // Permet de vérifier dans la console que la nouvelle version est bien chargée
-    console.log("Patro Layout Loaded - Version 8.0 (Cache Cleared)");
+    console.log("Patro Layout Loaded - Version 9.0 (Menu Espace Parent)");
 
     // --- 1. INJECTION DU HEADER (NAVBAR) ---
     const navbarPlaceholder = document.getElementById("navbar-placeholder");
@@ -17,21 +16,42 @@ document.addEventListener("DOMContentLoaded", function () {
                     </a>
 
                     <!-- Desktop Menu -->
-                    <div class="hidden lg:flex space-x-5 items-center">
+                    <div class="hidden lg:flex space-x-6 items-center">
                         <a href="index.html" class="nav-link text-gray-600 hover:text-patro-green font-medium transition">Accueil</a>
                         <a href="index.html#infos" class="nav-link text-gray-600 hover:text-patro-green font-medium transition">Agenda</a>
                         <a href="contact.html" class="nav-link text-gray-600 hover:text-patro-green font-medium transition">Contact</a>
-                        <a href="documents.html" class="nav-link text-gray-600 hover:text-patro-green font-medium transition">Documents</a>
-                        <a href="informations.html" class="nav-link text-gray-600 hover:text-patro-green font-medium transition">Communications</a>
                         
-                        <a href="inscription.html" class="bg-patro-green text-white px-4 py-2 rounded-full font-semibold hover:bg-green-700 transition shadow-md hover:shadow-lg transform hover:-translate-y-0.5 text-sm">
-                            Nous rejoindre
+                        <!-- DROPDOWN ESPACE PARENT -->
+                        <div class="relative group">
+                            <button class="nav-link text-gray-600 hover:text-patro-green font-medium transition flex items-center gap-1 outline-none">
+                                Espace Parent
+                                <i data-lucide="chevron-down" class="w-4 h-4 transition-transform group-hover:rotate-180"></i>
+                            </button>
+                            
+                            <!-- Menu Déroulant -->
+                            <div class="absolute top-full left-0 w-60 bg-white shadow-xl rounded-xl mt-2 py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform translate-y-2 group-hover:translate-y-0 border border-gray-100 overflow-hidden">
+                                <a href="documents.html" class="block px-5 py-3 text-sm text-gray-600 hover:bg-green-50 hover:text-patro-green transition flex items-center gap-2">
+                                    <i data-lucide="file-text" class="w-4 h-4"></i> Documents
+                                </a>
+                                <a href="informations.html" class="block px-5 py-3 text-sm text-gray-600 hover:bg-green-50 hover:text-patro-green transition flex items-center gap-2">
+                                    <i data-lucide="bell" class="w-4 h-4"></i> Communications
+                                </a>
+                                <div class="h-px bg-gray-100 my-1 mx-2"></div>
+                                <a href="https://manager.patrovaldhaine.be/espace-parent/" class="block px-5 py-3 text-sm font-bold text-patro-green hover:bg-green-50 transition flex items-center justify-between">
+                                    <span>Mon Espace Parent</span>
+                                    <i data-lucide="external-link" class="w-3 h-3"></i>
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <a href="inscription.html" class="bg-patro-green text-white px-5 py-2.5 rounded-full font-semibold hover:bg-green-700 transition shadow-md hover:shadow-lg transform hover:-translate-y-0.5 text-sm flex items-center gap-2">
+                            <i data-lucide="user-plus" class="w-4 h-4"></i> Nous rejoindre
                         </a>
                     </div>
 
                     <!-- Mobile Menu Button -->
                     <div class="lg:hidden flex items-center">
-                        <button onclick="toggleMenu()" class="text-gray-600 hover:text-patro-green focus:outline-none">
+                        <button onclick="toggleMenu()" class="text-gray-600 hover:text-patro-green focus:outline-none p-2">
                             <i data-lucide="menu" class="w-8 h-8"></i>
                         </button>
                     </div>
@@ -39,17 +59,32 @@ document.addEventListener("DOMContentLoaded", function () {
             </div>
 
             <!-- Mobile Menu Panel -->
-            <div id="mobile-menu" class="hidden lg:hidden bg-white border-t">
-                <div class="px-4 pt-2 pb-6 space-y-2 shadow-lg">
-                    <a href="index.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-patro-green hover:bg-yellow-50">Accueil</a>
-                    <a href="index.html#infos" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-patro-green hover:bg-yellow-50">Agenda</a>
-                    <a href="contact.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-patro-green hover:bg-yellow-50">Contact</a>
-                    <a href="documents.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-patro-green hover:bg-yellow-50">Documents</a>
-                    <a href="informations.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-patro-green hover:bg-yellow-50">Communications</a>
+            <div id="mobile-menu" class="hidden lg:hidden bg-white border-t max-h-[80vh] overflow-y-auto">
+                <div class="px-4 pt-4 pb-8 space-y-1 shadow-lg">
+                    <a href="index.html" class="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-patro-green hover:bg-yellow-50">Accueil</a>
+                    <a href="index.html#infos" class="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-patro-green hover:bg-yellow-50">Agenda</a>
+                    <a href="contact.html" class="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-patro-green hover:bg-yellow-50">Contact</a>
                     
-                    <a href="inscription.html" class="block w-full text-center mt-4 px-5 py-3 rounded-md font-bold bg-patro-yellow text-patro-green">
-                        S'inscrire maintenant
-                    </a>
+                    <!-- Section Espace Parent Mobile -->
+                    <div class="mt-4 pt-4 border-t border-gray-100">
+                        <span class="px-3 text-xs font-bold text-gray-400 uppercase tracking-wider mb-2 block">Zone Parents</span>
+                        
+                        <a href="documents.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-patro-green hover:bg-green-50 pl-6 border-l-4 border-transparent hover:border-patro-green flex items-center gap-2">
+                            <i data-lucide="file-text" class="w-4 h-4"></i> Documents
+                        </a>
+                        <a href="informations.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-patro-green hover:bg-green-50 pl-6 border-l-4 border-transparent hover:border-patro-green flex items-center gap-2">
+                            <i data-lucide="bell" class="w-4 h-4"></i> Communications
+                        </a>
+                        <a href="https://manager.patrovaldhaine.be/espace-parent/" class="block px-3 py-2 rounded-md text-base font-bold text-patro-green hover:bg-green-50 pl-6 border-l-4 border-patro-green/20 hover:border-patro-green flex items-center gap-2 mt-1">
+                            <i data-lucide="layout-dashboard" class="w-4 h-4"></i> Accès Manager
+                        </a>
+                    </div>
+                    
+                    <div class="mt-6 pt-2">
+                        <a href="inscription.html" class="block w-full text-center px-5 py-4 rounded-xl font-bold bg-patro-yellow text-patro-dark shadow-sm hover:shadow-md transition">
+                            S'inscrire maintenant
+                        </a>
+                    </div>
                 </div>
             </div>
         </nav>
@@ -180,6 +215,16 @@ function highlightActiveLink() {
         if (link.getAttribute('href') === currentPath) {
             link.classList.remove('text-gray-600');
             link.classList.add('text-patro-green', 'font-bold');
+            
+            // Si on est dans un sous-menu, on active aussi le parent (Espace Parent)
+            const parentGroup = link.closest('.group');
+            if (parentGroup) {
+                const parentButton = parentGroup.querySelector('button');
+                if (parentButton) {
+                    parentButton.classList.remove('text-gray-600');
+                    parentButton.classList.add('text-patro-green', 'font-bold');
+                }
+            }
         }
     });
 }
@@ -193,7 +238,6 @@ async function loadSponsors() {
     if (!container) return;
 
     try {
-        // AJOUT DU TIMESTAMP pour forcer le rafraîchissement du cache API GitHub
         const cacheBuster = `?t=${Date.now()}`;
         const response = await fetch(`https://api.github.com/repos/${repoOwner}/${repoName}/contents/${path}${cacheBuster}`);
         
@@ -218,13 +262,11 @@ async function loadSponsors() {
         });
     } catch (error) {
         console.error("Impossible de charger les sponsors:", error);
-        // Fallback propre
         container.innerHTML = ''; 
     }
 }
 
 function checkCookieConsent() {
-    // On garde le stockage local, c'est mieux pour l'UX (pas besoin de vider ça)
     if (!localStorage.getItem('patroCookieConsent')) {
         const banner = document.createElement('div');
         banner.id = 'cookie-banner';
