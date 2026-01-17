@@ -1,8 +1,8 @@
 document.addEventListener("DOMContentLoaded", function () {
     
     // --- VERSION CONTROL ---
-    console.log("Patro Layout Loaded - Version 11.1 (Auto-Cursor Inject)");
-    
+    console.log("Patro Layout Loaded - Version 11.2 (Sponsors via TXT file)");
+
     // --- 1. INJECTION DU HEADER (NAVBAR) ---
     const navbarPlaceholder = document.getElementById("navbar-placeholder");
     if (navbarPlaceholder) {
@@ -84,7 +84,8 @@ document.addEventListener("DOMContentLoaded", function () {
                     <!-- Colonne 2: Partenaires (DYNAMIQUE) -->
                     <div class="flex flex-col items-center md:items-start">
                         <h5 class="font-bold text-gray-200 mb-6 uppercase text-sm tracking-wider">Avec le soutien de :</h5>
-                        <div id="sponsors-grid" class="grid grid-cols-2 gap-4 items-center">
+                        <!-- Modification de la grille pour accepter plus de logos proprement -->
+                        <div id="sponsors-grid" class="flex flex-wrap gap-4 items-center justify-center md:justify-start">
                             <div class="animate-pulse h-16 w-24 bg-gray-800 rounded"></div>
                             <div class="animate-pulse h-16 w-24 bg-gray-800 rounded"></div>
                         </div>
@@ -129,14 +130,26 @@ document.addEventListener("DOMContentLoaded", function () {
     if (window.matchMedia("(pointer: fine)").matches) {
         const cursor = document.getElementById('custom-cursor');
         if(cursor) {
+            // Force styles
+            cursor.style.position = 'fixed';
+            cursor.style.pointerEvents = 'none';
+            cursor.style.zIndex = '9999';
+
             document.addEventListener('mousemove', (e) => {
                 requestAnimationFrame(() => {
                     cursor.style.left = e.clientX + 'px';
                     cursor.style.top = e.clientY + 'px';
+                    cursor.style.opacity = '1';
                 });
             });
-            document.addEventListener('mouseout', () => { cursor.style.opacity = '0'; });
-            document.addEventListener('mouseover', () => { cursor.style.opacity = '1'; });
+            document.addEventListener('mouseout', (e) => { 
+                if (e.relatedTarget === null) cursor.style.opacity = '0'; 
+            });
+        } else {
+            // Création de secours si le curseur n'existe pas dans le HTML
+            const newCursor = document.createElement('div');
+            newCursor.id = 'custom-cursor';
+            document.body.appendChild(newCursor);
         }
     }
 
@@ -183,38 +196,69 @@ function highlightActiveLink() {
     });
 }
 
+// --- NOUVELLE FONCTION LOAD SPONSORS (TXT FILE) ---
 async function loadSponsors() {
     const repoOwner = "staffpatrovdh-pixel";
     const repoName = "staffpatrovdh-pixel.github.io";
-    const path = "donnees-site/logos_sponsors";
-    const container = document.getElementById('sponsors-grid');
+    const branch = "main";
+    // Chemin vers le fichier texte
+    const fileUrl = `https://raw.githubusercontent.com/${repoOwner}/${repoName}/${branch}/donnees-site/partenaires.txt`;
     
+    const container = document.getElementById('sponsors-grid');
     if (!container) return;
 
     try {
-        const response = await fetch(`https://api.github.com/repos/${repoOwner}/${repoName}/contents/${path}`);
-        if (!response.ok) throw new Error('Erreur API GitHub');
-        const files = await response.json();
+        const cacheBuster = `?t=${Date.now()}`;
+        const response = await fetch(fileUrl + cacheBuster);
         
+        if (!response.ok) throw new Error('Fichier partenaires.txt introuvable');
+        
+        const text = await response.text();
+        const lines = text.split('\n');
+        
+        // Vider le conteneur (enlève les placeholders)
         container.innerHTML = '';
         
-        const imageFiles = files.filter(file => file.name.match(/\.(jpg|jpeg|png|gif|svg)$/i));
-        
-        if (imageFiles.length === 0) {
-            container.innerHTML = '<p class="text-gray-600 text-xs col-span-2">Aucun sponsor</p>';
-            return;
+        let hasPartners = false;
+
+        lines.forEach(line => {
+            // On ignore les lignes vides
+            if (!line.trim()) return;
+
+            // Structure : Nom | Logo Path | URL Site
+            const parts = line.split('|');
+            
+            if (parts.length >= 3) {
+                hasPartners = true;
+                const name = parts[0].trim();
+                const logoPath = parts[1].trim();
+                const siteUrl = parts[2].trim();
+
+                // Création du lien qui enveloppe l'image
+                const link = document.createElement('a');
+                link.href = siteUrl;
+                link.target = "_blank";
+                link.title = name; // Affiche le nom au survol (bulle native)
+                link.className = "partner-link block transition-transform hover:scale-105";
+
+                const img = document.createElement('img');
+                img.src = logoPath;
+                img.alt = name;
+                // Classes CSS pour le style (fond blanc, arrondi, taille contrainte)
+                img.className = "partner-logo h-16 w-auto max-w-[160px] object-contain bg-white rounded p-2 shadow-sm hover:shadow-md transition-all";
+                
+                link.appendChild(img);
+                container.appendChild(link);
+            }
+        });
+
+        if (!hasPartners) {
+            container.innerHTML = '<p class="text-gray-600 text-xs">Aucun partenaire pour le moment</p>';
         }
 
-        imageFiles.forEach(file => {
-            const img = document.createElement('img');
-            img.src = file.download_url;
-            img.alt = file.name.split('.')[0];
-            img.className = "partner-logo h-16 w-auto max-w-[160px] object-contain bg-white rounded p-2 transition hover:scale-105";
-            container.appendChild(img);
-        });
     } catch (error) {
-        console.error("Impossible de charger les sponsors:", error);
-        container.innerHTML = '<p class="text-gray-700 text-xs italic opacity-50">Sponsors</p>';
+        console.error("Erreur chargement partenaires:", error);
+        container.innerHTML = '<p class="text-gray-700 text-xs italic opacity-50">Soutiens</p>';
     }
 }
 
