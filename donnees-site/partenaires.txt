@@ -1,1 +1,5 @@
-Nom du partenaire | path logo | site web du partenaire
+Ecole Libre de Maurage | donnees-site/logos_sponsors/Logo-Etincelle.png | https://ecolelibremaurage.be
+Fédération Nationale des Patros | donnees-site/logos_sponsors/Logo_FNP.png | https://patro.be
+Fédération Wallonie-Bruxelles | donnees-site/logos_sponsors/Logo_FWB.png | https://servicejeunesse.cfwb.be
+Office de la Naissance et de l'Enfance | donnees-site/logos_sponsors/Logo_ONE.png | https://one.be
+Unité Pastorale du Val d'Haine | donnees-site/logos_sponsors/Logo_UPValDhaine.png | https://upvaldhaine.be
