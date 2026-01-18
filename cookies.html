@@ -23,8 +23,8 @@
 
     <!-- En-tête -->
     <div class="pt-32 pb-12 bg-gray-900 text-center relative overflow-hidden">
-        <h1 class="text-3xl md:text-4xl font-display font-bold text-white relative z-10">Politique des cookies</h1>
-        <p class="text-gray-400 mt-2 relative z-10 text-sm">Détails techniques et transparence</p>
+        <h1 class="text-3xl md:text-4xl font-display font-bold text-white relative z-10">Politique des cookies & données</h1>
+        <p class="text-gray-400 mt-2 relative z-10 text-sm">Transparence technique</p>
     </div>
 
     <section class="py-16 px-4">
@@ -33,23 +33,23 @@
             <!-- Intro -->
             <div class="bg-white p-8 rounded-2xl shadow-sm border-l-4 border-patro-yellow">
                 <h2 class="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
-                    <i data-lucide="cookie" class="w-5 h-5 text-patro-green"></i>
-                    Qu'est-ce qu'un cookie ?
+                    <i data-lucide="info" class="w-5 h-5 text-patro-green"></i>
+                    Cookies vs données de site (le cache)
                 </h2>
                 <p class="text-gray-600 text-sm leading-relaxed">
-                    Malheureusement, ce n'est pas un petit gâteau rond au chocolat :( <br>
-                    Un cookie est un petit fichier texte déposé sur votre ordinateur ou votre smartphone lorsque vous visitez un site. Ils sont largement utilisés pour faire fonctionner les sites web ou les rendre plus efficaces. Sur ce site, nous les limitons au strict nécessaire.
+                    Votre navigateur peut vous indiquer que des données sont stockées par divers domaines (Google, GitHub, Tailwind...). <br>
+                    Il est important de distinguer les <strong>cookies</strong> (fichiers de suivi) du <strong>cache navigateur</strong> (fichiers techniques sauvegardés pour que le site s'affiche plus vite). Notre site utilise principalement du cache pour la performance.
                 </p>
             </div>
 
             <!-- 1. Cookies Internes (Fonctionnels) -->
             <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
                 <div class="flex gap-4 items-start mb-6">
-                    <div class="p-2 bg-blue-50 rounded-lg text-blue-600 mt-1"><i data-lucide="settings" class="w-5 h-5"></i></div>
+                    <div class="p-2 bg-blue-50 rounded-lg text-blue-600 mt-1"><i data-lucide="hard-drive" class="w-5 h-5"></i></div>
                     <div>
-                        <h3 class="font-bold text-gray-800 text-lg">1. Cookies techniques (Internes)</h3>
+                        <h3 class="font-bold text-gray-800 text-lg">1. Stockage local (patrovaldhaine.be)</h3>
                         <p class="text-sm text-gray-500 mt-1">
-                            Ce sont les cookies que NOUS déposons. Ils sont indispensables pour mémoriser vos choix (comme le fait d'avoir accepté les cookies, pour ne pas vous redemander à chaque page).
+                            Nous n'utilisons pas de "cookie" classique, mais le "local storage" de votre navigateur pour mémoriser votre consentement.
                         </p>
                     </div>
                 </div>
@@ -58,83 +58,111 @@
                     <table class="w-full text-sm text-left text-gray-500">
                         <thead class="text-xs text-gray-700 uppercase bg-gray-50">
                             <tr>
-                                <th class="px-4 py-3 rounded-l-lg">Nom</th>
-                                <th class="px-4 py-3">Durée</th>
+                                <th class="px-4 py-3 rounded-l-lg">Clé</th>
+                                <th class="px-4 py-3">Type</th>
                                 <th class="px-4 py-3 rounded-r-lg">Finalité</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr class="border-b border-gray-100">
                                 <td class="px-4 py-3 font-mono text-patro-green font-bold">patroCookieConsent</td>
-                                <td class="px-4 py-3">1 an (ou jusqu'à effacement)</td>
-                                <td class="px-4 py-3">Sauvegarde votre choix (Acceptation ou Refus) concernant les cookies tiers.</td>
+                                <td class="px-4 py-3">Local Storage</td>
+                                <td class="px-4 py-3">Mémorise si vous avez cliqué sur "J'accepte" ou "Refuser" pour ne plus afficher le bandeau.</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
 
-            <!-- 2. Cookies Tiers (Services Externes) -->
+            <!-- 2. Services Tiers & Cache -->
             <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
                 <div class="flex gap-4 items-start mb-6">
-                    <div class="p-2 bg-green-50 rounded-lg text-green-600 mt-1"><i data-lucide="share-2" class="w-5 h-5"></i></div>
+                    <div class="p-2 bg-purple-50 rounded-lg text-purple-600 mt-1"><i data-lucide="zap" class="w-5 h-5"></i></div>
                     <div>
-                        <h3 class="font-bold text-gray-800 text-lg">2. Cookies Tiers (Services Externes)</h3>
+                        <h3 class="font-bold text-gray-800 text-lg">2. Ressources techniques (CDN & cache)</h3>
                         <p class="text-sm text-gray-500 mt-1">
-                            Nous utilisons des composants externes pour enrichir le site (cartes, formulaires). Ces services gèrent leurs propres cookies, sur lesquels nous n'avons pas de contrôle direct, mais qui sont nécessaires à leur affichage.
+                            Pour afficher le site correctement (design, polices, icônes), votre navigateur télécharge et stocke des fichiers provenant de serveurs spécialisés (CDN). <strong>Ces données ne servent pas à vous tracer, mais à accélérer l'affichage du site.</strong>
                         </p>
                     </div>
                 </div>
 
-                <div class="space-y-6">
-                    <!-- Cloudflare -->
+                <div class="grid gap-4 md:grid-cols-2">
+                    <!-- Google Fonts -->
                     <div class="border border-gray-200 rounded-xl p-4">
-                        <h4 class="font-bold text-gray-800 mb-2 flex items-center gap-2">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/4/4b/Cloudflare_Logo.svg" alt="Cloudflare" class="h-4">
-                            Sécurité & Performance
-                        </h4>
-                        <p class="text-xs text-gray-600 mb-2">Cloudflare sécurise notre site contre les attaques et accélère le chargement.</p>
-                        <ul class="text-xs text-gray-500 space-y-1 font-mono bg-gray-50 p-2 rounded">
-                            <li><strong>__cf_bm :</strong> Permet de distinguer les humains des robots. (Durée : 30 min)</li>
-                        </ul>
+                        <h4 class="font-bold text-gray-800 mb-1 text-sm">fonts.googleapis.com & gstatic.com</h4>
+                        <p class="text-xs text-gray-500">Sert à charger les polices d'écriture du site (Indie Flower, Poppins). Le navigateur garde les fichiers de police en cache.</p>
                     </div>
 
-                    <!-- Google (Maps & Drive) -->
+                    <!-- Tailwind CSS -->
                     <div class="border border-gray-200 rounded-xl p-4">
-                        <h4 class="font-bold text-gray-800 mb-2 flex items-center gap-2">
-                            <i data-lucide="map" class="w-4 h-4 text-blue-500"></i>
-                            Google Maps & Drive (PDF)
-                        </h4>
-                        <p class="text-xs text-gray-600 mb-2">Utilisés pour afficher la carte du local et les documents PDF intégrés.</p>
-                        <ul class="text-xs text-gray-500 space-y-1 font-mono bg-gray-50 p-2 rounded">
-                            <li><strong>NID / CONSENT :</strong> Enregistre vos préférences et permet l'affichage de la carte Google Maps. (Durée : 6 mois)</li>
-                        </ul>
+                        <h4 class="font-bold text-gray-800 mb-1 text-sm">tailwindcss.com</h4>
+                        <p class="text-xs text-gray-500">Sert à charger la feuille de style (le design, les couleurs Patro). Le fichier script est mis en cache.</p>
+                    </div>
+
+                    <!-- Unpkg (Lucide) -->
+                    <div class="border border-gray-200 rounded-xl p-4">
+                        <h4 class="font-bold text-gray-800 mb-1 text-sm">unpkg.com</h4>
+                        <p class="text-xs text-gray-500">Sert à charger les petites icônes (téléphone, calendrier, etc.) que vous voyez sur le site.</p>
+                    </div>
+
+                    <!-- GitHub User Content -->
+                    <div class="border border-gray-200 rounded-xl p-4">
+                        <h4 class="font-bold text-gray-800 mb-1 text-sm">raw.githubusercontent.com</h4>
+                        <p class="text-xs text-gray-500">C'est notre dépôt Github. Le site va y lire les fichiers qui gère le calendrier et la liste des partenaires pour les traduire à travers des scripts et les afficher.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. Cookies Tiers (Services Optionnels) -->
+            <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
+                <div class="flex gap-4 items-start mb-6">
+                    <div class="p-2 bg-green-50 rounded-lg text-green-600 mt-1"><i data-lucide="share-2" class="w-5 h-5"></i></div>
+                    <div>
+                        <h3 class="font-bold text-gray-800 text-lg">3. Cookies de services tiers</h3>
+                        <p class="text-sm text-gray-500 mt-1">
+                            Ces services peuvent déposer de vrais cookies pour fonctionner, notamment lors de l'utilisation de cartes ou formulaires.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="space-y-4">
+                    <!-- Cloudflare (Ajouté) -->
+                    <div class="border border-gray-200 rounded-xl p-4 flex gap-3 items-start">
+                        <i data-lucide="shield-check" class="w-5 h-5 text-orange-500 shrink-0 mt-0.5"></i>
+                        <div>
+                            <h4 class="font-bold text-gray-800 text-sm">Cloudflare (Sécurité)</h4>
+                            <p class="text-xs text-gray-600">Cookie <code>__cf_bm</code>. Utilisé pour distinguer les visiteurs humains des robots et sécuriser le site contre les attaques. (Durée : 30 min)</p>
+                        </div>
+                    </div>
+
+                    <!-- Google Maps -->
+                    <div class="border border-gray-200 rounded-xl p-4 flex gap-3 items-start">
+                        <i data-lucide="map" class="w-5 h-5 text-blue-500 shrink-0 mt-0.5"></i>
+                        <div>
+                            <h4 class="font-bold text-gray-800 text-sm">Google Maps & Google Drive</h4>
+                            <p class="text-xs text-gray-600">Cookie <code>NID</code> ou <code>CONSENT</code>. Utilisé pour afficher une carte Google Maps, visualiser les documents de la bibliothèque et mémoriser vos préférences d'affichage pour Google.</p>
+                        </div>
                     </div>
 
                     <!-- Microsoft Forms -->
-                    <div class="border border-gray-200 rounded-xl p-4">
-                        <h4 class="font-bold text-gray-800 mb-2 flex items-center gap-2">
-                            <i data-lucide="file-input" class="w-4 h-4 text-green-600"></i>
-                            Microsoft Forms
-                        </h4>
-                        <p class="text-xs text-gray-600 mb-2">Utilisé pour les formulaires d'inscription (ex: soupers, camps) intégrés dans les pages.</p>
-                        <ul class="text-xs text-gray-500 space-y-1 font-mono bg-gray-50 p-2 rounded">
-                            <li><strong>ExcelServicesLoadBalancer :</strong> Répartit la charge sur les serveurs pour que le formulaire s'affiche vite. (Durée : Session)</li>
-                            <li><strong>FormsWebSessionId :</strong> Maintient votre session active pendant que vous remplissez le formulaire. (Durée : Session)</li>
-                        </ul>
+                    <div class="border border-gray-200 rounded-xl p-4 flex gap-3 items-start">
+                        <i data-lucide="file-input" class="w-5 h-5 text-green-600 shrink-0 mt-0.5"></i>
+                        <div>
+                            <h4 class="font-bold text-gray-800 text-sm">Microsoft Forms</h4>
+                            <p class="text-xs text-gray-600">Cookies de session (ex: <code>FormsWebSessionId</code>) pour permettre le remplissage sécurisé des formulaires d'inscription.</p>
+                        </div>
                     </div>
                 </div>
             </div>
 
             <!-- Gestion -->
             <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
-                <h2 class="text-xl font-bold text-gray-800 mb-4">Votre contrôle</h2>
+                <h2 class="text-xl font-bold text-gray-800 mb-4">Votre contrôle sur tout ce bazar</h2>
                 <p class="text-gray-600 text-sm leading-relaxed mb-4">
-                    Vous avez accepté ou refusé ces cookies lors de votre première visite. Vous avez changé d'avis ? Pas de souci.
+                    Vous souhaitez réinitialiser votre consentement stocké sur notre site ?
                 </p>
                 
                 <div class="bg-gray-50 p-4 rounded-lg text-sm text-gray-600 border border-gray-200">
-                    <p class="font-bold mb-3">Réinitialiser vos préférences :</p>
                     <button onclick="resetConsent()" class="px-4 py-2 bg-white border border-gray-300 rounded-lg text-gray-700 hover:bg-patro-yellow hover:border-patro-yellow hover:text-patro-dark transition shadow-sm font-medium flex items-center gap-2">
                         <i data-lucide="refresh-cw" class="w-4 h-4"></i>
                         Effacer mes choix et relancer le bandeau
