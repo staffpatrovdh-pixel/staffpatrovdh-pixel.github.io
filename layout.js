@@ -114,11 +114,11 @@ document.addEventListener("DOMContentLoaded", function () {
                     <span class="hidden md:inline">•</span>
                     <a href="cookies.html" class="hover:text-white transition">Politique Cookies</a>
                     <span class="hidden md:inline">•</span>
+                    <a href="https://portail.patrovaldhaine.be/status.php" class="hover:text-white transition">Status</a>
                     <!-- BOUTON PORTAIL APPS (CORRIGÉ) -->
-                    <a href="app.html" class="flex items-center gap-1 text-patro-yellow hover:text-white transition font-medium" title="Portail Apps">
+                    <a href="https://portail.patrovaldhaine.be" class="flex items-center gap-1 text-patro-yellow hover:text-white transition font-medium" title="Espace Parents">
                         <i data-lucide="grid" class="w-3 h-3"></i> Portail Apps
                     </a>
-                    <span class="hidden md:inline">•</span>
                 </div>
             </div>
         </footer>
