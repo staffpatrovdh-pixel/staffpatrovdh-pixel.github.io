@@ -78,6 +78,8 @@ document.addEventListener("DOMContentLoaded", function () {
                             <span>Rue du Roeulx 23, 7110 Maurage</span>
                             <span>patrovaldhaine@patro.be</span>
                             <span>0488/08.86.03</span>
+                            <span><stong>IBAN :</strong> BE70 7320 7117 6025</span>
+                            <span><stong>Identification O.N.E. :</strong> PA55022VALD</span>
                         </div>
                     </div>
 
