@@ -8,8 +8,8 @@
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
-    <!-- Mise à jour version 8 pour le layout -->
-    <script src="layout.js?v=8"></script>
+    <!-- Mise à jour version 11.3 pour le layout -->
+    <script src="layout.js?v=11.3"></script>
 
     <script>
         tailwind.config = { theme: { extend: { colors: { patro: { yellow: '#FFD700', green: '#009045', dark: '#1a1a1a', light: '#f8fafc' } }, fontFamily: { sans: ['Poppins', 'sans-serif'], display: ['Fredoka', 'sans-serif'] } } } }
@@ -41,7 +41,6 @@
                         <li><strong>Éditeur :</strong> Les animateurs du Patro du Val d'Haine de Maurage</li>
                         <li><strong>Forme juridique :</strong> Association de fait (Mouvement de jeunesse)</li>
                         <li><strong>Siège social (Local) :</strong> Rue du Roeulx 23, 7110 Maurage, Belgique</li>
-                        <!-- Correction ici : ajout de la fermeture </a> -->
                         <li><strong>Contact pour les données :</strong> <a href="mailto:patrovaldhaine@patro.be" class="text-patro-green hover:underline">patrovaldhaine@patro.be</a></li>
                     </ul>
                 </div>
@@ -98,7 +97,6 @@
                 <h2 class="text-xl font-bold text-gray-800 mb-4">4. Données personnelles</h2>
                 <div class="text-gray-600 text-sm leading-relaxed space-y-3">
                     <p>
-                        <!-- Correction ici : communicationn -> communication -->
                         Les données collectées via l'Intranet ou les formulaires d'inscription sont nécessaires (assurances, sécurité des activités, communication etc.)
                     </p>
                     <ul class="list-disc pl-5 space-y-1">
@@ -128,11 +126,55 @@
                 </p>
             </div>
 
-            <!-- 7. Transparence & Rédaction -->
+            <!-- 7. Paiements & Coordonnées Bancaires (MODIFIÉ) -->
+            <div class="bg-white p-8 rounded-2xl shadow-sm border-l-4 border-gray-800">
+                <h2 class="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
+                    <i data-lucide="credit-card" class="w-5 h-5 text-gray-800"></i>
+                    7. Paiements & coordonnées bancaires
+                </h2>
+                <div class="text-gray-600 text-sm leading-relaxed space-y-4">
+                    <p>
+                        Pour le règlement des activités (inscriptions aux camps, soupers, cotisations...), le Patro propose généralement plusieurs méthodes de paiement flexibles : <strong>virement bancaire, QR Code (Payconiq/Bancontact), espèces ou paiement en ligne</strong>. Le choix de la méthode est laissé à votre convenance, sauf indication contraire spécifique pour certaines activités.
+                    </p>
+
+                    <!-- Coordonnées Bancaires -->
+                    <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                        <h4 class="font-bold text-gray-800 mb-2 flex items-center gap-2">
+                            <i data-lucide="landmark" class="w-4 h-4 text-patro-green"></i> Nos coordonnées bancaires
+                        </h4>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-y-1 gap-x-4 text-sm mt-2">
+                            <div><span class="text-gray-500">Banque :</span> <strong>CBC Banque SA</strong></div>
+                            <div><span class="text-gray-500">BIC/SWIFT :</span> <span class="font-mono bg-white px-1 rounded border border-gray-100">CREGBEBB</span></div>
+                            <div class="md:col-span-2 mt-1">
+                                <span class="text-gray-500">IBAN :</span> 
+                                <span class="font-mono font-bold bg-white px-2 py-1 rounded border border-gray-300 text-patro-green select-all ml-1">BE70 7320 7117 6025</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Paiement en ligne -->
+                    <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                        <h4 class="font-bold text-gray-800 mb-2 flex items-center gap-2">
+                            <i data-lucide="globe" class="w-4 h-4 text-patro-green"></i> Option de paiement en ligne
+                        </h4>
+                        <p class="mb-2 text-xs">
+                            Si vous choisissez l'option de paiement en ligne (proposée parfois pour faciliter la gestion administrative), sachez que :
+                        </p>
+                        <ul class="list-disc pl-5 mt-2 space-y-1 mb-3 text-xs">
+                            <li>Les liens et propositions de paiement proviennent <strong>OBLIGATOIREMENT</strong> de notre nom de domaine <strong>patrovaldhaine.be</strong> ou <strong>xyz.patrovaldhaine.be</strong>, par exemple <code>intranet.patrovaldhaine.be</code>.</li>
+                            <li>La transaction est entièrement sécurisée par <strong>SumUp</strong>.</li>
+                            <li><strong>Aucune donnée bancaire</strong> (numéro de carte, cryptogramme, etc) ne transite ni n'est stockée chez nous ;)</li>
+                        </ul>
+                        <p class="text-xs italic text-gray-500"><strong>Petit conseil de la vie de tous les jours</strong> : vérifiez TOUJOURS les liens et les domaines qui vous envoient des demandes de paiement en ligne ;) Si ils vous paraissent bizzares du genre <code>xyz.banquepasvrai.be.com.etc...</code>, n'introduisez jamais vos coordonnées bancaires !</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 8. Transparence & Rédaction (Renuméroté) -->
             <div class="bg-gray-50 p-6 rounded-2xl border border-dashed border-gray-300">
                 <h2 class="text-lg font-bold text-gray-700 mb-2 flex items-center gap-2">
                     <i data-lucide="bot" class="w-5 h-5 text-gray-400"></i>
-                    7. Transparence de rédaction de ces mentions légales
+                    8. Transparence de rédaction de ces mentions légales
                 </h2>
                 <p class="text-gray-500 text-xs leading-relaxed">
                     Ces mentions légales ont été rédigées avec l'aide d'une Intelligence Artificielle pour assurer une base de conformité légale et technique. Bien que nous ayons relu attentivement ce document, nous sommes une équipe de jeunes animateurs bénévoles. Si vous constatez une erreur, une incohérence ou un oubli, nous vous invitons chaleureusement à nous le signaler par e-mail afin que nous puissions le corriger rapidement! Merci infiniment pour votre compréhension :)
