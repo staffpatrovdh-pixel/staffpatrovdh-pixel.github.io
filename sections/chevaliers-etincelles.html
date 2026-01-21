@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Les Chevaliers & Étincelles (9-12 ans) | Patro du Val d'Haine</title>
+    
+    <!-- Note : Les chemins remontent d'un niveau avec "../" -->
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;800&family=Fredoka:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Script Layout (Chemin adapté) -->
+    <script src="../layout.js?v=11.3"></script>
+
+    <script>
+        tailwind.config = { 
+            theme: { 
+                extend: { 
+                    colors: { 
+                        patro: { 
+                            yellow: '#FFD700', 
+                            green: '#009045', 
+                            dark: '#1a1a1a', 
+                            light: '#f8fafc' 
+                        } 
+                    }, 
+                    fontFamily: { 
+                        sans: ['Poppins', 'sans-serif'], 
+                        display: ['Fredoka', 'sans-serif'], 
+                        handwritten: ['Indie Flower', 'cursive'] 
+                    }
+                } 
+            } 
+        }
+    </script>
+</head>
+<body class="font-sans text-slate-800 bg-patro-light antialiased overflow-x-hidden">
+
+    <!-- Global Elements -->
+    <div id="custom-cursor" class="hidden md:block"></div>
+    <div id="loader"><div class="spinner mb-4"></div><p class="text-patro-green font-bold font-display animate-pulse">Chargement...</p></div>
+    <div id="navbar-placeholder"></div>
+
+    <!-- Hero Section Spéciale Section -->
+    <section class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden bg-orange-500">
+        <!-- Image de fond (Photo de groupe) -->
+        <div class="absolute inset-0 bg-cover bg-center opacity-30" style="background-image: url('https://www.patrovaldhaine.be/donnees-site/photos-site-accueil/sections/chevaliers-etincelles.JPEG');"></div>
+        <div class="absolute inset-0 bg-gradient-to-b from-orange-600/80 to-white"></div>
+
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center z-10">
+            
+            <!-- Badge Écusson -->
+            <div class="mx-auto w-32 h-32 rounded-full border-4 border-white shadow-xl overflow-hidden mb-6 bg-white transform hover:scale-105 transition duration-500">
+                <img src="https://www.patrovaldhaine.be/donnees-site/illustrations/ecussons/ecusson_chev:etin.jpg" alt="Écusson Chevaliers Étincelles" class="w-full h-full object-cover">
+            </div>
+
+            <h1 class="text-4xl md:text-6xl font-display font-extrabold text-patro-dark mb-4 drop-shadow-sm">
+                Chevaliers & Étincelles
+            </h1>
+            <div class="inline-block px-4 py-1 rounded-full bg-white/50 border border-white text-patro-dark font-bold tracking-wider mb-6">
+                9 à 12 ans • La Solidarité
+            </div>
+            
+            <p class="mt-4 max-w-2xl mx-auto text-xl text-gray-800 font-medium font-handwritten">
+                "L'âge de la bande de potes, de la loyauté et de l'aventure !"
+            </p>
+        </div>
+    </section>
+
+    <!-- Introduction & Philosophie -->
+    <section class="py-16 md:py-24 bg-white relative">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="prose prose-lg mx-auto text-gray-600">
+                <h2 class="text-3xl font-display font-bold text-orange-600 text-center mb-8">L'esprit chevaleresque</h2>
+                
+                <p class="lead text-center text-xl mb-12">
+                    Comme les chevaliers d'antan, les enfants de 9 à 12 ans sont <strong>audacieux, aventureux et loyaux</strong>. C'est l'âge de la "bande de copains" par excellence. Ils s'ouvrent aux autres, se sentent appartenir à un clan et ont une soif de justice.
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+                    <div class="bg-yellow-50 p-6 rounded-2xl border-l-4 border-patro-yellow">
+                        <h3 class="font-bold text-gray-900 mt-0 flex items-center gap-2">
+                            <i data-lucide="palette" class="w-6 h-6 text-patro-yellow"></i> Avant (6-9 ans)
+                        </h3>
+                        <p class="text-sm">
+                            Chez les <strong>Benjamins</strong>, c'était le monde de la créativité et de l'imagination débordante. On apprenait à sortir de sa bulle.
+                        </p>
+                    </div>
+                    <div class="bg-pink-50 p-6 rounded-2xl border-l-4 border-pink-500">
+                        <h3 class="font-bold text-gray-900 mt-0 flex items-center gap-2">
+                            <i data-lucide="mic-2" class="w-6 h-6 text-pink-500"></i> Après (12-14 ans)
+                        </h3>
+                        <p class="text-sm">
+                            Chez les <strong>Conquérants</strong>, ce sera l'adolescence, la recherche d'identité et le besoin d'expression personnelle.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Ce qu'il faut savoir (Grille parents) -->
+    <section class="py-20 bg-patro-light">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-orange-600 font-bold tracking-wide uppercase text-sm mb-2">Pédagogie</h2>
+                <h3 class="text-3xl md:text-5xl font-display font-bold text-gray-900">Qui sont-ils ?</h3>
+                <p class="text-gray-500 mt-4">À cet âge charnière (pré-adolescence), voici comment nous répondons à leurs besoins.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                
+                <!-- Besoin 1 -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition">
+                    <div class="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center text-red-500 mb-4">
+                        <i data-lucide="flame" class="w-6 h-6"></i>
+                    </div>
+                    <h4 class="font-bold text-gray-900 mb-2">L'Énergie & l'Exploit</h4>
+                    <p class="text-sm text-gray-600">
+                        Ils ont besoin de se dépenser à fond et de prouver leur force. <br>
+                        <strong>Notre réponse :</strong> Des grands jeux sportifs, des défis physiques et de l'aventure.
+                    </p>
+                </div>
+
+                <!-- Besoin 2 -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition">
+                    <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center text-blue-500 mb-4">
+                        <i data-lucide="scale" class="w-6 h-6"></i>
+                    </div>
+                    <h4 class="font-bold text-gray-900 mb-2">La Justice</h4>
+                    <p class="text-sm text-gray-600">
+                        "C'est pas juste !" est leur phrase fétiche. <br>
+                        <strong>Notre réponse :</strong> Des règles claires établies ensemble et des sanctions cohérentes.
+                    </p>
+                </div>
+
+                <!-- Besoin 3 -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition">
+                    <div class="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center text-orange-500 mb-4">
+                        <i data-lucide="users" class="w-6 h-6"></i>
+                    </div>
+                    <h4 class="font-bold text-gray-900 mb-2">Le Clan</h4>
+                    <p class="text-sm text-gray-600">
+                        L'amitié et la loyauté envers les copains sont sacrées. <br>
+                        <strong>Notre réponse :</strong> On favorise l'esprit d'équipe, la solidarité et on évite l'exclusion.
+                    </p>
+                </div>
+
+                <!-- Besoin 4 -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition">
+                    <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center text-purple-500 mb-4">
+                        <i data-lucide="message-square" class="w-6 h-6"></i>
+                    </div>
+                    <h4 class="font-bold text-gray-900 mb-2">L'Affirmation</h4>
+                    <p class="text-sm text-gray-600">
+                        Ils commencent à avoir leurs propres opinions et à contester. <br>
+                        <strong>Notre réponse :</strong> On écoute, on débat et on leur apprend à argumenter respectueusement.
+                    </p>
+                </div>
+
+                <!-- Besoin 5 -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition">
+                    <div class="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center text-patro-yellow mb-4">
+                        <i data-lucide="medal" class="w-6 h-6"></i>
+                    </div>
+                    <h4 class="font-bold text-gray-900 mb-2">Les Responsabilités</h4>
+                    <p class="text-sm text-gray-600">
+                        Ils veulent être considérés comme des "grands". <br>
+                        <strong>Notre réponse :</strong> On leur confie des missions de confiance (gestion de matériel, arbitrage...).
+                    </p>
+                </div>
+
+                <!-- Besoin 6 -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition">
+                    <div class="w-12 h-12 bg-pink-100 rounded-full flex items-center justify-center text-pink-500 mb-4">
+                        <i data-lucide="heart" class="w-6 h-6"></i>
+                    </div>
+                    <h4 class="font-bold text-gray-900 mb-2">Le Corps qui change</h4>
+                    <p class="text-sm text-gray-600">
+                        Début de la puberté, importance de l'image de soi. <br>
+                        <strong>Notre réponse :</strong> Bienveillance, respect de l'intimité et renforcement de l'estime de soi.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Comment on anime ? (Méthode) -->
+    <section class="py-20 bg-patro-dark text-white relative overflow-hidden">
+        <!-- Déco -->
+        <div class="absolute bottom-0 right-0 w-80 h-80 bg-orange-500 opacity-20 rounded-full blur-3xl -mr-10 -mb-10"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="flex flex-col lg:flex-row gap-12 items-center">
+                
+                <div class="lg:w-1/2">
+                    <h2 class="text-orange-400 font-bold tracking-wide uppercase text-sm mb-2">Notre méthode</h2>
+                    <h3 class="text-3xl md:text-4xl font-display font-bold mb-6">Jeu, Stratégie & Projets</h3>
+                    <p class="text-gray-300 text-lg leading-relaxed mb-6">
+                        On passe à la vitesse supérieure ! Les règles se compliquent, les enjeux grandissent.
+                    </p>
+                    
+                    <div class="space-y-6">
+                        <div class="flex gap-4">
+                            <div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center shrink-0 text-orange-400 font-bold">1</div>
+                            <div>
+                                <h4 class="font-bold text-white">Le Grand Jeu (Stratégie)</h4>
+                                <p class="text-sm text-gray-400">Attaques de camps, prises de drapeaux, jeux de rôles... On développe l'analyse et la tactique en équipe.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center shrink-0 text-orange-400 font-bold">2</div>
+                            <div>
+                                <h4 class="font-bold text-white">Le Projet Solidaire</h4>
+                                <p class="text-sm text-gray-400">Construire une cabane, organiser un événement... On apprend à coopérer pour un but commun.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center shrink-0 text-orange-400 font-bold">3</div>
+                            <div>
+                                <h4 class="font-bold text-white">L'Engagement</h4>
+                                <p class="text-sm text-gray-400">On s'implique dans la vie de la section. On promet d'être là pour les autres.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Image Illustration -->
+                <div class="lg:w-1/2 relative">
+                    <div class="relative rounded-3xl overflow-hidden shadow-2xl border-4 border-white/10 transform rotate-2">
+                        <!-- Image générique car pas de photo spécifique fournie pour cette section dans le prompt, à remplacer si besoin -->
+                        <img src="https://images.unsplash.com/photo-1526976668912-1a811878dd37?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Aventure en groupe" class="w-full h-auto opacity-90">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-6">
+                            <p class="text-white font-handwritten text-xl">"Un pour tous, tous pour un !"</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="py-16 bg-white border-t border-gray-100 text-center">
+        <div class="max-w-3xl mx-auto px-4">
+            <h2 class="text-3xl font-display font-bold text-gray-900 mb-6">Votre enfant a entre 9 et 12 ans ?</h2>
+            <p class="text-gray-600 mb-8 text-lg">
+                Il cherche l'aventure et une vraie bande de potes ? Les Chevaliers-Étincelles l'attendent !
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="../inscription.html" class="px-8 py-4 bg-orange-500 text-white font-bold rounded-full shadow-lg hover:bg-orange-600 transition transform hover:-translate-y-1">
+                    Inscrire mon enfant
+                </a>
+                <a href="../contact.html" class="px-8 py-4 bg-gray-100 text-gray-700 font-bold rounded-full hover:bg-gray-200 transition">
+                    Contacter le staff
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <div id="footer-placeholder"></div>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
