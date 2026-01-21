@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Les Benjamins (6-9 ans) | Patro du Val d'Haine</title>
+    
+    <!-- Note : Les chemins remontent d'un niveau avec "../" -->
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;800&family=Fredoka:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Script Layout (Chemin adapté) -->
+    <script src="../layout.js?v=11.3"></script>
+
+    <script>
+        tailwind.config = { 
+            theme: { 
+                extend: { 
+                    colors: { 
+                        patro: { 
+                            yellow: '#FFD700', 
+                            green: '#009045', 
+                            dark: '#1a1a1a', 
+                            light: '#f8fafc' 
+                        } 
+                    }, 
+                    fontFamily: { 
+                        sans: ['Poppins', 'sans-serif'], 
+                        display: ['Fredoka', 'sans-serif'], 
+                        handwritten: ['Indie Flower', 'cursive'] 
+                    }
+                } 
+            } 
+        }
+    </script>
+</head>
+<body class="font-sans text-slate-800 bg-patro-light antialiased overflow-x-hidden">
+
+    <!-- Global Elements -->
+    <div id="custom-cursor" class="hidden md:block"></div>
+    <div id="loader"><div class="spinner mb-4"></div><p class="text-patro-green font-bold font-display animate-pulse">Chargement...</p></div>
+    <div id="navbar-placeholder"></div>
+
+    <!-- Hero Section Spéciale Section -->
+    <section class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden bg-patro-yellow">
+        <!-- Image de fond (Photo de groupe) -->
+        <div class="absolute inset-0 bg-cover bg-center opacity-30" style="background-image: url('https://www.patrovaldhaine.be/donnees-site/photos-site-accueil/sections/benjamins.JPEG');"></div>
+        <div class="absolute inset-0 bg-gradient-to-b from-patro-yellow/80 to-white"></div>
+
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center z-10">
+            
+            <!-- Badge Écusson -->
+            <div class="mx-auto w-32 h-32 rounded-full border-4 border-white shadow-xl overflow-hidden mb-6 bg-white transform hover:scale-105 transition duration-500">
+                <img src="https://www.patrovaldhaine.be/donnees-site/illustrations/ecussons/ecusson_benja.jpg" alt="Écusson Benjamins" class="w-full h-full object-cover">
+            </div>
+
+            <h1 class="text-5xl md:text-7xl font-display font-extrabold text-patro-dark mb-4 drop-shadow-sm">
+                Les Benjamins
+            </h1>
+            <div class="inline-block px-4 py-1 rounded-full bg-white/50 border border-white text-patro-dark font-bold tracking-wider mb-6">
+                6 à 9 ans • La Créativité
+            </div>
+            
+            <p class="mt-4 max-w-2xl mx-auto text-xl text-gray-800 font-medium font-handwritten">
+                "Imaginer, créer et découvrir les premiers liens d'amitié."
+            </p>
+        </div>
+    </section>
+
+    <!-- Introduction & Philosophie -->
+    <section class="py-16 md:py-24 bg-white relative">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="prose prose-lg mx-auto text-gray-600">
+                <h2 class="text-3xl font-display font-bold text-patro-green text-center mb-8">L'âge de l'imagination</h2>
+                
+                <p class="lead text-center text-xl mb-12">
+                    À cet âge, les enfants ont une <strong>imagination débordante</strong> ! Tout élément qui les entoure devient prétexte à la création. Ils inventent des histoires, créent des jeux et commencent à tisser leurs premiers liens d'amitié solides.
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+                    <div class="bg-green-50 p-6 rounded-2xl border-l-4 border-patro-green">
+                        <h3 class="font-bold text-gray-900 mt-0 flex items-center gap-2">
+                            <i data-lucide="baby" class="w-6 h-6 text-patro-green"></i> Avant (4-6 ans)
+                        </h3>
+                        <p class="text-sm">
+                            Chez les <strong>Poussins</strong>, l'enfant était dans la découverte pure et la sécurité affective. Il apprenait à vivre en dehors du cocon familial.
+                        </p>
+                    </div>
+                    <div class="bg-orange-50 p-6 rounded-2xl border-l-4 border-orange-500">
+                        <h3 class="font-bold text-gray-900 mt-0 flex items-center gap-2">
+                            <i data-lucide="flame" class="w-6 h-6 text-orange-500"></i> Après (9-12 ans)
+                        </h3>
+                        <p class="text-sm">
+                            Chez les <strong>Chevaliers</strong>, ce sera l'âge de la "bande de copains", de l'indépendance et de la solidarité en équipe.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Ce qu'il faut savoir (Grille parents) -->
+    <section class="py-20 bg-patro-light">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-patro-green font-bold tracking-wide uppercase text-sm mb-2">Pédagogie</h2>
+                <h3 class="text-3xl md:text-5xl font-display font-bold text-gray-900">Qui sont les Benjamins ?</h3>
+                <p class="text-gray-500 mt-4">Voici comment nous adaptons notre animation à leurs besoins de 6 à 9 ans.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                
+                <!-- Besoin 1 -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition">
+                    <div class="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center text-red-500 mb-4">
+                        <i data-lucide="hourglass" class="w-6 h-6"></i>
+                    </div>
+                    <h4 class="font-bold text-gray-900 mb-2">L'Impatience</h4>
+                    <p class="text-sm text-gray-600">
+                        Ils ne tiennent pas en place longtemps. <br>
+                        <strong>Notre réponse :</strong> On change d'activité toutes les 20 à 40 minutes et on évite les longues explications.
+                    </p>
+                </div>
+
+                <!-- Besoin 2 -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition">
+                    <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center text-blue-500 mb-4">
+                        <i data-lucide="scissors" class="w-6 h-6"></i>
+                    </div>
+                    <h4 class="font-bold text-gray-900 mb-2">L'Adresse</h4>
+                    <p class="text-sm text-gray-600">
+                        Leurs gestes sont de plus en plus précis. <br>
+                        <strong>Notre réponse :</strong> Des bricolages et jeux physiques plus complexes pour développer leur motricité.
+                    </p>
+                </div>
+
+                <!-- Besoin 3 -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition">
+                    <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center text-patro-green mb-4">
+                        <i data-lucide="users" class="w-6 h-6"></i>
+                    </div>
+                    <h4 class="font-bold text-gray-900 mb-2">La Socialisation</h4>
+                    <p class="text-sm text-gray-600">
+                        C'est la fin du "moi je" (égocentrisme). <br>
+                        <strong>Notre réponse :</strong> On joue par petits groupes, on confie des tâches collectives et on apprend la coopération.
+                    </p>
+                </div>
+
+                <!-- Besoin 4 -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition">
+                    <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center text-purple-500 mb-4">
+                        <i data-lucide="palette" class="w-6 h-6"></i>
+                    </div>
+                    <h4 class="font-bold text-gray-900 mb-2">La Créativité</h4>
+                    <p class="text-sm text-gray-600">
+                        Ils font la différence entre réel et imaginaire mais adorent créer. <br>
+                        <strong>Notre réponse :</strong> On multiplie les moyens d'expression : théâtre, peinture, invention d'histoires...
+                    </p>
+                </div>
+
+                <!-- Besoin 5 -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition">
+                    <div class="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center text-patro-yellow mb-4">
+                        <i data-lucide="user-check" class="w-6 h-6"></i>
+                    </div>
+                    <h4 class="font-bold text-gray-900 mb-2">L'Imitation</h4>
+                    <p class="text-sm text-gray-600">
+                        Ils prennent l'animateur comme modèle absolu. <br>
+                        <strong>Notre réponse :</strong> Nous sommes vigilants à l'image que nous renvoyons. Nous sommes des "grands frères/sœurs".
+                    </p>
+                </div>
+
+                <!-- Besoin 6 -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition">
+                    <div class="w-12 h-12 bg-indigo-100 rounded-full flex items-center justify-center text-indigo-500 mb-4">
+                        <i data-lucide="brain-circuit" class="w-6 h-6"></i>
+                    </div>
+                    <h4 class="font-bold text-gray-900 mb-2">La Curiosité</h4>
+                    <p class="text-sm text-gray-600">
+                        Ils posent des questions sur le sens de la vie et le bien/mal. <br>
+                        <strong>Notre réponse :</strong> On leur répond sans mentir, on aide à construire leur conscience morale par le concret.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Comment on anime ? (Méthode) -->
+    <section class="py-20 bg-patro-dark text-white relative overflow-hidden">
+        <!-- Déco -->
+        <div class="absolute top-0 right-0 w-64 h-64 bg-patro-yellow opacity-10 rounded-full blur-3xl -mr-10 -mt-10"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="flex flex-col lg:flex-row-reverse gap-12 items-center">
+                
+                <div class="lg:w-1/2">
+                    <h2 class="text-patro-yellow font-bold tracking-wide uppercase text-sm mb-2">Notre méthode</h2>
+                    <h3 class="text-3xl md:text-4xl font-display font-bold mb-6">Animer par le Projet</h3>
+                    <p class="text-gray-300 text-lg leading-relaxed mb-6">
+                        Chez les Benjamins, on apprend en faisant ensemble. Le "Projet" est au cœur de l'année.
+                    </p>
+                    
+                    <div class="space-y-6">
+                        <div class="flex gap-4">
+                            <div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center shrink-0 text-patro-yellow font-bold">1</div>
+                            <div>
+                                <h4 class="font-bold text-white">Imaginer & Choisir</h4>
+                                <p class="text-sm text-gray-400">On part de leurs idées (même farfelues !) pour créer un univers : l'espace, la jungle, les pirates...</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center shrink-0 text-patro-yellow font-bold">2</div>
+                            <div>
+                                <h4 class="font-bold text-white">Réaliser (Autonomie)</h4>
+                                <p class="text-sm text-gray-400">Ils mettent la main à la pâte : décors, costumes, inventions. On les laisse faire (avec un coup de pouce si besoin).</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center shrink-0 text-patro-yellow font-bold">3</div>
+                            <div>
+                                <h4 class="font-bold text-white">Fêter</h4>
+                                <p class="text-sm text-gray-400">On célèbre le résultat ! Un spectacle, une exposition ou un grand jeu final pour valoriser leurs talents.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Image Illustration -->
+                <div class="lg:w-1/2 relative">
+                    <div class="relative rounded-3xl overflow-hidden shadow-2xl border-4 border-white/10 transform -rotate-2">
+                        <img src="https://images.unsplash.com/photo-1502086223501-681a9a85419a?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Enfants créatifs" class="w-full h-auto opacity-90">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-6">
+                            <p class="text-white font-handwritten text-xl">"Ensemble, on crée notre monde."</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="py-16 bg-white border-t border-gray-100 text-center">
+        <div class="max-w-3xl mx-auto px-4">
+            <h2 class="text-3xl font-display font-bold text-gray-900 mb-6">Votre enfant a entre 6 et 9 ans ?</h2>
+            <p class="text-gray-600 mb-8 text-lg">
+                Il déborde d'énergie et d'imagination ? La section Benjamins est faite pour lui.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="../inscription.html" class="px-8 py-4 bg-patro-yellow text-patro-green font-bold rounded-full shadow-lg hover:bg-yellow-400 transition transform hover:-translate-y-1">
+                    Inscrire mon enfant
+                </a>
+                <a href="../contact.html" class="px-8 py-4 bg-gray-100 text-gray-700 font-bold rounded-full hover:bg-gray-200 transition">
+                    Contacter le staff
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <div id="footer-placeholder"></div>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
