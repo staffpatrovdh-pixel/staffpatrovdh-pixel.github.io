@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
     
     // --- VERSION CONTROL ---
-    console.log("Patro Layout Loaded - Version 11.2 (Sponsors via TXT file)");
+    console.log("Patro Layout Loaded - Version 11.5 (Absolute Paths Fix)");
 
     // --- 1. INJECTION DU HEADER (NAVBAR) ---
     const navbarPlaceholder = document.getElementById("navbar-placeholder");
@@ -10,20 +10,20 @@ document.addEventListener("DOMContentLoaded", function () {
         <nav class="fixed w-full z-50 transition-all duration-300 bg-white/95 backdrop-blur-md shadow-sm" id="navbar">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex justify-between items-center h-20">
-                    <!-- Logo -->
-                    <a href="index.html" class="flex-shrink-0 flex items-center gap-2">
-                        <img src="donnees-site/LogoMaurageContour.svg" alt="Logo Patro Val d'Haine" class="h-14 w-auto">
+                    <!-- Logo (Chemin absolu) -->
+                    <a href="/index.html" class="flex-shrink-0 flex items-center gap-2">
+                        <img src="/donnees-site/LogoMaurageContour.svg" alt="Logo Patro Val d'Haine" class="h-14 w-auto">
                     </a>
 
-                    <!-- Desktop Menu -->
+                    <!-- Desktop Menu (Chemins absolus) -->
                     <div class="hidden lg:flex space-x-5 items-center">
-                        <a href="index.html" class="nav-link text-gray-600 hover:text-patro-green font-medium transition">Accueil</a>
-                        <a href="index.html#infos" class="nav-link text-gray-600 hover:text-patro-green font-medium transition">Agenda</a>
-                        <a href="contact.html" class="nav-link text-gray-600 hover:text-patro-green font-medium transition">Contact</a>
-                        <a href="documents.html" class="nav-link text-gray-600 hover:text-patro-green font-medium transition">Documents</a>
-                        <a href="informations.html" class="nav-link text-gray-600 hover:text-patro-green font-medium transition">Communications</a>
+                        <a href="/index.html" class="nav-link text-gray-600 hover:text-patro-green font-medium transition">Accueil</a>
+                        <a href="/index.html#infos" class="nav-link text-gray-600 hover:text-patro-green font-medium transition">Agenda</a>
+                        <a href="/contact.html" class="nav-link text-gray-600 hover:text-patro-green font-medium transition">Contact</a>
+                        <a href="/documents.html" class="nav-link text-gray-600 hover:text-patro-green font-medium transition">Documents</a>
+                        <a href="/informations.html" class="nav-link text-gray-600 hover:text-patro-green font-medium transition">Communications</a>
                         
-                        <a href="inscription.html" class="bg-patro-green text-white px-4 py-2 rounded-full font-semibold hover:bg-green-700 transition shadow-md hover:shadow-lg transform hover:-translate-y-0.5 text-sm">
+                        <a href="/inscription.html" class="bg-patro-green text-white px-4 py-2 rounded-full font-semibold hover:bg-green-700 transition shadow-md hover:shadow-lg transform hover:-translate-y-0.5 text-sm">
                             Nous rejoindre
                         </a>
                     </div>
@@ -37,16 +37,16 @@ document.addEventListener("DOMContentLoaded", function () {
                 </div>
             </div>
 
-            <!-- Mobile Menu Panel -->
+            <!-- Mobile Menu Panel (Chemins absolus) -->
             <div id="mobile-menu" class="hidden lg:hidden bg-white border-t">
                 <div class="px-4 pt-2 pb-6 space-y-2 shadow-lg">
-                    <a href="index.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-patro-green hover:bg-yellow-50">Accueil</a>
-                    <a href="index.html#infos" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-patro-green hover:bg-yellow-50">Agenda</a>
-                    <a href="contact.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-patro-green hover:bg-yellow-50">Contact</a>
-                    <a href="documents.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-patro-green hover:bg-yellow-50">Documents</a>
-                    <a href="informations.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-patro-green hover:bg-yellow-50">Communications</a>
+                    <a href="/index.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-patro-green hover:bg-yellow-50">Accueil</a>
+                    <a href="/index.html#infos" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-patro-green hover:bg-yellow-50">Agenda</a>
+                    <a href="/contact.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-patro-green hover:bg-yellow-50">Contact</a>
+                    <a href="/documents.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-patro-green hover:bg-yellow-50">Documents</a>
+                    <a href="/informations.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-patro-green hover:bg-yellow-50">Communications</a>
                     
-                    <a href="inscription.html" class="block w-full text-center mt-4 px-5 py-3 rounded-md font-bold bg-patro-yellow text-patro-green">
+                    <a href="/inscription.html" class="block w-full text-center mt-4 px-5 py-3 rounded-md font-bold bg-patro-yellow text-patro-green">
                         S'inscrire maintenant
                     </a>
                 </div>
@@ -54,7 +54,6 @@ document.addEventListener("DOMContentLoaded", function () {
         </nav>
         `;
         
-        // Active le lien courant
         highlightActiveLink();
     }
 
@@ -68,7 +67,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12 text-center md:text-left">
                     <!-- Colonne 1: Info -->
                     <div class="flex flex-col items-center md:items-start">
-                        <img src="donnees-site/LogoMaurageContour.svg" alt="Patro Maurage" class="h-24 w-auto mb-6">
+                        <!-- Image en absolu -->
+                        <img src="/donnees-site/LogoMaurageContour.svg" alt="Patro Maurage" class="h-24 w-auto mb-6">
                         
                         <span class="font-display font-bold text-2xl text-white block mb-4">Le Patro Val d'Haine de Maurage</span>
                         <p class="text-gray-400 text-sm mb-4">
@@ -78,15 +78,14 @@ document.addEventListener("DOMContentLoaded", function () {
                             <span>Rue du Roeulx 23, 7110 Maurage</span>
                             <span>patrovaldhaine@patro.be</span>
                             <span>0488/08.86.03</span>
-                            <span><stong>IBAN :</strong> BE70 7320 7117 6025</span>
-                            <span><stong>Identification O.N.E. :</strong> PA55022VALD</span>
+                            <span><strong>IBAN :</strong> BE70 7320 7117 6025</span>
+                            <span><strong>Identification O.N.E. :</strong> PA55022VALD</span>
                         </div>
                     </div>
 
-                    <!-- Colonne 2: Partenaires (DYNAMIQUE) -->
+                    <!-- Colonne 2: Partenaires -->
                     <div class="flex flex-col items-center md:items-start">
                         <h5 class="font-bold text-gray-200 mb-6 uppercase text-sm tracking-wider">Avec le soutien de :</h5>
-                        <!-- Modification de la grille pour accepter plus de logos proprement -->
                         <div id="sponsors-grid" class="flex flex-wrap gap-4 items-center justify-center md:justify-start">
                             <div class="animate-pulse h-16 w-24 bg-gray-800 rounded"></div>
                             <div class="animate-pulse h-16 w-24 bg-gray-800 rounded"></div>
@@ -110,11 +109,10 @@ document.addEventListener("DOMContentLoaded", function () {
                 <div class="border-t border-gray-800 pt-8 text-center text-sm text-gray-500 flex flex-col md:flex-row justify-center items-center gap-4">
                     <p>© 2026 Patro du Val d'Haine – Tous droits réservés</p>
                     <span class="hidden md:inline">•</span>
-                    <a href="legal.html" class="hover:text-white transition">Mentions légales</a>
+                    <a href="/legal.html" class="hover:text-white transition">Mentions légales</a>
                     <span class="hidden md:inline">•</span>
-                    <a href="cookies.html" class="hover:text-white transition">Politique Cookies</a>
+                    <a href="/cookies.html" class="hover:text-white transition">Politique Cookies</a>
                     <span class="hidden md:inline">•</span>
-                    <!-- BOUTON PORTAIL APPS (CORRIGÉ) -->
                     <a href="https://portail.patrovaldhaine.be" class="flex items-center gap-1 text-patro-yellow hover:text-white transition font-medium" title="Espace Parents">
                         <i data-lucide="circle-user-round" class="w-3 h-3"></i> Espace Parents
                     </a>
@@ -128,10 +126,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (typeof lucide !== 'undefined') lucide.createIcons();
 
+    // --- CURSOR (Sécurité pour subfolders) ---
     if (window.matchMedia("(pointer: fine)").matches) {
         const cursor = document.getElementById('custom-cursor');
         if(cursor) {
-            // Force styles
             cursor.style.position = 'fixed';
             cursor.style.pointerEvents = 'none';
             cursor.style.zIndex = '9999';
@@ -147,7 +145,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 if (e.relatedTarget === null) cursor.style.opacity = '0'; 
             });
         } else {
-            // Création de secours si le curseur n'existe pas dans le HTML
             const newCursor = document.createElement('div');
             newCursor.id = 'custom-cursor';
             document.body.appendChild(newCursor);
@@ -183,26 +180,34 @@ function toggleMenu() {
     if (menu) menu.classList.toggle('hidden');
 }
 
+// Fonction de surlignage adaptée aux chemins absolus
 function highlightActiveLink() {
+    // On récupère le nom du fichier actuel (ex: "index.html" ou "" si racine)
     const currentPath = window.location.pathname.split('/').pop() || 'index.html';
     const links = document.querySelectorAll('.nav-link');
     
     links.forEach(link => {
-        if (link.getAttribute('href').includes('#')) return;
+        const href = link.getAttribute('href');
+        if (!href) return;
+        
+        // On récupère le nom du fichier du lien (ex: "/contact.html" -> "contact.html")
+        const linkPath = href.split('/').pop() || 'index.html';
+        
+        // On ignore les ancres pures
+        if (href.startsWith('#')) return;
 
-        if (link.getAttribute('href') === currentPath) {
+        if (linkPath === currentPath) {
             link.classList.remove('text-gray-600');
             link.classList.add('text-patro-green', 'font-bold');
         }
     });
 }
 
-// --- NOUVELLE FONCTION LOAD SPONSORS (TXT FILE) ---
+// --- CHARGEMENT SPONSORS (TXT) ---
 async function loadSponsors() {
     const repoOwner = "staffpatrovdh-pixel";
     const repoName = "staffpatrovdh-pixel.github.io";
     const branch = "main";
-    // Chemin vers le fichier texte
     const fileUrl = `https://raw.githubusercontent.com/${repoOwner}/${repoName}/${branch}/donnees-site/partenaires.txt`;
     
     const container = document.getElementById('sponsors-grid');
@@ -217,35 +222,35 @@ async function loadSponsors() {
         const text = await response.text();
         const lines = text.split('\n');
         
-        // Vider le conteneur (enlève les placeholders)
         container.innerHTML = '';
         
         let hasPartners = false;
 
         lines.forEach(line => {
-            // On ignore les lignes vides
             if (!line.trim()) return;
 
-            // Structure : Nom | Logo Path | URL Site
             const parts = line.split('|');
             
             if (parts.length >= 3) {
                 hasPartners = true;
                 const name = parts[0].trim();
-                const logoPath = parts[1].trim();
+                let logoPath = parts[1].trim();
                 const siteUrl = parts[2].trim();
 
-                // Création du lien qui enveloppe l'image
+                // IMPORTANT : Si le chemin du logo est relatif (commence par donnees-site), on ajoute / devant
+                if (!logoPath.startsWith('http') && !logoPath.startsWith('/')) {
+                    logoPath = '/' + logoPath;
+                }
+
                 const link = document.createElement('a');
                 link.href = siteUrl;
                 link.target = "_blank";
-                link.title = name; // Affiche le nom au survol (bulle native)
+                link.title = name;
                 link.className = "partner-link block transition-transform hover:scale-105";
 
                 const img = document.createElement('img');
                 img.src = logoPath;
                 img.alt = name;
-                // Classes CSS pour le style (fond blanc, arrondi, taille contrainte)
                 img.className = "partner-logo h-16 w-auto max-w-[160px] object-contain bg-white rounded p-2 shadow-sm hover:shadow-md transition-all";
                 
                 link.appendChild(img);
@@ -278,7 +283,7 @@ function checkCookieConsent() {
                     <p class="text-sm text-gray-600">
                         Nous utilisons des cookies essentiels pour le bon fonctionnement du site (cartes, calendrier). 
                         En continuant, vous acceptez leur utilisation.
-                        <a href="cookies.html" class="text-patro-green underline hover:text-patro-yellow">En savoir plus</a>.
+                        <a href="/cookies.html" class="text-patro-green underline hover:text-patro-yellow">En savoir plus</a>.
                     </p>
                 </div>
             </div>
