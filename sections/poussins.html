@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Les Poussins (4-6 ans) | Patro du Val d'Haine</title>
+    
+    <!-- Note : Les chemins remontent d'un niveau avec "../" -->
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;800&family=Fredoka:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Script Layout (Chemin adapté) -->
+    <script src="../layout.js?v=11.3"></script>
+
+    <script>
+        tailwind.config = { 
+            theme: { 
+                extend: { 
+                    colors: { 
+                        patro: { 
+                            yellow: '#FFD700', 
+                            green: '#009045', 
+                            dark: '#1a1a1a', 
+                            light: '#f8fafc' 
+                        } 
+                    }, 
+                    fontFamily: { 
+                        sans: ['Poppins', 'sans-serif'], 
+                        display: ['Fredoka', 'sans-serif'], 
+                        handwritten: ['Indie Flower', 'cursive'] 
+                    }
+                } 
+            } 
+        }
+    </script>
+</head>
+<body class="font-sans text-slate-800 bg-patro-light antialiased overflow-x-hidden">
+
+    <!-- Global Elements -->
+    <div id="custom-cursor" class="hidden md:block"></div>
+    <div id="loader"><div class="spinner mb-4"></div><p class="text-patro-green font-bold font-display animate-pulse">Chargement...</p></div>
+    <div id="navbar-placeholder"></div>
+
+    <!-- Hero Section Spéciale Section -->
+    <section class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden bg-patro-yellow">
+        <!-- Image de fond (Photo de groupe) -->
+        <div class="absolute inset-0 bg-cover bg-center opacity-30" style="background-image: url('https://www.patrovaldhaine.be/donnees-site/photos-site-accueil/sections/poussins.jpeg');"></div>
+        <div class="absolute inset-0 bg-gradient-to-b from-patro-yellow/80 to-white"></div>
+
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center z-10">
+            
+            <!-- Badge Écusson -->
+            <div class="mx-auto w-32 h-32 rounded-full border-4 border-white shadow-xl overflow-hidden mb-6 bg-white transform hover:scale-105 transition duration-500">
+                <img src="https://www.patrovaldhaine.be/donnees-site/illustrations/ecussons/ecusson_poussins.jpg" alt="Écusson Poussins" class="w-full h-full object-cover">
+            </div>
+
+            <h1 class="text-5xl md:text-7xl font-display font-extrabold text-patro-dark mb-4 drop-shadow-sm">
+                Les Poussins
+            </h1>
+            <div class="inline-block px-4 py-1 rounded-full bg-white/50 border border-white text-patro-dark font-bold tracking-wider mb-6">
+                4 à 6 ans • La Découverte
+            </div>
+            
+            <p class="mt-4 max-w-2xl mx-auto text-xl text-gray-800 font-medium font-handwritten">
+                "Comme le poussin sous l'aile de sa maman, nous grandissons en sécurité."
+            </p>
+        </div>
+    </section>
+
+    <!-- Introduction & Philosophie -->
+    <section class="py-16 md:py-24 bg-white relative">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="prose prose-lg mx-auto text-gray-600">
+                <h2 class="text-3xl font-display font-bold text-patro-green text-center mb-8">Bienvenue chez les tout-petits !</h2>
+                
+                <p class="lead text-center text-xl mb-12">
+                    C’est la plus jeune tranche d’âge de la Ligne de Croissance du Patro. Tout comme les poussins qui font leurs premiers pas et leurs premières découvertes avec la présence rassurante de la poule, les enfants de 4 à 6 ans ont besoin de <strong>sécurité</strong> et d’<strong>affection</strong>.
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+                    <div class="bg-yellow-50 p-6 rounded-2xl border-l-4 border-patro-yellow">
+                        <h3 class="font-bold text-gray-900 mt-0 flex items-center gap-2">
+                            <i data-lucide="baby" class="w-6 h-6 text-patro-yellow"></i> Avant le Patro
+                        </h3>
+                        <p class="text-sm">
+                            Jusqu'à 4 ans, l'univers de l'enfant est centré sur le cocon familial et l'école maternelle. Le monde tourne autour de lui et de ses repères fixes.
+                        </p>
+                    </div>
+                    <div class="bg-green-50 p-6 rounded-2xl border-l-4 border-patro-green">
+                        <h3 class="font-bold text-gray-900 mt-0 flex items-center gap-2">
+                            <i data-lucide="compass" class="w-6 h-6 text-patro-green"></i> L'étape Patro
+                        </h3>
+                        <p class="text-sm">
+                            Le Patro est un nouveau lieu de vie. C'est l'espace de la <strong>découverte</strong> : découverte des autres (le groupe), d'un nouveau milieu et de soi-même à travers des activités variées.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Ce qu'il faut savoir (Grille parents) -->
+    <section class="py-20 bg-patro-light">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-patro-green font-bold tracking-wide uppercase text-sm mb-2">Pédagogie</h2>
+                <h3 class="text-3xl md:text-5xl font-display font-bold text-gray-900">Qui sont les Poussins ?</h3>
+                <p class="text-gray-500 mt-4">Voici comment nous adaptons notre animation à leurs besoins spécifiques.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                
+                <!-- Besoin 1 -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition">
+                    <div class="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center text-orange-500 mb-4">
+                        <i data-lucide="zap" class="w-6 h-6"></i>
+                    </div>
+                    <h4 class="font-bold text-gray-900 mb-2">La Bougeotte</h4>
+                    <p class="text-sm text-gray-600">
+                        Ils ne tiennent pas en place ! <br>
+                        <strong>Notre réponse :</strong> On change d'activité toutes les 15 à 30 minutes pour capter leur attention.
+                    </p>
+                </div>
+
+                <!-- Besoin 2 -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition">
+                    <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center text-blue-500 mb-4">
+                        <i data-lucide="scissors" class="w-6 h-6"></i>
+                    </div>
+                    <h4 class="font-bold text-gray-900 mb-2">La Motricité</h4>
+                    <p class="text-sm text-gray-600">
+                        Sauter à cloche-pied ou découper n'est pas si simple. <br>
+                        <strong>Notre réponse :</strong> Des activités adaptées pour développer leur adresse en douceur.
+                    </p>
+                </div>
+
+                <!-- Besoin 3 -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition">
+                    <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center text-patro-green mb-4">
+                        <i data-lucide="user-check" class="w-6 h-6"></i>
+                    </div>
+                    <h4 class="font-bold text-gray-900 mb-2">L'Autonomie</h4>
+                    <p class="text-sm text-gray-600">
+                        "Moi tout seul !" est leur phrase préférée. <br>
+                        <strong>Notre réponse :</strong> On ne fait pas à leur place, on les encourage pour booster leur confiance.
+                    </p>
+                </div>
+
+                <!-- Besoin 4 -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition">
+                    <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center text-purple-500 mb-4">
+                        <i data-lucide="wand-2" class="w-6 h-6"></i>
+                    </div>
+                    <h4 class="font-bold text-gray-900 mb-2">L'Imaginaire</h4>
+                    <p class="text-sm text-gray-600">
+                        La frontière entre réel et fiction est floue. <br>
+                        <strong>Notre réponse :</strong> On raconte des histoires, on se déguise et on les aide à développer leur esprit critique.
+                    </p>
+                </div>
+
+                <!-- Besoin 5 -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition">
+                    <div class="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center text-red-500 mb-4">
+                        <i data-lucide="shield-alert" class="w-6 h-6"></i>
+                    </div>
+                    <h4 class="font-bold text-gray-900 mb-2">La Sécurité</h4>
+                    <p class="text-sm text-gray-600">
+                        Ils découvrent le monde sans voir les dangers. <br>
+                        <strong>Notre réponse :</strong> Une vigilance constante et un cadre clair pour distinguer le bien du mal.
+                    </p>
+                </div>
+
+                <!-- Besoin 6 -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition">
+                    <div class="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center text-patro-yellow mb-4">
+                        <i data-lucide="users" class="w-6 h-6"></i>
+                    </div>
+                    <h4 class="font-bold text-gray-900 mb-2">Le Groupe</h4>
+                    <p class="text-sm text-gray-600">
+                        Au début, le monde tourne autour d'eux (égocentrisme). <br>
+                        <strong>Notre réponse :</strong> On apprend le partage et la coopération petit à petit.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Comment on anime ? (Méthode) -->
+    <section class="py-20 bg-patro-dark text-white relative overflow-hidden">
+        <!-- Déco -->
+        <div class="absolute top-0 left-0 w-64 h-64 bg-patro-yellow opacity-10 rounded-full blur-3xl -ml-10 -mt-10"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="flex flex-col lg:flex-row gap-12 items-center">
+                
+                <div class="lg:w-1/2">
+                    <h2 class="text-patro-yellow font-bold tracking-wide uppercase text-sm mb-2">Notre méthode</h2>
+                    <h3 class="text-3xl md:text-4xl font-display font-bold mb-6">Animer par le Jeu & les Rites</h3>
+                    <p class="text-gray-300 text-lg leading-relaxed mb-6">
+                        Chez les Poussins, l'apprentissage passe par l'expérience. Nous utilisons 3 leviers principaux :
+                    </p>
+                    
+                    <div class="space-y-6">
+                        <div class="flex gap-4">
+                            <div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center shrink-0 text-patro-green font-bold">1</div>
+                            <div>
+                                <h4 class="font-bold text-white">Le Jeu</h4>
+                                <p class="text-sm text-gray-400">Petits jeux courts, jeux de piste, bricolages, chansons... Le jeu est leur langage naturel.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center shrink-0 text-patro-green font-bold">2</div>
+                            <div>
+                                <h4 class="font-bold text-white">Les Rites (Repères)</h4>
+                                <p class="text-sm text-gray-400">L'accueil, le rassemblement, le goûter... Des moments fixes et rassurants pour structurer l'après-midi.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center shrink-0 text-patro-green font-bold">3</div>
+                            <div>
+                                <h4 class="font-bold text-white">Le Sens</h4>
+                                <p class="text-sm text-gray-400">Même petits, on apprend à dire "merci", à respecter le copain et à gérer ses émotions.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Image Illustration -->
+                <div class="lg:w-1/2 relative">
+                    <div class="relative rounded-3xl overflow-hidden shadow-2xl border-4 border-white/10 transform rotate-2">
+                        <img src="https://images.unsplash.com/photo-1472162072942-cd5147eb3902?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Enfants jouant ensemble" class="w-full h-auto opacity-90">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-6">
+                            <p class="text-white font-handwritten text-xl">"Grandir en s'amusant !"</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="py-16 bg-white border-t border-gray-100 text-center">
+        <div class="max-w-3xl mx-auto px-4">
+            <h2 class="text-3xl font-display font-bold text-gray-900 mb-6">Votre enfant a entre 4 et 6 ans ?</h2>
+            <p class="text-gray-600 mb-8 text-lg">
+                Il est prêt pour l'aventure ! Venez essayer une après-midi, c'est sans engagement.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="../inscription.html" class="px-8 py-4 bg-patro-yellow text-patro-green font-bold rounded-full shadow-lg hover:bg-yellow-400 transition transform hover:-translate-y-1">
+                    Inscrire mon enfant
+                </a>
+                <a href="../contact.html" class="px-8 py-4 bg-gray-100 text-gray-700 font-bold rounded-full hover:bg-gray-200 transition">
+                    Contacter le staff
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <div id="footer-placeholder"></div>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
