@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Les grands (12-16 ans) | Patro du Val d'Haine</title>
+    
+    <!-- Note : Les chemins remontent d'un niveau avec "../" -->
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;800&family=Fredoka:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Script Layout (Chemin adapté) -->
+    <script src="../layout.js?v=11.3"></script>
+
+    <script>
+        tailwind.config = { 
+            theme: { 
+                extend: { 
+                    colors: { 
+                        patro: { 
+                            yellow: '#FFD700', 
+                            green: '#009045', 
+                            dark: '#1a1a1a', 
+                            light: '#f8fafc' 
+                        } 
+                    }, 
+                    fontFamily: { 
+                        sans: ['Poppins', 'sans-serif'], 
+                        display: ['Fredoka', 'sans-serif'], 
+                        handwritten: ['Indie Flower', 'cursive'] 
+                    }
+                } 
+            } 
+        }
+    </script>
+</head>
+<body class="font-sans text-slate-800 bg-patro-light antialiased overflow-x-hidden">
+
+    <!-- Global Elements -->
+    <div id="custom-cursor" class="hidden md:block"></div>
+    <div id="loader"><div class="spinner mb-4"></div><p class="text-patro-green font-bold font-display animate-pulse">Chargement...</p></div>
+    <div id="navbar-placeholder"></div>
+
+    <!-- Hero Section Spéciale Ados -->
+    <section class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden bg-purple-600">
+        <!-- Image de fond -->
+        <div class="absolute inset-0 bg-cover bg-center opacity-30" style="background-image: url('https://www.patrovaldhaine.be/donnees-site/photos-site-accueil/sections/alpines-conq.JPEG');"></div>
+        <div class="absolute inset-0 bg-gradient-to-b from-purple-800/80 to-white"></div>
+
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center z-10">
+            
+            <!-- Badges Écussons (Double) -->
+            <div class="flex justify-center gap-4 mb-6">
+                <div class="w-24 h-24 md:w-32 md:h-32 rounded-full border-4 border-white shadow-xl overflow-hidden bg-white transform hover:scale-105 transition duration-500 hover:rotate-3">
+                    <img src="https://www.patrovaldhaine.be/donnees-site/illustrations/ecussons/ecusson_alpine:conq.jpg" alt="Écusson Conquérants" class="w-full h-full object-cover">
+                </div>
+                <div class="w-24 h-24 md:w-32 md:h-32 rounded-full border-4 border-white shadow-xl overflow-hidden bg-white transform hover:scale-105 transition duration-500 hover:-rotate-3">
+                    <img src="https://www.patrovaldhaine.be/donnees-site/illustrations/ecussons/ecusson_aventuriers.jpg" alt="Écusson Aventuriers" class="w-full h-full object-cover">
+                </div>
+            </div>
+
+            <h1 class="text-4xl md:text-6xl font-display font-extrabold text-patro-dark mb-4 drop-shadow-sm leading-tight">
+                Conquérants/Alpines & Aventuriers
+            </h1>
+            <div class="inline-flex gap-2 mb-6 flex-wrap justify-center">
+                <span class="px-4 py-1 rounded-full bg-pink-500 text-white font-bold tracking-wider text-sm shadow-md">12-14 ans : Expression</span>
+                <span class="px-4 py-1 rounded-full bg-purple-600 text-white font-bold tracking-wider text-sm shadow-md">14-16 ans : Ouverture</span>
+            </div>
+            
+            <p class="mt-4 max-w-3xl mx-auto text-xl text-gray-800 font-medium font-handwritten">
+                "Prendre de la hauteur, s'exprimer et s'ouvrir au monde pour construire l'adulte de demain."
+            </p>
+        </div>
+    </section>
+
+    <!-- Introduction & Philosophie -->
+    <section class="py-16 md:py-24 bg-white relative">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="prose prose-lg mx-auto text-gray-600">
+                <h2 class="text-3xl font-display font-bold text-purple-700 text-center mb-8">L'âge des grands changements</h2>
+                
+                <p class="lead text-center text-xl mb-12">
+                    De 12 à 16 ans, c'est l'adolescence. Une période charnière remplie de défis. <br>
+                    Les <strong>Conquérants/Alpines (12-14 ans)</strong> cherchent leur identité et ont besoin de s'exprimer.<br>
+                    Les <strong>Aventuriers (14-16 ans)</strong> s'ouvrent aux autres, au monde et ont soif de grands projets.
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+                    <div class="bg-orange-50 p-6 rounded-2xl border-l-4 border-orange-500">
+                        <h3 class="font-bold text-gray-900 mt-0 flex items-center gap-2">
+                            <i data-lucide="shield" class="w-6 h-6 text-orange-500"></i> Avant (9-12 ans)
+                        </h3>
+                        <p class="text-sm">
+                            Chez les <strong>Chevaliers</strong>, c'était la bande de copains, la solidarité et les exploits physiques.
+                        </p>
+                    </div>
+                    <div class="bg-gray-100 p-6 rounded-2xl border-l-4 border-gray-800">
+                        <h3 class="font-bold text-gray-900 mt-0 flex items-center gap-2">
+                            <i data-lucide="compass" class="w-6 h-6 text-gray-800"></i> Après (16+ ans)
+                        </h3>
+                        <p class="text-sm">
+                            Les <strong>Animateurs</strong> prendront des responsabilités concrètes, encadreront les plus jeunes et deviendront les garants du projet éducatif.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Ce qu'il faut savoir (Grille parents) -->
+    <section class="py-20 bg-patro-light">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-purple-600 font-bold tracking-wide uppercase text-sm mb-2">Pédagogie</h2>
+                <h3 class="text-3xl md:text-5xl font-display font-bold text-gray-900">Qui sont-ils ?</h3>
+                <p class="text-gray-500 mt-4">Comprendre les ados pour mieux les animer.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                
+                <!-- Besoin 1 -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition border-t-4 border-pink-400">
+                    <div class="w-12 h-12 bg-pink-100 rounded-full flex items-center justify-center text-pink-500 mb-4">
+                        <i data-lucide="mic-2" class="w-6 h-6"></i>
+                    </div>
+                    <h4 class="font-bold text-gray-900 mb-2">L'Expression</h4>
+                    <p class="text-sm text-gray-600">
+                        Ils ont des opinions, critiquent et jugent. <br>
+                        <strong>Notre réponse :</strong> On leur donne la parole, on débat et on valorise leurs idées lors des évaluations.
+                    </p>
+                </div>
+
+                <!-- Besoin 2 -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition border-t-4 border-purple-500">
+                    <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center text-purple-500 mb-4">
+                        <i data-lucide="fingerprint" class="w-6 h-6"></i>
+                    </div>
+                    <h4 class="font-bold text-gray-900 mb-2">L'Identité</h4>
+                    <p class="text-sm text-gray-600">
+                        "Qui suis-je ?" est la grande question. Ils cherchent leur style. <br>
+                        <strong>Notre réponse :</strong> On renforce l'estime de soi et on accepte les différences sans juger.
+                    </p>
+                </div>
+
+                <!-- Besoin 3 -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition border-t-4 border-red-400">
+                    <div class="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center text-red-500 mb-4">
+                        <i data-lucide="battery-charging" class="w-6 h-6"></i>
+                    </div>
+                    <h4 class="font-bold text-gray-900 mb-2">L'Énergie (Exutoire)</h4>
+                    <p class="text-sm text-gray-600">
+                        Besoin de décharger le trop-plein d'énergie (parfois agressif). <br>
+                        <strong>Notre réponse :</strong> Des activités sportives intenses mais encadrées avec des règles de sécurité claires.
+                    </p>
+                </div>
+
+                <!-- Besoin 4 -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition border-t-4 border-green-500">
+                    <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center text-green-600 mb-4">
+                        <i data-lucide="globe" class="w-6 h-6"></i>
+                    </div>
+                    <h4 class="font-bold text-gray-900 mb-2">L'Ouverture</h4>
+                    <p class="text-sm text-gray-600">
+                        Ils s'intéressent au monde, à l'actualité et aux autres cultures. <br>
+                        <strong>Notre réponse :</strong> Des projets citoyens, des rencontres et des débats sur la société.
+                    </p>
+                </div>
+
+                <!-- Besoin 5 -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition border-t-4 border-yellow-400">
+                    <div class="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center text-patro-yellow mb-4">
+                        <i data-lucide="users" class="w-6 h-6"></i>
+                    </div>
+                    <h4 class="font-bold text-gray-900 mb-2">Le Groupe</h4>
+                    <p class="text-sm text-gray-600">
+                        Besoin d'appartenance fort. Les amitiés sont exclusives et intenses. <br>
+                        <strong>Notre réponse :</strong> On travaille la cohésion, on crée des signes distinctifs (sweat, cri...) et on veille à l'intégration.
+                    </p>
+                </div>
+
+                <!-- Besoin 6 -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition border-t-4 border-blue-400">
+                    <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center text-blue-500 mb-4">
+                        <i data-lucide="brain-circuit" class="w-6 h-6"></i>
+                    </div>
+                    <h4 class="font-bold text-gray-900 mb-2">L'Abstraction</h4>
+                    <p class="text-sm text-gray-600">
+                        Ils peuvent raisonner, faire des hypothèses et élaborer des stratégies. <br>
+                        <strong>Notre réponse :</strong> Des jeux complexes, des enquêtes et de la co-gestion de projets.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Comment on anime ? (Méthode) -->
+    <section class="py-20 bg-patro-dark text-white relative overflow-hidden">
+        <!-- Déco -->
+        <div class="absolute top-10 right-0 w-96 h-96 bg-purple-600 opacity-20 rounded-full blur-3xl -mr-20"></div>
+        <div class="absolute bottom-10 left-0 w-64 h-64 bg-pink-500 opacity-20 rounded-full blur-3xl -ml-20"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="flex flex-col lg:flex-row gap-12 items-center">
+                
+                <div class="lg:w-1/2">
+                    <h2 class="text-purple-300 font-bold tracking-wide uppercase text-sm mb-2">Notre méthode</h2>
+                    <h3 class="text-3xl md:text-4xl font-display font-bold mb-6">Le Projet & l'Autonomie</h3>
+                    <p class="text-gray-300 text-lg leading-relaxed mb-6">
+                        Ici, on ne fait pas "pour" eux, mais "avec" eux. La pédagogie par projet est centrale.
+                    </p>
+                    
+                    <div class="space-y-8">
+                        <div class="flex gap-4">
+                            <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-pink-500 to-purple-600 flex items-center justify-center shrink-0 text-white font-bold shadow-lg">1</div>
+                            <div>
+                                <h4 class="font-bold text-white text-lg">Imaginer & Choisir (Co-gestion)</h4>
+                                <p class="text-sm text-gray-400 mt-1">Brainstorming, débats, votes... Ils décident de leur année : un voyage, une construction, un spectacle ?</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-pink-500 to-purple-600 flex items-center justify-center shrink-0 text-white font-bold shadow-lg">2</div>
+                            <div>
+                                <h4 class="font-bold text-white text-lg">Réaliser (Responsabilités)</h4>
+                                <p class="text-sm text-gray-400 mt-1">Ils organisent, budgétisent et réalisent. L'animateur est là en soutien, mais ce sont eux les acteurs.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-pink-500 to-purple-600 flex items-center justify-center shrink-0 text-white font-bold shadow-lg">3</div>
+                            <div>
+                                <h4 class="font-bold text-white text-lg">S'ouvrir au monde</h4>
+                                <p class="text-sm text-gray-400 mt-1">Rencontres avec d'autres patros, actions sociales, découvertes culturelles... On sort du local !</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Image Illustration -->
+                <div class="lg:w-1/2 relative">
+                    <div class="relative rounded-3xl overflow-hidden shadow-2xl border-4 border-white/10 transform rotate-1">
+                        <!-- Image générique ado/groupe/projet -->
+                        <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Groupe d'ados unis" class="w-full h-auto opacity-90">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end p-8">
+                            <div>
+                                <p class="text-white font-handwritten text-2xl mb-1">"Plus qu'un groupe..."</p>
+                                <p class="text-gray-300 text-sm">Une équipe qui construit ses propres rêves.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="py-16 bg-white border-t border-gray-100 text-center">
+        <div class="max-w-3xl mx-auto px-4">
+            <h2 class="text-3xl font-display font-bold text-gray-900 mb-6">Votre ado a entre 12 et 16 ans ?</h2>
+            <p class="text-gray-600 mb-8 text-lg">
+                Il cherche un endroit pour être lui-même, s'exprimer et vivre des projets fous ?
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="../inscription.html" class="px-8 py-4 bg-purple-600 text-white font-bold rounded-full shadow-lg hover:bg-purple-700 transition transform hover:-translate-y-1">
+                    Inscrire mon ado
+                </a>
+                <a href="../contact.html" class="px-8 py-4 bg-gray-100 text-gray-700 font-bold rounded-full hover:bg-gray-200 transition">
+                    Contacter le staff
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <div id="footer-placeholder"></div>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
