@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Camp 2026 | Patro du Val d'Haine</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;800&family=Fredoka:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="../layout.js?v=11.5"></script>
+    <script>
+        tailwind.config = { theme: { extend: { colors: { patro: { yellow: '#FFD700', green: '#009045', dark: '#1a1a1a', light: '#f8fafc' } }, fontFamily: { sans: ['Poppins', 'sans-serif'], display: ['Fredoka', 'sans-serif'], handwritten: ['Indie Flower', 'cursive'] } } } }
+    </script>
+</head>
+<body class="font-sans text-slate-800 bg-patro-light antialiased overflow-x-hidden">
+    <div id="custom-cursor" class="hidden md:block"></div>
+    <div id="loader"><div class="spinner mb-4"></div><p class="text-patro-green font-bold font-display animate-pulse">Chargement...</p></div>
+    <div id="navbar-placeholder"></div>
+
+    <section class="relative pt-40 pb-20 lg:pt-56 lg:pb-40 overflow-hidden bg-patro-dark text-white">
+        <div id="hero-bg" class="absolute inset-0 bg-cover bg-center opacity-40" style="background-image: url('../donnees-site/illustrations/events/alpines-conq.JPEG');"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-patro-dark via-patro-dark/50 to-transparent"></div>
+        <div class="relative max-w-4xl mx-auto px-4 text-center z-10">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-green-500/20 border border-green-400 text-green-300 font-bold tracking-wider text-sm mb-6 backdrop-blur-sm">
+                <span class="relative flex h-3 w-3"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span><span class="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span></span>
+                <span>Inscriptions ouvertes</span>
+            </div>
+            <h1 class="text-4xl md:text-6xl lg:text-7xl font-display font-extrabold mb-4 leading-tight">Camp 2026</h1>
+            <p class="text-xl md:text-2xl text-gray-300 font-medium mb-8">
+                <i data-lucide="calendar" class="inline-block w-6 h-6 mr-2 -mt-1 text-patro-yellow"></i>
+                Samedi 1 août 2026 à 13:30
+            </p>
+            <a href="#reservation" class="inline-flex items-center gap-2 px-8 py-4 bg-patro-yellow text-patro-dark font-bold rounded-full text-lg shadow-lg hover:bg-yellow-400 transition transform hover:-translate-y-1">
+                Je réserve ma place <i data-lucide="arrow-down" class="w-5 h-5"></i>
+            </a>
+        </div>
+    </section>
+
+    <section class="py-16 px-4 bg-white relative">
+        <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-12">
+            <div class="lg:col-span-2 space-y-12">
+                <div>
+                    <h2 class="text-3xl font-display font-bold text-gray-900 mb-6 flex items-center gap-3"><i data-lucide="info" class="w-8 h-8 text-patro-green"></i> À propos</h2>
+                    <div class="prose prose-lg text-gray-600"><p class="mb-4">Chers parents, chers patronnés,</p><p class="mb-4"></p><p class="mb-4">Nous voilà en 2026 !</p><p class="mb-4">Qui dit une nouvelle année, dit de nouvelles aventures Patro !</p><p class="mb-4">C’est avec beaucoup d’enthousiasme que nous ouvrons les inscriptions pour le camp 😉</p><p class="mb-4"></p><p class="mb-4">Voici les petites infos pratiques à connaitre : </p><p class="mb-4">Le camp se déroulera du 1er au 11 août 2026 en province de Namur. Ce sont 10 jours d’activités organisées du matin au soir autour d’un thème encore secret... Le camp est au prix de 150€ pour l’hébergement, la nourriture, les activités, etc. Ce prix est dégressif de 20€ par enfants supplémentaires et une partie de celui-ci peut vous être remboursé par votre mutuelle. Les places étant limitées, nous vous demandons d’inscrire votre enfant à l’avance afin de lui garantir 10 jours de folie !!!</p><p class="mb-4">Pour réaliser l’inscription, veuillez compléter le talon ci-dessous et verser un acompte de 50€. L’acompte nous permet de réserver l’endroit de camp. Le reste du montant sera à régler avant le 31 juillet. Ou si vous le souhaitez, vous pouvez payer directement la totalité du camp avant le 31 juillet.</p><p class="mb-4"></p><p class="mb-4">Nous vous rappelons aussi que l’affiliation est obligatoire pour le camp et permet aussi d’assurer votre enfant tout au long de l’année Patro 2025-2026.</p><p class="mb-4"></p><p class="mb-4">Une réunion avec les parents sera organisée afin d’expliquer aux nouveaux parents le camp et aussi répondre à vos questions à la fin de l’année scolaire. Nous restons joignables pour répondre à vos éventuelles questions avant celle-ci. </p><p class="mb-4">Le staff du Patro du Val d’Haine de Maurage 🔰</p><p class="mb-4"></p></div>
+                </div>
+
+                <div class="hidden">
+                    <h2 class="text-3xl font-display font-bold text-gray-900 mb-6 flex items-center gap-3"><i data-lucide="utensils" class="w-8 h-8 text-patro-green"></i> Le Menu</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="border border-gray-200 rounded-2xl p-6 hover:shadow-lg transition relative overflow-hidden group">
+                            <div class="absolute top-0 right-0 bg-patro-yellow text-xs font-bold px-3 py-1 rounded-bl-xl">POPULAIRE</div>
+                            <h3 class="text-xl font-bold text-gray-800 mb-2">Plat Adulte</h3>
+                            <p class="text-gray-500 text-sm mb-4"></p>
+                            <div class="text-3xl font-bold text-patro-green mb-4">€</div>
+                        </div>
+                        <div class="border border-gray-200 rounded-2xl p-6 hover:shadow-lg transition">
+                            <h3 class="text-xl font-bold text-gray-800 mb-2">Plat Enfant</h3>
+                            <p class="text-gray-500 text-sm mb-4"></p>
+                            <div class="text-3xl font-bold text-patro-green mb-4">€</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="">
+                    <h2 class="text-3xl font-display font-bold text-gray-900 mb-6 flex items-center gap-3"><i data-lucide="backpack" class="w-8 h-8 text-patro-green"></i> Infos & Matériel</h2>
+                    <div class="bg-blue-50 p-6 rounded-2xl border-l-4 border-blue-500 mb-6">
+                        <h4 class="font-bold text-blue-900 mb-2">Prix du séjour</h4>
+                        <p class="text-3xl font-bold text-blue-600">150€ <span class="text-sm font-normal text-gray-500">/ enfant</span></p>
+                    </div>
+                    <div class="bg-gray-50 p-6 rounded-2xl border border-gray-200">
+                        <h4 class="font-bold text-gray-800 mb-3">À ne pas oublier :</h4>
+                        <ul class="list-disc pl-5 space-y-1 text-gray-600">
+                            <li>Sac de couchage</li><li>Valise</li><li>Trousse de toilette</li><li>lit de camp</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="">
+                    <h2 class="text-3xl font-display font-bold text-gray-900 mb-6 flex items-center gap-3"><i data-lucide="file-down" class="w-8 h-8 text-patro-green"></i> Documents</h2>
+                    <a href="../documents/Inscription_PVDH.pdf" target="_blank" class="flex items-center justify-between p-4 bg-white border border-gray-200 rounded-xl hover:border-patro-yellow hover:shadow-md transition group">
+                        <div class="flex items-center gap-4">
+                            <div class="bg-red-100 p-3 rounded-lg text-red-500"><i data-lucide="file-text" class="w-6 h-6"></i></div>
+                            <div>
+                                <h4 class="font-bold text-gray-800 group-hover:text-patro-green transition">Inscription_PVDH.pdf</h4>
+                                <p class="text-sm text-gray-500">Télécharger</p>
+                            </div>
+                        </div>
+                        <i data-lucide="download" class="w-5 h-5 text-gray-400 group-hover:text-patro-yellow"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="lg:col-span-1">
+                <div class="bg-patro-light p-6 rounded-3xl border border-gray-200 shadow-sm sticky top-24">
+                    <h3 class="text-xl font-display font-bold text-gray-900 mb-6 border-b border-gray-200 pb-4">En résumé</h3>
+                    <ul class="space-y-6">
+                        <li class="flex gap-4">
+                            <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-patro-yellow shadow-sm shrink-0"><i data-lucide="calendar" class="w-5 h-5"></i></div>
+                            <div><p class="text-xs text-gray-500 font-bold uppercase tracking-wider">Date</p><p class="font-medium text-gray-800">Samedi 1 août 2026</p></div>
+                        </li>
+                        <li class="flex gap-4">
+                            <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-patro-yellow shadow-sm shrink-0"><i data-lucide="clock" class="w-5 h-5"></i></div>
+                            <div><p class="text-xs text-gray-500 font-bold uppercase tracking-wider">Heure</p><p class="font-medium text-gray-800">13:30</p></div>
+                        </li>
+                        <li class="flex gap-4">
+                            <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-patro-yellow shadow-sm shrink-0"><i data-lucide="map-pin" class="w-5 h-5"></i></div>
+                            <div>
+                                <p class="text-xs text-gray-500 font-bold uppercase tracking-wider">Lieu</p>
+                                <p class="font-medium text-gray-800">Rue Albert-François de Maillen 4, 5361 Mohiville/Hamois</p>
+                                <a href="https://maps.app.goo.gl/Hza8ntqWheJBzJt3A" target="_blank" class="text-xs text-patro-green underline hover:text-green-700">Voir sur la carte</a>
+                            </div>
+                        </li>
+                        <li class="flex gap-4">
+                            <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-patro-yellow shadow-sm shrink-0"><i data-lucide="users" class="w-5 h-5"></i></div>
+                            <div><p class="text-xs text-gray-500 font-bold uppercase tracking-wider">Pour qui ?</p><p class="font-medium text-gray-800">Toutes les sections</p></div>
+                        </li>
+                    </ul>
+                    <hr class="my-6 border-gray-200">
+                    <div id="reservation" class="space-y-3">
+                        <a href="https://www.patrovaldhaine.be" target="_blank" class="block w-full py-4 bg-patro-green text-white font-bold rounded-xl text-center shadow-lg hover:bg-green-700 transition transform hover:-translate-y-1">Je réserve !</a>
+                        <a href="mailto:patrovaldhaine@patro.be" class="block w-full py-3 bg-white border-2 border-gray-200 text-gray-600 font-bold rounded-xl text-center hover:border-patro-green hover:text-patro-green transition"><i data-lucide="mail" class="w-4 h-4 inline mr-2"></i> Une question ?</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div id="footer-placeholder"></div>
+    <script> lucide.createIcons(); </script>
+</body>
+</html>
