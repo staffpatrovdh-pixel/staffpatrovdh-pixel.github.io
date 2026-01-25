@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Patro du Val d'Haine | Maurage</title>
+    <title>Patro du Val d'Haine de Maurage</title>
     
     <link rel="stylesheet" href="style.css">
     <!-- Ajout de la police Indie Flower -->
@@ -11,8 +11,8 @@
     
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
-    <!-- Version 7 pour le layout -->
-    <script src="layout.js?v=7"></script>
+    <!-- Version 11.3 pour le layout -->
+    <script src="layout.js?v=11.3"></script>
 
     <script>
         // Ajout de la font 'handwritten' pour Indie Flower
@@ -26,7 +26,7 @@
     <div id="navbar-placeholder"></div>
 
     <!-- Hero Section -->
-    <section id="accueil" class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden" style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 144, 69, 0.7)), url('https://static.wixstatic.com/media/99150c_fdc168f86c01429eb37adcee6a16b99c~mv2.jpg'); background-size: cover; background-position: center;">
+    <section id="accueil" class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden" style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 144, 69, 0.7)), url('donnees-site/photos-site-accueil/banniere_accueil.jpg'); background-size: cover; background-position: center;">
         <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             
             <!-- Texte Bienvenue style manuscrit et incliné -->
@@ -43,12 +43,22 @@
             <p class="mt-4 max-w-2xl mx-auto text-xl text-green-50 md:text-2xl font-light">
                 Le Patro du Val d'Haine est un mouvement de jeunesse ouvert à tous à partir de 4 ans !
             </p>
+            
+            <!-- BOUTONS D'ACTION -->
             <div class="mt-10 flex flex-col sm:flex-row justify-center gap-4">
+                <!-- Bouton Inscription -->
                 <a href="inscription.html" class="px-8 py-4 rounded-full bg-patro-yellow text-patro-green font-bold text-lg shadow-lg hover:bg-yellow-400 hover:scale-105 transition transform duration-200 flex items-center justify-center gap-2">
                     <i data-lucide="user-plus" class="w-5 h-5"></i>
                     Je m'inscris
                 </a>
+                
+                <!-- NOUVEAU BOUTON : Devenir Animateur -->
+                <a href="recrutement.html" class="px-8 py-4 rounded-full bg-white text-patro-green font-bold text-lg shadow-lg hover:bg-gray-100 hover:scale-105 transition transform duration-200 flex items-center justify-center gap-2">
+                    <i data-lucide="sparkles" class="w-5 h-5"></i>
+                    Devenir animateur
+                </a>
             </div>
+
         </div>
         <div class="absolute bottom-0 w-full leading-none z-10">
             <svg class="block w-full h-12 md:h-24 text-patro-light" viewBox="0 0 1440 320" preserveAspectRatio="none">
@@ -64,7 +74,7 @@
             <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
                 
                 <!-- Espace Parents -->
-                <a href="https://manager.patrovaldhaine.be/espace-parent/" target="_blank" class="group flex flex-col items-center text-center">
+                <a href="https://portail.patrovaldhaine.be" target="_blank" class="group flex flex-col items-center text-center">
                     <div class="w-full aspect-square overflow-hidden rounded-2xl shadow-lg mb-4 relative border-4 border-white group-hover:-translate-y-2 transition duration-300">
                         <div class="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition z-10"></div>
                         <img src="donnees-site/photos-site-accueil/espace-parent.png" 
@@ -185,37 +195,52 @@
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Poussins -->
-                <div class="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 bg-yellow-50 border border-yellow-100 p-8 text-center">
-                    <div class="w-16 h-16 mx-auto bg-yellow-400 rounded-full flex items-center justify-center text-white mb-4"><i data-lucide="baby" class="w-8 h-8"></i></div>
-                    <h4 class="text-2xl font-display font-bold text-gray-800 mb-2">Poussins</h4>
-                    <span class="inline-block px-3 py-1 bg-yellow-400 text-white text-xs font-bold rounded-full mb-4">4 - 6 ANS</span>
-                </div>
-                <!-- Benjamins -->
-                <div class="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 bg-orange-50 border border-orange-100 p-8 text-center">
-                    <div class="w-16 h-16 mx-auto bg-orange-500 rounded-full flex items-center justify-center text-white mb-4"><i data-lucide="sun" class="w-8 h-8"></i></div>
-                    <h4 class="text-2xl font-display font-bold text-gray-800 mb-2">Benjamins</h4>
-                    <span class="inline-block px-3 py-1 bg-orange-500 text-white text-xs font-bold rounded-full mb-4">6 - 9 ANS</span>
-                </div>
-                <!-- Chevaliers -->
-                <div class="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 bg-red-50 border border-red-100 p-8 text-center">
-                    <div class="w-16 h-16 mx-auto bg-red-500 rounded-full flex items-center justify-center text-white mb-4"><i data-lucide="flame" class="w-8 h-8"></i></div>
-                    <h4 class="text-2xl font-display font-bold text-gray-800 mb-2">Chevaliers / Étincelles</h4>
-                    <span class="inline-block px-3 py-1 bg-red-500 text-white text-xs font-bold rounded-full mb-4">9 - 12 ANS</span>
-                </div>
-                <!-- Conquérants -->
-                <div class="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 bg-blue-50 border border-blue-100 p-8 text-center">
-                    <div class="w-16 h-16 mx-auto bg-blue-500 rounded-full flex items-center justify-center text-white mb-4"><i data-lucide="mountain" class="w-8 h-8"></i></div>
-                    <h4 class="text-2xl font-display font-bold text-gray-800 mb-2">Conquérants / Alpines</h4>
-                    <span class="inline-block px-3 py-1 bg-blue-500 text-white text-xs font-bold rounded-full mb-4">12 - 14 ANS</span>
-                </div>
-                <!-- Aventuriers -->
+                <!-- Poussins (VERT) -->
                 <div class="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 bg-green-50 border border-green-100 p-8 text-center">
-                    <div class="w-16 h-16 mx-auto bg-green-600 rounded-full flex items-center justify-center text-white mb-4"><i data-lucide="compass" class="w-8 h-8"></i></div>
-                    <h4 class="text-2xl font-display font-bold text-gray-800 mb-2">Aventuriers</h4>
-                    <span class="inline-block px-3 py-1 bg-green-600 text-white text-xs font-bold rounded-full mb-4">14 - 16 ANS</span>
+                    <div class="w-20 h-20 mx-auto rounded-full overflow-hidden mb-4 shadow-md">
+                        <img src="donnees-site/illustrations/ecussons/ecusson_poussins.jpg" alt="Écusson Poussins" class="w-full h-full object-cover">
+                    </div>
+                    <h4 class="text-2xl font-display font-bold text-gray-800 mb-2">Poussins</h4>
+                    <span class="inline-block px-3 py-1 bg-green-600 text-white text-xs font-bold rounded-full mb-4">4 - 6 ANS</span>
                 </div>
-                <!-- Animateurs -->
+                
+                <!-- Benjamins (JAUNE) -->
+                <div class="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 bg-yellow-50 border border-yellow-100 p-8 text-center">
+                    <div class="w-20 h-20 mx-auto rounded-full overflow-hidden mb-4 shadow-md">
+                        <img src="donnees-site/illustrations/ecussons/ecusson_benja.jpg" alt="Écusson Benjamins" class="w-full h-full object-cover">
+                    </div>
+                    <h4 class="text-2xl font-display font-bold text-gray-800 mb-2">Benjamins</h4>
+                    <span class="inline-block px-3 py-1 bg-yellow-400 text-gray-900 text-xs font-bold rounded-full mb-4">6 - 9 ANS</span>
+                </div>
+                
+                <!-- Chevaliers (ORANGE) -->
+                <div class="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 bg-orange-50 border border-orange-100 p-8 text-center">
+                    <div class="w-20 h-20 mx-auto rounded-full overflow-hidden mb-4 shadow-md">
+                        <img src="donnees-site/illustrations/ecussons/ecusson_chev:etin.jpg" alt="Écusson Chevaliers/Étincelles" class="w-full h-full object-cover">
+                    </div>
+                    <h4 class="text-2xl font-display font-bold text-gray-800 mb-2">Chevaliers / Étincelles</h4>
+                    <span class="inline-block px-3 py-1 bg-orange-500 text-white text-xs font-bold rounded-full mb-4">9 - 12 ANS</span>
+                </div>
+                
+                <!-- Conquérants (ROSE/MAGENTA) -->
+                <div class="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 bg-pink-50 border border-pink-100 p-8 text-center">
+                    <div class="w-20 h-20 mx-auto rounded-full overflow-hidden mb-4 shadow-md">
+                        <img src="donnees-site/illustrations/ecussons/ecusson_alpine:conq.jpg" alt="Écusson Conquérants/Alpines" class="w-full h-full object-cover">
+                    </div>
+                    <h4 class="text-2xl font-display font-bold text-gray-800 mb-2">Conquérants / Alpines</h4>
+                    <span class="inline-block px-3 py-1 bg-pink-500 text-white text-xs font-bold rounded-full mb-4">12 - 14 ANS</span>
+                </div>
+                
+                <!-- Aventuriers (MAUVE) -->
+                <div class="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 bg-purple-50 border border-purple-100 p-8 text-center">
+                    <div class="w-20 h-20 mx-auto rounded-full overflow-hidden mb-4 shadow-md">
+                        <img src="donnees-site/illustrations/ecussons/ecusson_aventuriers.jpg" alt="Écusson Aventuriers" class="w-full h-full object-cover">
+                    </div>
+                    <h4 class="text-2xl font-display font-bold text-gray-800 mb-2">Aventuriers</h4>
+                    <span class="inline-block px-3 py-1 bg-purple-600 text-white text-xs font-bold rounded-full mb-4">14 - 16 ANS</span>
+                </div>
+                
+                <!-- Animateurs (Inchangé - Noir/Jaune) -->
                 <div class="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 bg-gray-800 text-white p-8 text-center">
                     <div class="w-16 h-16 mx-auto bg-white/20 rounded-full flex items-center justify-center text-patro-yellow mb-4"><i data-lucide="star" class="w-8 h-8"></i></div>
                     <h4 class="text-2xl font-display font-bold text-white mb-2">Animateurs</h4>
@@ -271,9 +296,27 @@
                     </div>
                 </div>
 
-                <!-- Colonne Droite : Calendrier Dynamique -->
+                <!-- Colonne Droite : Météo & Calendrier Dynamique -->
                 <div class="space-y-6">
-                    <div class="bg-white rounded-2xl shadow-xl border-4 border-white p-6 min-h-[400px]">
+                    
+                    <!-- NOUVEAU : BLOC MÉTÉO DU DIMANCHE -->
+                    <div class="bg-gradient-to-br from-cyan-50 to-white rounded-2xl shadow-xl border border-cyan-100 p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <h4 class="font-display font-bold text-xl text-cyan-900 flex items-center gap-2">
+                                <i data-lucide="cloud-sun" class="w-6 h-6 text-cyan-600"></i> Météo Maurage
+                            </h4>
+                            <div id="weather-loader" class="animate-spin rounded-full h-5 w-5 border-b-2 border-cyan-600"></div>
+                        </div>
+                        
+                        <div id="weather-content" class="hidden">
+                            <!-- Le contenu sera injecté ici par JS -->
+                        </div>
+                        
+                        <div id="weather-error" class="hidden text-sm text-red-400 italic">Météo indisponible</div>
+                    </div>
+
+                    <!-- BLOC CALENDRIER -->
+                    <div class="bg-white rounded-2xl shadow-xl border-4 border-white p-6 min-h-[300px]">
                         <h4 class="font-display font-bold text-2xl text-gray-800 mb-6 border-b pb-2">Prochaines dates</h4>
                         
                         <!-- Container où les événements seront injectés -->
@@ -293,8 +336,109 @@
 
     <div id="footer-placeholder"></div>
 
-    <!-- SCRIPT CALENDRIER ACCUEIL -->
+    <!-- SCRIPT CALENDRIER & MÉTÉO -->
     <script>
+        // --- CONFIGURATION MÉTÉO ---
+        async function loadSundayWeather() {
+            try {
+                // Lat: 50.4565, Long: 4.097, Timezone: Europe/Berlin
+                const url = "https://api.open-meteo.com/v1/forecast?latitude=50.4565&longitude=4.097&daily=weathercode,temperature_2m_max,temperature_2m_min,precipitation_probability_max&timezone=Europe%2FBerlin";
+                const response = await fetch(url);
+                if (!response.ok) throw new Error('API Error');
+                const data = await response.json();
+                
+                const container = document.getElementById('weather-content');
+                const days = data.daily.time;
+                const maxs = data.daily.temperature_2m_max;
+                const mins = data.daily.temperature_2m_min;
+                const rains = data.daily.precipitation_probability_max;
+                const codes = data.daily.weathercode;
+                
+                // Trouver le prochain dimanche
+                let sundayIndex = -1;
+                const targetDay = 0; // 0 = Dimanche
+                
+                for(let i=0; i<days.length; i++) {
+                    const d = new Date(days[i]);
+                    if (d.getDay() === targetDay) {
+                        sundayIndex = i;
+                        break;
+                    }
+                }
+
+                if (sundayIndex !== -1) {
+                    const dateObj = new Date(days[sundayIndex]);
+                    const dayStr = dateObj.toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long' });
+                    
+                    const code = codes[sundayIndex];
+                    const maxTemp = Math.round(maxs[sundayIndex]);
+                    const minTemp = Math.round(mins[sundayIndex]);
+                    const rainProb = rains[sundayIndex];
+
+                    let icon = 'cloud'; let color = 'text-gray-400'; let desc = 'Nuageux';
+                    let adviceIcon = 'shirt';
+                    let adviceText = 'Uniforme impeccable (Chemise & Foulard)';
+
+                    // Logique Icone
+                    if (code <= 3) { icon = 'sun'; color = 'text-yellow-400'; desc = 'Ensoleillé'; }
+                    else if (code >= 51 && code <= 67) { icon = 'cloud-drizzle'; color = 'text-blue-300'; desc = 'Bruine'; }
+                    else if (code >= 71) { icon = 'snowflake'; color = 'text-blue-200'; desc = 'Neige'; }
+                    else if (code >= 95) { icon = 'cloud-lightning'; color = 'text-gray-600'; desc = 'Orage'; }
+                    else if (code >= 80) { icon = 'cloud-rain'; color = 'text-blue-500'; desc = 'Averses'; }
+                    else if (code >= 45) { icon = 'cloud-fog'; color = 'text-gray-300'; desc = 'Brouillard'; }
+
+                    // Logique Conseil
+                    if (rainProb > 40 || (code >= 51 && code <= 67) || (code >= 80)) {
+                        adviceIcon = 'umbrella';
+                        adviceText = "K-Way imperméable & chaussures impérméable (idéalement) ;)";
+                    } else if (code >= 71) {
+                        adviceIcon = 'snowflake';
+                        adviceText = "Gros manteau, gants, bonnet & bottes";
+                    } else if (maxTemp > 25) {
+                        adviceIcon = 'sun';
+                        adviceText = "Casquette, crème solaire & gourde d'eau";
+                    } else if (maxTemp < 8) {
+                        adviceIcon = 'thermometer-snowflake';
+                        adviceText = "Habillez-les très chaudement (Gants/Bonnet).";
+                    } else if (maxTemp < 15) {
+                        adviceIcon = 'shirt';
+                        adviceText = "Petit pull recommandé.";
+                    }
+
+                    container.innerHTML = `
+                        <div class="flex items-center justify-between mb-2">
+                            <div class="flex items-center gap-4">
+                                <i data-lucide="${icon}" class="w-12 h-12 ${color}"></i>
+                                <div>
+                                    <span class="block text-xs font-bold text-gray-400 uppercase tracking-wider">${dayStr}</span>
+                                    <div class="text-2xl font-black text-cyan-800 leading-none">
+                                        ${maxTemp}° <span class="text-sm font-normal text-gray-500">/ ${minTemp}°</span>
+                                    </div>
+                                    <div class="text-sm font-semibold text-gray-600 flex items-center gap-2">
+                                        ${desc} <span class="text-blue-500 text-xs bg-blue-50 px-1.5 py-0.5 rounded"><i data-lucide="umbrella" class="w-3 h-3 inline"></i> ${rainProb}%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-3 bg-white/60 rounded-lg p-2 text-sm text-cyan-800 font-medium flex items-center gap-2 border border-cyan-100">
+                            <i data-lucide="${adviceIcon}" class="w-4 h-4 text-cyan-600"></i> ${adviceText}
+                        </div>
+                    `;
+                    
+                    document.getElementById('weather-loader').style.display = 'none';
+                    container.classList.remove('hidden');
+                    lucide.createIcons();
+                } else {
+                    throw new Error('Dimanche introuvable');
+                }
+                
+            } catch (e) {
+                document.getElementById('weather-loader').style.display = 'none';
+                document.getElementById('weather-error').classList.remove('hidden');
+            }
+        }
+
+        // --- CONFIGURATION CALENDRIER ---
         const repoOwner = 'staffpatrovdh-pixel'; 
         const repoName = 'staffpatrovdh-pixel.github.io';
         const branch = 'main'; 
@@ -306,6 +450,8 @@
         };
 
         document.addEventListener('DOMContentLoaded', async () => {
+            loadSundayWeather(); // Lancer la météo
+
             try {
                 const response = await fetch(calendarUrl);
                 if (!response.ok) throw new Error("Calendrier introuvable");
@@ -317,7 +463,7 @@
                 const lines = text.split('\n');
                 let hasEvents = false;
                 let count = 0;
-                const maxEvents = 5;
+                const maxEvents = 10;
 
                 lines.forEach(line => {
                     if (!line.trim() || count >= maxEvents) return;
@@ -328,14 +474,14 @@
                         const dateRaw = parts[0].trim(); 
                         const title = parts[1].trim();
                         const place = parts[2] ? parts[2].trim() : '';
+                        const linkUrl = parts[3] ? parts[3].trim() : '';
 
                         const dateParts = dateRaw.split('/');
                         const day = dateParts[0];
                         const monthNum = dateParts[1];
                         const monthName = monthMap[monthNum] || monthNum;
 
-                        const html = `
-                            <div class="flex items-center gap-4 p-3 hover:bg-gray-50 rounded-lg transition group">
+                        const innerContent = `
                                 <div class="flex-shrink-0 bg-patro-yellow/20 text-patro-dark rounded-lg w-14 h-14 flex flex-col items-center justify-center border border-patro-yellow/30">
                                     <span class="text-lg font-bold leading-none">${day}</span>
                                     <span class="text-xs uppercase font-bold leading-none mt-1">${monthName}</span>
@@ -344,8 +490,17 @@
                                     <h5 class="font-bold text-gray-800 group-hover:text-patro-green transition">${title}</h5>
                                     ${place ? `<p class="text-xs text-gray-500 flex items-center gap-1"><i data-lucide="map-pin" class="w-3 h-3"></i> ${place}</p>` : ''}
                                 </div>
-                            </div>
                         `;
+
+                        const commonClasses = "flex items-center gap-4 p-3 hover:bg-gray-50 rounded-lg transition group block w-full text-left";
+                        let html = '';
+
+                        if (linkUrl) {
+                            html = `<a href="${linkUrl}" class="${commonClasses} cursor-pointer decoration-0">${innerContent}</a>`;
+                        } else {
+                            html = `<div class="${commonClasses}">${innerContent}</div>`;
+                        }
+
                         container.innerHTML += html;
                         count++;
                     }
