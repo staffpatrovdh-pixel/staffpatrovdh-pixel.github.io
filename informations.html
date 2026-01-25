@@ -49,6 +49,12 @@
                         </div>
                     </div>
                 </div>
+                 <!-- Petit lien vers l'agenda complet -->
+                 <div class="text-center mt-2">
+                    <a href="https://calendar.google.com/calendar/embed?src=staff.patrovdh%40gmail.com&ctz=Europe%2FBrussels" target="_blank" class="text-xs text-gray-500 hover:text-patro-green underline">
+                        Ouvrir dans Google Agenda
+                    </a>
+                </div>
             </div>
 
             <!-- COLONNE DROITE : VALVES INFO -->
@@ -80,78 +86,120 @@
     <div id="footer-placeholder"></div>
 
     <script>
+        // CONFIGURATION
         const repoOwner = 'staffpatrovdh-pixel'; 
         const repoName = 'staffpatrovdh-pixel.github.io';
         const branch = 'main'; 
         
-        const calendarUrl = `https://raw.githubusercontent.com/${repoOwner}/${repoName}/${branch}/donnees-site/calendrier.txt?t=${Date.now()}`;
+        // URL Valves (Markdown) - Inchangé
         const valvesUrl = `https://raw.githubusercontent.com/${repoOwner}/${repoName}/${branch}/donnees-site/valves.md?t=${Date.now()}`;
+
+        // CONFIGURATION GOOGLE AGENDA
+        const CALENDAR_ID = 'staff.patrovdh@gmail.com';
+        // J'ai repris la clé que tu as mise dans index.html
+        const API_KEY = 'AIzaSyDA0jGeq43fHI30WeY126gBf82gVYSfV48'; 
 
         // Mapping Mois
         const monthMap = {
-            '01': 'Janv', '02': 'Fév', '03': 'Mars', '04': 'Avr', '05': 'Mai', '06': 'Juin',
-            '07': 'Juil', '08': 'Août', '09': 'Sept', '10': 'Oct', '11': 'Nov', '12': 'Déc'
+            0: 'Janv', 1: 'Fév', 2: 'Mars', 3: 'Avr', 4: 'Mai', 5: 'Juin',
+            6: 'Juil', 7: 'Août', 8: 'Sept', 9: 'Oct', 10: 'Nov', 11: 'Déc'
         };
 
+        // Fonction formatage date (même que sur l'accueil)
+        function formatPatroEventDate(start, end) {
+            const startDate = new Date(start.dateTime || start.date);
+            const endDate = new Date(end.dateTime || end.date);
+            const isAllDay = !start.dateTime;
+
+            if (isAllDay) endDate.setDate(endDate.getDate() - 1);
+
+            const isSameDay = startDate.getDate() === endDate.getDate() && 
+                              startDate.getMonth() === endDate.getMonth() && 
+                              startDate.getFullYear() === endDate.getFullYear();
+
+            const optionsDay = { day: 'numeric', month: 'long' };
+            const optionsTime = { hour: '2-digit', minute: '2-digit' };
+
+            if (isAllDay && isSameDay) return `Le ${startDate.toLocaleDateString('fr-FR', optionsDay)}`;
+            if (isAllDay && !isSameDay) return `Du ${startDate.toLocaleDateString('fr-FR', optionsDay)} au ${endDate.toLocaleDateString('fr-FR', optionsDay)}`;
+            if (!isAllDay && isSameDay) return `Le ${startDate.toLocaleDateString('fr-FR', optionsDay)} de ${startDate.toLocaleTimeString('fr-FR', optionsTime)} à ${endDate.toLocaleTimeString('fr-FR', optionsTime)}`;
+            return `Du ${startDate.toLocaleDateString('fr-FR', optionsDay)} (${startDate.toLocaleTimeString('fr-FR', optionsTime)}) au ${endDate.toLocaleDateString('fr-FR', optionsDay)} (${endDate.toLocaleTimeString('fr-FR', optionsTime)})`;
+        }
+
         document.addEventListener('DOMContentLoaded', () => {
-            loadCalendar();
+            loadGoogleCalendar();
             loadValves();
         });
 
-        async function loadCalendar() {
+        async function loadGoogleCalendar() {
+            const container = document.getElementById('calendar-container');
+
             try {
-                const response = await fetch(calendarUrl);
-                if (!response.ok) throw new Error("Fichier calendrier introuvable");
-                const text = await response.text();
-                
-                const container = document.getElementById('calendar-container');
+                const timeMin = new Date().toISOString();
+                const url = `https://www.googleapis.com/calendar/v3/calendars/${encodeURIComponent(CALENDAR_ID)}/events?key=${API_KEY}&singleEvents=true&orderBy=startTime&timeMin=${timeMin}&maxResults=15`; // Max 15 events ici
+
+                const response = await fetch(url);
+                if (!response.ok) throw new Error("Erreur API Google");
+
+                const data = await response.json();
+                const events = data.items;
+
                 container.innerHTML = '';
 
-                const lines = text.split('\n');
-                let hasEvents = false;
-
-                lines.forEach(line => {
-                    if (!line.trim()) return;
-
-                    const parts = line.split('|');
-                    if (parts.length >= 2) {
-                        hasEvents = true;
-                        const dateRaw = parts[0].trim();
-                        const title = parts[1].trim();
-                        const place = parts[2] ? parts[2].trim() : '';
-
-                        // Transformation Date
-                        const dateParts = dateRaw.split('/');
-                        const day = dateParts[0];
-                        const monthNum = dateParts[1];
-                        const monthName = monthMap[monthNum] || monthNum;
-
-                        const html = `
-                            <div class="bg-white p-4 rounded-xl shadow-sm border-l-4 border-patro-yellow hover:shadow-md transition flex items-start gap-4">
-                                <div class="flex-shrink-0 bg-gray-50 rounded-lg p-2 text-center min-w-[60px]">
-                                    <span class="block text-xs text-gray-500 font-bold uppercase">${monthName}</span>
-                                    <span class="block text-xl font-bold text-patro-dark">${day}</span>
-                                </div>
-                                <div>
-                                    <h3 class="font-bold text-gray-800 text-lg">${title}</h3>
-                                    ${place ? `<p class="text-sm text-gray-500 flex items-center gap-1 mt-1"><i data-lucide="map-pin" class="w-3 h-3"></i> ${place}</p>` : ''}
-                                </div>
-                            </div>
-                        `;
-                        container.innerHTML += html;
-                    }
-                });
-
-                if (!hasEvents) {
-                    container.innerHTML = '<p class="text-gray-500 italic">Aucune date prévue pour le moment.</p>';
+                if (!events || events.length === 0) {
+                    container.innerHTML = '<p class="text-gray-500 italic p-4 text-center">Aucune date prévue pour le moment.</p>';
+                    return;
                 }
+
+                events.forEach(event => {
+                    const start = event.start;
+                    const end = event.end;
+                    const title = event.summary;
+                    const place = event.location || '';
+                    const linkUrl = event.description && event.description.includes('http') ? event.description.match(/https?:\/\/[^\s]+/)[0] : '';
+
+                    // Date pour l'icône
+                    const dateObj = new Date(start.dateTime || start.date);
+                    const day = dateObj.getDate();
+                    const monthName = monthMap[dateObj.getMonth()];
+                    
+                    // Texte descriptif complet
+                    const dateString = formatPatroEventDate(start, end);
+
+                    const innerContent = `
+                            <div class="flex-shrink-0 bg-gray-50 rounded-lg p-2 text-center min-w-[60px] self-center">
+                                <span class="block text-xs text-gray-500 font-bold uppercase">${monthName}</span>
+                                <span class="block text-xl font-bold text-patro-dark">${day}</span>
+                            </div>
+                            <div class="flex-grow">
+                                <h3 class="font-bold text-gray-800 text-lg group-hover:text-patro-green transition">${title}</h3>
+                                <p class="text-sm text-patro-green font-medium mb-1"><i data-lucide="clock" class="w-3 h-3 inline"></i> ${dateString}</p>
+                                ${place ? `<p class="text-sm text-gray-500 flex items-center gap-1"><i data-lucide="map-pin" class="w-3 h-3"></i> ${place}</p>` : ''}
+                            </div>
+                    `;
+                    
+                    let html = '';
+                    // Classe de base (avec border jaune sur le côté)
+                    const baseClass = "bg-white p-4 rounded-xl shadow-sm border-l-4 border-patro-yellow hover:shadow-md transition flex items-start gap-4 group";
+
+                    if (linkUrl) {
+                        html = `<a href="${linkUrl}" target="_blank" class="${baseClass} cursor-pointer block text-left decoration-0">${innerContent}</a>`;
+                    } else {
+                        html = `<div class="${baseClass}">${innerContent}</div>`;
+                    }
+
+                    container.innerHTML += html;
+                });
                 
                 if(typeof lucide !== 'undefined') lucide.createIcons();
 
             } catch (error) {
                 console.error(error);
-                document.getElementById('calendar-container').innerHTML = 
-                    '<div class="bg-red-50 text-red-500 p-4 rounded-lg text-sm">Impossible de charger le calendrier.</div>';
+                container.innerHTML = `
+                    <div class="bg-red-50 text-red-500 p-4 rounded-lg text-sm text-center">
+                        Impossible de charger le calendrier.<br>
+                        <a href="https://calendar.google.com/calendar/embed?src=${CALENDAR_ID}" target="_blank" class="underline mt-2 inline-block">Voir sur Google Agenda</a>
+                    </div>`;
             }
         }
 
@@ -180,6 +228,7 @@
         .prose ul { list-style-type: disc; padding-left: 1.5em; margin-bottom: 1em; color: #4b5563; }
         .prose li { margin-bottom: 0.3em; }
         .prose blockquote { border-left: 4px solid var(--patro-yellow); padding-left: 1em; font-style: italic; background: #fffbeb; padding: 1em; border-radius: 0 8px 8px 0; }
+        .prose a { color: var(--patro-green); text-decoration: underline; font-weight: bold; }
     </style>
 </body>
 </html>
