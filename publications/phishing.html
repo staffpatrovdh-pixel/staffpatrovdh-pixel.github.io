@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sécurité & phishing | Patro du Val d'Haine</title>
+    
+    <!-- Note : Les chemins remontent d'un niveau avec "../" car on est dans le dossier /publications/ -->
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Fredoka:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Script Layout (Chemin adapté) -->
+    <script src="../layout.js?v=11.5"></script>
+
+    <script>
+        tailwind.config = { 
+            theme: { 
+                extend: { 
+                    colors: { 
+                        patro: { 
+                            yellow: '#FFD700', 
+                            green: '#009045', 
+                            dark: '#1a1a1a', 
+                            light: '#f8fafc' 
+                        } 
+                    }, 
+                    fontFamily: { 
+                        sans: ['Poppins', 'sans-serif'], 
+                        display: ['Fredoka', 'sans-serif'], 
+                        handwritten: ['Indie Flower', 'cursive'] 
+                    }
+                } 
+            } 
+        }
+    </script>
+</head>
+<body class="font-sans text-slate-700 bg-slate-100 antialiased overflow-x-hidden">
+
+    <!-- Global Elements -->
+    <div id="custom-cursor" class="hidden md:block"></div>
+    <div id="loader"><div class="spinner mb-4"></div><p class="text-patro-green font-bold font-display animate-pulse">Chargement...</p></div>
+    <div id="navbar-placeholder"></div>
+
+    <!-- Main Container : Style "Feuille de papier / Wiki" -->
+    <main class="max-w-5xl mx-auto my-8 md:my-12 bg-white shadow-sm border border-slate-200 rounded-lg overflow-hidden">
+        
+        <!-- Header Officiel -->
+        <header class="bg-slate-900 text-white px-8 py-10 md:px-12 md:py-12 border-b-4 border-patro-green relative overflow-hidden">
+            <!-- Filigrane discret -->
+            <div class="absolute top-0 right-0 p-8 opacity-5 pointer-events-none">
+                <i data-lucide="shield" class="w-64 h-64"></i>
+            </div>
+
+            <div class="relative z-10">
+                <div class="flex items-center gap-2 text-patro-yellow text-sm font-semibold tracking-wider uppercase mb-3">
+                    <i data-lucide="lock" class="w-4 h-4"></i>
+                    Centre de ressources • Sécurité
+                </div>
+                <h1 class="text-3xl md:text-4xl font-bold mb-4 leading-tight">
+                    Prévention contre le phishing
+                </h1>
+                <p class="text-lg text-slate-300 max-w-2xl font-light">
+                    Guide officiel pour vous protéger contre le vol de données.
+                </p>
+            </div>
+        </header>
+
+        <!-- Corps du document -->
+        <div class="px-6 py-8 md:px-12 md:py-12 space-y-12">
+
+            <!-- Section 1: Définition (Style Note d'information) -->
+            <section>
+                <div class="flex items-start gap-4 p-6 bg-slate-50 border-l-4 border-blue-600 rounded-r-md">
+                    <div class="shrink-0 mt-1">
+                        <i data-lucide="info" class="w-6 h-6 text-blue-600"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-lg font-bold text-slate-900 mb-2">Définition : C'est quoi le phishing ?</h2>
+                        <p class="text-slate-700 leading-relaxed">
+                            C'est une arnaque en ligne où les fraudeurs se font passer pour une organisation de confiance (votre banque, l'école, un service de livraison, et étonnament des mouvements de jeunesse oui oui...) via un e-mail, un SMS ou un message WhatsApp.
+                            <br><br>
+                            <strong>Leur but ?</strong> Vous faire cliquer sur un lien bizzare ou vous faire encoder vos mots de passe et données bancaires sur un faux site.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 2: Les Indices (Style Documentation Grid) -->
+            <section>
+                <div class="flex items-center gap-3 mb-6 border-b border-slate-200 pb-4">
+                    <div class="bg-patro-green text-white p-2 rounded">
+                        <i data-lucide="search" class="w-5 h-5"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold text-slate-800">5 indices de détection</h2>
+                </div>
+                
+                <p class="mb-6 text-slate-600 italic">Voici les points de vigilance à vérifier avant de cliquer sur un lien.</p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    
+                    <!-- Indice 1 -->
+                    <article class="border border-slate-200 rounded p-5 hover:bg-slate-50 transition">
+                        <h4 class="font-bold text-slate-900 mb-2 flex items-center gap-2">
+                            <span class="bg-slate-200 text-slate-700 w-6 h-6 flex items-center justify-center rounded text-xs">1</span>
+                            L'expéditeur suspect
+                        </h4>
+                        <p class="text-sm text-slate-600">
+                            Ne regardez pas seulement le nom affiché ! Regardez <strong>l'adresse mail réelle</strong>. 
+                            <br><span class="block mt-2 text-xs bg-red-50 text-red-700 p-2 rounded font-mono">Exemple : "Patro" <info.patro@gmail.com></span>
+                        </p>
+                    </article>
+
+                    <!-- Indice 2 -->
+                    <article class="border border-slate-200 rounded p-5 hover:bg-slate-50 transition">
+                        <h4 class="font-bold text-slate-900 mb-2 flex items-center gap-2">
+                            <span class="bg-slate-200 text-slate-700 w-6 h-6 flex items-center justify-center rounded text-xs">2</span>
+                            L'urgence et la menace
+                        </h4>
+                        <p class="text-sm text-slate-600">
+                            "Votre compte va être bloqué !", "Payez sous 24h !". Les pirates jouent sur la panique.
+                            <br><strong>Note :</strong> Ni nous, ni aucune autre organisation ne vous menacera jamais comme ça par mail. Le téléphone ça existe ^^
+                        </p>
+                    </article>
+
+                    <!-- Indice 3 -->
+                    <article class="border border-slate-200 rounded p-5 hover:bg-slate-50 transition">
+                        <h4 class="font-bold text-slate-900 mb-2 flex items-center gap-2">
+                            <span class="bg-slate-200 text-slate-700 w-6 h-6 flex items-center justify-center rounded text-xs">3</span>
+                            Le lien bizarre
+                        </h4>
+                        <p class="text-sm text-slate-600">
+                            Passez votre souris sur le lien (sans cliquer !), et regarder le lien en bas à gauche de votre PC.
+                            <br><span class="block mt-2 text-xs bg-slate-100 p-2 rounded font-mono">bit.ly/k3j4... ≠ patrovaldhaine.be</span>
+                        </p>
+                    </article>
+
+                    <!-- Indice 4 -->
+                    <article class="border border-slate-200 rounded p-5 hover:bg-slate-50 transition">
+                        <h4 class="font-bold text-slate-900 mb-2 flex items-center gap-2">
+                            <span class="bg-slate-200 text-slate-700 w-6 h-6 flex items-center justify-center rounded text-xs">4</span>
+                            La demande de données
+                        </h4>
+                        <p class="text-sm text-slate-600">
+                            On ne vous demandera <strong>JAMAIS</strong> votre mot de passe, PIN ou codes bancaires par e-mail. Même pour "vérifier votre compte".
+                        </p>
+                    </article>
+
+                    <!-- Indice 5 -->
+                    <article class="border border-slate-200 rounded p-5 hover:bg-slate-50 transition md:col-span-2">
+                        <h4 class="font-bold text-slate-900 mb-2 flex items-center gap-2">
+                            <span class="bg-slate-200 text-slate-700 w-6 h-6 flex items-center justify-center rounded text-xs">5</span>
+                            Les fautes et le contexte
+                        </h4>
+                        <p class="text-sm text-slate-600">
+                            Les fautes d'orthographe grossières ou un mélange de langues sont suspects. 
+                            <br><em>Nuance :</em> Nous envoyons souvent des mails groupés ("Chers Parents"), ou avec des petites fautes de frappes involontaires ^^, ce n'est pas suspect ! Mais si un mail générique vous menace personnellement, c'est une arnaque.
+                        </p>
+                    </article>
+                </div>
+
+                <!-- Callout Conseil d'or -->
+                <div class="mt-6 bg-green-50 border border-green-200 text-green-900 px-6 py-4 rounded flex items-center gap-4">
+                    <i data-lucide="check-circle" class="w-6 h-6 text-green-600 shrink-0"></i>
+                    <div>
+                        <strong class="block text-green-700 font-bold">Le conseil d'or</strong>
+                        <span class="text-sm">Dans le doute, abstenez-vous ! N'ouvrez pas la pièce jointe, ne cliquez pas. Contactez l'expéditeur via un autre canal pour vérifier.</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 3: Canaux Officiels (Style Table/Liste) -->
+            <section>
+                <div class="flex items-center gap-3 mb-6 border-b border-slate-200 pb-4">
+                    <div class="bg-patro-yellow text-patro-dark p-2 rounded">
+                        <i data-lucide="shield-check" class="w-5 h-5"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold text-slate-800">Authentification - les canaux officiels</h2>
+                </div>
+
+                <div class="bg-white border border-slate-200 rounded-lg overflow-hidden">
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left text-sm">
+                            <thead class="bg-slate-50 border-b border-slate-200 text-slate-500 uppercase tracking-wider">
+                                <tr>
+                                    <th class="px-6 py-3 font-medium">Type</th>
+                                    <th class="px-6 py-3 font-medium">Détails de sécurité</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-200">
+                                <tr class="hover:bg-slate-50">
+                                    <td class="px-6 py-4 font-bold text-slate-900 flex items-center gap-2">
+                                        <i data-lucide="at-sign" class="w-4 h-4 text-slate-400"></i> Emails
+                                    </td>
+                                    <td class="px-6 py-4 text-slate-600">
+                                        Nos e-mails au Patro se terminent <strong>toujours</strong> par :
+                                        <ul class="list-disc list-inside mt-1 space-y-1">
+                                            <li><code class="bg-slate-100 px-1 rounded text-patro-green">@patrovaldhaine.be</code> Pour le staff</li>
+                                            <li><code class="bg-slate-100 px-1 rounded text-patro-green">@patro.be</code> Pour la Fédération ou notre mail générale</li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                                <tr class="hover:bg-slate-50">
+                                    <td class="px-6 py-4 font-bold text-slate-900 flex items-center gap-2">
+                                        <i data-lucide="credit-card" class="w-4 h-4 text-slate-400"></i> Paiements
+                                    </td>
+                                    <td class="px-6 py-4 text-slate-600">
+                                        Pas de lien bizarze ou pas de comptes étrangers.
+                                        Nos paiements passent exclusivement par <strong>SumUp</strong> ou par notre compte bancaire <strong>BE70 7320 7117 6025</strong>.
+                                    </td>
+                                </tr>
+                                <tr class="hover:bg-slate-50">
+                                    <td class="px-6 py-4 font-bold text-slate-900 flex items-center gap-2">
+                                        <i data-lucide="globe" class="w-4 h-4 text-slate-400"></i> Nos possibile sites Web
+                                    </td>
+                                    <td class="px-6 py-4 text-slate-600">
+                                        <a href="https://www.patrovaldhaine.be" class="text-blue-600 hover:underline">www.patrovaldhaine.be</a><br>
+                                        <a href="https://intranet.patrovaldhaine.be" class="text-blue-600 hover:underline">intranet.patrovaldhaine.be</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+
+        <!-- Footer d'action (Style Zone Danger/Contact) -->
+        <div class="bg-red-50 border-t border-red-100 p-8 md:p-12">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+                <div>
+                    <h3 class="text-xl font-bold text-red-800 flex items-center gap-2 mb-2">
+                        <i data-lucide="alert-triangle" class="w-5 h-5"></i>
+                        Signaler une tentative de phishing ou un incident
+                    </h3>
+                    <p class="text-red-700 text-sm max-w-lg">
+                        Vous avez reçu un message suspect ? Ne prenez aucun risque.
+                        <br><span class="text-xs opacity-75 mt-1 block">Si vous avez donné vos codes, appelez Card Stop (078 170 170).</span>
+                    </p>
+                </div>
+                
+                <div class="flex flex-col sm:flex-row gap-3">
+                    <a href="mailto:suspect@safeonweb.be" class="inline-flex items-center justify-center gap-2 px-4 py-2 bg-white border border-red-200 text-red-700 text-sm font-semibold rounded hover:bg-red-100 transition shadow-sm">
+                        <i data-lucide="forward" class="w-4 h-4"></i>
+                        Signalement Safeonweb
+                    </a>
+                    <a href="mailto:patrovaldhaine@patro.be" class="inline-flex items-center justify-center gap-2 px-4 py-2 bg-red-700 text-white text-sm font-semibold rounded hover:bg-red-800 transition shadow-sm">
+                        <i data-lucide="mail" class="w-4 h-4"></i>
+                        Contacter le staff
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Crédits (Style bas de page document) -->
+        <div class="bg-slate-100 px-8 py-4 border-t border-slate-200 text-center">
+            <p class="text-xs text-slate-500">
+                Sources :
+                <a href="https://www.dnsbelgium.be/fr/naviguer-sagement/5-conseils-phishing" target="_blank" class="text-slate-600 hover:text-slate-900 underline">DNS Belgium</a>
+                &
+                <a href="https://atwork.safeonweb.be/fr/tools-resources/phishing-ne-mordez-pas-lhamecon" target="_blank" class="text-slate-600 hover:text-slate-900 underline">Safeonweb.be</a>
+            </p>
+        </div>
+
+    </main>
+
+    <div id="footer-placeholder"></div>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
