@@ -255,6 +255,23 @@
         const newTabBtn = document.getElementById('preview-newtab');
 
         function openPreview(viewerUrl, directUrl, docName) {
+            // --- CORRECTION MOBILE ---
+            // Détection si c'est un appareil mobile
+            const isMobile = window.innerWidth < 1024 || /Mobi|Android/i.test(navigator.userAgent);
+            
+            // Vérification de l'extension pour voir si c'est une image
+            const ext = directUrl.split('.').pop().toLowerCase();
+            const isImage = ['jpg', 'jpeg', 'png', 'gif', 'webp'].includes(ext);
+
+            // ADAPTATION MOBILE :
+            // Si c'est un mobile et que ce n'est PAS une image, on ouvre directement dans un nouvel onglet
+            // pour utiliser la visionneuse native du téléphone (meilleure expérience).
+            if (isMobile && !isImage) {
+                window.open(directUrl, '_blank');
+                return;
+            }
+
+            // COMPORTEMENT CLASSIQUE (Desktop ou Image Mobile)
             frame.src = viewerUrl;
             title.textContent = docName;
             newTabBtn.href = directUrl;
