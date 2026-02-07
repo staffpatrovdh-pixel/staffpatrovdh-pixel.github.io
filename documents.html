@@ -8,7 +8,8 @@
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
-    <script src="layout.js?v=8"></script>
+    <!-- Mise à jour vers la dernière version du layout -->
+    <script src="layout.js?v=11.5"></script>
 
     <script>
         tailwind.config = { theme: { extend: { colors: { patro: { yellow: '#FFD700', green: '#009045', dark: '#1a1a1a', light: '#f8fafc' } }, fontFamily: { sans: ['Poppins', 'sans-serif'], display: ['Fredoka', 'sans-serif'] } } } }
@@ -176,13 +177,25 @@
                 // 2. RENDU DES FICHIERS
                 files.forEach(file => {
                     const cleanName = file.name.replace(/\.[^/.]+$/, "").replace(/[-_]/g, " ");
-                    // Format: "Texte en minuscule sauf le premier"
                     const displayName = cleanName.charAt(0).toUpperCase() + cleanName.slice(1).toLowerCase();
                     
                     const info = getFileInfo(file.name);
                     const cleanUrl = `${window.location.origin}/${file.path}`; 
-                    const isImage = info.type === 'IMAGE';
-                    const viewerUrl = isImage ? cleanUrl : `https://docs.google.com/gview?url=${encodeURIComponent(cleanUrl)}&embedded=true`;
+                    
+                    // --- MODIFICATION : Logique de prévisualisation SANS Google ---
+                    const ext = file.name.split('.').pop().toLowerCase();
+                    let viewerUrl;
+
+                    if (['pdf', 'jpg', 'jpeg', 'png', 'gif', 'webp', 'txt'].includes(ext)) {
+                        // NATIF : Le navigateur gère le PDF ou l'image
+                        viewerUrl = cleanUrl;
+                    } else if (['doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx'].includes(ext)) {
+                        // OFFICE : Utilisation du lecteur Microsoft (standard, pas Google)
+                        viewerUrl = `https://view.officeapps.live.com/op/embed.aspx?src=${encodeURIComponent(cleanUrl)}`;
+                    } else {
+                        // AUTRES : On tente le lien direct (téléchargement probable)
+                        viewerUrl = cleanUrl;
+                    }
 
                     html += `
                         <div class="group bg-white rounded-xl p-5 shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 ${info.border} flex flex-col items-start transform hover:-translate-y-1 relative overflow-hidden">
@@ -195,7 +208,6 @@
                                 <span class="text-[10px] font-bold ${info.color} bg-white border border-gray-100 shadow-sm px-2 py-1 rounded uppercase tracking-wider">${info.type}</span>
                             </div>
                             
-                            <!-- Suppression de la classe capitalize -->
                             <h3 class="font-bold text-gray-800 mb-4 text-base line-clamp-2 leading-tight h-10 w-full" title="${displayName}">${displayName}</h3>
                             
                             <div class="mt-auto w-full grid grid-cols-2 gap-2">
