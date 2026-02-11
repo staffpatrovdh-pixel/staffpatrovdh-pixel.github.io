@@ -3,3 +3,4 @@ Fédération Nationale des Patros | donnees-site/logos_sponsors/Logo_FNP.png | h
 Fédération Wallonie-Bruxelles | donnees-site/logos_sponsors/Logo_FWB.png | https://servicejeunesse.cfwb.be
 Office de la Naissance et de l'Enfance | donnees-site/logos_sponsors/Logo_ONE.png | https://one.be
 Unité Pastorale du Val d'Haine | donnees-site/logos_sponsors/Logo_UPValDhaine.png | https://upvaldhaine.be
+Coulicoucou | donnees-site/logos_sponsors/logo-coulicoucou.png | https://www.facebook.com/profile.php?id=61564834937201
