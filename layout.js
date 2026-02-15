@@ -111,10 +111,13 @@ document.addEventListener("DOMContentLoaded", function () {
                     <span class="hidden md:inline">•</span>
                     <a href="/legal.html" class="hover:text-white transition">Mentions légales</a>
                     <span class="hidden md:inline">•</span>
-                    <a href="/cookies.html" class="hover:text-white transition">Politique Cookies</a>
+                    <a href="/cookies.html" class="hover:text-white transition">Politique des cookies</a>
                     <span class="hidden md:inline">•</span>
-                    <a href="https://portail.patrovaldhaine.be" class="flex items-center gap-1 text-patro-yellow hover:text-white transition font-medium" title="Espace Parents">
+                    <a href="https://parent.patrovaldhaine.be/" class="flex items-center gap-1 text-patro-yellow hover:text-white transition font-medium" title="Espace Parents">
                         <i data-lucide="circle-user-round" class="w-3 h-3"></i> Espace Parents
+                    <span class="hidden md:inline">•</span>
+                    <a href="https://intranet.patrovaldhaine.be" class="flex items-center gap-1 text-patro-yellow hover:text-white transition font-medium" title="Intranet animateur">
+                        <i data-lucide="database" class="w-3 h-3"></i> Intranet animateur
                     </a>
                 </div>
             </div>
