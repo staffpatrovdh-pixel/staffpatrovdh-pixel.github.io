@@ -137,6 +137,45 @@
         </div>
     </section>
 
+    <!-- NOUVEAU BLOC : CHIFFRES CLÉS (Style Minimaliste & Épuré) -->
+    <section class="py-16 bg-white relative z-20 border-y border-gray-100" id="chiffres-cles">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <span class="font-handwritten text-2xl text-patro-yellow mb-2 block">Un petit résumé</span>
+                <h2 class="text-3xl md:text-4xl font-display font-bold text-gray-900">Notre Patro c'est...</h2>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-12 text-center">
+                <!-- Compteur 1 -->
+                <div class="flex flex-col items-center group">
+                    <div class="w-16 h-16 bg-green-50 rounded-full flex items-center justify-center text-patro-green mb-4 group-hover:scale-110 transition-transform duration-300">
+                        <i data-lucide="users" class="w-8 h-8"></i>
+                    </div>
+                    <div class="text-5xl md:text-6xl font-display font-black text-gray-900 mb-2 counter-value" data-target="55">0</div>
+                    <div class="text-gray-500 font-bold uppercase tracking-widest text-sm">Membres inscrits</div>
+                </div>
+                
+                <!-- Compteur 2 -->
+                <div class="flex flex-col items-center group">
+                    <div class="w-16 h-16 bg-yellow-50 rounded-full flex items-center justify-center text-patro-yellow mb-4 group-hover:scale-110 transition-transform duration-300">
+                        <i data-lucide="shield-check" class="w-8 h-8"></i>
+                    </div>
+                    <div class="text-5xl md:text-6xl font-display font-black text-gray-900 mb-2 counter-value" data-target="16">0</div>
+                    <div class="text-gray-500 font-bold uppercase tracking-widest text-sm">Animateurs & Accompagnateurs</div>
+                </div>
+                
+                <!-- Compteur 3 -->
+                <div class="flex flex-col items-center group">
+                    <div class="w-16 h-16 bg-gray-50 rounded-full flex items-center justify-center text-gray-400 mb-4 group-hover:scale-110 transition-transform duration-300">
+                        <i data-lucide="calendar-heart" class="w-8 h-8"></i>
+                    </div>
+                    <div class="text-5xl md:text-6xl font-display font-black text-gray-900 mb-2 counter-value" data-target="8">0</div>
+                    <div class="text-gray-500 font-bold uppercase tracking-widest text-sm">Ans d'existence</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Presentation Textes Officiels (Version Dynamique) -->
     <section class="py-20 bg-patro-light overflow-hidden">
         <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -195,7 +234,7 @@
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Poussins (VERT) -->
+                <!-- Poussins -->
                 <div class="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 bg-green-50 border border-green-100 p-8 text-center">
                     <div class="w-20 h-20 mx-auto rounded-full overflow-hidden mb-4 shadow-md">
                         <img src="donnees-site/illustrations/ecussons/ecusson_poussins.jpg" alt="Écusson Poussins" class="w-full h-full object-cover">
@@ -203,8 +242,7 @@
                     <h4 class="text-2xl font-display font-bold text-gray-800 mb-2">Poussins</h4>
                     <span class="inline-block px-3 py-1 bg-green-600 text-white text-xs font-bold rounded-full mb-4">4 - 6 ANS</span>
                 </div>
-                
-                <!-- Benjamins (JAUNE) -->
+                <!-- Benjamins -->
                 <div class="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 bg-yellow-50 border border-yellow-100 p-8 text-center">
                     <div class="w-20 h-20 mx-auto rounded-full overflow-hidden mb-4 shadow-md">
                         <img src="donnees-site/illustrations/ecussons/ecusson_benja.jpg" alt="Écusson Benjamins" class="w-full h-full object-cover">
@@ -212,8 +250,7 @@
                     <h4 class="text-2xl font-display font-bold text-gray-800 mb-2">Benjamins</h4>
                     <span class="inline-block px-3 py-1 bg-yellow-400 text-gray-900 text-xs font-bold rounded-full mb-4">6 - 9 ANS</span>
                 </div>
-                
-                <!-- Chevaliers (ORANGE) -->
+                <!-- Chevaliers -->
                 <div class="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 bg-orange-50 border border-orange-100 p-8 text-center">
                     <div class="w-20 h-20 mx-auto rounded-full overflow-hidden mb-4 shadow-md">
                         <img src="donnees-site/illustrations/ecussons/ecusson_chev:etin.jpg" alt="Écusson Chevaliers/Étincelles" class="w-full h-full object-cover">
@@ -221,8 +258,7 @@
                     <h4 class="text-2xl font-display font-bold text-gray-800 mb-2">Chevaliers / Étincelles</h4>
                     <span class="inline-block px-3 py-1 bg-orange-500 text-white text-xs font-bold rounded-full mb-4">9 - 12 ANS</span>
                 </div>
-                
-                <!-- Conquérants (ROSE/MAGENTA) -->
+                <!-- Conquérants -->
                 <div class="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 bg-pink-50 border border-pink-100 p-8 text-center">
                     <div class="w-20 h-20 mx-auto rounded-full overflow-hidden mb-4 shadow-md">
                         <img src="donnees-site/illustrations/ecussons/ecusson_alpine:conq.jpg" alt="Écusson Conquérants/Alpines" class="w-full h-full object-cover">
@@ -230,8 +266,7 @@
                     <h4 class="text-2xl font-display font-bold text-gray-800 mb-2">Conquérants / Alpines</h4>
                     <span class="inline-block px-3 py-1 bg-pink-500 text-white text-xs font-bold rounded-full mb-4">12 - 14 ANS</span>
                 </div>
-                
-                <!-- Aventuriers (MAUVE) -->
+                <!-- Aventuriers -->
                 <div class="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 bg-purple-50 border border-purple-100 p-8 text-center">
                     <div class="w-20 h-20 mx-auto rounded-full overflow-hidden mb-4 shadow-md">
                         <img src="donnees-site/illustrations/ecussons/ecusson_aventuriers.jpg" alt="Écusson Aventuriers" class="w-full h-full object-cover">
@@ -239,8 +274,7 @@
                     <h4 class="text-2xl font-display font-bold text-gray-800 mb-2">Aventuriers</h4>
                     <span class="inline-block px-3 py-1 bg-purple-600 text-white text-xs font-bold rounded-full mb-4">14 - 16 ANS</span>
                 </div>
-                
-                <!-- Animateurs (Inchangé - Noir/Jaune) -->
+                <!-- Animateurs -->
                 <div class="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 bg-gray-800 text-white p-8 text-center">
                     <div class="w-16 h-16 mx-auto bg-white/20 rounded-full flex items-center justify-center text-patro-yellow mb-4"><i data-lucide="star" class="w-8 h-8"></i></div>
                     <h4 class="text-2xl font-display font-bold text-white mb-2">Animateurs</h4>
@@ -340,9 +374,48 @@
 
     <div id="footer-placeholder"></div>
 
-    <!-- SCRIPT CALENDRIER GOOGLE & MÉTÉO -->
+    <!-- SCRIPT CALENDRIER GOOGLE & MÉTÉO & COMPTEURS -->
     <script>
-        // --- CONFIGURATION MÉTÉO (INCHANGÉ) ---
+        // --- ANIMATION DES COMPTEURS ---
+        function runCounters() {
+            const counters = document.querySelectorAll('.counter-value');
+            const speed = 100; // Vitesse de l'animation (plus c'est bas, plus c'est rapide)
+
+            counters.forEach(counter => {
+                const animate = () => {
+                    const target = +counter.getAttribute('data-target');
+                    const count = +counter.innerText;
+                    const inc = target / speed;
+
+                    if (count < target) {
+                        counter.innerText = Math.ceil(count + inc);
+                        setTimeout(animate, 20);
+                    } else {
+                        counter.innerText = target;
+                    }
+                };
+                animate();
+            });
+        }
+
+        // Intersection Observer pour lancer l'animation quand on scrolle sur la section
+        document.addEventListener('DOMContentLoaded', () => {
+            const counterSection = document.getElementById('chiffres-cles');
+            if (counterSection) {
+                const observer = new IntersectionObserver((entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            runCounters();
+                            observer.unobserve(entry.target); // Ne lance l'animation qu'une seule fois
+                        }
+                    });
+                }, { threshold: 0.5 }); // Se déclenche quand 50% de la section est visible
+                observer.observe(counterSection);
+            }
+        });
+
+
+        // --- CONFIGURATION MÉTÉO ---
         async function loadSundayWeather() {
             try {
                 // Lat: 50.4565, Long: 4.097, Timezone: Europe/Berlin
@@ -431,7 +504,7 @@
                     
                     document.getElementById('weather-loader').style.display = 'none';
                     container.classList.remove('hidden');
-                    lucide.createIcons();
+                    if(typeof lucide !== 'undefined') lucide.createIcons();
                 } else {
                     throw new Error('Dimanche introuvable');
                 }
@@ -442,14 +515,8 @@
             }
         }
 
-        // --- NOUVELLE CONFIGURATION CALENDRIER GOOGLE ---
-        
-        // 1. ID de votre agenda (public)
+        // --- CONFIGURATION CALENDRIER GOOGLE ---
         const CALENDAR_ID = 'staff.patrovdh@gmail.com'; 
-        
-        // 2. IMPORTANT : VOUS DEVEZ METTRE VOTRE CLÉ API GOOGLE ICI
-        // Sans cette clé, Google refusera d'envoyer les données à votre site.
-        // Tuto rapide : Google Cloud Console -> New Project -> Enable Google Calendar API -> Credentials -> Create API Key
         const API_KEY = 'AIzaSyDA0jGeq43fHI30WeY126gBf82gVYSfV48'; 
 
         const monthMap = {
@@ -457,13 +524,11 @@
             6: 'Juil', 7: 'Août', 8: 'Sept', 9: 'Oct', 10: 'Nov', 11: 'Déc'
         };
 
-        // Fonction pour formater les dates proprement (multijours, heures, etc.)
         function formatPatroEventDate(start, end) {
             const startDate = new Date(start.dateTime || start.date);
             const endDate = new Date(end.dateTime || end.date);
-            const isAllDay = !start.dateTime; // Si pas de 'dateTime', c'est 'date' (journée entière)
+            const isAllDay = !start.dateTime; 
 
-            // Ajustement fin de date pour les événements "Toute la journée" (Google met la date de fin à J+1 00:00)
             if (isAllDay) {
                 endDate.setDate(endDate.getDate() - 1);
             }
@@ -475,41 +540,34 @@
             const optionsDay = { day: 'numeric', month: 'long' };
             const optionsTime = { hour: '2-digit', minute: '2-digit' };
 
-            // Cas 1 : Toute la journée, 1 seul jour
             if (isAllDay && isSameDay) {
                 return `Le ${startDate.toLocaleDateString('fr-FR', optionsDay)}`;
             }
-            // Cas 2 : Toute la journée, plusieurs jours (Camp, WE)
             if (isAllDay && !isSameDay) {
                 return `Du ${startDate.toLocaleDateString('fr-FR', optionsDay)} au ${endDate.toLocaleDateString('fr-FR', optionsDay)}`;
             }
-            // Cas 3 : Heures précises, même jour (Réunion normale)
             if (!isAllDay && isSameDay) {
                 return `Le ${startDate.toLocaleDateString('fr-FR', optionsDay)} de ${startDate.toLocaleTimeString('fr-FR', optionsTime)} à ${endDate.toLocaleTimeString('fr-FR', optionsTime)}`;
             }
-            // Cas 4 : Heures précises, plusieurs jours (Hike)
             return `Du ${startDate.toLocaleDateString('fr-FR', optionsDay)} (${startDate.toLocaleTimeString('fr-FR', optionsTime)}) au ${endDate.toLocaleDateString('fr-FR', optionsDay)} (${endDate.toLocaleTimeString('fr-FR', optionsTime)})`;
         }
 
         document.addEventListener('DOMContentLoaded', async () => {
-            loadSundayWeather(); // Météo
+            loadSundayWeather(); 
 
             const container = document.getElementById('home-calendar-container');
 
-            // Vérification simple de sécurité pour la clé API
-            if (API_KEY === 'VOTRE_CLE_API_GOOGLE_ICI') {
+            if (API_KEY === 'AIzaSyDA0jGeq43fHI30WeY126gBf82gVYSfV48') {
                 container.innerHTML = `
                     <div class="text-red-500 text-sm p-4 bg-red-50 rounded-lg border border-red-200">
                         <strong>Configuration requise :</strong><br>
-                        Il manque la Clé API Google dans le code (ligne ~403).<br>
-                        <a href="https://developers.google.com/calendar/api/guides/create-project" target="_blank" class="underline">Comment créer une clé API ?</a>
+                        Il manque la Clé API Google dans le code.<br>
                     </div>`;
                 return;
             }
 
             try {
-                // URL de l'API Google Calendar v3
-                const timeMin = new Date().toISOString(); // Seulement les événements futurs
+                const timeMin = new Date().toISOString(); 
                 const url = `https://www.googleapis.com/calendar/v3/calendars/${encodeURIComponent(CALENDAR_ID)}/events?key=${API_KEY}&singleEvents=true&orderBy=startTime&timeMin=${timeMin}&maxResults=10`;
 
                 const response = await fetch(url);
@@ -534,12 +592,10 @@
                         const place = event.location || '';
                         const linkUrl = event.description && event.description.includes('http') ? event.description.match(/https?:\/\/[^\s]+/)[0] : '';
                         
-                        // Extraction Date pour le Carré Jaune (Toujours la date de début)
                         const dateObj = new Date(start.dateTime || start.date);
                         const dayNum = dateObj.getDate();
                         const monthName = monthMap[dateObj.getMonth()];
 
-                        // Texte de description de la date (ex: "Du 20 au 22...")
                         const dateString = formatPatroEventDate(start, end);
 
                         const innerContent = `
