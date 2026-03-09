@@ -34,14 +34,6 @@ Envoyez un e-mail directement à notre équipe technique à l'adresse : patroval
 
 Merci de fournir autant de détails que possible (description, étapes pour reproduire le bug, captures d'écran).
 
-Notre engagement :
-
-Nous accuserons réception de votre rapport dans les 48 à 72 heures.
-
-Nous vous tiendrons informé de l'avancement de la correction.
-
-Une fois la faille corrigée, nous vous créditerons (si vous le souhaitez) pour votre aide.
-
 🇬🇧 English
 
 Supported Versions
@@ -73,11 +65,3 @@ How to report:
 Please send an email directly to our tech team at: patrovaldhaine@patro.be
 
 Please provide as much detail as possible (description, steps to reproduce, screenshots).
-
-Our commitment:
-
-We will acknowledge receipt of your report within 48 to 72 hours.
-
-We will keep you updated on the progress of the fix.
-
-Once resolved, we will credit you (if desired) for your contribution to our security.
