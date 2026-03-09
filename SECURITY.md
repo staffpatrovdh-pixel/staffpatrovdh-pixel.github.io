@@ -8,6 +8,8 @@ Versions Supportées
 
 Le site du Patro du Val d'Haine étant un site web statique hébergé sur GitHub Pages, nous assurons uniquement la maintenance et la sécurité de la version actuellement en ligne.
 
+Avertissement : Les éventuelles clés API exposées sont strictement limitées à nos domaines. Toute tentative de connexion non autorisée via ces clés entraînera le bannissement (blacklist) de votre adresse IP et sera signalée.
+
 Version
 
 Statut de Support
@@ -26,7 +28,7 @@ La sécurité de notre site et des données de nos membres est une priorité. Si
 
 Procédure de signalement :
 
-Ne créez pas d'Issue publique sur GitHub pour signaler une faille sensible.
+⚠️ Ne créez pas d'Issue publique sur GitHub pour signaler une faille sensible.
 
 Envoyez un e-mail directement à notre équipe technique à l'adresse : patrovaldhaine@patro.be
 
@@ -46,6 +48,8 @@ Supported Versions
 
 As the "Patro du Val d'Haine" website is a static site hosted on GitHub Pages, we only provide security support for the version currently deployed.
 
+Warning: Any exposed API keys are strictly restricted to our domains. Any unauthorized attempt to connect using these keys will result in your IP address being blacklisted and the incident will be reported.
+
 Version
 
 Support Status
@@ -64,7 +68,7 @@ We take the security of our website and our members' data seriously. If you disc
 
 How to report:
 
-Do NOT open a public Issue on GitHub for sensitive vulnerabilities.
+⚠️ Do NOT open a public Issue on GitHub for sensitive vulnerabilities.
 
 Please send an email directly to our tech team at: patrovaldhaine@patro.be
 
