@@ -46,7 +46,7 @@
                 </div>
             </div>
 
-            <!-- 2. Infrastructure & Hébergement (MISE À JOUR) -->
+            <!-- 2. Infrastructure & Hébergement (MISE À JOUR OVH) -->
             <div class="bg-white p-8 rounded-2xl shadow-sm border-l-4 border-patro-green">
                 <h2 class="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
                     <i data-lucide="server" class="w-5 h-5 text-patro-green"></i>
@@ -56,7 +56,7 @@
                     
                     <div>
                         <h3 class="font-bold text-gray-800 mb-1">A. Site web (www.patrovaldhaine.be)</h3>
-                        <p>Notre site d'information public (celui sur lequel vous naviguez actuellement) est hébergé de manière sécurisée chez <strong>GitHub</strong>.</p>
+                        <p>Notre site d'information public (celui sur lequel vous naviguez actuellement) est hébergé de manière sécurisée par <strong>OVHCloud SAS</strong> (2 rue Kellermann, 59100 Roubaix, France).</p>
                     </div>
 
                     <div class="bg-blue-50 p-4 rounded-lg border border-blue-100">
@@ -89,7 +89,7 @@
                 
                 <h4 class="font-bold text-gray-700 text-sm mb-2">Services tiers techniques :</h4>
                 <ul class="list-disc pl-5 space-y-2 text-sm text-gray-600 mb-4">
-                    <li><strong>GitHub :</strong> Assure la distribution et disponibilité du site public</li>
+                    <li><strong>OVHCloud :</strong> Assure l'hébergement et la disponibilité du site public.</li>
                     <li><strong>Cloudflare :</strong> Cookies de sécurité stricts pour distinguer les visiteurs humains des cyberattaques</li>
                     <li><strong>Ressources graphiques :</strong> Pour un affichage correct, le site charge des ressources depuis <em>fonts.googleapis.com</em> (Polices & typographies), <em>cdn.tailwindcss.com</em> (Design) et <em>unpkg.com</em> (Icônes).</li>
                 </ul>
@@ -188,5 +188,12 @@
     </section>
 
     <div id="footer-placeholder"></div>
+
+    <script>
+        // Initialisation de lucide pour le cas où layout.js ne s'en charge pas asynchrone
+        if (typeof lucide !== 'undefined') {
+            lucide.createIcons();
+        }
+    </script>
 </body>
 </html>
