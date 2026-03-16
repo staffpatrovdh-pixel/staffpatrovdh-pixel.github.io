@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contactez-nous ! | Patro du Val d'Haine</title>
+    
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="layout.js?v=8"></script>
+
+    <script>
+        tailwind.config = { 
+            theme: { 
+                extend: { 
+                    colors: { 
+                        patro: { yellow: '#FFD700', green: '#009045', dark: '#1a1a1a', light: '#f8fafc' } 
+                    }, 
+                    fontFamily: { 
+                        sans: ['Poppins', 'sans-serif'], 
+                        display: ['Fredoka', 'sans-serif'] 
+                    } 
+                } 
+            } 
+        }
+    </script>
+
+    <style>
+        /* Classes utilitaires pour les petites animations d'apparition */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="font-sans text-slate-800 bg-patro-light antialiased">
+
+    <div id="custom-cursor"></div>
+    <div id="navbar-placeholder"></div>
+
+    <!-- En-tête avec Image de Fond et Vague -->
+    <header class="relative pt-32 pb-24 md:pb-32 overflow-hidden bg-patro-green">
+        <div class="absolute inset-0 z-0">
+            <img src="donnees-site/photos-intranet/Connexion_espace_parent.png" alt="Contact Patro" class="w-full h-full object-cover opacity-20">
+            <div class="absolute inset-0 bg-gradient-to-t from-patro-green via-patro-green/80 to-transparent"></div>
+        </div>
+
+        <div class="max-w-4xl mx-auto px-4 text-center relative z-20 text-white reveal active">
+            <span class="inline-flex items-center gap-2 px-4 py-1.5 bg-patro-yellow text-patro-dark font-bold rounded-full text-sm mb-6 shadow-sm">
+                <i data-lucide="hand" class="w-4 h-4"></i> Toujours à l'écoute !
+            </span>
+            <h1 class="text-4xl md:text-6xl font-display font-bold mb-4 drop-shadow-lg">Contactez-nous</h1>
+            <p class="text-green-50 mt-4 text-lg md:text-xl max-w-2xl mx-auto font-light">
+                Une question sur les inscriptions, le staff ou nos activités ? Envoyez-nous un message ou contactez directement l'animateur concerné.
+            </p>
+        </div>
+
+        <!-- Vague de transition (SVG) -->
+        <div class="absolute bottom-0 left-0 right-0 w-full overflow-hidden leading-none z-20">
+            <svg class="relative block w-full h-[50px] md:h-[80px]" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V120H0V95.8C59.71,118.08,130.83,115.1,188.47,99.16,234.37,86.43,280.89,64.84,321.39,56.44Z" fill="#f8fafc"></path>
+            </svg>
+        </div>
+    </header>
+
+    <main class="w-full relative z-30 -mt-8 md:-mt-12">
+        <div class="max-w-7xl mx-auto px-4 pb-20">
+            
+            <!-- SECTION : NOTRE ÉQUIPE -->
+            <div class="text-center mb-16 reveal">
+                <span class="text-patro-green font-bold tracking-widest uppercase text-sm mb-2 block">Le Staff</span>
+                <h2 class="text-4xl md:text-5xl font-display font-bold text-slate-800">Rencontrez notre équipe</h2>
+                <div class="w-24 h-1.5 bg-patro-yellow mx-auto mt-6 rounded-full"></div>
+            </div>
+
+            <!-- Sous-section ANIMATEURS -->
+            <section class="mb-20 reveal">
+                <div class="flex items-center gap-4 mb-8">
+                    <div class="p-3 bg-patro-green text-white rounded-xl shadow-md">
+                        <i data-lucide="tent" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-3xl font-display font-bold text-slate-800">L'équipe d'animation</h3>
+                </div>
+                
+                <div id="staff-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8">
+                    <!-- Rempli par JS -->
+                </div>
+            </section>
+
+            <!-- Sous-section ADULTES -->
+            <section class="mb-24 reveal">
+                <div class="flex items-center gap-4 mb-8">
+                    <div class="p-3 bg-patro-yellow text-patro-dark rounded-xl shadow-md">
+                        <i data-lucide="shield-check" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-3xl font-display font-bold text-slate-800">Accompagnateurs & intendants</h3>
+                </div>
+                
+                <div id="adults-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8">
+                    <!-- Rempli par JS -->
+                </div>
+            </section>
+
+            <!-- SECTION PRINCIPALE : INFOS & FORMULAIRE -->
+            <section class="grid grid-cols-1 lg:grid-cols-12 gap-8 relative reveal">
+                
+                <!-- Colonne de gauche : Infos générales (Sticky sur PC) -->
+                <div class="lg:col-span-4 lg:sticky lg:top-32 h-fit space-y-6">
+                    <div class="bg-white p-8 rounded-[2rem] shadow-lg border border-gray-100 relative overflow-hidden">
+                        <!-- Décoration fond -->
+                        <div class="absolute -right-10 -top-10 w-32 h-32 bg-patro-yellow/10 rounded-full blur-2xl"></div>
+                        
+                        <h2 class="text-3xl font-display font-bold text-patro-green mb-6">Parlons-en !</h2>
+                        <p class="text-slate-600 mb-8 leading-relaxed">
+                            N'hésitez pas à nous envoyer un message via le formulaire. Nous essayons de répondre dans les plus brefs délais.
+                        </p>
+
+                        <div class="space-y-6">
+                            <div class="flex items-start gap-4 group">
+                                <div class="w-12 h-12 rounded-full bg-green-50 text-patro-green flex items-center justify-center shrink-0 group-hover:bg-patro-green group-hover:text-white transition-colors duration-300">
+                                    <i data-lucide="mail" class="w-6 h-6"></i>
+                                </div>
+                                <div>
+                                    <p class="text-sm font-bold text-slate-400 uppercase tracking-wider">Email Général</p>
+                                    <a href="mailto:patrovaldhaine@patro.be" class="text-lg font-medium text-slate-800 hover:text-patro-green transition-colors break-all">
+                                        patrovaldhaine@patro.be
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start gap-4 group">
+                                <div class="w-12 h-12 rounded-full bg-yellow-50 text-patro-dark flex items-center justify-center shrink-0 group-hover:bg-patro-yellow transition-colors duration-300">
+                                    <i data-lucide="map-pin" class="w-6 h-6"></i>
+                                </div>
+                                <div>
+                                    <p class="text-sm font-bold text-slate-400 uppercase tracking-wider">Notre Local</p>
+                                    <p class="text-lg font-medium text-slate-800">
+                                        Place du Val d'Haine<br>
+                                        <span class="text-slate-500 text-base">7100 La Louvière</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Colonne de droite : Formulaire Microsoft Forms -->
+                <div class="lg:col-span-8">
+                    <div class="bg-white rounded-[2rem] shadow-xl border border-gray-100 overflow-hidden relative">
+                        <!-- En-tête du formulaire -->
+                        <div class="bg-patro-green p-6 md:px-10 flex flex-col md:flex-row items-center justify-between gap-4">
+                            <div>
+                                <h3 class="text-xl md:text-2xl font-display font-bold text-white flex items-center gap-3">
+                                    <i data-lucide="send" class="w-6 h-6 text-patro-yellow"></i>
+                                    Envoyez-nous un message
+                                </h3>
+                            </div>
+                            <span class="px-3 py-1 bg-white/20 text-white rounded-full text-xs font-medium backdrop-blur-sm">
+                                Réponse rapide
+                            </span>
+                        </div>
+                        
+                        <!-- Iframe du formulaire -->
+                        <div class="relative w-full h-[800px] bg-slate-50 p-2 md:p-4">
+                            <iframe src="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=NPF7FFp5BESD9SwHoEWkdcDJwt4bhp5OotaWRfoTKWJUN0IwQ0xKUFIxTFdLUlRRQjROQjkxR0VaQi4u" 
+                                    class="w-full h-full rounded-2xl" 
+                                    frameborder="0" 
+                                    style="border:none;"
+                                    title="Formulaire de contact">
+                                Chargement...
+                            </iframe>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <div id="footer-placeholder"></div>
+
+    <script>
+        // LISTE DES ANIMATEURS
+        const staff = [
+            { mainName: "Nevala", subName: "Aurélie Bellon", role: "Présidente", fonction: "Poussins & Benjamins", tel: "0488/08.86.03", mail: "patrovaldhaine@patro.be", photo: "Nevala_(Aurelie).png" },
+            { mainName: "Choucas", subName: "Romain Meersman", role: "Vice-Président", fonction: "Alpines/Conquérants", tel: "0494/20.72.98", mail: "patrovaldhaine@patro.be", photo: "Choucas_(Romain).png" },
+            { mainName: "Duma", subName: "Jonathan Delmoitiez", role: "Trésorier", fonction: "Aventuriers", tel: "0468/08.92.86", mail: "patrovaldhaine@patro.be", photo: "Duma_(Jonathan).png" },
+            { mainName: "Logan", subName: "Logan Mahauden", role: "Chef de section", fonction: "Chevaliers/Étincelles", tel: "0472/28.21.23", mail: "patrovaldhaine@patro.be", photo: "Logan.png" },
+            { mainName: "Hyrax", subName: "Kelya", role: "Animatrice junior", fonction: "Poussins & Benjamins", tel: "", mail: "", photo: "Hyrax_(Kelya).png" },
+            { mainName: "Pomsky", subName: "Maëlia", role: "Animatrice junior", fonction: "Poussins & Benjamins", tel: "", mail: "", photo: "Pomsky_(Maelia).png" },
+            { mainName: "Wombat", subName: "Chloé Vrancx", role: "Aide animatrice", fonction: "Poussins & Benjamins", tel: "", mail: "", photo: "Wombat_(Chloe).png" },
+            { mainName: "Laura", subName: "Laura Bausier", role: "Animatrice", fonction: "Chevaliers/Étincelles", tel: "0492/93.54.57", mail: "", photo: "Laura.png" }
+        ];
+
+        // LISTE DES ADULTES & INTENDANTS
+        const adults = [
+            { mainName: "Kikaou", subName: "Marine Domecijn", role: "Resp. intendance", tel: "0479/84.02.55", mail: "marine@patrovaldhaine.be", photo: "Kikaou_(Marine).png" },
+            { mainName: "Yunbao", subName: "Alexiane", role: "Accompagnatrice", tel: "", mail: "", photo: "Yunbao_(Alexiane).png" },
+            { mainName: "Paca", subName: "Noéline", role: "Accompagnatrice", tel: "", mail: "", photo: "Noeline.JPEG" },
+            { mainName: "Nonius", subName: "Alessandro", role: "Accompagnateur", tel: "", mail: "", photo: "Nonius_(Alessandro).png" },
+            { mainName: "Monax", subName: "Elliot", role: "Accompagnateur", tel: "", mail: "", photo: "Monax_(Elliot).png" },
+            { mainName: "Okami", subName: "Charles", role: "Accompagnateur", tel: "", mail: "", photo: "Okami_(Charles).png" },
+            { mainName: "Gélada", subName: "Louison", role: "Accompagnateur", tel: "", mail: "", photo: "Gelada_(Louison).png" },
+            { mainName: "Laurine", subName: "Laurine", role: "Accompagnatrice", tel: "", mail: "", photo: "Laurine.png" },
+            { mainName: "Chaoui", subName: "Maëlie", role: "Intendante", tel: "", mail: "", photo: "Chaoui_(Maelie).png" },
+            { mainName: "Pavo", subName: "Lola", role: "Intendante", tel: "", mail: "", photo: "Pavo_(Lola).png" }
+        ];
+
+        // Fonction de création de carte avec le nouveau design
+        function createCard(member) {
+            const imgUrl = `donnees-site/photos-staff/${member.photo}`;
+            
+            // Éléments conditionnels
+            const roleBadge = member.role 
+                ? `<div class="absolute top-4 right-4 z-10 bg-patro-yellow text-patro-dark text-xs font-extrabold px-3 py-1.5 rounded-full shadow-lg transform transition-transform duration-300 group-hover:scale-110">${member.role}</div>` 
+                : '';
+                
+            const fonctionTag = member.fonction 
+                ? `<div class="inline-flex items-center justify-center gap-1.5 px-3 py-1.5 bg-green-50 text-patro-green text-xs font-bold rounded-full mb-3 shadow-sm border border-green-100"><i data-lucide="users" class="w-3.5 h-3.5"></i>${member.fonction}</div>` 
+                : '<div class="h-8 mb-3"></div>';
+
+            const phoneLine = member.tel 
+                ? `<a href="tel:${member.tel}" class="flex items-center gap-2.5 text-slate-600 hover:text-patro-green transition-colors py-1"><div class="p-1.5 bg-slate-100 rounded-lg text-slate-400 group-hover:bg-green-50 group-hover:text-patro-green transition-colors"><i data-lucide="phone" class="w-4 h-4"></i></div><span class="font-medium">${member.tel}</span></a>` 
+                : '';
+                
+            const mailLine = member.mail 
+                ? `<a href="mailto:${member.mail}" class="flex items-center gap-2.5 text-slate-600 hover:text-patro-green transition-colors py-1"><div class="p-1.5 bg-slate-100 rounded-lg text-slate-400 group-hover:bg-green-50 group-hover:text-patro-green transition-colors"><i data-lucide="mail" class="w-4 h-4"></i></div><span class="font-medium text-sm truncate" title="${member.mail}">${member.mail}</span></a>` 
+                : '';
+
+            const contactsHtml = (member.tel || member.mail) 
+                ? `<div class="mt-auto pt-4 border-t border-slate-100 space-y-1">${phoneLine}${mailLine}</div>`
+                : `<div class="mt-auto"></div>`;
+
+            return `
+            <div class="group bg-white rounded-[2rem] shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100 overflow-hidden flex flex-col relative reveal">
+                
+                ${roleBadge}
+
+                <!-- Container Image Carré -->
+                <div class="w-full aspect-square bg-slate-100 relative overflow-hidden">
+                    <img src="${imgUrl}" 
+                         alt="${member.mainName}" 
+                         class="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-110"
+                         onerror="this.src='https://placehold.co/600x600/eee/999?text=Photo+Manquante'">
+                    <!-- Overlay subtil au hover -->
+                    <div class="absolute inset-0 bg-patro-green/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                </div>
+
+                <!-- Corps de la carte -->
+                <div class="p-6 flex flex-col flex-grow relative bg-white">
+                    <div class="text-center mb-4">
+                        <h3 class="text-2xl font-display font-bold text-slate-800 group-hover:text-patro-green transition-colors">${member.mainName}</h3>
+                        <p class="text-slate-500 text-sm font-medium mt-0.5">${member.subName}</p>
+                    </div>
+                    
+                    <div class="text-center w-full">
+                        ${fonctionTag}
+                    </div>
+                    
+                    <!-- Contacts -->
+                    ${contactsHtml}
+                </div>
+            </div>`;
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Remplissage des grilles
+            const staffGrid = document.getElementById('staff-grid');
+            const adultsGrid = document.getElementById('adults-grid');
+            
+            staffGrid.innerHTML = staff.map(createCard).join('');
+            adultsGrid.innerHTML = adults.map(createCard).join('');
+            
+            // Initialisation des icônes Lucide
+            lucide.createIcons();
+
+            // Script pour l'animation au défilement (Scroll Reveal)
+            const revealElements = document.querySelectorAll('.reveal');
+            
+            const revealCallback = (entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        observer.unobserve(entry.target); // Ne s'anime qu'une seule fois
+                    }
+                });
+            };
+
+            const revealOptions = {
+                threshold: 0.1, // Se déclenche quand 10% de l'élément est visible
+                rootMargin: "0px 0px -50px 0px"
+            };
+
+            const revealObserver = new IntersectionObserver(revealCallback, revealOptions);
+            
+            revealElements.forEach(el => {
+                revealObserver.observe(el);
+            });
+            
+            // Forcer l'apparition des éléments déjà dans le viewport au chargement
+            setTimeout(() => {
+                document.querySelectorAll('.reveal.active').forEach(el => {
+                    el.style.transitionDelay = '0s';
+                });
+            }, 100);
+        });
+    </script>
+</body>
+</html>
