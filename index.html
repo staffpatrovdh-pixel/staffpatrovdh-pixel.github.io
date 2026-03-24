@@ -337,7 +337,7 @@
                     <div class="bg-gradient-to-br from-cyan-50 to-white rounded-2xl shadow-xl border border-cyan-100 p-6">
                         <div class="flex items-center justify-between mb-4">
                             <h4 class="font-display font-bold text-xl text-cyan-900 flex items-center gap-2">
-                                <i data-lucide="cloud-sun" class="w-6 h-6 text-cyan-600"></i> Météo Maurage
+                                <i data-lucide="cloud-sun" class="w-6 h-6 text-cyan-600"></i> La météo à Maurage
                             </h4>
                             <div id="weather-loader" class="animate-spin rounded-full h-5 w-5 border-b-2 border-cyan-600"></div>
                         </div>
@@ -351,7 +351,7 @@
 
                     <!-- BLOC CALENDRIER -->
                     <div class="bg-white rounded-2xl shadow-xl border-4 border-white p-6 min-h-[300px]">
-                        <h4 class="font-display font-bold text-2xl text-gray-800 mb-6 border-b pb-2">Prochaines dates</h4>
+                        <h4 class="font-display font-bold text-2xl text-gray-800 mb-6 border-b pb-2">Prochaines dates Patro</h4>
                         
                         <!-- Container où les événements seront injectés -->
                         <div id="home-calendar-container" class="space-y-3">
@@ -415,10 +415,10 @@
         });
 
 
-        // --- CONFIGURATION MÉTÉO ---
+        // --- CONFIGURATION MÉTÉO AMÉLIORÉE ---
         async function loadSundayWeather() {
             try {
-                // Lat: 50.4565, Long: 4.097, Timezone: Europe/Berlin
+                // Maurage: Lat: 50.4565, Long: 4.097
                 const url = "https://api.open-meteo.com/v1/forecast?latitude=50.4565&longitude=4.097&daily=weathercode,temperature_2m_max,temperature_2m_min,precipitation_probability_max&timezone=Europe%2FBerlin";
                 const response = await fetch(url);
                 if (!response.ok) throw new Error('API Error');
@@ -431,13 +431,11 @@
                 const rains = data.daily.precipitation_probability_max;
                 const codes = data.daily.weathercode;
                 
-                // Trouver le prochain dimanche
+                // Trouver le prochain dimanche (0)
                 let sundayIndex = -1;
-                const targetDay = 0; // 0 = Dimanche
-                
                 for(let i=0; i<days.length; i++) {
                     const d = new Date(days[i]);
-                    if (d.getDay() === targetDay) {
+                    if (d.getDay() === 0) {
                         sundayIndex = i;
                         break;
                     }
@@ -452,34 +450,65 @@
                     const minTemp = Math.round(mins[sundayIndex]);
                     const rainProb = rains[sundayIndex];
 
-                    let icon = 'cloud'; let color = 'text-gray-400'; let desc = 'Nuageux';
-                    let adviceIcon = 'shirt';
-                    let adviceText = 'Uniforme impeccable (Chemise & Foulard)';
+                    // Variables par défaut
+                    let icon = 'cloud'; 
+                    let color = 'text-gray-400'; 
+                    let desc = 'Nuageux';
 
-                    // Logique Icone
-                    if (code <= 3) { icon = 'sun'; color = 'text-yellow-400'; desc = 'Ensoleillé'; }
-                    else if (code >= 51 && code <= 67) { icon = 'cloud-drizzle'; color = 'text-blue-300'; desc = 'Bruine'; }
-                    else if (code >= 71) { icon = 'snowflake'; color = 'text-blue-200'; desc = 'Neige'; }
-                    else if (code >= 95) { icon = 'cloud-lightning'; color = 'text-gray-600'; desc = 'Orage'; }
-                    else if (code >= 80) { icon = 'cloud-rain'; color = 'text-blue-500'; desc = 'Averses'; }
-                    else if (code >= 45) { icon = 'cloud-fog'; color = 'text-gray-300'; desc = 'Brouillard'; }
+                    // LOGIQUE WMO STRICTE ET CORRIGÉE
+                    if (code === 0) { 
+                        icon = 'sun'; color = 'text-yellow-500'; desc = 'Grand soleil'; 
+                    } else if (code === 1 || code === 2) { 
+                        icon = 'cloud-sun'; color = 'text-blue-400'; desc = 'Éclaircies'; 
+                    } else if (code === 3) { 
+                        icon = 'cloud'; color = 'text-gray-500'; desc = 'Couvert'; 
+                    } else if (code === 45 || code === 48) { 
+                        icon = 'cloud-fog'; color = 'text-gray-400'; desc = 'Brouillard'; 
+                    } else if (code >= 51 && code <= 67) { 
+                        icon = 'cloud-drizzle'; color = 'text-blue-300'; desc = 'Pluie fine'; 
+                    } else if (code >= 80 && code <= 82) { 
+                        icon = 'cloud-rain'; color = 'text-blue-500'; desc = 'Averses'; 
+                    } else if (code >= 61 && code <= 65) { 
+                        icon = 'cloud-rain'; color = 'text-blue-500'; desc = 'Pluie'; 
+                    } else if (code === 71 || code === 73 || code === 75 || code === 77 || code === 85 || code === 86) { 
+                        icon = 'snowflake'; color = 'text-blue-200'; desc = 'Neige'; 
+                    } else if (code >= 95) { 
+                        icon = 'cloud-lightning'; color = 'text-indigo-600'; desc = 'Orages'; 
+                    }
 
-                    // Logique Conseil
-                    if (rainProb > 40 || (code >= 51 && code <= 67) || (code >= 80)) {
-                        adviceIcon = 'umbrella';
-                        adviceText = "K-Way imperméable & chaussures impérméable (idéalement) ;)";
-                    } else if (code >= 71) {
-                        adviceIcon = 'snowflake';
-                        adviceText = "Gros manteau, gants, bonnet & bottes";
-                    } else if (maxTemp > 25) {
-                        adviceIcon = 'sun';
-                        adviceText = "Casquette, crème solaire & gourde d'eau";
-                    } else if (maxTemp < 8) {
+                    // --- LOGIQUE DE CONSEIL "PIED SUR TERRE" ---
+                    let adviceText = "";
+                    let adviceIcon = "shirt";
+                    
+                    // Modificateurs de précipitations (Vrai si on annonce vraiment de l'eau ou de la neige)
+                    let isRaining = rainProb > 40 || (code >= 51 && code <= 67) || (code >= 80 && code <= 82) || (code >= 61 && code <= 65) || (code >= 95);
+                    let isSnowing = (code === 71 || code === 73 || code === 75 || code === 77 || code === 85 || code === 86);
+
+                    // 1. Choix du texte basé sur la température max
+                    if (maxTemp <= 5) {
+                        adviceText = "Gros manteau, gants et bonnet. ";
                         adviceIcon = 'thermometer-snowflake';
-                        adviceText = "Habillez-les très chaudement (Gants/Bonnet).";
-                    } else if (maxTemp < 15) {
+                    } else if (maxTemp <= 12) {
+                        adviceText = "Bon manteau et pull conseillés. ";
                         adviceIcon = 'shirt';
-                        adviceText = "Petit pull recommandé.";
+                    } else if (maxTemp <= 18) {
+                        adviceText = "Un petit pull ou une veste. ";
+                        adviceIcon = 'shirt';
+                    } else if (maxTemp <= 24) {
+                        adviceText = "T-shirt et short (s'il fait beau). ";
+                        adviceIcon = 'sun';
+                    } else {
+                        adviceText = "Casquette, crème solaire et GOURDE. ";
+                        adviceIcon = 'sun';
+                    }
+
+                    // 2. Ajout dynamique selon la pluie ou la neige
+                    if (isSnowing) {
+                        adviceText += "Bottes ⛄";
+                        adviceIcon = 'snowflake';
+                    } else if (isRaining) {
+                        adviceText += "K-Way ou veste imperméable 🌧️";
+                        if (adviceIcon !== 'thermometer-snowflake') adviceIcon = 'umbrella'; // On priorise l'icône parapluie s'il ne gèle pas
                     }
 
                     container.innerHTML = `
@@ -497,8 +526,9 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="mt-3 bg-white/60 rounded-lg p-2 text-sm text-cyan-800 font-medium flex items-center gap-2 border border-cyan-100">
-                            <i data-lucide="${adviceIcon}" class="w-4 h-4 text-cyan-600"></i> ${adviceText}
+                        <div class="mt-3 bg-white/60 rounded-lg p-3 text-sm text-cyan-800 font-medium flex items-start gap-3 border border-cyan-100 leading-tight">
+                            <i data-lucide="${adviceIcon}" class="w-5 h-5 text-cyan-600 flex-shrink-0 mt-0.5"></i> 
+                            <span>${adviceText}</span>
                         </div>
                     `;
                     
@@ -506,10 +536,11 @@
                     container.classList.remove('hidden');
                     if(typeof lucide !== 'undefined') lucide.createIcons();
                 } else {
-                    throw new Error('Dimanche introuvable');
+                    throw new Error('Météo du dimanche introuvable');
                 }
                 
             } catch (e) {
+                console.error(e);
                 document.getElementById('weather-loader').style.display = 'none';
                 document.getElementById('weather-error').classList.remove('hidden');
             }
