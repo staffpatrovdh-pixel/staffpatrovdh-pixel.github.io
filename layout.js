@@ -44,10 +44,10 @@ document.addEventListener("DOMContentLoaded", function () {
                                         Les Benjamins <span class="text-xs font-normal text-gray-400 block">6 - 9 ans</span>
                                     </a>
                                     <a href="${basePath}sections/chevaliers-etincelles.html" class="nav-link-sub block px-4 py-3 text-sm font-medium text-gray-700 hover:bg-orange-50 hover:text-orange-500 rounded-lg transition border-l-2 border-transparent hover:border-orange-500 mt-1">
-                                        Chev. & Étincelles <span class="text-xs font-normal text-gray-400 block">9 - 12 ans</span>
+                                        Les Chevaliers & Étincelles <span class="text-xs font-normal text-gray-400 block">9 - 12 ans</span>
                                     </a>
                                     <a href="${basePath}sections/conq-alp.html" class="nav-link-sub block px-4 py-3 text-sm font-medium text-gray-700 hover:bg-purple-50 hover:text-purple-600 rounded-lg transition border-l-2 border-transparent hover:border-purple-600 mt-1">
-                                        Conq. & Aventuriers <span class="text-xs font-normal text-gray-400 block">12 - 16 ans</span>
+                                        Les Grands <span class="text-xs font-normal text-gray-400 block">12 - 16 ans</span>
                                     </a>
                                 </div>
                             </div>
@@ -87,8 +87,8 @@ document.addEventListener("DOMContentLoaded", function () {
                         <div id="mobile-sections-menu" class="hidden overflow-hidden transition-all duration-300 bg-gray-50 rounded-b-lg border-l-2 border-patro-green/30 ml-3 mt-1 mb-2 shadow-inner">
                             <a href="${basePath}sections/poussins.html" class="nav-link-sub block px-4 py-2.5 text-sm font-medium text-gray-600 hover:text-patro-green hover:bg-green-100 transition">Les Poussins (4-6 ans)</a>
                             <a href="${basePath}sections/benjamins.html" class="nav-link-sub block px-4 py-2.5 text-sm font-medium text-gray-600 hover:text-patro-yellow hover:bg-yellow-50 transition">Les Benjamins (6-9 ans)</a>
-                            <a href="${basePath}sections/chevaliers-etincelles.html" class="nav-link-sub block px-4 py-2.5 text-sm font-medium text-gray-600 hover:text-orange-500 hover:bg-orange-50 transition">Chevaliers & Étincelles (9-12 ans)</a>
-                            <a href="${basePath}sections/conq-alp.html" class="nav-link-sub block px-4 py-2.5 text-sm font-medium text-gray-600 hover:text-purple-600 hover:bg-purple-50 transition">Conquérants & Aventuriers (12-16 ans)</a>
+                            <a href="${basePath}sections/chevaliers-etincelles.html" class="nav-link-sub block px-4 py-2.5 text-sm font-medium text-gray-600 hover:text-orange-500 hover:bg-orange-50 transition">Les Chevaliers & Étincelles (9-12 ans)</a>
+                            <a href="${basePath}sections/conq-alp.html" class="nav-link-sub block px-4 py-2.5 text-sm font-medium text-gray-600 hover:text-purple-600 hover:bg-purple-50 transition">Les Grands (12-16 ans)</a>
                         </div>
                     </div>
 
