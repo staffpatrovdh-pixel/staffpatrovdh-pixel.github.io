@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
     
     // --- VERSION CONTROL ---
-    console.log("Patro Layout Loaded - Version 11.5 (Absolute Paths Fix)");
+    console.log("Patro Layout Loaded - Version 11.6 (Menu Sections Ajouté)");
 
     // --- 1. INJECTION DU HEADER (NAVBAR) ---
     const navbarPlaceholder = document.getElementById("navbar-placeholder");
@@ -19,11 +19,36 @@ document.addEventListener("DOMContentLoaded", function () {
                     <div class="hidden lg:flex space-x-5 items-center">
                         <a href="/index.html" class="nav-link text-gray-600 hover:text-patro-green font-medium transition">Accueil</a>
                         <a href="/index.html#infos" class="nav-link text-gray-600 hover:text-patro-green font-medium transition">Agenda</a>
-                        <a href="/contact.html" class="nav-link text-gray-600 hover:text-patro-green font-medium transition">Contact</a>
+                        
+                        <!-- Menu Déroulant Sections -->
+                        <div class="relative group">
+                            <button id="desktop-sections-btn" class="nav-link text-gray-600 group-hover:text-patro-green font-medium transition flex items-center gap-1 focus:outline-none py-2">
+                                Sections <i data-lucide="chevron-down" class="w-4 h-4 transition-transform duration-300 group-hover:rotate-180"></i>
+                            </button>
+                            <!-- Menu caché par défaut, apparaît au survol -->
+                            <div class="absolute left-1/2 -translate-x-1/2 mt-0 pt-2 w-64 rounded-xl shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 transform origin-top translate-y-2 group-hover:translate-y-0">
+                                <div class="bg-white rounded-xl border border-gray-100 overflow-hidden shadow-lg p-2" role="menu">
+                                    <a href="/sections/poussins.html" class="nav-link block px-4 py-3 text-sm font-medium text-gray-700 hover:bg-green-50 hover:text-patro-green rounded-lg transition border-l-2 border-transparent hover:border-patro-green">
+                                        Les Poussins <span class="text-xs font-normal text-gray-400 block">4 - 6 ans</span>
+                                    </a>
+                                    <a href="/sections/benjamins.html" class="nav-link block px-4 py-3 text-sm font-medium text-gray-700 hover:bg-yellow-50 hover:text-patro-yellow rounded-lg transition border-l-2 border-transparent hover:border-patro-yellow mt-1">
+                                        Les Benjamins <span class="text-xs font-normal text-gray-400 block">6 - 9 ans</span>
+                                    </a>
+                                    <a href="/sections/chevaliers-etincelles.html" class="nav-link block px-4 py-3 text-sm font-medium text-gray-700 hover:bg-orange-50 hover:text-orange-500 rounded-lg transition border-l-2 border-transparent hover:border-orange-500 mt-1">
+                                        Chev. & Étincelles <span class="text-xs font-normal text-gray-400 block">9 - 12 ans</span>
+                                    </a>
+                                    <a href="/sections/conq-alp.html" class="nav-link block px-4 py-3 text-sm font-medium text-gray-700 hover:bg-purple-50 hover:text-purple-600 rounded-lg transition border-l-2 border-transparent hover:border-purple-600 mt-1">
+                                        Conq. & Aventuriers <span class="text-xs font-normal text-gray-400 block">12 - 16 ans</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
                         <a href="/documents.html" class="nav-link text-gray-600 hover:text-patro-green font-medium transition">Documents</a>
                         <a href="/informations.html" class="nav-link text-gray-600 hover:text-patro-green font-medium transition">Communications</a>
+                        <a href="/contact.html" class="nav-link text-gray-600 hover:text-patro-green font-medium transition">Contact</a>
                         
-                        <a href="/inscription.html" class="bg-patro-green text-white px-4 py-2 rounded-full font-semibold hover:bg-green-700 transition shadow-md hover:shadow-lg transform hover:-translate-y-0.5 text-sm">
+                        <a href="/inscription.html" class="bg-patro-green text-white px-5 py-2.5 rounded-full font-bold hover:bg-green-700 transition shadow-md hover:shadow-lg transform hover:-translate-y-0.5 text-sm ml-2">
                             Nous rejoindre
                         </a>
                     </div>
@@ -37,16 +62,32 @@ document.addEventListener("DOMContentLoaded", function () {
                 </div>
             </div>
 
-            <!-- Mobile Menu Panel (Chemins absolus) -->
-            <div id="mobile-menu" class="hidden lg:hidden bg-white border-t">
-                <div class="px-4 pt-2 pb-6 space-y-2 shadow-lg">
-                    <a href="/index.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-patro-green hover:bg-yellow-50">Accueil</a>
-                    <a href="/index.html#infos" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-patro-green hover:bg-yellow-50">Agenda</a>
-                    <a href="/contact.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-patro-green hover:bg-yellow-50">Contact</a>
-                    <a href="/documents.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-patro-green hover:bg-yellow-50">Documents</a>
-                    <a href="/informations.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-patro-green hover:bg-yellow-50">Communications</a>
+            <!-- Mobile Menu Panel -->
+            <div id="mobile-menu" class="hidden lg:hidden bg-white border-t overflow-y-auto max-h-[85vh]">
+                <div class="px-4 pt-2 pb-6 space-y-2 shadow-inner">
+                    <a href="/index.html" class="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-patro-green hover:bg-green-50 transition">Accueil</a>
+                    <a href="/index.html#infos" class="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-patro-green hover:bg-green-50 transition">Agenda</a>
                     
-                    <a href="/inscription.html" class="block w-full text-center mt-4 px-5 py-3 rounded-md font-bold bg-patro-yellow text-patro-green">
+                    <!-- Menu Accordéon Sections Mobile -->
+                    <div>
+                        <button onclick="document.getElementById('mobile-sections-menu').classList.toggle('hidden'); document.getElementById('mobile-sections-icon').classList.toggle('rotate-180');" class="w-full flex justify-between items-center px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-patro-green hover:bg-green-50 transition focus:outline-none">
+                            Nos Sections
+                            <i data-lucide="chevron-down" id="mobile-sections-icon" class="w-5 h-5 transition-transform duration-300"></i>
+                        </button>
+                        <!-- Sous-menu caché par défaut -->
+                        <div id="mobile-sections-menu" class="hidden overflow-hidden transition-all duration-300 bg-gray-50 rounded-b-lg border-l-2 border-patro-green/30 ml-3 mt-1 mb-2 shadow-inner">
+                            <a href="/sections/poussins.html" class="nav-link block px-4 py-2.5 text-sm font-medium text-gray-600 hover:text-patro-green hover:bg-green-100 transition">Les Poussins (4-6 ans)</a>
+                            <a href="/sections/benjamins.html" class="nav-link block px-4 py-2.5 text-sm font-medium text-gray-600 hover:text-patro-yellow hover:bg-yellow-50 transition">Les Benjamins (6-9 ans)</a>
+                            <a href="/sections/chevaliers-etincelles.html" class="nav-link block px-4 py-2.5 text-sm font-medium text-gray-600 hover:text-orange-500 hover:bg-orange-50 transition">Chevaliers & Étincelles (9-12 ans)</a>
+                            <a href="/sections/conq-alp.html" class="nav-link block px-4 py-2.5 text-sm font-medium text-gray-600 hover:text-purple-600 hover:bg-purple-50 transition">Conquérants & Aventuriers (12-16 ans)</a>
+                        </div>
+                    </div>
+
+                    <a href="/documents.html" class="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-patro-green hover:bg-green-50 transition">Documents</a>
+                    <a href="/informations.html" class="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-patro-green hover:bg-green-50 transition">Communications</a>
+                    <a href="/contact.html" class="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-patro-green hover:bg-green-50 transition">Contact</a>
+                    
+                    <a href="/inscription.html" class="block w-full text-center mt-6 px-5 py-4 rounded-xl font-bold bg-patro-yellow text-patro-green shadow-md active:scale-95 transition">
                         S'inscrire maintenant
                     </a>
                 </div>
@@ -67,7 +108,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12 text-center md:text-left">
                     <!-- Colonne 1: Info -->
                     <div class="flex flex-col items-center md:items-start">
-                        <!-- Image en absolu -->
                         <img src="/donnees-site/LogoMaurageContour.svg" alt="Patro Maurage" class="h-24 w-auto mb-6">
                         
                         <span class="font-display font-bold text-2xl text-white block mb-4">Le Patro Val d'Haine de Maurage</span>
@@ -115,6 +155,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     <span class="hidden md:inline">•</span>
                     <a href="https://parent.patrovaldhaine.be/" class="flex items-center gap-1 text-patro-yellow hover:text-white transition font-medium" title="Espace Parents">
                         <i data-lucide="circle-user-round" class="w-3 h-3"></i> Espace Parents
+                    </a>
                     <span class="hidden md:inline">•</span>
                     <a href="https://intranet.patrovaldhaine.be" class="flex items-center gap-1 text-patro-yellow hover:text-white transition font-medium" title="Intranet animateur">
                         <i data-lucide="database" class="w-3 h-3"></i> Intranet animateur
@@ -183,25 +224,45 @@ function toggleMenu() {
     if (menu) menu.classList.toggle('hidden');
 }
 
-// Fonction de surlignage adaptée aux chemins absolus
+// Fonction de surlignage adaptée aux chemins absolus et sous-dossiers
 function highlightActiveLink() {
-    // On récupère le nom du fichier actuel (ex: "index.html" ou "" si racine)
     const currentPath = window.location.pathname.split('/').pop() || 'index.html';
     const links = document.querySelectorAll('.nav-link');
+    
+    // Si on est dans le dossier sections, on surligne le bouton "Sections" du menu principal (Desktop)
+    if (window.location.pathname.includes('/sections/')) {
+        const desktopBtn = document.getElementById('desktop-sections-btn');
+        if (desktopBtn) {
+            desktopBtn.classList.remove('text-gray-600');
+            desktopBtn.classList.add('text-patro-green', 'font-bold');
+        }
+    }
     
     links.forEach(link => {
         const href = link.getAttribute('href');
         if (!href) return;
         
-        // On récupère le nom du fichier du lien (ex: "/contact.html" -> "contact.html")
         const linkPath = href.split('/').pop() || 'index.html';
         
         // On ignore les ancres pures
         if (href.startsWith('#')) return;
 
         if (linkPath === currentPath) {
-            link.classList.remove('text-gray-600');
-            link.classList.add('text-patro-green', 'font-bold');
+            link.classList.remove('text-gray-600', 'text-gray-700');
+            // Mettre en gras
+            link.classList.add('font-bold');
+            
+            // Si ce n'est pas un bouton avec une couleur de survol spécifique (ex: jaune, violet), on met en vert
+            if (!link.classList.contains('hover:text-patro-yellow') && 
+                !link.classList.contains('hover:text-orange-500') && 
+                !link.classList.contains('hover:text-purple-600')) {
+                link.classList.add('text-patro-green');
+            } else {
+                // S'il a une classe hover spécifique, on lui applique la couleur correspondante pour qu'il reste dans son thème
+                if (link.classList.contains('hover:text-patro-yellow')) link.classList.add('text-patro-yellow');
+                if (link.classList.contains('hover:text-orange-500')) link.classList.add('text-orange-500');
+                if (link.classList.contains('hover:text-purple-600')) link.classList.add('text-purple-600');
+            }
         }
     });
 }
@@ -240,7 +301,6 @@ async function loadSponsors() {
                 let logoPath = parts[1].trim();
                 const siteUrl = parts[2].trim();
 
-                // IMPORTANT : Si le chemin du logo est relatif (commence par donnees-site), on ajoute / devant
                 if (!logoPath.startsWith('http') && !logoPath.startsWith('/')) {
                     logoPath = '/' + logoPath;
                 }
