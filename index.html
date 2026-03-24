@@ -1,4 +1,11 @@
 <!DOCTYPE html>
+<!--
+=======================================================================
+  © 2026 Patro du Val d'Haine de Maurage - Tous droits réservés.
+  Conception & Développement pour le Patro du Val d'Haine.
+  Toute reproduction de ce code, du design ou des textes est interdite.
+=======================================================================
+-->
 <html lang="fr" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
@@ -6,16 +13,13 @@
     <title>Patro du Val d'Haine de Maurage</title>
     
     <link rel="stylesheet" href="style.css">
-    <!-- Ajout de la police Indie Flower -->
     <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
     
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
-    <!-- Version 11.3 pour le layout -->
     <script src="layout.js?v=11.3"></script>
 
     <script>
-        // Ajout de la font 'handwritten' pour Indie Flower
         tailwind.config = { theme: { extend: { colors: { patro: { yellow: '#FFD700', green: '#009045', dark: '#1a1a1a', light: '#f8fafc' } }, fontFamily: { sans: ['Poppins', 'sans-serif'], display: ['Fredoka', 'sans-serif'], handwritten: ['Indie Flower', 'cursive'] } } } }
     </script>
 </head>
@@ -29,7 +33,6 @@
     <section id="accueil" class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden" style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 144, 69, 0.7)), url('donnees-site/photos-site-accueil/banniere_accueil.jpg'); background-size: cover; background-position: center;">
         <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             
-            <!-- Texte Bienvenue style manuscrit et incliné -->
             <div class="mb-8 transform -rotate-3 origin-center inline-block">
                 <span class="font-handwritten text-3xl md:text-5xl text-patro-yellow font-bold drop-shadow-md tracking-wide">
                     Bienvenue au Patro du Val d'Haine
@@ -44,15 +47,12 @@
                 Le Patro du Val d'Haine est un mouvement de jeunesse ouvert à tous à partir de 4 ans !
             </p>
             
-            <!-- BOUTONS D'ACTION -->
             <div class="mt-10 flex flex-col sm:flex-row justify-center gap-4">
-                <!-- Bouton Inscription -->
                 <a href="inscription.html" class="px-8 py-4 rounded-full bg-patro-yellow text-patro-green font-bold text-lg shadow-lg hover:bg-yellow-400 hover:scale-105 transition transform duration-200 flex items-center justify-center gap-2">
                     <i data-lucide="user-plus" class="w-5 h-5"></i>
                     Je m'inscris
                 </a>
                 
-                <!-- NOUVEAU BOUTON : Devenir Animateur -->
                 <a href="recrutement.html" class="px-8 py-4 rounded-full bg-white text-patro-green font-bold text-lg shadow-lg hover:bg-gray-100 hover:scale-105 transition transform duration-200 flex items-center justify-center gap-2">
                     <i data-lucide="sparkles" class="w-5 h-5"></i>
                     Devenir animateur
@@ -60,6 +60,7 @@
             </div>
 
         </div>
+        <!-- Vagues décoratives -->
         <div class="absolute bottom-0 w-full leading-none z-10">
             <svg class="block w-full h-12 md:h-24 text-patro-light" viewBox="0 0 1440 320" preserveAspectRatio="none">
                 <path class="wave-anim-2" fill="currentColor" d="M0,224L48,213.3C96,203,192,181,288,181.3C384,181,480,203,576,224C672,245,768,267,864,261.3C960,256,1056,224,1152,202.7C1248,181,1344,171,1392,165.3L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
@@ -73,7 +74,6 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
                 
-                <!-- Espace Parents -->
                 <a href="https://parent.patrovaldhaine.be/app/parent/" target="_blank" class="group flex flex-col items-center text-center">
                     <div class="w-full aspect-square overflow-hidden rounded-2xl shadow-lg mb-4 relative border-4 border-white group-hover:-translate-y-2 transition duration-300">
                         <div class="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition z-10"></div>
@@ -88,7 +88,6 @@
                     <h3 class="text-lg md:text-xl font-display font-bold text-gray-800 group-hover:text-patro-green transition">Espace parents</h3>
                 </a>
 
-                <!-- Documents -->
                 <a href="documents.html" class="group flex flex-col items-center text-center">
                     <div class="w-full aspect-square overflow-hidden rounded-2xl shadow-lg mb-4 relative border-4 border-white group-hover:-translate-y-2 transition duration-300">
                         <div class="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition z-10"></div>
@@ -103,7 +102,6 @@
                     <h3 class="text-lg md:text-xl font-display font-bold text-gray-800 group-hover:text-patro-green transition">Documents</h3>
                 </a>
 
-                <!-- Contactez-nous -->
                 <a href="contact.html" class="group flex flex-col items-center text-center">
                     <div class="w-full aspect-square overflow-hidden rounded-2xl shadow-lg mb-4 relative border-4 border-white group-hover:-translate-y-2 transition duration-300">
                         <div class="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition z-10"></div>
@@ -118,7 +116,6 @@
                     <h3 class="text-lg md:text-xl font-display font-bold text-gray-800 group-hover:text-patro-green transition">Contactez-nous</h3>
                 </a>
 
-                <!-- Infos Pratiques & Agenda -->
                 <a href="#infos" class="group flex flex-col items-center text-center">
                     <div class="w-full aspect-square overflow-hidden rounded-2xl shadow-lg mb-4 relative border-4 border-white group-hover:-translate-y-2 transition duration-300">
                         <div class="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition z-10"></div>
@@ -137,7 +134,7 @@
         </div>
     </section>
 
-    <!-- NOUVEAU BLOC : CHIFFRES CLÉS (Style Minimaliste & Épuré) -->
+    <!-- Chiffres Clés -->
     <section class="py-16 bg-white relative z-20 border-y border-gray-100" id="chiffres-cles">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12">
@@ -146,7 +143,6 @@
             </div>
             
             <div class="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-12 text-center">
-                <!-- Compteur 1 -->
                 <div class="flex flex-col items-center group">
                     <div class="w-16 h-16 bg-green-50 rounded-full flex items-center justify-center text-patro-green mb-4 group-hover:scale-110 transition-transform duration-300">
                         <i data-lucide="users" class="w-8 h-8"></i>
@@ -155,7 +151,6 @@
                     <div class="text-gray-500 font-bold uppercase tracking-widest text-sm">Inscrits</div>
                 </div>
                 
-                <!-- Compteur 2 -->
                 <div class="flex flex-col items-center group">
                     <div class="w-16 h-16 bg-yellow-50 rounded-full flex items-center justify-center text-patro-yellow mb-4 group-hover:scale-110 transition-transform duration-300">
                         <i data-lucide="shield-check" class="w-8 h-8"></i>
@@ -164,7 +159,6 @@
                     <div class="text-gray-500 font-bold uppercase tracking-widest text-sm">Animateurs & Accompagnateurs</div>
                 </div>
                 
-                <!-- Compteur 3 -->
                 <div class="flex flex-col items-center group">
                     <div class="w-16 h-16 bg-gray-50 rounded-full flex items-center justify-center text-gray-400 mb-4 group-hover:scale-110 transition-transform duration-300">
                         <i data-lucide="calendar-heart" class="w-8 h-8"></i>
@@ -176,7 +170,7 @@
         </div>
     </section>
 
-    <!-- Presentation Textes Officiels (Version Dynamique) -->
+    <!-- Présentation du Patro -->
     <section class="py-20 bg-patro-light overflow-hidden">
         <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
@@ -185,7 +179,7 @@
             </div>
 
             <div class="space-y-12">
-                <!-- Bloc 1: Ouvert à tous (Légèrement penché gauche) -->
+                
                 <div class="bg-white rounded-3xl shadow-lg p-8 md:p-10 transform -rotate-1 hover:rotate-0 transition duration-300 border-l-8 border-patro-yellow">
                     <h4 class="text-2xl md:text-3xl font-display font-bold text-patro-yellow mb-4">Ouvert à tous</h4>
                     <div class="text-gray-600 text-lg leading-relaxed">
@@ -202,7 +196,6 @@
                     </div>
                 </div>
 
-                <!-- Bloc 2: Par les jeunes (Légèrement penché droite) -->
                 <div class="bg-white rounded-3xl shadow-lg p-8 md:p-10 transform rotate-1 hover:rotate-0 transition duration-300 border-r-8 border-patro-green ml-auto md:w-11/12">
                     <h4 class="text-2xl md:text-3xl font-display font-bold text-patro-green mb-4">Par les jeunes, pour les jeunes !</h4>
                     <div class="text-gray-600 text-lg leading-relaxed">
@@ -211,7 +204,6 @@
                     </div>
                 </div>
 
-                <!-- Bloc 3: S'amuser (Légèrement penché gauche) -->
                 <div class="bg-white rounded-3xl shadow-lg p-8 md:p-10 transform -rotate-1 hover:rotate-0 transition duration-300 border-l-8 border-patro-yellow">
                     <h4 class="text-2xl md:text-3xl font-display font-bold text-patro-yellow mb-4">S'amuser, rêver & kiffer</h4>
                     <div class="text-gray-600 text-lg leading-relaxed">
@@ -224,7 +216,7 @@
         </div>
     </section>
 
-    <!-- Sections (Age Groups) -->
+    <!-- Sections d'âges -->
     <section id="sections" class="py-20 bg-white relative">
         <div class="absolute top-0 w-full h-24 bg-gradient-to-b from-patro-light to-white"></div>
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
@@ -234,7 +226,6 @@
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Poussins -->
                 <div class="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 bg-green-50 border border-green-100 p-8 text-center">
                     <div class="w-20 h-20 mx-auto rounded-full overflow-hidden mb-4 shadow-md">
                         <img src="donnees-site/illustrations/ecussons/ecusson_poussins.jpg" alt="Écusson Poussins" class="w-full h-full object-cover">
@@ -242,7 +233,7 @@
                     <h4 class="text-2xl font-display font-bold text-gray-800 mb-2">Poussins</h4>
                     <span class="inline-block px-3 py-1 bg-green-600 text-white text-xs font-bold rounded-full mb-4">4 - 6 ANS</span>
                 </div>
-                <!-- Benjamins -->
+                
                 <div class="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 bg-yellow-50 border border-yellow-100 p-8 text-center">
                     <div class="w-20 h-20 mx-auto rounded-full overflow-hidden mb-4 shadow-md">
                         <img src="donnees-site/illustrations/ecussons/ecusson_benja.jpg" alt="Écusson Benjamins" class="w-full h-full object-cover">
@@ -250,7 +241,7 @@
                     <h4 class="text-2xl font-display font-bold text-gray-800 mb-2">Benjamins</h4>
                     <span class="inline-block px-3 py-1 bg-yellow-400 text-gray-900 text-xs font-bold rounded-full mb-4">6 - 9 ANS</span>
                 </div>
-                <!-- Chevaliers -->
+                
                 <div class="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 bg-orange-50 border border-orange-100 p-8 text-center">
                     <div class="w-20 h-20 mx-auto rounded-full overflow-hidden mb-4 shadow-md">
                         <img src="donnees-site/illustrations/ecussons/ecusson_chev:etin.jpg" alt="Écusson Chevaliers/Étincelles" class="w-full h-full object-cover">
@@ -258,7 +249,7 @@
                     <h4 class="text-2xl font-display font-bold text-gray-800 mb-2">Chevaliers / Étincelles</h4>
                     <span class="inline-block px-3 py-1 bg-orange-500 text-white text-xs font-bold rounded-full mb-4">9 - 12 ANS</span>
                 </div>
-                <!-- Conquérants -->
+                
                 <div class="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 bg-pink-50 border border-pink-100 p-8 text-center">
                     <div class="w-20 h-20 mx-auto rounded-full overflow-hidden mb-4 shadow-md">
                         <img src="donnees-site/illustrations/ecussons/ecusson_alpine:conq.jpg" alt="Écusson Conquérants/Alpines" class="w-full h-full object-cover">
@@ -266,7 +257,7 @@
                     <h4 class="text-2xl font-display font-bold text-gray-800 mb-2">Conquérants / Alpines</h4>
                     <span class="inline-block px-3 py-1 bg-pink-500 text-white text-xs font-bold rounded-full mb-4">12 - 14 ANS</span>
                 </div>
-                <!-- Aventuriers -->
+                
                 <div class="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 bg-purple-50 border border-purple-100 p-8 text-center">
                     <div class="w-20 h-20 mx-auto rounded-full overflow-hidden mb-4 shadow-md">
                         <img src="donnees-site/illustrations/ecussons/ecusson_aventuriers.jpg" alt="Écusson Aventuriers" class="w-full h-full object-cover">
@@ -274,7 +265,7 @@
                     <h4 class="text-2xl font-display font-bold text-gray-800 mb-2">Aventuriers</h4>
                     <span class="inline-block px-3 py-1 bg-purple-600 text-white text-xs font-bold rounded-full mb-4">14 - 16 ANS</span>
                 </div>
-                <!-- Animateurs -->
+                
                 <div class="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 bg-gray-800 text-white p-8 text-center">
                     <div class="w-16 h-16 mx-auto bg-white/20 rounded-full flex items-center justify-center text-patro-yellow mb-4"><i data-lucide="star" class="w-8 h-8"></i></div>
                     <h4 class="text-2xl font-display font-bold text-white mb-2">Animateurs</h4>
@@ -284,7 +275,7 @@
         </div>
     </section>
 
-    <!-- Infos Pratiques & Calendar -->
+    <!-- Infos Pratiques & Agenda -->
     <section id="infos" class="py-20 bg-patro-light relative">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
@@ -333,7 +324,7 @@
                 <!-- Colonne Droite : Météo & Calendrier Dynamique -->
                 <div class="space-y-6">
                     
-                    <!-- NOUVEAU : BLOC MÉTÉO DU DIMANCHE -->
+                    <!-- Bloc Météo -->
                     <div class="bg-gradient-to-br from-cyan-50 to-white rounded-2xl shadow-xl border border-cyan-100 p-6">
                         <div class="flex items-center justify-between mb-4">
                             <h4 class="font-display font-bold text-xl text-cyan-900 flex items-center gap-2">
@@ -342,26 +333,22 @@
                             <div id="weather-loader" class="animate-spin rounded-full h-5 w-5 border-b-2 border-cyan-600"></div>
                         </div>
                         
-                        <div id="weather-content" class="hidden">
-                            <!-- Le contenu sera injecté ici par JS -->
-                        </div>
+                        <div id="weather-content" class="hidden"></div>
                         
                         <div id="weather-error" class="hidden text-sm text-red-400 italic">Météo indisponible</div>
                     </div>
 
-                    <!-- BLOC CALENDRIER -->
+                    <!-- Widget Calendrier -->
                     <div class="bg-white rounded-2xl shadow-xl border-4 border-white p-6 min-h-[300px]">
                         <h4 class="font-display font-bold text-2xl text-gray-800 mb-6 border-b pb-2">Prochaines dates Patro</h4>
                         
-                        <!-- Container où les événements seront injectés -->
                         <div id="home-calendar-container" class="space-y-3">
-                            <!-- Loader -->
                             <div class="flex flex-col items-center justify-center py-12 text-gray-400">
                                 <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-patro-green mb-2"></div>
                                 <p>Chargement du calendrier...</p>
                             </div>
                         </div>
-                        <!-- Petit message légal pour Google -->
+                        
                         <div class="mt-4 text-center">
                             <a href="https://calendar.google.com/calendar/embed?src=staff.patrovdh%40gmail.com&ctz=Europe%2FBrussels" target="_blank" class="text-xs text-gray-400 hover:text-patro-green transition">Voir tout l'agenda Google</a>
                         </div>
@@ -374,12 +361,12 @@
 
     <div id="footer-placeholder"></div>
 
-    <!-- SCRIPT CALENDRIER GOOGLE & MÉTÉO & COMPTEURS -->
+    <!-- Scripts -->
     <script>
-        // --- ANIMATION DES COMPTEURS ---
+        // Animation des chiffres clés
         function runCounters() {
             const counters = document.querySelectorAll('.counter-value');
-            const speed = 100; // Vitesse de l'animation (plus c'est bas, plus c'est rapide)
+            const speed = 100;
 
             counters.forEach(counter => {
                 const animate = () => {
@@ -398,7 +385,7 @@
             });
         }
 
-        // Intersection Observer pour lancer l'animation quand on scrolle sur la section
+        // Déclencheur au scroll pour les compteurs
         document.addEventListener('DOMContentLoaded', () => {
             const counterSection = document.getElementById('chiffres-cles');
             if (counterSection) {
@@ -406,19 +393,18 @@
                     entries.forEach(entry => {
                         if (entry.isIntersecting) {
                             runCounters();
-                            observer.unobserve(entry.target); // Ne lance l'animation qu'une seule fois
+                            observer.unobserve(entry.target);
                         }
                     });
-                }, { threshold: 0.5 }); // Se déclenche quand 50% de la section est visible
+                }, { threshold: 0.5 });
                 observer.observe(counterSection);
             }
         });
 
-
-        // --- CONFIGURATION MÉTÉO AMÉLIORÉE ---
+        // Widget Météo
         async function loadSundayWeather() {
             try {
-                // Maurage: Lat: 50.4565, Long: 4.097
+                // Coordonnées de Maurage
                 const url = "https://api.open-meteo.com/v1/forecast?latitude=50.4565&longitude=4.097&daily=weathercode,temperature_2m_max,temperature_2m_min,precipitation_probability_max&timezone=Europe%2FBerlin";
                 const response = await fetch(url);
                 if (!response.ok) throw new Error('API Error');
@@ -431,7 +417,7 @@
                 const rains = data.daily.precipitation_probability_max;
                 const codes = data.daily.weathercode;
                 
-                // Trouver le prochain dimanche (0)
+                // Recherche du dimanche (index 0)
                 let sundayIndex = -1;
                 for(let i=0; i<days.length; i++) {
                     const d = new Date(days[i]);
@@ -450,12 +436,11 @@
                     const minTemp = Math.round(mins[sundayIndex]);
                     const rainProb = rains[sundayIndex];
 
-                    // Variables par défaut
                     let icon = 'cloud'; 
                     let color = 'text-gray-400'; 
                     let desc = 'Nuageux';
 
-                    // LOGIQUE WMO STRICTE ET CORRIGÉE
+                    // Interprétation des codes WMO
                     if (code === 0) { 
                         icon = 'sun'; color = 'text-yellow-500'; desc = 'Grand soleil'; 
                     } else if (code === 1 || code === 2) { 
@@ -476,15 +461,13 @@
                         icon = 'cloud-lightning'; color = 'text-indigo-600'; desc = 'Orages'; 
                     }
 
-                    // --- LOGIQUE DE CONSEIL "PIED SUR TERRE" ---
+                    // Génération du conseil météo
                     let adviceText = "";
                     let adviceIcon = "shirt";
                     
-                    // Modificateurs de précipitations (Vrai si on annonce vraiment de l'eau ou de la neige)
                     let isRaining = rainProb > 40 || (code >= 51 && code <= 67) || (code >= 80 && code <= 82) || (code >= 61 && code <= 65) || (code >= 95);
                     let isSnowing = (code === 71 || code === 73 || code === 75 || code === 77 || code === 85 || code === 86);
 
-                    // 1. Choix du texte basé sur la température max
                     if (maxTemp <= 5) {
                         adviceText = "Gros manteau, gants et bonnet. ";
                         adviceIcon = 'thermometer-snowflake';
@@ -502,13 +485,12 @@
                         adviceIcon = 'sun';
                     }
 
-                    // 2. Ajout dynamique selon la pluie ou la neige
                     if (isSnowing) {
                         adviceText += "Bottes ⛄";
                         adviceIcon = 'snowflake';
                     } else if (isRaining) {
                         adviceText += "K-Way ou veste imperméable 🌧️";
-                        if (adviceIcon !== 'thermometer-snowflake') adviceIcon = 'umbrella'; // On priorise l'icône parapluie s'il ne gèle pas
+                        if (adviceIcon !== 'thermometer-snowflake') adviceIcon = 'umbrella';
                     }
 
                     container.innerHTML = `
@@ -546,7 +528,7 @@
             }
         }
 
-        // --- CONFIGURATION CALENDRIER GOOGLE ---
+        // Widget Calendrier Google
         const CALENDAR_ID = 'staff.patrovdh@gmail.com'; 
         const API_KEY = 'AIzaSyDA0jGeq43fHI30WeY126gBf82gVYSfV48'; 
 
