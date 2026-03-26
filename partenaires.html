@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nos Partenaires & sponsors | Patro du Val d'Haine</title>
+    
+    <link rel="stylesheet" href="style.css">
+    <!-- Police manuscrite -->
+    <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;800&family=Fredoka:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="layout.js?v=12"></script>
+
+    <script>
+        tailwind.config = { 
+            theme: { 
+                extend: { 
+                    colors: { 
+                        patro: { 
+                            yellow: '#FFD700', 
+                            green: '#009045', 
+                            dark: '#1a1a1a', 
+                            light: '#f8fafc' 
+                        } 
+                    }, 
+                    fontFamily: { 
+                        sans: ['Poppins', 'sans-serif'], 
+                        display: ['Fredoka', 'sans-serif'], 
+                        handwritten: ['Indie Flower', 'cursive'] 
+                    } 
+                } 
+            } 
+        }
+    </script>
+</head>
+<body class="font-sans text-slate-800 bg-patro-light antialiased overflow-x-hidden">
+
+    <!-- Global Elements -->
+    <div id="custom-cursor" class="hidden md:block"></div>
+    <div id="loader">
+        <div class="spinner mb-4"></div>
+        <p class="text-patro-green font-bold font-display animate-pulse">Chargement...</p>
+    </div>
+    <div id="navbar-placeholder"></div>
+
+    <!-- Hero Section -->
+    <section class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden bg-patro-dark">
+        <!-- Image de fond avec overlay -->
+        <div class="absolute inset-0 z-0">
+            <img src="donnees-site/photos-site-accueil/banniere_partenaires.jpg" alt="Soutenez le Patro" class="w-full h-full object-cover opacity-40" onerror="this.src='https://images.unsplash.com/photo-1529156069898-49953e39b3ac?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80'">
+            <div class="absolute inset-0 bg-gradient-to-t from-patro-dark via-patro-dark/80 to-patro-green/40"></div>
+        </div>
+
+        <div class="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center z-10">
+            <div class="mb-6 transform -rotate-2 origin-center inline-block">
+                <span class="font-handwritten text-3xl md:text-4xl text-patro-yellow font-bold drop-shadow-md tracking-wide">
+                    Soutenez la jeunesse !
+                </span>
+            </div>
+
+            <h1 class="text-4xl md:text-6xl lg:text-7xl font-display font-extrabold text-white mb-6 leading-tight drop-shadow-sm">
+                Nos partenaires <br class="hidden md:block" />
+                <span class="text-patro-green bg-white px-4 py-1 rounded-xl inline-block mt-2 transform rotate-1">& Sponsors</span>
+            </h1>
+            <p class="mt-6 max-w-2xl mx-auto text-xl text-gray-200 md:text-2xl font-light">
+                Associez l'image de votre entreprise ou apportez votre soutien à notre Patro !
+            </p>
+            
+            <div class="mt-10 flex flex-col sm:flex-row justify-center gap-4">
+                <a href="#les-formules" class="px-8 py-4 rounded-full bg-patro-yellow text-patro-green font-bold text-lg shadow-lg hover:bg-yellow-400 hover:scale-105 transition transform duration-200 flex items-center justify-center gap-2">
+                    <i data-lucide="award" class="w-5 h-5"></i>
+                    Devenir Sponsor
+                </a>
+                <a href="#don-particulier" class="px-8 py-4 rounded-full bg-white text-patro-green font-bold text-lg shadow-lg hover:bg-gray-100 hover:scale-105 transition transform duration-200 flex items-center justify-center gap-2">
+                    <i data-lucide="heart" class="w-5 h-5"></i>
+                    Faire un don libre
+                </a>
+            </div>
+        </div>
+
+        <!-- Vagues décoratives -->
+        <div class="absolute bottom-0 w-full leading-none z-10">
+            <svg class="block w-full h-12 md:h-24 text-patro-light" viewBox="0 0 1440 320" preserveAspectRatio="none">
+                <path class="wave-anim-1" fill="currentColor" fill-opacity="1" d="M0,224L48,213.3C96,203,192,181,288,181.3C384,181,480,203,576,224C672,245,768,267,864,261.3C960,256,1056,224,1152,202.7C1248,181,1344,171,1392,165.3L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+            </svg>
+        </div>
+    </section>
+
+    <!-- Ceux qui rendent l'aventure possible (Sponsors & Partenaires) -->
+    <section class="py-16 md:py-20 bg-patro-light relative z-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12 md:mb-16">
+                <h2 class="text-patro-green font-bold tracking-wide uppercase text-sm mb-2">Un immense merci</h2>
+                <h3 class="text-3xl md:text-5xl font-display font-bold text-gray-900">Ceux qui rendent l'aventure possible</h3>
+                <p class="text-gray-600 mt-4 max-w-2xl mx-auto">Le Patro, c'est une grande famille, et nos soutiens en font partie. Qu'il s'agisse de soutien structurel ou financier, sans eux, nos activités n'auraient pas la même saveur !</p>
+            </div>
+
+            <!-- SECTION PARTENAIRES -->
+            <div class="mb-16 md:mb-24">
+                <div class="flex items-center gap-3 mb-4">
+                    <i data-lucide="building" class="w-6 h-6 md:w-8 md:h-8 text-patro-green"></i>
+                    <h3 class="text-2xl md:text-3xl font-display font-bold text-gray-800">Nos partenaires institutionnels & locaux</h3>
+                </div>
+                <p class="text-gray-600 mb-8 max-w-3xl text-sm md:text-base">Ils nous soutiennent au quotidien : mise à disposition de locaux, reconnaissance, accompagnement pédagogique et octroi de subsides essentiels à notre bon fonctionnement.</p>
+                
+                <!-- Grille Partenaires avec coordonnées -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 items-stretch">
+                    
+                    <!-- FWB -->
+                    <div class="group bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 w-full flex flex-col border border-gray-100 overflow-hidden h-full">
+                        <div class="p-4 h-32 md:h-40 flex justify-center items-center w-full bg-white shrink-0">
+                            <img src="https://www.patrovaldhaine.be/donnees-site/logos_sponsors/Logo_FWB.png" alt="Fédération Wallonie-Bruxelles" class="partner-logo max-w-full max-h-full object-contain p-2">
+                        </div>
+                        <div class="px-5 py-4 flex-1 flex flex-col border-t border-gray-50 bg-gray-50/50">
+                            <h4 class="font-bold text-gray-800 text-sm mb-3">Fédération Wallonie-Bruxelles</h4>
+                            <ul class="space-y-2 text-xs text-gray-600 mt-auto">
+                                <li class="flex items-center gap-2">
+                                    <i data-lucide="globe" class="w-4 h-4 text-patro-green shrink-0"></i> 
+                                    <a href="https://servicejeunesse.cfwb.be" target="_blank" class="hover:text-patro-green transition truncate">Site de la FWB</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- ONE -->
+                    <div class="group bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 w-full flex flex-col border border-gray-100 overflow-hidden h-full">
+                        <div class="p-4 h-32 md:h-40 flex justify-center items-center w-full bg-white shrink-0">
+                            <img src="https://www.patrovaldhaine.be/donnees-site/logos_sponsors/Logo_ONE.png" alt="Office de la Naissance et de l'Enfance" class="partner-logo max-w-full max-h-full object-contain">
+                        </div>
+                        <div class="px-5 py-4 flex-1 flex flex-col border-t border-gray-50 bg-gray-50/50">
+                            <h4 class="font-bold text-gray-800 text-sm mb-3">ONE</h4>
+                            <ul class="space-y-2 text-xs text-gray-600 mt-auto">
+                                <li class="flex items-center gap-2">
+                                    <i data-lucide="globe" class="w-4 h-4 text-patro-green shrink-0"></i> 
+                                    <a href="https://www.one.be/" target="_blank" class="hover:text-patro-green transition truncate">Site de l'ONE</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Ecole Libre de Maurage -->
+                    <div class="group bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 w-full flex flex-col border border-gray-100 overflow-hidden h-full">
+                        <div class="p-4 h-32 md:h-40 flex justify-center items-center w-full bg-white shrink-0">
+                            <img src="https://www.patrovaldhaine.be/donnees-site/logos_sponsors/Logo-Etincelle.png" alt="École Libre de Maurage (L'Étincelle)" class="partner-logo max-w-full max-h-full object-contain">
+                        </div>
+                        <div class="px-5 py-4 flex-1 flex flex-col border-t border-gray-50 bg-gray-50/50">
+                            <h4 class="font-bold text-gray-800 text-sm mb-3">École Libre de Maurage</h4>
+                            <ul class="space-y-2 text-xs text-gray-600 mt-auto">
+                                <li class="flex items-start gap-2">
+                                    <i data-lucide="map-pin" class="w-4 h-4 mt-0.5 text-patro-green shrink-0"></i> 
+                                    <span class="leading-tight">Rue du Rœulx 23<br>7110 Maurage</span>
+                                </li>
+                                <li class="flex items-center gap-2">
+                                    <i data-lucide="phone" class="w-4 h-4 text-patro-green shrink-0"></i> 
+                                    <span>064/66.45.68</span>
+                                </li>
+                                <li class="flex items-center gap-2">
+                                    <i data-lucide="globe" class="w-4 h-4 text-patro-green shrink-0"></i> 
+                                    <a href="https://ecolelibremaurage.be" target="_blank" class="hover:text-patro-green transition truncate">Site de l'école</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Fédération Nationale des Patros -->
+                    <div class="group bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 w-full flex flex-col border border-gray-100 overflow-hidden h-full">
+                        <div class="p-4 h-32 md:h-40 flex justify-center items-center w-full bg-white shrink-0">
+                            <img src="https://www.patrovaldhaine.be/donnees-site/logos_sponsors/Logo_FNP.png" alt="Fédération Nationale des Patros" class="partner-logo max-w-full max-h-full object-contain p-2">
+                        </div>
+                        <div class="px-5 py-4 flex-1 flex flex-col border-t border-gray-50 bg-gray-50/50">
+                            <h4 class="font-bold text-gray-800 text-sm mb-3">Fédération Nationale des Patros</h4>
+                            <ul class="space-y-2 text-xs text-gray-600 mt-auto">
+                                <li class="flex items-center gap-2">
+                                    <i data-lucide="phone" class="w-4 h-4 text-patro-green shrink-0"></i> 
+                                    <span>071/28.69.50</span>
+                                </li>
+                                <li class="flex items-center gap-2">
+                                    <i data-lucide="mail" class="w-4 h-4 text-patro-green shrink-0"></i> 
+                                    <a href="mailto:secretariat@patro.be" class="hover:text-patro-green transition truncate">secretariat@patro.be</a>
+                                </li>
+                                <li class="flex items-center gap-2">
+                                    <i data-lucide="globe" class="w-4 h-4 text-patro-green shrink-0"></i> 
+                                    <a href="https://patro.be/" target="_blank" class="hover:text-patro-green transition truncate">www.patro.be</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Paroisse du Val d'Haine -->
+                    <div class="group bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 w-full flex flex-col border border-gray-100 overflow-hidden h-full">
+                        <div class="p-4 h-32 md:h-40 flex justify-center items-center w-full bg-white shrink-0">
+                            <img src="https://www.patrovaldhaine.be/donnees-site/logos_sponsors/Logo_UPValDhaine.png" alt="Paroisse du Val d'Haine" class="partner-logo max-w-full max-h-full object-contain">
+                        </div>
+                        <div class="px-5 py-4 flex-1 flex flex-col border-t border-gray-50 bg-gray-50/50">
+                            <h4 class="font-bold text-gray-800 text-sm mb-3">Unité Pastorale du Val d'Haine</h4>
+                            <ul class="space-y-2 text-xs text-gray-600 mt-auto">
+                                <li class="flex items-center gap-2">
+                                    <i data-lucide="globe" class="w-4 h-4 text-patro-green shrink-0"></i> 
+                                    <a href="https://upvaldhaine.be" target="_blank" class="hover:text-patro-green transition truncate">Site de la paroisse</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECTION SPONSORS -->
+            <div>
+                <div class="flex items-center gap-3 mb-4">
+                    <i data-lucide="store" class="w-6 h-6 md:w-8 md:h-8 text-patro-yellow"></i>
+                    <h3 class="text-2xl md:text-3xl font-display font-bold text-gray-800">Nos sponsors</h3>
+                </div>
+                <p class="text-gray-600 mb-8 max-w-3xl text-sm md:text-base">Des entreprises et commerçants locaux qui ont choisi de nous faire confiance en nous soutenant financièrement ou matériellement. Grâce à eux, nous réduisons le coût des camps et améliorons nos animations !</p>
+                
+                <!-- Grille Sponsors avec coordonnées -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 items-stretch">
+                    
+                    <!-- Sponsor 1 : Coulicoucou -->
+                    <div class="group bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 w-full flex flex-col border border-gray-100 overflow-hidden h-full">
+                        <div class="p-4 h-32 md:h-40 flex justify-center items-center w-full bg-white shrink-0">
+                            <img src="https://www.patrovaldhaine.be/donnees-site/logos_sponsors/logo-coulicoucou.png" alt="Coulicoucou" class="partner-logo max-w-full max-h-full object-contain">
+                        </div>
+                        <div class="px-5 py-4 flex-1 flex flex-col border-t border-gray-50 bg-gray-50/50">
+                            <h4 class="font-bold text-gray-800 text-sm mb-3">Coulicoucou</h4>
+                            <ul class="space-y-2 text-xs text-gray-600 mt-auto">
+                                <li class="flex items-center gap-2">
+                                    <i data-lucide="phone" class="w-4 h-4 text-patro-green shrink-0"></i> 
+                                    <span>0470/42.92.33</span>
+                                </li>
+                                <li class="flex items-center gap-2">
+                                    <i data-lucide="facebook" class="w-4 h-4 text-patro-green shrink-0"></i> 
+                                    <a href="https://www.facebook.com/profile.php?id=61564834937201" target="_blank" class="hover:text-patro-green transition truncate">Page Facebook</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Encart pour attirer de nouveaux sponsors -->
+                    <div class="col-span-1 sm:col-span-2 lg:col-span-1 w-full h-full min-h-[12rem] md:min-h-[15rem]">
+                        <div class="bg-patro-yellow/10 border-2 border-dashed border-patro-yellow p-4 md:p-6 rounded-2xl flex flex-col justify-center items-center h-full text-center transition-colors hover:bg-patro-yellow/20 group">
+                            <p class="font-handwritten text-lg md:text-2xl text-patro-dark font-bold mb-1 md:mb-2 group-hover:scale-105 transition-transform duration-300">Votre logo ici ? 👇</p>
+                            <a href="#les-formules" class="text-sm md:text-base font-bold text-patro-green hover:underline flex items-center gap-1 mt-2">
+                                Découvrir nos formules <i data-lucide="arrow-right" class="w-3 h-3 md:w-4 md:h-4"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Comment nous soutenir ? (Les formules OFFICIELLES) -->
+    <section id="les-formules" class="py-16 md:py-24 bg-patro-dark relative overflow-hidden">
+        <!-- Déco -->
+        <div class="absolute top-0 right-0 w-96 h-96 bg-patro-green opacity-20 rounded-full blur-3xl -mr-20"></div>
+        <div class="absolute bottom-0 left-0 w-64 h-64 bg-patro-yellow opacity-10 rounded-full blur-3xl -ml-20"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-12 md:mb-16">
+                <h2 class="text-patro-yellow font-bold tracking-wide uppercase text-sm mb-2">Entreprises & commerçants</h2>
+                <h3 class="text-3xl md:text-5xl font-display font-bold text-white mb-4">Nos formules de sponsoring</h3>
+                <p class="text-gray-300 max-w-2xl mx-auto text-sm md:text-base">Nous avons conçu des formules flexibles pour mettre en valeur votre soutien, quel que soit votre budget. Associez votre entreprise à nos projets éducatifs !</p>
+            </div>
+
+            <!-- GRILLE DES PRIX (Pricing Cards) -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 items-stretch mb-12">
+                
+                <!-- Formule 1 : Ami du Patro -->
+                <div class="bg-white rounded-3xl p-6 md:p-8 flex flex-col shadow-xl border-t-8 border-gray-400 transform hover:-translate-y-2 transition duration-300">
+                    <h4 class="text-2xl font-display font-bold text-gray-800 mb-2">Ami du Patro</h4>
+                    <div class="text-4xl font-black text-gray-900 mb-4">20€ <span class="text-base text-gray-500 font-normal">ou +</span></div>
+                    <p class="text-sm text-gray-500 mb-6 italic">Idéal pour un don ou un premier petit soutien (ex: tombola).</p>
+                    <ul class="space-y-4 mb-8 flex-1">
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="check-circle-2" class="w-5 h-5 text-patro-green shrink-0 mt-0.5"></i>
+                            <span class="text-sm text-gray-700"><strong>Sets de table :</strong> Votre nom ou logo lors de nos soupers.</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="check-circle-2" class="w-5 h-5 text-patro-green shrink-0 mt-0.5"></i>
+                            <span class="text-sm text-gray-700"><strong>Réseaux sociaux :</strong> Mention sur nos publications FB/Insta.</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Formule 2 : Bronze -->
+                <div class="bg-white rounded-3xl p-6 md:p-8 flex flex-col shadow-xl border-t-8 border-amber-600 transform hover:-translate-y-2 transition duration-300 relative">
+                    <h4 class="text-2xl font-display font-bold text-gray-800 mb-2">Bronze</h4>
+                    <div class="text-4xl font-black text-amber-600 mb-4">40€ <span class="text-base text-gray-500 font-normal">ou +</span></div>
+                    <p class="text-sm text-gray-500 mb-6 italic">Parfait pour soutenir un événement et gagner en visibilité locale.</p>
+                    <ul class="space-y-4 mb-8 flex-1">
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="plus" class="w-5 h-5 text-amber-600 shrink-0 mt-0.5"></i>
+                            <span class="text-sm font-bold text-gray-800">Tous les avantages "Ami"</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="check-circle-2" class="w-5 h-5 text-patro-green shrink-0 mt-0.5"></i>
+                            <span class="text-sm text-gray-700"><strong>Site internet :</strong> Votre logo sur notre page web.</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="check-circle-2" class="w-5 h-5 text-patro-green shrink-0 mt-0.5"></i>
+                            <span class="text-sm text-gray-700"><strong>Supports imprimés :</strong> Logo sur flyers & affiches de l'événement.</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Formule 3 : Argent -->
+                <div class="bg-white rounded-3xl p-6 md:p-8 flex flex-col shadow-xl border-t-8 border-slate-400 transform hover:-translate-y-2 transition duration-300">
+                    <h4 class="text-2xl font-display font-bold text-gray-800 mb-2">Argent</h4>
+                    <div class="text-4xl font-black text-slate-500 mb-4">60€ <span class="text-base text-gray-500 font-normal">ou +</span></div>
+                    <p class="text-sm text-gray-500 mb-6 italic">La formule complète pour une visibilité maximale.</p>
+                    <ul class="space-y-4 mb-8 flex-1">
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="plus" class="w-5 h-5 text-slate-500 shrink-0 mt-0.5"></i>
+                            <span class="text-sm font-bold text-gray-800">Tous les avantages "Bronze"</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="check-circle-2" class="w-5 h-5 text-patro-green shrink-0 mt-0.5"></i>
+                            <span class="text-sm text-gray-700"><strong>Visibilité 360° :</strong> Présence sur TOUS nos supports de communication liés à l'événement.</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Formule 4 : Or -->
+                <div class="bg-patro-yellow rounded-3xl p-6 md:p-8 flex flex-col shadow-2xl border-4 border-yellow-300 transform md:-translate-y-4 hover:-translate-y-6 transition duration-300 relative z-10">
+                    <div class="absolute -top-4 right-6 bg-white text-patro-green text-xs font-bold px-3 py-1 rounded-full uppercase shadow-md">Le Top</div>
+                    <h4 class="text-2xl font-display font-bold text-patro-dark mb-2">Sponsor Or</h4>
+                    <div class="text-4xl font-black text-patro-dark mb-4">80€ <span class="text-base text-gray-700 font-normal">ou +</span></div>
+                    <p class="text-sm text-gray-800 mb-6 font-medium">Devenez un partenaire privilégié pour TOUTE l'année !</p>
+                    <ul class="space-y-4 mb-8 flex-1">
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="plus" class="w-5 h-5 text-patro-dark shrink-0 mt-0.5"></i>
+                            <span class="text-sm font-bold text-patro-dark">Tous les avantages "Argent"</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="star" class="w-5 h-5 text-patro-dark fill-current shrink-0 mt-0.5"></i>
+                            <span class="text-sm text-gray-800"><strong>Partenariat annuel :</strong> Assuré sur TOUS nos événements de l'année (soupers, fêtes, camp...).</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="star" class="w-5 h-5 text-patro-dark fill-current shrink-0 mt-0.5"></i>
+                            <span class="text-sm text-gray-800"><strong>Invité d'honneur :</strong> Invitation spéciale à nos événements.</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Bloc Partenaire Matériel -->
+            <div class="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-6 md:p-8 max-w-4xl mx-auto flex flex-col md:flex-row items-center gap-6 mb-16">
+                <div class="p-4 bg-white/20 rounded-full shrink-0">
+                    <i data-lucide="package-open" class="w-10 h-10 text-white"></i>
+                </div>
+                <div class="text-center md:text-left">
+                    <h4 class="text-2xl font-display font-bold text-white mb-2">Partenaire matériel & services</h4>
+                    <p class="text-gray-300 text-sm md:text-base">
+                        Vous préférez nous soutenir avec des lots pour notre tombola, du matériel (bois, peinture, nourriture) ou des services (prêt de camionnette) ? 
+                        <strong class="text-patro-yellow">La visibilité est à la carte !</strong> Les contreparties seront discutées au cas par cas.
+                    </p>
+                </div>
+            </div>
+
+            <!-- NOUVEAU BLOC : PARTICULIERS / DONS LIBRES -->
+            <div id="don-particulier" class="bg-gradient-to-br from-patro-green to-emerald-800 rounded-3xl p-8 md:p-12 max-w-5xl mx-auto shadow-2xl relative overflow-hidden border border-emerald-600">
+                <div class="absolute -right-10 -bottom-10 opacity-20 transform rotate-12 pointer-events-none">
+                    <i data-lucide="heart-handshake" class="w-64 h-64 text-white"></i>
+                </div>
+                
+                <div class="relative z-10 text-center">
+                    <div class="inline-block p-4 bg-white/10 rounded-full mb-6">
+                        <i data-lucide="heart" class="w-10 h-10 text-patro-yellow fill-current"></i>
+                    </div>
+                    <h3 class="text-3xl md:text-4xl font-display font-bold text-white mb-4">Vous êtes un particulier ?</h3>
+                    <p class="text-green-50 text-base md:text-lg mb-6 max-w-2xl mx-auto">
+                        Parents, anciens patronné, sympathisants ou simplement citoyens... Vous pouvez aussi nous donner un coup de pouce ! Chaque don, même petit, fait une énorme différence pour le quotidien de nos animés.
+                    </p>
+                    
+                    <!-- Guide étape par étape -->
+                    <div class="bg-white/10 border border-white/20 p-5 rounded-2xl mb-8 text-left inline-block max-w-xl shadow-inner">
+                        <p class="text-sm text-patro-yellow font-bold mb-3 uppercase tracking-wide flex items-center gap-2">
+                            <i data-lucide="info" class="w-4 h-4"></i> Marche à suivre pour la déduction :
+                        </p>
+                        <ol class="text-sm text-green-50 space-y-2 list-decimal pl-4 mb-4">
+                            <li>Cliquez sur le bouton ci-dessous.</li>
+                            <li>Sélectionnez <strong>"Le Patro local de mon choix"</strong>.</li>
+                            <li>Cherchez et choisissez <strong>"DU VAL D'HAINE - STREPY-BRACQUEGNIES"</strong>.</li>
+                            <li class="text-xs italic text-green-200 mt-1 opacity-80">(La fédération n'a pas mis à jour notre localité "Maurage", mais c'est bien nous !)</li>
+                        </ol>
+                        <div class="text-xs text-green-100 border-t border-white/20 pt-3">
+                            <p class="mb-1"><strong>Bon à savoir :</strong> Vous pourrez choisir d'attribuer un pourcentage de votre don à une caisse commune solidaire pour aider d'autres Patros en difficulté.</p>
+                            <p><em>Note : Des frais de traitement (8% avec un min. de 0,35€) liés à la gestion de la plateforme sont déduits de votre don.</em></p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex justify-center">
+                        <a href="https://soutien.patro.be/fr-FR/p/faire-un-don-1d3b2" target="_blank" class="inline-flex items-center justify-center gap-3 px-8 py-4 bg-patro-yellow text-patro-dark font-bold text-lg rounded-full shadow-xl hover:bg-yellow-400 hover:scale-105 transition transform duration-200 w-full sm:w-auto">
+                            <i data-lucide="external-link" class="w-5 h-5"></i>
+                            Faire un don en ligne
+                        </a>
+                    </div>
+                    <p class="text-xs text-green-200 mt-4 font-medium flex items-center justify-center gap-1">
+                        <i data-lucide="lock" class="w-3 h-3"></i> Via la plateforme de soutien 100% sécurisée de la Fédération
+                    </p>
+                </div>
+            </div>
+
+            <!-- LE GROS AVANTAGE FISCAL & COMPTABLE -->
+            <div class="bg-white rounded-3xl p-8 md:p-10 mt-12 max-w-5xl mx-auto shadow-xl relative overflow-hidden border border-gray-100">
+                <div class="absolute -right-10 -top-10 text-gray-50 opacity-50 pointer-events-none">
+                    <i data-lucide="calculator" class="w-64 h-64"></i>
+                </div>
+                <div class="relative z-10 flex flex-col md:flex-row items-start gap-6">
+                    <div class="bg-patro-green/10 p-5 rounded-2xl shrink-0 hidden md:block">
+                        <i data-lucide="receipt" class="w-12 h-12 text-patro-green"></i>
+                    </div>
+                    <div class="flex-1 w-full">
+                        <h4 class="text-2xl md:text-3xl font-display font-bold text-patro-green mb-5 text-center md:text-left">
+                            Avantages fiscaux & comptables
+                        </h4>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <!-- Pour Entreprises -->
+                            <div class="bg-white p-5 rounded-2xl border border-gray-200 shadow-sm relative overflow-hidden">
+                                <div class="absolute top-0 right-0 p-3 opacity-5"><i data-lucide="building-2" class="w-16 h-16"></i></div>
+                                <h5 class="font-bold text-gray-800 flex items-center gap-2 mb-2 text-lg">
+                                    <i data-lucide="building-2" class="w-5 h-5 text-patro-yellow"></i> Pour les entreprises
+                                </h5>
+                                <p class="text-sm text-gray-600 leading-relaxed mb-3">
+                                    En tant qu'association de fait, nous ne délivrons pas de facture classique. En échange d'une visibilité pour votre marque, votre soutien est considéré comme une <strong>dépense de publicité</strong> (et non un don). 
+                                </p>
+                                <p class="text-sm text-gray-600 leading-relaxed">
+                                    Conformément à l'<strong>Art. 49 du CIR 92</strong>, les frais de sponsoring sont des <strong>frais professionnels déductibles à 100%</strong>. Nous vous fournissons une <strong>déclaration sur l'honneur</strong> (reçu de sponsoring) et les preuves de votre visibilité pour votre comptabilité.
+                                </p>
+                            </div>
+
+                            <!-- Pour Particuliers -->
+                            <div class="bg-green-50 p-5 rounded-2xl border border-green-200 shadow-sm relative overflow-hidden">
+                                <div class="absolute top-0 right-0 p-3 opacity-10"><i data-lucide="user" class="w-16 h-16 text-patro-green"></i></div>
+                                <h5 class="font-bold text-green-900 flex items-center gap-2 mb-2 text-lg">
+                                    <i data-lucide="user" class="w-5 h-5 text-patro-green"></i> Pour les particuliers
+                                </h5>
+                                <p class="text-sm text-green-800 leading-relaxed mb-3">
+                                    Pour bénéficier d'une véritable <strong>réduction d'impôt de 30%</strong> (dès 40€ cumulés sur l'année), vous devez <strong>obligatoirement</strong> passer par la plateforme sécurisée de la Fédération (bouton ci-dessus). 
+                                </p>
+                                <p class="text-sm text-green-800 leading-relaxed">
+                                    La Fédération Nationale des Patros se chargera de vous envoyer l'attestation fiscale officielle par la poste dans le courant du mois de mars de l’année suivant votre don.
+                                </p>
+                                <p class="mt-4 text-sm text-green-900 font-bold bg-green-100/50 p-2 rounded-lg inline-block">
+                                    💡 Exemple : Un don de 100€ ne vous coûte que 70€ !
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Pourquoi nous sponsoriser ? (Impact) -->
+    <section class="py-16 md:py-20 bg-white relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h3 class="text-3xl md:text-5xl font-display font-bold text-gray-900">Pourquoi nous aider ?</h3>
+                <p class="text-gray-600 mt-4 max-w-2xl mx-auto">Parce que vous investissez directement dans l'éducation et l'épanouissement de la jeunesse locale.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-patro-light rounded-2xl p-6 text-center shadow-sm hover:shadow-md transition border-t-4 border-blue-400">
+                    <i data-lucide="users" class="w-10 h-10 mx-auto text-blue-500 mb-4"></i>
+                    <h4 class="font-bold text-gray-900 mb-2">Cohésion sociale</h4>
+                    <p class="text-sm text-gray-600">Nous rassemblons les familles et les habitants lors de nos événements (St-Nicolas, Soupers, Marches) pour faire vivre notre village.</p>
+                </div>
+                <div class="bg-patro-light rounded-2xl p-6 text-center shadow-sm hover:shadow-md transition border-t-4 border-patro-green">
+                    <i data-lucide="tent" class="w-10 h-10 mx-auto text-patro-green mb-4"></i>
+                    <h4 class="font-bold text-gray-900 mb-2">Des infrastructures sûres</h4>
+                    <p class="text-sm text-gray-600">Votre aide finance l'aménagement de nos locaux et l'achat de tentes solides pour que les enfants campent en toute sécurité.</p>
+                </div>
+                <div class="bg-patro-light rounded-2xl p-6 text-center shadow-sm hover:shadow-md transition border-t-4 border-patro-yellow">
+                    <i data-lucide="graduation-cap" class="w-10 h-10 mx-auto text-patro-yellow mb-4"></i>
+                    <h4 class="font-bold text-gray-900 mb-2">École de la vie (CRACS)</h4>
+                    <p class="text-sm text-gray-600">Nous formons des Citoyens Responsables, Actifs, Critiques et Solidaires. De véritables compétences pour leur avenir !</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action / Contact -->
+    <section id="contact-sponsors" class="py-20 md:py-24 bg-patro-green relative text-center">
+        <!-- Vague top -->
+        <div class="absolute top-0 w-full leading-none z-10 rotate-180">
+            <svg class="block w-full h-8 md:h-16 text-patro-light" viewBox="0 0 1440 320" preserveAspectRatio="none">
+                <path fill="currentColor" d="M0,224L48,213.3C96,203,192,181,288,181.3C384,181,480,203,576,224C672,245,768,267,864,261.3C960,256,1056,224,1152,202.7C1248,181,1344,171,1392,165.3L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+            </svg>
+        </div>
+
+        <div class="max-w-4xl mx-auto px-4 relative z-20 mt-8">
+            <h2 class="text-3xl md:text-5xl font-display font-bold text-white mb-6">Prêt à collaborer avec nous ?</h2>
+            <p class="text-green-50 text-base md:text-xl mb-6 max-w-2xl mx-auto">
+                Téléchargez notre dossier complet ou contactez directement notre équipe pour en discuter. Vous pouvez également effectuer un virement direct pour le sponsoring d'entreprise :
+            </p>
+            
+            <!-- Compte bancaire -->
+            <div class="bg-white/10 backdrop-blur-sm border border-white/30 rounded-xl p-4 inline-block mb-10 text-white shadow-inner">
+                <p class="text-sm text-green-100 uppercase tracking-wide mb-1">Compte bancaire du Patro</p>
+                <p class="font-bold text-xl md:text-2xl font-mono tracking-wider">BE70 7320 7117 6025</p>
+                <p class="text-xs text-green-100 mt-2">Communication (Entreprises) : Sponsoring + Nom entreprise + N°BCE</p>
+                <div class="mt-3 pt-3 border-t border-white/20">
+                    <p class="text-xs text-yellow-300 font-bold flex items-center justify-center gap-1">
+                        <i data-lucide="alert-triangle" class="w-3 h-3"></i> 
+                        Pour les particuliers : un virement direct ne donne pas droit à la réduction d'impôt de 30% (utilisez la plateforme fédérale plus haut).
+                    </p>
+                </div>
+            </div>
+            
+            <div class="flex flex-col sm:flex-row justify-center items-center gap-4 md:gap-6 flex-wrap">
+                <!-- Bouton Téléchargement Dossier -->
+                <a href="https://www.patrovaldhaine.be/documents/Documents%20pour%20les%20sponsors/Dossier_de_sponsoring.pdf" download class="w-full sm:w-auto px-6 py-4 bg-patro-yellow text-patro-dark font-bold text-base md:text-lg rounded-full shadow-xl hover:bg-yellow-400 hover:scale-105 transition transform duration-200 flex items-center justify-center gap-3">
+                    <i data-lucide="download" class="w-5 h-5"></i>
+                    Télécharger le dossier (PDF)
+                </a>
+
+                <!-- Bouton Mail -->
+                <a href="mailto:patrovaldhaine@patro.be?subject=Soutien / Sponsoring Patro du Val d'Haine" class="w-full sm:w-auto px-6 py-4 bg-white text-patro-green font-bold text-base md:text-lg rounded-full shadow-xl hover:bg-gray-100 hover:scale-105 transition transform duration-200 flex items-center justify-center gap-3">
+                    <i data-lucide="mail" class="w-5 h-5"></i>
+                    Nous envoyer un email
+                </a>
+            </div>
+
+            <div class="mt-12 text-sm text-green-100">
+                <p><strong>Aurélie Bellon</strong> (Présidente) : 0488/08.86.03 | <strong>Romain Meersman</strong> (Vice-président) : 0494/20.72.98</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Placeholder -->
+    <div id="footer-placeholder"></div>
+
+    <script>
+        // Initialisation des icônes Lucide
+        document.addEventListener('DOMContentLoaded', () => {
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+            }
+        });
+    </script>
+</body>
+</html>
