@@ -369,8 +369,128 @@
 
     <div id="footer-placeholder"></div>
 
+    <!-- Modal Détails de l'Événement -->
+    <div id="event-modal" class="fixed inset-0 z-50 hidden" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+        <!-- Backdrop : Assombrit l'arrière-plan et se ferme au clic -->
+        <div class="fixed inset-0 bg-gray-900/60 transition-opacity backdrop-blur-sm" onclick="closeModal()"></div>
+
+        <!-- Conteneur de la Modale -->
+        <div class="fixed inset-0 z-10 w-screen overflow-y-auto">
+            <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+                <div class="relative transform overflow-hidden rounded-2xl bg-white text-left shadow-2xl transition-all sm:my-8 sm:w-full sm:max-w-lg w-full">
+                    
+                    <!-- En-tête -->
+                    <div class="bg-patro-light px-4 py-4 sm:px-6 flex justify-between items-center border-b border-gray-100">
+                        <h3 class="text-xl font-display font-bold text-gray-900" id="modal-title">Titre de l'événement</h3>
+                        <button type="button" onclick="closeModal()" class="text-gray-400 hover:text-gray-600 focus:outline-none bg-white rounded-full p-1.5 hover:bg-gray-100 transition shadow-sm border border-gray-100">
+                            <span class="sr-only">Fermer</span>
+                            <i data-lucide="x" class="w-5 h-5"></i>
+                        </button>
+                    </div>
+                    
+                    <!-- Contenu -->
+                    <div class="bg-white px-4 pb-6 pt-5 sm:p-6 sm:pb-6 space-y-5">
+                        
+                        <!-- Date & Heure -->
+                        <div class="flex items-start gap-3">
+                            <div class="mt-0.5 text-patro-green bg-green-50 p-1.5 rounded-lg"><i data-lucide="calendar-clock" class="w-5 h-5"></i></div>
+                            <div>
+                                <p class="text-sm font-bold text-gray-800 uppercase tracking-wide">Quand ?</p>
+                                <p class="text-base text-gray-600 mt-0.5" id="modal-date">Date ici</p>
+                            </div>
+                        </div>
+
+                        <!-- Lieu -->
+                        <div class="flex items-start gap-3" id="modal-location-container">
+                            <div class="mt-0.5 text-patro-yellow bg-yellow-50 p-1.5 rounded-lg"><i data-lucide="map-pin" class="w-5 h-5"></i></div>
+                            <div>
+                                <p class="text-sm font-bold text-gray-800 uppercase tracking-wide">Où ?</p>
+                                <p class="text-base text-gray-600 mt-0.5" id="modal-location">Lieu ici</p>
+                            </div>
+                        </div>
+
+                        <!-- Description -->
+                        <div class="flex items-start gap-3" id="modal-description-container">
+                            <div class="mt-0.5 text-cyan-500 bg-cyan-50 p-1.5 rounded-lg"><i data-lucide="info" class="w-5 h-5"></i></div>
+                            <div class="w-full">
+                                <p class="text-sm font-bold text-gray-800 uppercase tracking-wide">Détails</p>
+                                <div class="text-base text-gray-600 mt-1 prose prose-sm max-w-none break-words" id="modal-description">Description ici</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Pied de modale -->
+                    <div class="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6 border-t border-gray-100">
+                        <button type="button" onclick="closeModal()" class="inline-flex w-full justify-center rounded-full bg-patro-green px-6 py-2.5 text-sm font-bold text-white shadow-sm hover:bg-green-700 sm:w-auto sm:ml-3 transition">
+                            Fermer
+                        </button>
+                        <a href="#" target="_blank" id="modal-link" class="hidden mt-3 inline-flex w-full justify-center rounded-full bg-white px-6 py-2.5 text-sm font-bold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto transition">
+                            <i data-lucide="external-link" class="w-4 h-4 mr-2"></i> Plus d'infos
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Scripts -->
     <script>
+        // Array global pour stocker les événements de l'API
+        window.fetchedEvents = [];
+
+        // Fonctions pour gérer la modale
+        function openModal(index) {
+            const ev = window.fetchedEvents[index];
+            
+            // Titre & Date
+            document.getElementById('modal-title').innerText = ev.title;
+            document.getElementById('modal-date').innerText = ev.dateString;
+
+            // Lieu
+            const locContainer = document.getElementById('modal-location-container');
+            if (ev.place) {
+                document.getElementById('modal-location').innerText = ev.place;
+                locContainer.classList.remove('hidden');
+                locContainer.classList.add('flex');
+            } else {
+                locContainer.classList.add('hidden');
+                locContainer.classList.remove('flex');
+            }
+
+            // Description
+            const descContainer = document.getElementById('modal-description-container');
+            if (ev.description) {
+                document.getElementById('modal-description').innerHTML = ev.description;
+                descContainer.classList.remove('hidden');
+                descContainer.classList.add('flex');
+            } else {
+                descContainer.classList.add('hidden');
+                descContainer.classList.remove('flex');
+            }
+
+            // Lien additionnel
+            const linkBtn = document.getElementById('modal-link');
+            if (ev.linkUrl) {
+                linkBtn.href = ev.linkUrl;
+                linkBtn.classList.remove('hidden');
+                linkBtn.classList.add('inline-flex');
+            } else {
+                linkBtn.classList.add('hidden');
+                linkBtn.classList.remove('inline-flex');
+            }
+
+            // Afficher la modale
+            const modal = document.getElementById('event-modal');
+            modal.classList.remove('hidden');
+            
+            // Actualiser les icônes si besoin
+            if(typeof lucide !== 'undefined') lucide.createIcons();
+        }
+
+        function closeModal() {
+            document.getElementById('event-modal').classList.add('hidden');
+        }
+
         // Animation des chiffres clés
         function runCounters() {
             const counters = document.querySelectorAll('.counter-value');
@@ -602,6 +722,8 @@
                 const events = data.items;
 
                 container.innerHTML = '';
+                // On réinitialise l'array global au chargement
+                window.fetchedEvents = [];
 
                 if (events.length === 0) {
                     container.innerHTML = '<p class="text-gray-500 italic text-center py-4">Aucune date prévue pour le moment.</p>';
@@ -612,12 +734,23 @@
                         const title = event.summary;
                         const place = event.location || '';
                         const linkUrl = event.description && event.description.includes('http') ? event.description.match(/https?:\/\/[^\s]+/)[0] : '';
+                        const descriptionText = event.description || '';
                         
                         const dateObj = new Date(start.dateTime || start.date);
                         const dayNum = dateObj.getDate();
                         const monthName = monthMap[dateObj.getMonth()];
 
                         const dateString = formatPatroEventDate(start, end);
+
+                        // On stocke les infos de l'événement pour la modale
+                        window.fetchedEvents.push({
+                            title: title,
+                            dateString: dateString,
+                            place: place,
+                            description: descriptionText,
+                            linkUrl: linkUrl
+                        });
+                        const eventIndex = window.fetchedEvents.length - 1;
 
                         const innerContent = `
                                 <div class="flex-shrink-0 bg-patro-yellow/20 text-patro-dark rounded-lg w-14 h-14 flex flex-col items-center justify-center border border-patro-yellow/30">
@@ -631,14 +764,9 @@
                                 </div>
                         `;
 
-                        const commonClasses = "flex items-center gap-4 p-3 hover:bg-gray-50 rounded-lg transition group block w-full text-left";
-                        let html = '';
-
-                        if (linkUrl) {
-                            html = `<a href="${linkUrl}" target="_blank" class="${commonClasses} cursor-pointer decoration-0">${innerContent}</a>`;
-                        } else {
-                            html = `<div class="${commonClasses}">${innerContent}</div>`;
-                        }
+                        // On remplace le div/a par un bouton qui déclenche la modale
+                        const commonClasses = "flex items-center gap-4 p-3 hover:bg-gray-50 rounded-lg transition group block w-full text-left bg-transparent border-0 appearance-none focus:outline-none focus:ring-2 focus:ring-patro-green focus:ring-opacity-50";
+                        const html = `<button type="button" onclick="openModal(${eventIndex})" class="${commonClasses} cursor-pointer decoration-0">${innerContent}</button>`;
 
                         container.innerHTML += html;
                     });
