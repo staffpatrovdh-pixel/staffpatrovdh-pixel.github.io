@@ -2,13 +2,12 @@
 =======================================================================
   © 2026 Patro du Val d'Haine de Maurage - Tous droits réservés.
   Script de Layout (Navbar & Footer)
-  Toute reproduction de ce code, du design ou des textes est interdite.
 =======================================================================
 */
 
 document.addEventListener("DOMContentLoaded", function () {
     
-    console.log("Patro Layout Loaded - Version 12.1 (Menu Reordered & Parent Space)");
+    console.log("Patro Layout Loaded - Version 12.2 (Menu Reordered & Partners added)");
 
     // Détermination intelligente du chemin de base (Root vs Sous-dossiers)
     let basePath = './';
@@ -29,8 +28,8 @@ document.addEventListener("DOMContentLoaded", function () {
                     <div class="hidden lg:flex space-x-5 items-center">
                         <a href="${basePath}index.html" class="nav-link text-gray-600 hover:text-patro-green font-medium transition">Accueil</a>
                         <a href="${basePath}index.html#infos" class="nav-link text-gray-600 hover:text-patro-green font-medium transition">Agenda</a>
-                        <a href="${basePath}contact.html" class="nav-link text-gray-600 hover:text-patro-green font-medium transition">Contact</a>
                         
+                        <!-- Menu Déroulant : Sections -->
                         <div class="relative group">
                             <button id="desktop-sections-btn" class="nav-link text-gray-600 group-hover:text-patro-green font-medium transition flex items-center gap-1 focus:outline-none py-2">
                                 Sections <i data-lucide="chevron-down" class="w-4 h-4 transition-transform duration-300 group-hover:rotate-180"></i>
@@ -53,7 +52,25 @@ document.addEventListener("DOMContentLoaded", function () {
                             </div>
                         </div>
 
-                        <a href="${basePath}documents.html" class="nav-link text-gray-600 hover:text-patro-green font-medium transition">Documents</a>
+                        <!-- Menu Déroulant : Infos & Contact -->
+                        <div class="relative group">
+                            <button id="desktop-infos-btn" class="nav-link text-gray-600 group-hover:text-patro-green font-medium transition flex items-center gap-1 focus:outline-none py-2">
+                                Infos & Contact <i data-lucide="chevron-down" class="w-4 h-4 transition-transform duration-300 group-hover:rotate-180"></i>
+                            </button>
+                            <div class="absolute left-1/2 -translate-x-1/2 mt-0 pt-2 w-56 rounded-xl shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 transform origin-top translate-y-2 group-hover:translate-y-0">
+                                <div class="bg-white rounded-xl border border-gray-100 overflow-hidden shadow-lg p-2" role="menu">
+                                    <a href="${basePath}contact.html" class="nav-link-sub block px-4 py-3 text-sm font-medium text-gray-700 hover:bg-green-50 hover:text-patro-green rounded-lg transition border-l-2 border-transparent hover:border-patro-green">
+                                        Nous contacter
+                                    </a>
+                                    <a href="${basePath}documents.html" class="nav-link-sub block px-4 py-3 text-sm font-medium text-gray-700 hover:bg-green-50 hover:text-patro-green rounded-lg transition border-l-2 border-transparent hover:border-patro-green mt-1">
+                                        Documents
+                                    </a>
+                                    <a href="${basePath}partenaires.html" class="nav-link-sub block px-4 py-3 text-sm font-medium text-gray-700 hover:bg-green-50 hover:text-patro-green rounded-lg transition border-l-2 border-transparent hover:border-patro-green mt-1">
+                                        Nos Partenaires
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
                         
                         <div class="flex items-center gap-3 pl-3 border-l border-gray-200">
                             <a href="${basePath}inscription.html" class="bg-patro-green text-white px-5 py-2.5 rounded-full font-bold hover:bg-green-700 transition shadow-md hover:shadow-lg transform hover:-translate-y-0.5 text-sm">
@@ -73,12 +90,13 @@ document.addEventListener("DOMContentLoaded", function () {
                 </div>
             </div>
 
+            <!-- Menu Mobile -->
             <div id="mobile-menu" class="hidden lg:hidden bg-white border-t overflow-y-auto max-h-[85vh]">
                 <div class="px-4 pt-2 pb-6 space-y-2 shadow-inner">
                     <a href="${basePath}index.html" class="nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-patro-green hover:bg-green-50 transition">Accueil</a>
                     <a href="${basePath}index.html#infos" class="nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-patro-green hover:bg-green-50 transition">Agenda</a>
-                    <a href="${basePath}contact.html" class="nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-patro-green hover:bg-green-50 transition">Contact</a>
                     
+                    <!-- Mobile : Sections -->
                     <div>
                         <button id="mobile-sections-btn" onclick="document.getElementById('mobile-sections-menu').classList.toggle('hidden'); document.getElementById('mobile-sections-icon').classList.toggle('rotate-180');" class="nav-link w-full flex justify-between items-center px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-patro-green hover:bg-green-50 transition focus:outline-none">
                             Nos Sections
@@ -92,7 +110,18 @@ document.addEventListener("DOMContentLoaded", function () {
                         </div>
                     </div>
 
-                    <a href="${basePath}documents.html" class="nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-patro-green hover:bg-green-50 transition">Documents</a>
+                    <!-- Mobile : Infos & Contact -->
+                    <div>
+                        <button id="mobile-infos-btn" onclick="document.getElementById('mobile-infos-menu').classList.toggle('hidden'); document.getElementById('mobile-infos-icon').classList.toggle('rotate-180');" class="nav-link w-full flex justify-between items-center px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-patro-green hover:bg-green-50 transition focus:outline-none">
+                            Infos & Contact
+                            <i data-lucide="chevron-down" id="mobile-infos-icon" class="w-5 h-5 transition-transform duration-300"></i>
+                        </button>
+                        <div id="mobile-infos-menu" class="hidden overflow-hidden transition-all duration-300 bg-gray-50 rounded-b-lg border-l-2 border-patro-green/30 ml-3 mt-1 mb-2 shadow-inner">
+                            <a href="${basePath}contact.html" class="nav-link-sub block px-4 py-2.5 text-sm font-medium text-gray-600 hover:text-patro-green hover:bg-green-100 transition">Nous contacter</a>
+                            <a href="${basePath}documents.html" class="nav-link-sub block px-4 py-2.5 text-sm font-medium text-gray-600 hover:text-patro-green hover:bg-green-100 transition">Documents</a>
+                            <a href="${basePath}partenaires.html" class="nav-link-sub block px-4 py-2.5 text-sm font-medium text-gray-600 hover:text-patro-green hover:bg-green-100 transition">Nos Partenaires</a>
+                        </div>
+                    </div>
                     
                     <div class="pt-4 mt-2 border-t border-gray-100 space-y-3">
                         <a href="${basePath}inscription.html" class="block w-full text-center px-5 py-4 rounded-xl font-bold bg-patro-yellow text-patro-green shadow-md active:scale-95 transition">
@@ -139,6 +168,10 @@ document.addEventListener("DOMContentLoaded", function () {
                             <div class="animate-pulse h-16 w-24 bg-gray-800 rounded"></div>
                             <div class="animate-pulse h-16 w-24 bg-gray-800 rounded"></div>
                         </div>
+                        <a href="${basePath}partenaires.html" class="mt-6 flex items-center gap-2 text-sm text-patro-yellow hover:text-white transition-colors duration-300 font-medium group">
+                            Vous aussi vous voulez nous soutenir ? 
+                            <i data-lucide="arrow-right" class="w-4 h-4 transform group-hover:translate-x-1 transition-transform"></i>
+                        </a>
                     </div>
 
                     <div class="flex flex-col items-center md:items-end">
@@ -247,12 +280,32 @@ function highlightActiveLink() {
             mobileBtn.classList.remove('text-gray-700', 'font-medium');
             mobileBtn.classList.add('text-patro-green', 'font-bold');
             
-            // Ouvre l'accordéon mobile automatiquement
             const mobileMenu = document.getElementById('mobile-sections-menu');
             const mobileIcon = document.getElementById('mobile-sections-icon');
             if(mobileMenu && mobileIcon) {
                 mobileMenu.classList.remove('hidden');
                 mobileIcon.classList.add('rotate-180');
+            }
+        }
+    }
+
+    // Éclaire le menu "Infos & Contact" si l'utilisateur est sur l'une de ces pages
+    if (currentPath.includes('contact.html') || currentPath.includes('documents.html') || currentPath.includes('partenaires.html')) {
+        const desktopInfosBtn = document.getElementById('desktop-infos-btn');
+        if (desktopInfosBtn) {
+            desktopInfosBtn.classList.remove('text-gray-600', 'font-medium');
+            desktopInfosBtn.classList.add('text-patro-green', 'font-bold');
+        }
+        const mobileInfosBtn = document.getElementById('mobile-infos-btn');
+        if (mobileInfosBtn) {
+            mobileInfosBtn.classList.remove('text-gray-700', 'font-medium');
+            mobileInfosBtn.classList.add('text-patro-green', 'font-bold');
+            
+            const mobileInfosMenu = document.getElementById('mobile-infos-menu');
+            const mobileInfosIcon = document.getElementById('mobile-infos-icon');
+            if(mobileInfosMenu && mobileInfosIcon) {
+                mobileInfosMenu.classList.remove('hidden');
+                mobileInfosIcon.classList.add('rotate-180');
             }
         }
     }
