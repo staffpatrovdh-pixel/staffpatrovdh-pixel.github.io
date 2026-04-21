@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirection vers le formulaire...</title>
+    
+    <!-- Redirection automatique via balise meta (0 seconde d'attente) -->
+    <meta http-equiv="refresh" content="0; url=https://docs.google.com/forms/d/e/1FAIpQLSeqOF75fqSny5BJu976pmxnTw3tvdoucS4B7YQhru17Q-wqJg/viewform?usp=dialog">
+    
+    <!-- Redirection de secours via JavaScript -->
+    <script>
+        window.location.href = "https://docs.google.com/forms/d/e/1FAIpQLSeqOF75fqSny5BJu976pmxnTw3tvdoucS4B7YQhru17Q-wqJg/viewform?usp=dialog";
+    </script>
+    
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f9;
+            color: #333;
+            text-align: center;
+        }
+        .container {
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        a {
+            color: #0056b3;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Redirection en cours...</h2>
+        <p>Vous allez être redirigé vers le formulaire d'inscription.</p>
+        <p>
+            <!-- Lien cliquable au cas où la redirection automatique est bloquée par le navigateur -->
+            Si vous n'êtes pas redirigé automatiquement d'ici quelques secondes, <br><br>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSeqOF75fqSny5BJu976pmxnTw3tvdoucS4B7YQhru17Q-wqJg/viewform?usp=dialog">Cliquez ici pour accéder au formulaire</a>.
+        </p>
+    </div>
+</body>
+</html>
