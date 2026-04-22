@@ -1,151 +1,259 @@
 <!DOCTYPE html>
+<!--
+=======================================================================
+  © 2026 Patro du Val d'Haine de Maurage - Tous droits réservés
+  Conception & développement pour le Patro du Val d'Haine par Romain Meersman.
+=======================================================================
+-->
 <html lang="fr" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portail | Patro du Val d'Haine</title>
+    <title>Fête des Familles - Patro du Val d'Haine</title>
     
-    <!-- Chemins corrigés pour la racine -->
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
+    <!-- Polices : Indie Flower, Balsamiq Sans et Poppins (en secours) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Balsamiq+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Indie+Flower&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
-    <!-- Chemin corrigé pour la racine -->
-    <script src="layout.js?v=8"></script>
+    <script src="layout.js?v=11.3"></script>
 
     <script>
-        tailwind.config = { theme: { extend: { colors: { patro: { yellow: '#FFD700', green: '#009045', dark: '#1a1a1a', light: '#f8fafc' } }, fontFamily: { sans: ['Poppins', 'sans-serif'], display: ['Fredoka', 'sans-serif'], handwritten: ['Indie Flower', 'cursive'] } } } }
+        tailwind.config = { 
+            theme: { 
+                extend: { 
+                    colors: { 
+                        affiche: {
+                            darkgreen: '#085A2B',
+                            lightgreen: '#A2C617',
+                            teal: '#379FB2',
+                            bgmint: '#D4EFE9',
+                            bgblue: '#94C1DA'
+                        }
+                    }, 
+                    fontFamily: { 
+                        sans: ['Balsamiq Sans', 'Calibri', 'Poppins', 'sans-serif'], 
+                        display: ['"Winky Rough"', 'Impact', 'Arial Black', 'sans-serif'], 
+                        handwritten: ['Indie Flower', 'cursive'] 
+                    } 
+                } 
+            } 
+        }
     </script>
+    <style>
+        /* Animations fluides au défilement */
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .fade-in-up.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .delay-100 { transition-delay: 100ms; }
+        .delay-200 { transition-delay: 200ms; }
+        .delay-300 { transition-delay: 300ms; }
+    </style>
 </head>
-<body class="font-sans text-slate-800 bg-gray-50 antialiased min-h-screen flex flex-col">
+<body class="font-sans text-affiche-darkgreen bg-affiche-bgmint antialiased">
 
     <div id="custom-cursor"></div>
-    <div id="loader"><div class="spinner mb-4"></div><p class="text-patro-green font-bold font-display animate-pulse">Chargement du portail...</p></div>
+    <div id="loader"><div class="spinner mb-4"></div><p class="text-affiche-darkgreen font-bold font-display animate-pulse">Chargement...</p></div>
     
+    <!-- La barre de navigation sera injectée ici par layout.js -->
     <div id="navbar-placeholder"></div>
 
-    <!-- En-tête Portail -->
-    <div class="pt-32 pb-16 bg-patro-dark relative overflow-hidden">
-        <div class="absolute inset-0 z-0">
-            <!-- Chemin corrigé -->
-            <img src="donnees-site/photos-site-accueil/portail.png" alt="Portail Patro" class="w-full h-full object-cover opacity-40">
-            <div class="absolute inset-0 bg-gradient-to-t from-patro-dark/90 to-patro-dark/60"></div>
+    <!-- Hero Section de l'événement (Bannière Image) -->
+    <section class="relative pt-20 lg:pt-28 bg-affiche-bgmint overflow-hidden">
+        <div class="w-full relative fade-in-up">
+            <picture>
+                <!-- Version PC : 851x315 -->
+                <source media="(min-width: 768px)" srcset="donnees-site/illustrations/events/fete-famille-2026.png">
+                <!-- Version Mobile : 1080x1080 (Carré recommandé) -->
+                <img src="donnees-site/illustrations/events/fete-famille-2026-mobile.png" alt="Bannière 1ère Fête des Familles" class="w-full h-auto object-cover max-h-[70vh] md:max-h-none" onerror="this.src='https://placehold.co/851x315/085A2B/FFFFFF?text=Banniere+Fete+des+Familles';">
+            </picture>
+            
+            <!-- Bouton Inscription superposé sur le bas de la bannière -->
+            <div class="absolute bottom-4 md:bottom-8 left-0 w-full flex justify-center z-20">
+                <a href="#inscription" class="px-6 py-3 md:px-8 md:py-4 rounded-full bg-affiche-lightgreen text-affiche-darkgreen font-bold text-base md:text-lg shadow-xl hover:bg-white hover:text-affiche-darkgreen hover:scale-105 transition transform duration-200 flex items-center justify-center gap-2">
+                    <i data-lucide="ticket" class="w-5 h-5"></i>
+                    Je m'inscris !
+                </a>
+            </div>
         </div>
 
-        <div class="max-w-4xl mx-auto px-4 text-center relative z-10">
-            <span class="inline-block py-1 px-3 rounded-full bg-white/10 border border-white/20 text-white text-xs font-bold uppercase tracking-widest mb-4">
-                Outils Patro
+        <!-- Vagues décoratives collées sous l'image -->
+        <div class="relative w-full leading-none z-10 -mt-1 md:-mt-2">
+            <svg class="block w-full h-12 md:h-24 text-affiche-bgmint" viewBox="0 0 1440 320" preserveAspectRatio="none">
+                <path class="wave-anim-2" fill="currentColor" d="M0,224L48,213.3C96,203,192,181,288,181.3C384,181,480,203,576,224C672,245,768,267,864,261.3C960,256,1056,224,1152,202.7C1248,181,1344,171,1392,165.3L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+                <path class="wave-anim-1" fill="currentColor" fill-opacity="1" d="M0,224L48,213.3C96,203,192,181,288,181.3C384,181,480,203,576,224C672,245,768,267,864,261.3C960,256,1056,224,1152,202.7C1248,181,1344,171,1392,165.3L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+            </svg>
+        </div>
+    </section>
+
+    <!-- Introduction (Texte déplacé du haut) -->
+    <section class="pt-8 pb-12 bg-affiche-bgmint relative z-20">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center fade-in-up">
+            <span class="font-handwritten text-3xl md:text-4xl text-affiche-darkgreen font-bold drop-shadow-sm tracking-wide block mb-2">
+                Pour nos 8 ans... 🎉
             </span>
-            <h1 class="text-4xl md:text-5xl font-display font-bold text-white mb-4">
-                Portail d'applications
-            </h1>
-            <p class="text-lg text-gray-400 max-w-2xl mx-auto">
-                Retrouvez-ici un accès rapide à tous les outils
+            <h2 class="text-4xl md:text-5xl font-display tracking-wide text-affiche-teal mb-4 uppercase">
+                1ère Fête des <span class="text-affiche-lightgreen">Familles</span>
+            </h2>
+            <p class="text-lg md:text-xl text-affiche-darkgreen font-semibold max-w-2xl mx-auto">
+                Participez à la toute première édition de notre grande journée ouverte à tous !
             </p>
         </div>
-    </div>
+    </section>
 
-    <!-- Contenu Principal -->
-    <main class="flex-grow py-16 px-4">
-        <div class="max-w-6xl mx-auto space-y-16">
-
-            <!-- ZONE PARENTS -->
-            <div>
-                <h2 class="text-2xl font-display font-bold text-patro-green mb-8 flex items-center gap-3">
-                    <i data-lucide="users" class="w-8 h-8"></i>
-                    Pour les Parents :
-                </h2>
+    <!-- Informations Clés (Cartes) -->
+    <section class="py-12 bg-affiche-bgmint relative z-20 -mt-4 md:-mt-8">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <!-- Carte Espace Parent -->
-                    <a href="http://parent.patrovaldhaine.be/" target="_blank" class="group bg-white rounded-2xl shadow-sm hover:shadow-xl border border-gray-200 p-6 transition-all duration-300 transform hover:-translate-y-1 flex flex-col h-full relative overflow-hidden">
-                        <div class="absolute top-0 right-0 w-24 h-24 bg-patro-yellow/10 rounded-bl-full transition group-hover:bg-patro-yellow/20"></div>
-                        
-                        <div class="w-14 h-14 bg-patro-yellow/20 rounded-xl flex items-center justify-center text-patro-dark mb-4 group-hover:scale-110 transition">
-                            <i data-lucide="layout-dashboard" class="w-7 h-7"></i>
-                        </div>
-                        
-                        <h3 class="text-xl font-bold text-gray-900 mb-2">Espace Parents</h3>
-                        <p class="text-gray-500 text-sm mb-6 flex-grow">
-                            Connectez-vous afin de pouvoir consulter ou modifier les données de vos enfants
-                        </p>
-                        
-                        <div class="text-patro-green font-bold text-sm flex items-center gap-2 group-hover:gap-3 transition-all">
-                            Se connecter <i data-lucide="arrow-right" class="w-4 h-4"></i>
-                        </div>
-                    </a>
+                <!-- Date & Heure -->
+                <div class="bg-white rounded-3xl shadow-lg p-8 flex flex-col items-center text-center transform hover:-translate-y-2 transition duration-300 border-b-4 border-affiche-teal fade-in-up delay-100">
+                    <div class="w-16 h-16 bg-affiche-bgblue rounded-full flex items-center justify-center text-affiche-darkgreen mb-4">
+                        <i data-lucide="calendar-clock" class="w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-2xl font-display tracking-wide text-affiche-teal mb-2">Quand ?</h3>
+                    <p class="text-affiche-darkgreen font-bold text-lg">Samedi 16 Mai</p>
+                    <p class="text-affiche-teal font-semibold">De 14h00 à 18h00</p>
                 </div>
-            </div>
 
-            <!-- SÉPARATEUR -->
-            <div class="border-t border-gray-200"></div>
-
-            <!-- ZONE STAFF (Accès Restreint visuel) -->
-            <div>
-                <h2 class="text-2xl font-display font-bold text-gray-800 mb-8 flex items-center gap-3">
-                    <i data-lucide="lock" class="w-6 h-6 text-gray-400"></i>
-                    Pour le staff et l'intendance :
-                    <span class="text-xs font-sans font-normal bg-gray-200 text-gray-600 px-2 py-1 rounded ml-2">Outils réservés au staff et aux intendants du Patro</span>
-                </h2>
-                
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    
-                    <!-- Carte Intranet Animateur -->
-                    <a href="https://intranet.patrovaldhaine.be/admin/" target="_blank" class="group bg-slate-800 rounded-2xl shadow-lg hover:shadow-2xl border border-slate-700 p-6 transition-all duration-300 transform hover:-translate-y-1 flex flex-col h-full relative overflow-hidden">
-                        <div class="absolute inset-0 bg-gradient-to-tr from-white/0 via-white/5 to-white/0 opacity-0 group-hover:opacity-100 transition duration-500"></div>
-                        <div class="w-14 h-14 bg-slate-700 rounded-xl flex items-center justify-center text-white mb-4 group-hover:bg-patro-green transition-colors">
-                            <i data-lucide="database" class="w-7 h-7"></i>
-                        </div>
-                        <h3 class="text-xl font-bold text-white mb-2">Intranet</h3>
-                        <p class="text-slate-400 text-sm mb-6 flex-grow">
-                            Accès réservé au staff
-                        </p>
-                        <div class="text-white/80 font-bold text-sm flex items-center gap-2 group-hover:text-patro-green transition-colors">
-                            Se connecter <i data-lucide="external-link" class="w-4 h-4"></i>
-                        </div>
-                    </a>
-
-                    <!-- Carte Webmail  -->
-                    <a href="https://webmail.patrovaldhaine.be/" target="_blank" class="group bg-slate-800 rounded-2xl shadow-lg hover:shadow-2xl border border-slate-700 p-6 transition-all duration-300 transform hover:-translate-y-1 flex flex-col h-full relative overflow-hidden">
-                        <div class="absolute inset-0 bg-gradient-to-tr from-white/0 via-white/5 to-white/0 opacity-0 group-hover:opacity-100 transition duration-500"></div>
-                        <div class="w-14 h-14 bg-slate-700 rounded-xl flex items-center justify-center text-white mb-4 group-hover:bg-patro-green transition-colors">
-                            <i data-lucide="mail" class="w-7 h-7"></i>
-                        </div>
-                        <h3 class="text-xl font-bold text-white mb-2">Webmail</h3>
-                        <p class="text-slate-400 text-sm mb-6 flex-grow">
-                            Accès aux mails
-                        </p>
-                        <div class="text-white/80 font-bold text-sm flex items-center gap-2 group-hover:text-patro-green transition-colors">
-                            Se connecter <i data-lucide="external-link" class="w-4 h-4"></i>
-                        </div>
-                    </a>
-                    
-                    <!-- Carte MonPatro.be -->
-                    <a href="https://www.monpatro.be/login" target="_blank" class="group bg-patro-yellow rounded-2xl shadow-lg hover:shadow-2xl p-6 transition-all duration-300 transform hover:-translate-y-1 flex flex-col h-full relative overflow-hidden">
-                        <div class="w-14 h-14 bg-white/20 rounded-xl flex items-center justify-center text-patro-dark mb-4">
-                            <i data-lucide="users-round" class="w-7 h-7"></i>
-                        </div>
-                        <h3 class="text-xl font-bold text-patro-dark mb-2">MonPatro.be</h3>
-                        <p class="text-patro-dark/70 text-sm mb-6 flex-grow">
-                            Affiliations et assurances à la FNP
-                        </p>
-                        <div class="text-patro-dark font-bold text-sm flex items-center gap-2 group-hover:gap-3 transition-all">
-                            Se connecter <i data-lucide="external-link" class="w-4 h-4"></i>
-                        </div>
-                    </a>
+                <!-- Lieu -->
+                <div class="bg-white rounded-3xl shadow-lg p-8 flex flex-col items-center text-center transform hover:-translate-y-2 transition duration-300 border-b-4 border-affiche-lightgreen fade-in-up delay-200">
+                    <div class="w-16 h-16 bg-affiche-bgmint rounded-full flex items-center justify-center text-affiche-darkgreen mb-4">
+                        <i data-lucide="map-pin" class="w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-2xl font-display tracking-wide text-affiche-teal mb-2">Où ?</h3>
+                    <p class="text-affiche-darkgreen font-bold text-lg">École de l'Étincelle</p>
+                    <p class="text-affiche-teal font-semibold">Rue du Roeulx 23, Maurage</p>
                 </div>
-            </div>
 
+                <!-- Public & Prix -->
+                <div class="bg-white rounded-3xl shadow-lg p-8 flex flex-col items-center text-center transform hover:-translate-y-2 transition duration-300 border-b-4 border-affiche-teal fade-in-up delay-300">
+                    <div class="w-16 h-16 bg-affiche-bgblue rounded-full flex items-center justify-center text-affiche-darkgreen mb-4">
+                        <i data-lucide="users" class="w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-2xl font-display tracking-wide text-affiche-teal mb-2">Pour qui ?</h3>
+                    <p class="text-affiche-darkgreen font-bold text-lg">De 4 à 99 ans +</p>
+                    <p class="text-affiche-lightgreen font-black text-2xl mt-1">1€ <span class="text-sm font-bold text-affiche-teal">/ participant</span></p>
+                </div>
+
+            </div>
         </div>
-    </main>
+    </section>
 
-    <!-- Footer -->
+    <!-- Détails du Programme -->
+    <section class="py-12 md:py-20 bg-affiche-bgmint overflow-hidden">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12 md:mb-16 fade-in-up">
+                <h2 class="text-affiche-teal font-bold tracking-wide uppercase text-sm mb-2">Au programme pour nos 8 ans</h2>
+                <h3 class="text-4xl md:text-6xl font-display tracking-wide text-affiche-darkgreen">Une journée de folie !</h3>
+            </div>
+
+            <div class="space-y-8 md:space-y-10">
+                
+                <!-- Le Grand Jeu -->
+                <div class="bg-white rounded-3xl shadow-lg p-6 md:p-10 transform md:-rotate-1 hover:rotate-0 transition duration-300 border-l-8 border-affiche-lightgreen fade-in-up">
+                    <div class="flex flex-col sm:flex-row items-start gap-4">
+                        <div class="w-16 h-16 bg-affiche-bgmint rounded-2xl flex items-center justify-center text-affiche-teal flex-shrink-0 mb-4 sm:mb-0">
+                            <i data-lucide="globe-2" class="w-8 h-8"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-2xl md:text-3xl font-display tracking-wide text-affiche-darkgreen mb-3">Le Grand Jeu : Thème "Tour du Monde"</h4>
+                            <p class="text-affiche-teal font-semibold text-base md:text-lg leading-relaxed mb-4">
+                                Pour fêter le <strong>8ème anniversaire du Patro</strong>, nous vous avons préparé une 1ère édition inoubliable ! En famille ou entre amis, rejoignez-nous pour une aventure exceptionnelle. Parcourez les différents continents à travers des épreuves amusantes et originales.
+                            </p>
+                            <p class="text-affiche-lightgreen font-bold text-lg flex items-center gap-2">
+                                <i data-lucide="gift" class="w-5 h-5 flex-shrink-0"></i>
+                                Tentez de remporter un super cadeau à la fin du jeu !
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bar & Goûter -->
+                <div class="bg-white rounded-3xl shadow-lg p-6 md:p-10 transform md:rotate-1 hover:rotate-0 transition duration-300 border-r-8 border-affiche-teal ml-auto md:w-11/12 fade-in-up delay-100">
+                    <div class="flex flex-col-reverse sm:flex-row items-start gap-4">
+                        <div class="flex-grow">
+                            <h4 class="text-2xl md:text-3xl font-display tracking-wide text-affiche-darkgreen mb-3">Bar Patro & Buffet Goûter</h4>
+                            <p class="text-affiche-teal font-semibold text-base md:text-lg leading-relaxed">
+                                Après l'effort, le réconfort ! Un espace détente sera à votre disposition tout au long de l'après-midi. Profitez de notre <strong>Bar Patro</strong> pour vous rafraîchir et régalez-vous à notre <strong>buffet goûter</strong> bien garni. 
+                            </p>
+                        </div>
+                        <div class="w-16 h-16 bg-affiche-bgblue rounded-2xl flex items-center justify-center text-affiche-darkgreen flex-shrink-0 mb-4 sm:mb-0">
+                            <i data-lucide="coffee" class="w-8 h-8"></i>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Inscription Section -->
+    <section id="inscription" class="py-12 md:py-20 bg-affiche-bgblue relative border-t border-affiche-teal">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center fade-in-up">
+            <span class="font-handwritten text-3xl md:text-4xl text-affiche-darkgreen mb-2 block">On vous attend !</span>
+            <h2 class="text-3xl md:text-5xl font-display tracking-wide text-white mb-6">Prêts à embarquer ?</h2>
+            <p class="text-base md:text-lg text-affiche-darkgreen font-semibold mb-8 max-w-2xl mx-auto">
+                Pour nous aider à organiser cette journée au mieux, merci de vous inscrire via le formulaire ci-dessous. Le paiement (1€/personne) se fera sur place.
+            </p>
+            
+            <!-- Intégration du formulaire Mobile First -->
+            <div class="bg-white rounded-2xl p-2 sm:p-4 md:p-6 border border-white shadow-xl w-full mx-auto overflow-hidden">
+                <iframe 
+                    src="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=NPF7FFp5BESD9SwHoEWkdcDJwt4bhp5OotaWRfoTKWJUM1Q5RFpHNzZVM1pHOUJKMVFLT1ZBN1EyNS4u&embed=true" 
+                    frameborder="0" 
+                    marginwidth="0" 
+                    marginheight="0" 
+                    class="w-full min-h-[600px] md:min-h-[750px] border-none rounded-xl"
+                    allowfullscreen webkitallowfullscreen mozallowfullscreen msallowfullscreen> 
+                </iframe>
+            </div>
+            
+            <p class="mt-8 text-sm text-affiche-darkgreen font-semibold">
+                Une question ? Contactez-nous via nos réseaux sociaux ou l'onglet Contact !
+            </p>
+        </div>
+    </section>
+
+    <!-- Le Footer sera injecté ici par layout.js -->
     <div id="footer-placeholder"></div>
 
+    <!-- Initialisation des icônes et Animations -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            lucide.createIcons();
+            // Initialisation des icônes
+            if(typeof lucide !== 'undefined') {
+                lucide.createIcons();
+            }
+
+            // Système d'animation au défilement (Scroll)
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.15 // Se déclenche quand 15% de l'élément est visible
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target); // Ne s'anime qu'une seule fois
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.fade-in-up').forEach(element => {
+                observer.observe(element);
+            });
         });
     </script>
 </body>
