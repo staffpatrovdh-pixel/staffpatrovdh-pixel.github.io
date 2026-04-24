@@ -9,7 +9,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>La Fête des Familles</title>
+    <title>La Fête des Familles - Patro du Val d'Haine</title>
     
     <!-- Polices Google -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -73,7 +73,13 @@
 </head>
 <body class="font-poppins text-gray-800 antialiased overflow-x-hidden bg-patro-mint/20">
 
-    <!-- En-tête / Bannière (Plus compacte que sur le site complet) -->
+    <!-- Notification Toast (pour la copie du lien) -->
+    <div id="toast" class="fixed bottom-6 right-6 bg-gray-900 text-white px-6 py-4 rounded-2xl shadow-2xl transform transition-all duration-300 translate-y-32 opacity-0 z-50 flex items-center gap-3">
+        <i class="fa-solid fa-circle-check text-patro-lime text-xl"></i>
+        <span id="toast-msg" class="font-medium text-sm">Lien copié !</span>
+    </div>
+
+    <!-- En-tête / Bannière -->
     <header class="relative pt-12 pb-16 lg:pt-16 lg:pb-24 overflow-hidden flex flex-col items-center justify-center border-b-[6px] border-patro-teal shadow-md" style="background-image: url('https://www.patrovaldhaine.be/donnees-site/illustrations/events/baniere_fete_famm_2026.png'); background-size: cover; background-position: center;">
         <div class="absolute inset-0 bg-black/20 pointer-events-none z-0 backdrop-blur-[2px]"></div>
         
@@ -190,6 +196,40 @@
             </div>
         </div>
 
+        <!-- Section Partage -->
+        <div class="bg-gradient-to-r from-patro-mint to-white rounded-3xl p-6 md:p-8 shadow-sm border border-patro-mint mb-8 text-center relative overflow-hidden">
+            <i class="fa-solid fa-paper-plane absolute -top-4 -right-2 text-6xl text-patro-teal opacity-10 rotate-12"></i>
+            <h4 class="font-winky text-2xl text-patro-darkgreen mb-2">Formez votre équipe !</h4>
+            <p class="text-sm text-gray-600 mb-6 max-w-lg mx-auto">Invitez vos amis et votre famille à participer au grand jeu. Partagez-leur le lien pour qu'ils puissent rejoindre votre équipe :</p>
+            
+            <div class="flex flex-wrap justify-center gap-4 relative z-10">
+                <!-- WhatsApp -->
+                <button onclick="shareEvent('wa')" class="w-12 h-12 rounded-full bg-[#25D366] text-white flex items-center justify-center text-xl hover:scale-110 transition-transform shadow-md" title="Partager sur WhatsApp">
+                    <i class="fa-brands fa-whatsapp"></i>
+                </button>
+                <!-- Messenger -->
+                <button onclick="shareEvent('messenger')" class="w-12 h-12 rounded-full bg-[#0084FF] text-white flex items-center justify-center text-xl hover:scale-110 transition-transform shadow-md" title="Partager sur Messenger">
+                    <i class="fa-brands fa-facebook-messenger"></i>
+                </button>
+                <!-- Facebook -->
+                <button onclick="shareEvent('fb')" class="w-12 h-12 rounded-full bg-[#1877F2] text-white flex items-center justify-center text-xl hover:scale-110 transition-transform shadow-md" title="Partager sur Facebook">
+                    <i class="fa-brands fa-facebook-f"></i>
+                </button>
+                <!-- Instagram / Copy -->
+                <button onclick="shareEvent('ig')" class="w-12 h-12 rounded-full bg-gradient-to-tr from-[#f09433] via-[#dc2743] to-[#bc1888] text-white flex items-center justify-center text-xl hover:scale-110 transition-transform shadow-md" title="Copier le lien pour Instagram">
+                    <i class="fa-brands fa-instagram"></i>
+                </button>
+                <!-- SMS -->
+                <button onclick="shareEvent('sms')" class="w-12 h-12 rounded-full bg-[#34C759] text-white flex items-center justify-center text-xl hover:scale-110 transition-transform shadow-md" title="Envoyer par SMS">
+                    <i class="fa-solid fa-comment-sms"></i>
+                </button>
+                <!-- Native Share (S'adapte au téléphone) -->
+                <button onclick="nativeShare()" class="w-12 h-12 rounded-full bg-gray-800 text-white flex items-center justify-center text-xl hover:scale-110 transition-transform shadow-md" title="Plus d'options de partage">
+                    <i class="fa-solid fa-share-nodes"></i>
+                </button>
+            </div>
+        </div>
+
         <!-- Le Formulaire (Optimisé) -->
         <div class="bg-white rounded-3xl shadow-xl border-2 border-patro-teal overflow-hidden" id="formulaire">
             
@@ -238,5 +278,72 @@
         </div>
     </footer>
 
+    <!-- Script de Partage -->
+    <script>
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            const toastMsg = document.getElementById('toast-msg');
+            toastMsg.textContent = message;
+            
+            toast.classList.remove('translate-y-32', 'opacity-0');
+            setTimeout(() => {
+                toast.classList.add('translate-y-32', 'opacity-0');
+            }, 3500);
+        }
+
+        function fallbackCopyTextToClipboard(text, successMessage) {
+            var textArea = document.createElement("textarea");
+            textArea.value = text;
+            textArea.style.top = "0";
+            textArea.style.left = "0";
+            textArea.style.position = "fixed";
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            try {
+                document.execCommand('copy');
+                showToast(successMessage);
+            } catch (err) {
+                console.error('Impossible de copier le lien', err);
+            }
+            document.body.removeChild(textArea);
+        }
+
+        function shareEvent(platform) {
+            const url = 'https://www.patrovaldhaine.be/fetes';
+            const textMsg = "Embarquement pour le Tour du Monde avec le Patro ! 🌍 Rejoins mon équipe pour le grand jeu du 16 mai. Infos et Inscriptions ici : ";
+            
+            const encodedUrl = encodeURIComponent(url);
+            const encodedText = encodeURIComponent(textMsg);
+            const fullMessage = encodeURIComponent(textMsg + url);
+
+            if (platform === 'fb') {
+                window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`, '_blank');
+            } else if (platform === 'wa') {
+                window.open(`https://api.whatsapp.com/send?text=${fullMessage}`, '_blank');
+            } else if (platform === 'messenger') {
+                window.open(`fb-messenger://share/?link=${encodedUrl}`, '_blank');
+            } else if (platform === 'sms') {
+                window.open(`sms:?&body=${fullMessage}`, '_self');
+            } else if (platform === 'ig') {
+                // Pour Instagram on copie le texte complet (impossible d'ouvrir un intent de post web)
+                fallbackCopyTextToClipboard(textMsg + url, "Texte et lien copiés pour Instagram !");
+            } else if (platform === 'copy') {
+                fallbackCopyTextToClipboard(url, "Lien copié dans le presse-papiers !");
+            }
+        }
+
+        function nativeShare() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'La Fête des Familles - Patro',
+                    text: 'Embarquement pour le Tour du Monde avec le Patro ! 🌍 Rejoins mon équipe pour le grand jeu du 16 mai.',
+                    url: 'https://www.patrovaldhaine.be/fetes',
+                }).catch(console.error);
+            } else {
+                shareEvent('copy');
+            }
+        }
+    </script>
 </body>
 </html>
