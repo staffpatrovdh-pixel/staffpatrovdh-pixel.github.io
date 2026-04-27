@@ -133,42 +133,6 @@
         </div>
     </section>
 
-    <!-- Chiffres Clés -->
-    <section class="py-16 bg-white relative z-20 border-y border-gray-100" id="chiffres-cles">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-12">
-                <span class="font-handwritten text-2xl text-patro-yellow mb-2 block">Un petit résumé</span>
-                <h2 class="text-3xl md:text-4xl font-display font-bold text-gray-900">Notre Patro c'est...</h2>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-12 text-center">
-                <div class="flex flex-col items-center group">
-                    <div class="w-16 h-16 bg-green-50 rounded-full flex items-center justify-center text-patro-green mb-4 group-hover:scale-110 transition-transform duration-300">
-                        <i data-lucide="users" class="w-8 h-8"></i>
-                    </div>
-                    <div class="text-5xl md:text-6xl font-display font-black text-gray-900 mb-2 counter-value" data-target="53">0</div>
-                    <div class="text-gray-500 font-bold uppercase tracking-widest text-sm">Inscrits</div>
-                </div>
-                
-                <div class="flex flex-col items-center group">
-                    <div class="w-16 h-16 bg-yellow-50 rounded-full flex items-center justify-center text-patro-yellow mb-4 group-hover:scale-110 transition-transform duration-300">
-                        <i data-lucide="shield-check" class="w-8 h-8"></i>
-                    </div>
-                    <div class="text-5xl md:text-6xl font-display font-black text-gray-900 mb-2 counter-value" data-target="16">0</div>
-                    <div class="text-gray-500 font-bold uppercase tracking-widest text-sm">Animateurs & Accompagnateurs</div>
-                </div>
-                
-                <div class="flex flex-col items-center group">
-                    <div class="w-16 h-16 bg-gray-50 rounded-full flex items-center justify-center text-gray-400 mb-4 group-hover:scale-110 transition-transform duration-300">
-                        <i data-lucide="calendar-heart" class="w-8 h-8"></i>
-                    </div>
-                    <div class="text-5xl md:text-6xl font-display font-black text-gray-900 mb-2 counter-value" data-target="2018">0</div>
-                    <div class="text-gray-500 font-bold uppercase tracking-widest text-sm">Année de création</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- Présentation du Patro -->
     <section class="py-20 bg-patro-light overflow-hidden">
         <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -490,44 +454,6 @@
         function closeModal() {
             document.getElementById('event-modal').classList.add('hidden');
         }
-
-        // Animation des chiffres clés
-        function runCounters() {
-            const counters = document.querySelectorAll('.counter-value');
-            const speed = 100;
-
-            counters.forEach(counter => {
-                const animate = () => {
-                    const target = +counter.getAttribute('data-target');
-                    const count = +counter.innerText;
-                    const inc = target / speed;
-
-                    if (count < target) {
-                        counter.innerText = Math.ceil(count + inc);
-                        setTimeout(animate, 20);
-                    } else {
-                        counter.innerText = target;
-                    }
-                };
-                animate();
-            });
-        }
-
-        // Déclencheur au scroll pour les compteurs
-        document.addEventListener('DOMContentLoaded', () => {
-            const counterSection = document.getElementById('chiffres-cles');
-            if (counterSection) {
-                const observer = new IntersectionObserver((entries, observer) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            runCounters();
-                            observer.unobserve(entry.target);
-                        }
-                    });
-                }, { threshold: 0.5 });
-                observer.observe(counterSection);
-            }
-        });
 
         // Widget Météo
         async function loadSundayWeather() {
